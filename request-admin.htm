@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="img/kpickicon.png">
+    <link rel="stylesheet" href="css/style.css?v=20260429-4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <title>Generated PO Requests | K-Pick</title>
+</head>
+<body class="quote-page quote-admin-page">
+    <main class="quote-admin">
+        <section class="quote-hero quote-admin__hero">
+            <div>
+                <span class="quote-hero__eyebrow">Staff Dashboard</span>
+                <h1>PO Operations Dashboard</h1>
+                <p>Log in with your staff ID to review generated PO requests and update only the workflow assigned to your role.</p>
+            </div>
+            <div class="quote-hero__note">
+                <span>Local database</span>
+                <strong>CS, Inventory, Manager, Boss, Admin</strong>
+            </div>
+        </section>
+
+        <section class="quote-panel quote-admin-login">
+            <h2>Staff Login</h2>
+            <div class="quote-admin-login__grid">
+                <label>
+                    ID Number
+                    <input type="text" data-login-id placeholder="admin, cs001, inv001">
+                </label>
+                <label>
+                    Password
+                    <input type="password" data-login-password placeholder="Staff password">
+                </label>
+                <button class="quote-button" type="button" data-login-button>Login</button>
+                <button class="quote-button quote-button--secondary" type="button" data-logout-button>Logout</button>
+            </div>
+            <p class="quote-admin-login__session" data-login-session>Not logged in.</p>
+        </section>
+
+        <section class="quote-panel quote-admin-report" hidden>
+            <div class="quote-panel__header">
+                <div>
+                    <h2>Reports</h2>
+                    <p data-report-status>Manager and Boss report snapshot.</p>
+                </div>
+                <label class="quote-admin-filter">
+                    Report Month
+                    <input type="month" data-report-month>
+                </label>
+            </div>
+            <div class="quote-admin-report__grid" data-report-summary></div>
+        </section>
+
+        <section class="quote-panel quote-admin-users" hidden>
+            <div class="quote-panel__header">
+                <div>
+                    <h2>Staff Accounts</h2>
+                    <p data-user-status>Admin can add or update local dashboard users.</p>
+                </div>
+            </div>
+            <div class="quote-admin-user-form">
+                <input type="hidden" data-user-original-id>
+                <label>ID Number<input type="text" data-user-id placeholder="cs002"></label>
+                <label>Name<input type="text" data-user-name placeholder="Staff name"></label>
+                <label>
+                    Role
+                    <select data-user-role>
+                        <option value="CS">CS</option>
+                        <option value="Inventory">Inventory</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Boss">Boss</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </label>
+                <label>Password<input type="password" data-user-password placeholder="Leave blank to keep current"></label>
+                <label>Manager Code<input type="password" data-user-manager-code placeholder="Manager/Admin only"></label>
+                <button class="quote-button" type="button" data-save-user>Save User</button>
+                <button class="quote-button quote-button--secondary" type="button" data-clear-user>New User</button>
+            </div>
+            <div class="quote-admin-users__list" data-user-list></div>
+        </section>
+
+        <section class="quote-panel quote-admin__panel">
+            <div class="quote-panel__header">
+                <div>
+                    <h2>Saved Requests</h2>
+                    <p class="quote-admin__status">Loading requests...</p>
+                </div>
+                <div class="quote-admin__header-actions">
+                    <label class="quote-admin-search">
+                        Search PO
+                        <input type="search" data-po-search placeholder="PO number, customer, contact">
+                    </label>
+                    <label class="quote-admin-filter">
+                        PO Condition
+                        <select data-status-filter>
+                            <option value="all">All Conditions</option>
+                            <option value="Generated">Generated</option>
+                            <option value="Pending for Picking">Pending for Picking</option>
+                            <option value="Picking Products">Picking Products</option>
+                            <option value="For Repacking">For Repacking</option>
+                            <option value="Ready for Shipment">Ready for Shipment</option>
+                            <option value="Released / Shipped">Released / Shipped</option>
+                        </select>
+                    </label>
+                    <button class="quote-button quote-button--secondary" type="button" data-sync-inventory>Sync Sheet</button>
+                    <button class="quote-button" type="button" data-refresh-quotes>Refresh</button>
+                </div>
+            </div>
+            <div class="quote-admin__list" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <script src="script/request-admin.js"></script>
+</body>
+</html>

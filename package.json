@@ -1,0 +1,16 @@
+{
+  "name": "kpick-webdraft",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch backend/server.mjs",
+    "start": "node backend/server.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "pdfkit": "^0.18.0"
+  }
+}

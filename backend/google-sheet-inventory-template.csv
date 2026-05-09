@@ -1,0 +1,31 @@
+sku,brand,category,product_name,packaging,carton_packing,gauge,stock_quantity,stock_unit,unit_price,active,last_updated,notes
+SUN-IS-BL-050-31G-08,Sungshim,Insulin Syringe,BLISTER 0.5ml 31G 8mm,Blister,,31G,,box,,TRUE,,
+SUN-IS-BL-050-31G-06,Sungshim,Insulin Syringe,BLISTER 0.5ml 31G 6mm,Blister,,31G,,box,,TRUE,,
+SUN-IS-BL-100-32G-08,Sungshim,Insulin Syringe,BLISTER 1ml 32G 8mm,Blister,,32G,,box,,TRUE,,
+SUN-IS-BL-100-31G-08,Sungshim,Insulin Syringe,BLISTER 1ml 31G 8mm,Blister,,31G,,box,,TRUE,,
+SUN-IS-BL-100-31G-06,Sungshim,Insulin Syringe,BLISTER 1ml 31G 6mm,Blister,,31G,,box,,TRUE,,
+SUN-IS-BL-050-32G-08,Sungshim,Insulin Syringe,BLISTER 0.5ml 32G 8mm,Blister,,32G,,box,,TRUE,,
+SUN-IS-PB-050-30G-08,Sungshim,Insulin Syringe,POLYBAG 0.5ml 30G 8mm,Polybag,,30G,,box,,TRUE,,
+SUN-IS-PB-050-31G-08,Sungshim,Insulin Syringe,POLYBAG 0.5ml 31G 8mm,Polybag,,31G,,box,,TRUE,,
+SUN-IS-PB-050-32G-08,Sungshim,Insulin Syringe,POLYBAG 0.5ml 32G 8mm,Polybag,,32G,,box,,TRUE,,
+SUN-IS-PB-100-29G-13,Sungshim,Insulin Syringe,POLYBAG 1ml 29G 13mm,Polybag,,29G,,box,,TRUE,,
+SUN-IS-PB-100-30G-08,Sungshim,Insulin Syringe,POLYBAG 1ml 30G 8mm,Polybag,,30G,,box,,TRUE,,
+SUN-IS-PB-100-30G-13,Sungshim,Insulin Syringe,POLYBAG 1ml 30G 13mm,Polybag,,30G,,box,,TRUE,,
+SUN-IS-PB-100-31G-08,Sungshim,Insulin Syringe,POLYBAG 1ml 31G 8mm,Polybag,,31G,,box,,TRUE,,
+SUN-IS-PB-100-32G-08,Sungshim,Insulin Syringe,POLYBAG 1ml 32G 8mm,Polybag,,32G,,box,,TRUE,,
+SUN-SU-001-26G-13-LS,Sungshim,Single-Use Syringe,1ml 26G 13mm Luer Slip,,36 boxes per carton,26G,,box,,TRUE,,
+SUN-SU-003-23G-25-LS,Sungshim,Single-Use Syringe,3ml 23G 25mm Luer Slip,,24 boxes per carton,23G,,box,,TRUE,,
+SUN-SU-003-23G-25-LL,Sungshim,Single-Use Syringe,3ml 23G 25mm Luer Lock,,24 boxes per carton,23G,,box,,TRUE,,
+SUN-SU-005-21G-32-LS,Sungshim,Single-Use Syringe,5ml 21G 32mm Luer Slip,,18 boxes per carton,21G,,box,,TRUE,,
+SUN-SU-005-21G-32-LL,Sungshim,Single-Use Syringe,5ml 21G 32mm Luer Lock,,18 boxes per carton,21G,,box,,TRUE,,
+SUN-SU-010-23G-25-LS,Sungshim,Single-Use Syringe,10ml 23G 25mm Luer Slip,,12 boxes per carton,23G,,box,,TRUE,,
+SUN-SU-010-23G-25-LL,Sungshim,Single-Use Syringe,10ml 23G 25mm Luer Lock,,12 boxes per carton,23G,,box,,TRUE,,
+SUN-LDS-001-23G-25,Sungshim,LDS Syringe,1ml LDS 23G 25mm,,36 boxes per carton,23G,,box,,TRUE,,
+SUN-PN-32G-04,Sungshim,Pen Needles,Pen Needle 32G 4mm,,,32G,,box,,TRUE,,
+SUN-PN-32G-05,Sungshim,Pen Needles,Pen Needle 32G 5mm,,,32G,,box,,TRUE,,
+SUN-PN-32G-06,Sungshim,Pen Needles,Pen Needle 32G 6mm,,,32G,,box,,TRUE,,
+SUN-PN-31G-08,Sungshim,Pen Needles,Pen Needle 31G 8mm,,,31G,,box,,TRUE,,
+HAN-BH-010,Hansol,Hansol Cupping Sets,Hansol Bu-Hang 10-Cup Set,Cupping set,,,,set,1259,TRUE,,No carton discount
+HAN-BH-017,Hansol,Hansol Cupping Sets,Hansol Bu-Hang 17-Cup Set,Cupping set,,,,set,1789,TRUE,,No carton discount
+HAN-BH-019,Hansol,Hansol Cupping Sets,Hansol Bu-Hang 19-Cup Set,Cupping set,,,,set,2359,TRUE,,No carton discount
+HAN-BH-030,Hansol,Hansol Cupping Sets,Hansol Bu-Hang 30-Cup Set,Cupping set,,,,set,2999,TRUE,,No carton discount

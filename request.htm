@@ -12,13 +12,142 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <title>Request Quote or PO | K-Pick Trading Corp</title>
 </head>
-<body class="simple-product-page">
-    <main class="simple-product-page__content">
-        <h1>Request Quote / PO</h1>
-        <p>This page is under development while we build the customer request form.</p>
-        <a href="index.html">Back to Home</a>
+<body class="quote-page" id="top">
+    <section class="heading">
+        <div class="header">
+            <div class="header-container">
+                <div class="logo"><img src="img/KpickLogo.png" alt="K-Pick Trading Corp logo"></div>
+                <div class="email"><p class="mail">E-MAIL: kpickmedicalmarketing@gmail.com</p></div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <a class="navlogo" href="index.html" aria-label="K-Pick Trading Corp home">
+                <img src="img/KpickLogoDark.png" alt="K-Pick Trading Corp" class="nav-logo">
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+            <div class="navigations">
+                <ul class="navigation" id="primary-navigation">
+                    <li class="nav home"><a href="index.html">Home</a></li>
+                    <li class="nav aboutus"><a href="index.html#about">About Us</a></li>
+                    <li class="nav brands"><a href="index.html#TieUps">Brands</a></li>
+                    <li class="nav generatePO"><a href="request.htm">Generate Quote / PO</a></li>
+                    <li class="nav contactus"><a href="contact.htm">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <main class="quote-shell">
+        <section class="quote-hero">
+            <div>
+                <span class="quote-hero__eyebrow">K-Pick Product Request</span>
+                <h1>Generate Quote / PO</h1>
+                <p>Select products from the current K-Pick catalog, add quantities, and prepare a request summary for quotation or purchase order processing.</p>
+            </div>
+            <div class="quote-hero__note">
+                <span>Backend plan</span>
+                <strong>Local Mac DB first, Google Sheet mirror later.</strong>
+            </div>
+        </section>
+
+        <section class="quote-workspace" aria-label="Quote request builder">
+            <aside class="quote-panel quote-panel--customer">
+                <h2>Customer Details</h2>
+                <form class="quote-customer-form">
+                    <label>
+                        Company / Clinic / Hospital / Buyer Name
+                        <input type="text" name="company" placeholder="Company, clinic, hospital, or buyer name" required>
+                    </label>
+                    <label>
+                        Contact Person
+                        <input type="text" name="contact" placeholder="Full name" required>
+                    </label>
+                    <label>
+                        Email
+                        <input type="email" name="email" placeholder="name@example.com" required>
+                    </label>
+                    <label>
+                        Mobile
+                        <input type="tel" name="mobile" placeholder="+63" required>
+                    </label>
+                    <label class="quote-address-field">
+                        Delivery Address
+                        <textarea name="address" rows="3" placeholder="Search or paste the pinned Google Maps address" required></textarea>
+                    </label>
+                    <div class="quote-address-tools">
+                        <button class="quote-button quote-button--secondary" type="button" data-search-gmaps>Search / Pin in Google Maps</button>
+                        <label class="quote-toggle">
+                            <input type="checkbox" name="address_after_payment" value="1" data-address-after-payment>
+                            Add address after payment
+                        </label>
+                    </div>
+                    <label>
+                        Google Maps Link
+                        <input type="url" name="maps_url" placeholder="Paste pinned Google Maps link if available">
+                    </label>
+                    <label>
+                        Notes
+                        <textarea name="notes" rows="4" placeholder="Delivery location, preferred timeline, special request"></textarea>
+                    </label>
+                </form>
+            </aside>
+
+            <section class="quote-panel quote-panel--products">
+                <div class="quote-panel__header">
+                    <div>
+                        <h2>Products</h2>
+                        <p>Products listed from the current available K-Pick catalog.</p>
+                        <p class="quote-discount-criteria">Discount criteria: Sungshim carton discounts apply only when the selected quantity reaches the carton requirement for that product group. Hansol sets have no carton discount.</p>
+                    </div>
+                    <input class="quote-search" type="search" placeholder="Search product" aria-label="Search product">
+                </div>
+                <div class="quote-category-tabs" role="tablist" aria-label="Product categories"></div>
+                <div class="quote-product-list" aria-live="polite"></div>
+            </section>
+
+            <aside class="quote-panel quote-panel--summary">
+                <div class="quote-panel__header">
+                    <div>
+                        <h2>Request Summary</h2>
+                        <p class="quote-summary-count">No products selected.</p>
+                    </div>
+                </div>
+                <div class="quote-selected-list"></div>
+                <div class="quote-actions">
+                    <button class="quote-button quote-button--secondary" type="button" data-clear-quote>Clear</button>
+                    <button class="quote-button" type="button" data-copy-quote>Copy Summary</button>
+                    <button class="quote-button quote-button--submit" type="button" data-submit-quote>Submit Request</button>
+                </div>
+                <p class="quote-copy-status" role="status" aria-live="polite"></p>
+            </aside>
+        </section>
     </main>
+
+    <div class="quote-modal" hidden>
+        <div class="quote-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
+            <button class="quote-modal__close" type="button" aria-label="Close generated PO popup" data-close-quote-modal>&times;</button>
+            <div class="quote-modal__content"></div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="site-footer__top">
+            <div class="site-footer__brand">
+                <img src="img/KpickLogo.png" alt="K-Pick Trading Corp." class="site-footer__logo">
+            </div>
+            <div class="site-footer__contact">
+                <p>Dakota Building, 555 Gen Malvar St. cor</p>
+                <p>Adriatico St. Brgy. 698 Zone 076 Malate, Manila</p>
+                <p>Mobile: +639173158420</p>
+            </div>
+        </div>
+        <p class="site-footer__bottom">K-Pick Trading Corp. &copy; 2026 All Rights Reserved.</p>
+    </footer>
     <a href="#top" class="back-to-top" aria-label="Back to top">&#8593;</a>
+    <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/request-products.js"></script>
+    <script src="script/request-po.js"></script>
 </body>
 </html>
