@@ -104,13 +104,29 @@ const eropProducts = [
         label: "Dual Guard",
         description: "Dual port type wound protector.",
         image: "img/DualGuardDGS.png",
+        showcaseName: "DUAL GUARD",
         imageClass: "erop-showcase__image--dual-guard",
-        specs: [
-            ["DGS", "Dual Guard System", "1"],
-            ["DGP", "Dual Port Cap", "1"],
-            ["DGW", "Wound Protector", "1"],
-            ["DGA", "Access Component", "1"],
+        variations: [
+            {
+                code: "DGS",
+                image: "img/DualGuardDGS.png",
+                description: "DGS-2 / DGS-2X",
+            },
+            {
+                code: "DGM",
+                image: "img/DGM.png",
+                description: "DGM-2 / DGM-2X<br>DGM-2L / DGM-2LX",
+            },
         ],
+        specs: [
+            ["DGS-2", "5mm x1 / 12mm x1", "135"],
+            ["DGS-2X", "12mm x1 / 12mm x1", "135"],
+            ["DGM-2", "5mm x1 / 12mm x1", "135"],
+            ["DGM-2X", "12mm x1 / 12mm x1", "135"],
+            ["DGM-2L", "5mm x1 / 12mm x1", "145"],
+            ["DGM-2LX", "12mm x1 / 12mm x1", "145"],
+        ],
+        specLayout: "dualGuard",
     },
     {
         id: "new-port",
@@ -119,13 +135,42 @@ const eropProducts = [
         label: "New Port",
         description: "Disposable manual medical opening device.",
         image: "img/2port.png",
+        showcaseName: "NEW PORT",
         imageClass: "erop-showcase__image--new-port",
-        specs: [
-            ["NP-2", "New Port Device", "1"],
-            ["NP-C", "Cap Assembly", "1"],
-            ["NP-V", "Valve Unit", "1"],
-            ["NP-S", "Sleeve", "1"],
+        variations: [
+            {
+                code: "2PORT",
+                image: "img/2port.png",
+                description: "Surgical instruments used during<br>laparoscopic procedures to minimize scars",
+            },
+            {
+                code: "3PORT",
+                image: "img/3port.png",
+                description: "Surgical instruments used during<br>laparoscopic procedures to minimize scars",
+            },
         ],
+        specs: [
+            {
+                title: "NEW PORT 2PORT TYPE",
+                image: "img/2portBP.png",
+                rows: [
+                    ["KSILS-2PA", "5mm x1 / 5mm x1", "135"],
+                    ["KSILS-2PB", "5mm x1 / 12mm x1", "135"],
+                    ["KSILS-2PC", "12mm x1 / 12mm x1", "135"],
+                ],
+            },
+            {
+                title: "NEW PORT 3PORT TYPE",
+                image: "img/3portBP.png",
+                rows: [
+                    ["KSILS-3PA", "5mm x1 / 5mm x1 / 5mm x1", "135"],
+                    ["KSILS-3PB", "5mm x1 / 5mm x1 / 12mm x1", "135"],
+                    ["KSILS-3PC", "5mm x1 / 12mm x1 / 12mm x1", "135"],
+                    ["KSILS-4PC", "12mm x1 / 12mm x1 / 12mm x1", "135"],
+                ],
+            },
+        ],
+        specLayout: "newPort",
     },
     {
         id: "chito-block",
@@ -135,6 +180,18 @@ const eropProducts = [
         description: "Pain buster management device kit.",
         image: "img/ChitoBlockPlenty.png",
         imageClass: "erop-showcase__image--chito-block",
+        variations: [
+            {
+                code: "Chito-Block",
+                image: "img/ChitoBlockPlenty.png",
+                description: "Catheter with natural imitation bio-adhesive material coating technology",
+            },
+            {
+                code: "Pain Catheter",
+                image: "img/pain-catheter.png",
+                description: "Catheter with natural imitation bio-adhesive material coating technology",
+            },
+        ],
         specs: [
             ["CB-K", "Chito Block Kit", "1"],
             ["CB-P", "Pain Buster Pump", "1"],
@@ -189,6 +246,7 @@ const eropProducts = [
     },
 ];
 
+const productsWithoutSpecs = new Set(["chito-block", "t-closure", "s-sustener", "new-port-pack"]);
 const currentProductId = document.body.dataset.eropProduct;
 const currentIndex = Math.max(0, eropProducts.findIndex((product) => product.id === currentProductId));
 const currentProduct = eropProducts[currentIndex] || eropProducts[0];
@@ -213,6 +271,10 @@ function renderSpecRows(rows, fallbackImage) {
 }
 
 function renderSpecSections(product) {
+    if (productsWithoutSpecs.has(product.id)) {
+        return "";
+    }
+
     if (product.specLayout === "forcep") {
         return `
             <section class="erop-spec__group forcep-spec">
@@ -255,6 +317,68 @@ function renderSpecSections(product) {
                 <div class="forcep-spec__competitiveness">
                     <h3>Main competitiveness</h3>
                     <p>Laparoscopic medical procedure aids are utilized to hold and drag interior organs and tissues after inclusion into the human body through trocar. The claw-shaped end effector mounted toward the end of the instrument is used by the handle, and the end effector and needle part are inserted into the body with a trocar where it holds the tissue through maneuvering the handle afterwards.</p>
+                </div>
+            </section>
+        `;
+    }
+
+    if (product.specLayout === "dualGuard") {
+        return `
+            <section class="erop-spec__group dual-guard-spec">
+                <h2>SPECIFICATION</h2>
+                <div class="dual-guard-spec__table-wrap">
+                    <table class="dual-guard-spec__table">
+                        <thead>
+                            <tr>
+                                <th>MODEL</th>
+                                <th>Port SPEC</th>
+                                <th>Retractor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${product.specs.map(([model, portSpec, retractor]) => `
+                                <tr>
+                                    <td>${model}</td>
+                                    <td>${portSpec}</td>
+                                    <td>${retractor}</td>
+                                </tr>
+                            `).join("")}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        `;
+    }
+
+    if (product.specLayout === "newPort") {
+        return `
+            <section class="erop-spec__group new-port-spec">
+                <h2>SPECIFICATION</h2>
+                <div class="new-port-spec__table-wrap">
+                    <table class="new-port-spec__table">
+                        <tbody>
+                            ${product.specs.map((section) => `
+                                <tr class="new-port-spec__section-title">
+                                    <th colspan="4">${section.title}</th>
+                                </tr>
+                                <tr>
+                                    <td class="new-port-spec__image-cell" rowspan="${section.rows.length + 1}">
+                                        <img src="${section.image}" alt="${section.title}" class="new-port-spec__image">
+                                    </td>
+                                    <th>MODEL</th>
+                                    <th>Port SPEC</th>
+                                    <th>Retractor</th>
+                                </tr>
+                                ${section.rows.map(([model, portSpec, retractor]) => `
+                                    <tr>
+                                        <td>${model}</td>
+                                        <td>${portSpec}</td>
+                                        <td>${retractor}</td>
+                                    </tr>
+                                `).join("")}
+                            `).join("")}
+                        </tbody>
+                    </table>
                 </div>
             </section>
         `;
@@ -336,6 +460,91 @@ function renderFeaturePanel(product) {
 }
 
 function renderAfterSpecPanel(product) {
+    if (product.id === "chito-block") {
+        const features = [
+            {
+                icon: "img/chitoIcon1.png",
+                title: "Chitosan adhesion",
+                description: "Improves convenience for the practitioner and helps prevent medication backflow.",
+            },
+            {
+                icon: "img/chitoicon2.png",
+                title: "Built-in internal coil",
+                description: "Improves practitioner convenience and reduces patient pain by distributing medication evenly.",
+            },
+            {
+                icon: "img/chitoicon3.png",
+                title: "Minimized side effects",
+                description: "A compact 1mm diameter, micro-hole processing, and special materials help minimize side effects.",
+            },
+            {
+                icon: "img/chitoicon4.png",
+                title: "Pump",
+                description: "Provides continuous medication injection through the pump.",
+            },
+            {
+                icon: "img/chitoicon5.png",
+                title: "Components",
+                description: "Configured with the practitioner's convenience in mind.",
+            },
+        ];
+
+        return `
+            <section class="chito-function-strip">
+                <div class="chito-function-strip__inner">
+                    <h3>Function</h3>
+                    <ul>
+                        <li>Device for injecting pain-relief medication into the surgical site after various outpatient procedures.</li>
+                        <li>Used by placing the catheter under the skin near the incision area before suturing after surgery.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="chito-feature-panel" aria-label="Chito Block feature overview">
+                <div class="chito-feature-panel__inner">
+                    <div class="chito-feature-panel__features">
+                        ${features.map((feature, index) => `
+                            <article class="chito-feature chito-feature--${index + 1}">
+                                <img src="${feature.icon}" alt="" class="chito-feature__icon" aria-hidden="true">
+                                <h3>${feature.title}</h3>
+                                <p>${feature.description}</p>
+                            </article>
+                        `).join("")}
+                    </div>
+                    <div class="chito-feature-panel__visual" aria-hidden="true">
+                        <img src="img/chitoblockbottom draft.png" alt="" class="chito-feature-panel__image">
+                    </div>
+                </div>
+            </section>
+        `;
+    }
+
+    if (product.id === "dual-guard") {
+        return `
+            <section class="erop-product-competitiveness">
+                <h3>Main competitiveness</h3>
+                <p>It can be compatible with existing products to reduce medical costs and secure the user's high degree of surgical freedom. It prevents secondary infections that can be potentially caused by CO2 gas reflux, and localizes the product accordingly through its own factory production.</p>
+            </section>
+
+            <section class="dual-guard-static-panel" aria-label="Dual Guard feature overview">
+                <img src="img/dualguardbottom.jpg" alt="Dual Guard feature overview" class="dual-guard-static-panel__image">
+            </section>
+        `;
+    }
+
+    if (product.id === "new-port") {
+        return `
+            <section class="erop-product-competitiveness">
+                <h3>Main competitiveness</h3>
+                <p>It gives 1-2 autonomous ports to limit collisions between instruments during a medical procedure, which is an issue with existing single-opening ports, and shows high price competitiveness in the homegrown and worldwide business sectors with a single-hole package including a disposable endoscopic tube needle (Laparoscopic surgical instruments.).</p>
+            </section>
+
+            <section class="new-port-static-panel" aria-label="New Port feature overview">
+                <img src="img/newportBottom.jpg" alt="New Port feature overview" class="new-port-static-panel__image">
+            </section>
+        `;
+    }
+
     if (product.id === "forcep") {
         return `
             <section class="forcep-scroll-story" aria-label="Forcep feature story">
