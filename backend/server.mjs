@@ -21,6 +21,9 @@ const adminPassword = process.env.KPICK_ADMIN_PASSWORD || (isLocalHost ? 'kpick0
 const authSecret = process.env.KPICK_AUTH_SECRET || (isLocalHost ? `${adminPassword}:${dbPath}` : '');
 const googleSheetCsvUrl = process.env.KPICK_INVENTORY_CSV_URL
     || 'https://docs.google.com/spreadsheets/d/1lyGPgs3edGO7EV-Q1mnpzjvsbghojdQ6ocCp4Dxcsak/gviz/tq?tqx=out:csv&sheet=Backend%20Mirror';
+const autoSyncInventory = process.env.KPICK_AUTO_SYNC_INVENTORY !== '0';
+const inventorySyncIntervalMs = getPositiveInteger(process.env.KPICK_INVENTORY_SYNC_INTERVAL_MS, 30 * 60 * 1000);
+const inventorySyncTimeoutMs = getPositiveInteger(process.env.KPICK_INVENTORY_SYNC_TIMEOUT_MS, 15 * 1000);
 
 const contentTypes = {
     '.css': 'text/css; charset=utf-8',
@@ -46,6 +49,15 @@ function getPort(value) {
     }
 
     return parsed;
+}
+
+function getPositiveInteger(value, fallback) {
+    if (value === undefined || value === '') {
+        return fallback;
+    }
+
+    const parsed = Number(value);
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 }
 
 function validateRuntimeConfig() {
@@ -468,7 +480,19 @@ function parseNumber(value) {
 }
 
 async function syncInventoryFromGoogleSheet() {
-    const response = await fetch(googleSheetCsvUrl);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), inventorySyncTimeoutMs);
+    let response;
+
+    try {
+        response = await fetch(googleSheetCsvUrl, { signal: controller.signal });
+    } catch (error) {
+        throw new Error(error.name === 'AbortError'
+            ? `Google Sheet CSV sync timed out after ${inventorySyncTimeoutMs}ms.`
+            : error.message);
+    } finally {
+        clearTimeout(timeout);
+    }
 
     if (!response.ok) {
         throw new Error(`Google Sheet CSV returned ${response.status}`);
@@ -540,6 +564,29 @@ async function syncInventoryFromGoogleSheet() {
         synced_at: syncedAt,
         source: googleSheetCsvUrl
     };
+}
+
+let inventorySyncInProgress = null;
+
+async function syncInventorySafely(reason) {
+    if (inventorySyncInProgress) {
+        return inventorySyncInProgress;
+    }
+
+    inventorySyncInProgress = syncInventoryFromGoogleSheet()
+        .then(async (result) => {
+            await writeLog(`Inventory ${reason} sync completed: ${result.updated} products updated.`);
+            return result;
+        })
+        .catch(async (error) => {
+            await writeLog(`Inventory ${reason} sync failed: ${error.stack || error.message}`);
+            return null;
+        })
+        .finally(() => {
+            inventorySyncInProgress = null;
+        });
+
+    return inventorySyncInProgress;
 }
 
 function getRequestBody(request) {
@@ -1753,6 +1800,10 @@ initDb();
 seedStaffUsers();
 await seedProducts();
 
+if (autoSyncInventory) {
+    await syncInventorySafely('startup');
+}
+
 const server = createServer((request, response) => {
     handleRequest(request, response).catch((error) => {
         writeLog(error.stack || error.message).catch(() => {});
@@ -1763,5 +1814,11 @@ const server = createServer((request, response) => {
 server.listen(port, host, async () => {
     await writeLog(`K-Pick Node backend running at http://${host}:${port}/request.htm`);
     await writeLog(`SQLite DB: ${dbPath}`);
+    if (autoSyncInventory && inventorySyncIntervalMs > 0) {
+        setInterval(() => {
+            syncInventorySafely('scheduled').catch(() => {});
+        }, inventorySyncIntervalMs).unref();
+        await writeLog(`Inventory auto-sync enabled every ${inventorySyncIntervalMs}ms.`);
+    }
     console.log(`K-Pick backend running at http://${host}:${port}/request.htm`);
 });

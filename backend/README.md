@@ -43,6 +43,7 @@ http://127.0.0.1:8000/request.htm
 - Product seed data lives in `backend/seed_products.json`.
 - SQLite is created at `backend/data/kpick_quote.sqlite3`, or inside `KPICK_DATA_DIR` when that environment variable is set.
 - Google Sheet mirror template: `backend/google-sheet-inventory-template.csv`.
+- Inventory price/stock sync runs automatically from the Google Sheet on server startup and every 30 minutes by default. Manual **Sync Sheet** in the admin page is only needed when you want an immediate refresh.
 - On Mac deployment, install Node.js 24+, copy the project folder, and run `npm run start`.
 
 ## Temporary Node Deployment
@@ -62,6 +63,8 @@ Environment variables:
 KPICK_ADMIN_PASSWORD=choose-a-strong-admin-fallback-password
 KPICK_AUTH_SECRET=generate-a-long-random-secret
 KPICK_DATA_DIR=/opt/render/project/src/backend/data
+KPICK_AUTO_SYNC_INVENTORY=1
+KPICK_INVENTORY_SYNC_INTERVAL_MS=1800000
 ```
 
 On Render, attach a persistent disk at the same `KPICK_DATA_DIR` path. On Railway, attach a volume and set `KPICK_DATA_DIR` to the mounted path, such as `/data`. The app also honors the platform `PORT` variable automatically.
