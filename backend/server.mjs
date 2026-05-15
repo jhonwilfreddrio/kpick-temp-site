@@ -1572,8 +1572,9 @@ function sendQuotePdf(response, quote) {
         const termsRight = left + 300;
         let y = 207;
         const offerTerms = [
-            ['Manufacturer', 'K-Pick Trading Corp.'],
-            ['Brand Name', 'K-Pick / Sungshim Brand'],
+            ['Manufacturer', 'Sungshim'],
+            ['Brand Name', 'Sungshim'],
+            ['Official PH Distributor', 'K-Pick Trading Corp.'],
             ['Origin', 'Republic of Korea'],
             ['Payment', 'Cash / Online Banking'],
             ['Packing', 'Domestic standard packing'],
@@ -1657,13 +1658,19 @@ function sendQuotePdf(response, quote) {
     }
 
     const footerY = pageHeight - 46;
-    const closingY = shortQuote ? Math.min(Math.max(y, 565), 600) : y;
-    const buyerY = closingY + 54;
+    const closingY = shortQuote ? Math.min(Math.max(y, 545), 570) : y;
+    const buyerY = closingY + 44;
     const qrY = shortQuote ? 670 : buyerY + 116;
-    const signatureX = right - 205;
+    const signatureStartX = left + 220;
+    const signatureWidth = 105;
+    const signatories = [
+        ['Ms. Ays San Antonio', 'Medical Representative'],
+        ['Sir Ian Jones Duelo', 'General Manager'],
+        ['Youn Dong Ho', 'CEO']
+    ];
 
     doc.font('Helvetica-Bold').fontSize(8).fillColor('#000000').text('Accepted & Confirmed by ;', left, closingY);
-    doc.text('K-PICK TRADING CORP.', signatureX, closingY, { width: 205, align: 'center', underline: true });
+    doc.text('K-PICK TRADING CORP.', signatureStartX, closingY, { width: right - signatureStartX, align: 'center', underline: true });
 
     doc.font('Helvetica').fontSize(8);
     doc.text('Buyer :', left, buyerY);
@@ -1671,12 +1678,12 @@ function sendQuotePdf(response, quote) {
     doc.text('Date :', left, buyerY + 18);
     doc.moveTo(left + 38, buyerY + 27).lineTo(left + 190, buyerY + 27).stroke(line);
 
-    doc.font('Helvetica-Bold').fontSize(8).text('Ms. Ays San Antonio', signatureX, buyerY - 4, { width: 205, align: 'center' });
-    doc.font('Helvetica').fontSize(7.5).text('Medical Representative', signatureX, buyerY + 9, { width: 205, align: 'center' });
-    doc.font('Helvetica-Bold').fontSize(8).text('Sir Ian Jones Duelo', signatureX, buyerY + 30, { width: 205, align: 'center' });
-    doc.font('Helvetica').fontSize(7.5).text('General Manager', signatureX, buyerY + 43, { width: 205, align: 'center' });
-    doc.font('Helvetica-Bold').fontSize(8).text('Youn Dong Ho', signatureX, buyerY + 64, { width: 205, align: 'center' });
-    doc.font('Helvetica').fontSize(7.5).text('CEO', signatureX, buyerY + 77, { width: 205, align: 'center' });
+    signatories.forEach(([name, role], index) => {
+        const x = signatureStartX + (index * signatureWidth);
+        doc.moveTo(x + 7, buyerY + 6).lineTo(x + signatureWidth - 7, buyerY + 6).stroke(line);
+        doc.font('Helvetica-Bold').fontSize(7.5).text(name, x, buyerY + 12, { width: signatureWidth, align: 'center' });
+        doc.font('Helvetica').fontSize(7).text(role, x, buyerY + 24, { width: signatureWidth, align: 'center' });
+    });
 
     doc.font('Helvetica-Bold').fontSize(9).text('Visit Our Website', 0, qrY, { align: 'center' });
     if (existsSync(websiteQrPath)) {
