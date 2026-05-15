@@ -311,6 +311,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const cartonDiscountGroupKey = (item) => String(item.sku || item.name || '').trim().toLowerCase();
+
     const calculatePricing = () => {
         const items = Array.from(selected.values()).map((item) => ({
             ...item,
@@ -327,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const groupKey = String(item.boxes_per_carton);
+            const groupKey = cartonDiscountGroupKey(item);
             groupTotals.set(groupKey, (groupTotals.get(groupKey) || 0) + item.quantity);
         });
 
@@ -335,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let discount = 0;
         const pricedItems = items.map((item) => {
             const lineSubtotal = item.unit_price * item.quantity;
-            const groupQuantity = groupTotals.get(String(item.boxes_per_carton)) || 0;
+            const groupQuantity = groupTotals.get(cartonDiscountGroupKey(item)) || 0;
             const discountEligible = item.boxes_per_carton > 0 && groupQuantity >= item.boxes_per_carton;
             const hasFixedDiscountPrice = discountEligible
                 && Number.isFinite(item.discounted_unit_price)

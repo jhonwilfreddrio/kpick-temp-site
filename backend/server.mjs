@@ -703,6 +703,10 @@ function money(value) {
     })}`;
 }
 
+function cartonDiscountGroupKey(item) {
+    return String(item.sku || item.name || '').trim().toLowerCase();
+}
+
 function calculateQuotePricing(items) {
     const groupTotals = new Map();
 
@@ -712,7 +716,8 @@ function calculateQuotePricing(items) {
             continue;
         }
 
-        groupTotals.set(String(boxesPerCarton), (groupTotals.get(String(boxesPerCarton)) || 0) + Number(item.quantity || 0));
+        const groupKey = cartonDiscountGroupKey(item);
+        groupTotals.set(groupKey, (groupTotals.get(groupKey) || 0) + Number(item.quantity || 0));
     }
 
     let subtotal = 0;
@@ -723,7 +728,7 @@ function calculateQuotePricing(items) {
         const discountedUnitPrice = Number(item.discounted_unit_price);
         const boxesPerCarton = Number(item.boxes_per_carton) || 0;
         const discountRate = Number.isFinite(Number(item.carton_discount_rate)) ? Number(item.carton_discount_rate) : 0.15;
-        const groupQuantity = groupTotals.get(String(boxesPerCarton)) || 0;
+        const groupQuantity = groupTotals.get(cartonDiscountGroupKey(item)) || 0;
         const discountEligible = boxesPerCarton > 0 && groupQuantity >= boxesPerCarton;
         const hasFixedDiscountPrice = discountEligible
             && Number.isFinite(discountedUnitPrice)
