@@ -162,6 +162,7 @@ function initDb() {
             stock_quantity INTEGER,
             stock_unit TEXT,
             unit_price REAL,
+            discounted_unit_price REAL,
             boxes_per_carton INTEGER,
             carton_discount_rate REAL,
             last_synced_at TEXT,
@@ -222,6 +223,7 @@ function initDb() {
         ['stock_quantity', 'ALTER TABLE products ADD COLUMN stock_quantity INTEGER'],
         ['stock_unit', 'ALTER TABLE products ADD COLUMN stock_unit TEXT'],
         ['unit_price', 'ALTER TABLE products ADD COLUMN unit_price REAL'],
+        ['discounted_unit_price', 'ALTER TABLE products ADD COLUMN discounted_unit_price REAL'],
         ['boxes_per_carton', 'ALTER TABLE products ADD COLUMN boxes_per_carton INTEGER'],
         ['carton_discount_rate', 'ALTER TABLE products ADD COLUMN carton_discount_rate REAL'],
         ['last_synced_at', 'ALTER TABLE products ADD COLUMN last_synced_at TEXT'],
@@ -318,8 +320,8 @@ async function seedProducts() {
     const updatedAt = nowIso();
     db.prepare('UPDATE products SET active = 0, updated_at = ?').run(updatedAt);
     const statement = db.prepare(`
-        INSERT INTO products (sku, category, name, packaging, carton, gauge, stock_unit, unit_price, boxes_per_carton, carton_discount_rate, active, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+        INSERT INTO products (sku, category, name, packaging, carton, gauge, stock_unit, unit_price, discounted_unit_price, boxes_per_carton, carton_discount_rate, active, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
         ON CONFLICT(sku) DO UPDATE SET
             category = excluded.category,
             name = excluded.name,
@@ -328,6 +330,7 @@ async function seedProducts() {
             gauge = excluded.gauge,
             stock_unit = excluded.stock_unit,
             unit_price = excluded.unit_price,
+            discounted_unit_price = excluded.discounted_unit_price,
             boxes_per_carton = excluded.boxes_per_carton,
             carton_discount_rate = excluded.carton_discount_rate,
             active = 1,
@@ -353,6 +356,7 @@ async function seedProducts() {
                 item.gauge || null,
                 item.stock_unit || null,
                 Number.isFinite(Number(item.unit_price)) ? Number(item.unit_price) : null,
+                Number.isFinite(Number(item.discounted_unit_price)) ? Number(item.discounted_unit_price) : null,
                 item.boxes_per_carton || null,
                 Number.isFinite(Number(item.carton_discount_rate)) ? Number(item.carton_discount_rate) : 0.15,
                 updatedAt
@@ -367,7 +371,7 @@ function slugify(value) {
 
 function getProductCategories() {
     const rows = db.prepare(`
-        SELECT sku, category, name, packaging, carton, gauge, stock_quantity, stock_unit, unit_price, boxes_per_carton, carton_discount_rate, last_synced_at
+        SELECT sku, category, name, packaging, carton, gauge, stock_quantity, stock_unit, unit_price, discounted_unit_price, boxes_per_carton, carton_discount_rate, last_synced_at
         FROM products
         WHERE active = 1
         ORDER BY
@@ -395,6 +399,7 @@ function getProductCategories() {
             stock_quantity: row.stock_quantity,
             stock_unit: row.stock_unit,
             unit_price: row.unit_price,
+            discounted_unit_price: row.discounted_unit_price,
             boxes_per_carton: row.boxes_per_carton,
             carton_discount_rate: row.carton_discount_rate,
             last_synced_at: row.last_synced_at
@@ -523,6 +528,7 @@ async function syncInventoryFromGoogleSheet() {
             stock_quantity = COALESCE(?, stock_quantity),
             stock_unit = COALESCE(NULLIF(?, ''), stock_unit),
             unit_price = COALESCE(?, unit_price),
+            discounted_unit_price = COALESCE(?, discounted_unit_price),
             last_synced_at = ?,
             active = 1,
             updated_at = ?
@@ -543,9 +549,10 @@ async function syncInventoryFromGoogleSheet() {
         const result = update.run(
             record.product_name || record.product || record.name || '',
             record.category || '',
-            parseNumber(record.stock),
+            parseNumber(record.stock || record.stock_quantity || record.quantity),
             record.unit || '',
-            parseNumber(record.price),
+            parseNumber(record.price || record.unit_price || record.selling_price),
+            parseNumber(record.discounted_price || record.discount_price || record.discounted_unit_price || record.carton_price),
             syncedAt,
             syncedAt,
             sku
@@ -638,7 +645,7 @@ function cleanCustomer(customer = {}) {
 
 function getProductBySku(sku) {
     return db.prepare(`
-        SELECT sku, category, name, packaging, carton, gauge, stock_quantity, stock_unit, unit_price, boxes_per_carton, carton_discount_rate
+        SELECT sku, category, name, packaging, carton, gauge, stock_quantity, stock_unit, unit_price, discounted_unit_price, boxes_per_carton, carton_discount_rate
         FROM products
         WHERE active = 1 AND sku = ?
     `).get(sku);
@@ -678,9 +685,7 @@ function validateQuote(payload) {
     const requiredFields = [
         ['company', 'Company / Clinic / Hospital / Buyer Name'],
         ['contact', 'Contact Person'],
-        ['email', 'Email'],
-        ['mobile', 'Mobile'],
-        ...(customer.address_after_payment ? [] : [['address', 'Delivery Address']])
+        ['mobile', 'Mobile']
     ];
     const missingField = requiredFields.find(([field]) => !customer[field]);
 
@@ -715,12 +720,19 @@ function calculateQuotePricing(items) {
     const pricedItems = items.map((item) => {
         const quantity = Number(item.quantity) || 0;
         const unitPrice = Number(item.unit_price) || 0;
+        const discountedUnitPrice = Number(item.discounted_unit_price);
         const boxesPerCarton = Number(item.boxes_per_carton) || 0;
         const discountRate = Number.isFinite(Number(item.carton_discount_rate)) ? Number(item.carton_discount_rate) : 0.15;
         const groupQuantity = groupTotals.get(String(boxesPerCarton)) || 0;
         const discountEligible = boxesPerCarton > 0 && groupQuantity >= boxesPerCarton;
+        const hasFixedDiscountPrice = discountEligible
+            && Number.isFinite(discountedUnitPrice)
+            && discountedUnitPrice >= 0
+            && discountedUnitPrice < unitPrice;
         const lineSubtotal = unitPrice * quantity;
-        const lineDiscount = discountEligible ? lineSubtotal * discountRate : 0;
+        const lineDiscount = hasFixedDiscountPrice
+            ? (unitPrice - discountedUnitPrice) * quantity
+            : (discountEligible ? lineSubtotal * discountRate : 0);
         const lineTotal = lineSubtotal - lineDiscount;
 
         subtotal += lineSubtotal;
@@ -730,6 +742,8 @@ function calculateQuotePricing(items) {
             ...item,
             quantity,
             unit_price: unitPrice,
+            discounted_unit_price: Number.isFinite(discountedUnitPrice) ? discountedUnitPrice : null,
+            effective_unit_price: hasFixedDiscountPrice ? discountedUnitPrice : unitPrice,
             boxes_per_carton: boxesPerCarton,
             carton_discount_rate: discountRate,
             discount_eligible: discountEligible,
@@ -1448,7 +1462,7 @@ function deleteQuote(id, payload, actor) {
 }
 
 function sendQuotePdf(response, quote) {
-    const doc = new PDFDocument({ margin: 48, size: 'A4' });
+    const doc = new PDFDocument({ margin: 45, size: 'A4' });
     const chunks = [];
 
     doc.on('data', (chunk) => chunks.push(chunk));
@@ -1462,56 +1476,165 @@ function sendQuotePdf(response, quote) {
         response.end(pdf);
     });
 
-    if (existsSync(pdfLogoPath)) {
-        doc.image(pdfLogoPath, 48, 42, { width: 170 });
-        doc.moveDown(3.2);
-    } else {
-        doc.fontSize(20).text('K-Pick Trading Corp.', { align: 'left' });
-        doc.moveDown(0.35);
-    }
+    const pageWidth = doc.page.width;
+    const left = 45;
+    const right = pageWidth - 45;
+    const width = right - left;
+    const navy = '#172c4f';
+    const line = '#111111';
+    const rowHeight = 42;
 
-    doc.moveDown(0.35);
-    doc.fontSize(14).text('Quote / Purchase Order Request');
-    doc.moveDown(0.8);
-    doc.fontSize(11).text(`PO Number: ${quote.request_number}`);
-    doc.text(`Created: ${new Date(quote.created_at).toLocaleString()}`);
-    doc.moveDown();
+    const clientName = quote.customer.contact || 'Client';
+    const clientLines = [
+        quote.customer.company,
+        clientName,
+        quote.customer.mobile ? `Contact: ${quote.customer.mobile}` : '',
+        quote.customer.email ? `Email: ${quote.customer.email}` : '',
+        quote.customer.address_after_payment ? 'Delivery address to be added after payment' : quote.customer.address
+    ].filter(Boolean);
 
-    doc.fontSize(13).text('Customer Details', { underline: true });
-    doc.fontSize(10);
-    doc.text(`Company / Clinic / Hospital / Buyer Name: ${quote.customer.company || 'Not provided'}`);
-    doc.text(`Contact Person: ${quote.customer.contact || 'Not provided'}`);
-    doc.text(`Email: ${quote.customer.email || 'Not provided'}`);
-    doc.text(`Mobile: ${quote.customer.mobile || 'Not provided'}`);
-    doc.text(`Delivery Address: ${quote.customer.address_after_payment ? 'To be added after payment' : (quote.customer.address || 'Not provided')}`);
-    if (quote.customer.maps_url) {
-        doc.text(`Google Maps Pin: ${quote.customer.maps_url}`);
-    }
-    if (quote.customer.notes) {
-        doc.text(`Notes: ${quote.customer.notes}`);
-    }
-    doc.moveDown();
+    const drawCell = (x, y, cellWidth, height, text, options = {}) => {
+        doc.rect(x, y, cellWidth, height).stroke(line);
+        doc.font(options.bold ? 'Helvetica-Bold' : 'Helvetica')
+            .fontSize(options.size || 8.5)
+            .fillColor(options.color || '#000000')
+            .text(String(text || ''), x + 5, y + 5, {
+                width: cellWidth - 10,
+                height: height - 8,
+                align: options.align || 'left'
+            });
+    };
 
-    doc.fontSize(13).text('Selected Products', { underline: true });
-    doc.moveDown(0.4);
-    doc.fontSize(9);
-
-    quote.items.forEach((item, index) => {
-        const discountText = item.line_discount ? ` | Discount: ${money(item.line_discount)}` : '';
-        doc.text(`${index + 1}. ${item.name}`);
-        doc.text(`   SKU: ${item.sku} | Qty: ${item.quantity} ${item.stock_unit || 'box'} | Unit: ${money(item.unit_price)} | Line: ${money(item.line_total)}${discountText}`);
-        if (item.discount_eligible) {
-            doc.text(`   15% carton discount applied (${item.discount_group_quantity}/${item.boxes_per_carton} boxes group)`);
+    const drawInvoiceHeader = () => {
+        if (existsSync(pdfLogoPath)) {
+            doc.image(pdfLogoPath, 108, 35, { width: 250 });
+        } else {
+            doc.font('Helvetica-Bold').fontSize(24).fillColor('#222222').text('K-PICK TRADING CORP.', 108, 35);
         }
-        doc.moveDown(0.35);
+
+        doc.font('Helvetica-Bold')
+            .fontSize(20)
+            .fillColor(navy)
+            .text('FIRM / OFFER PRO-FORMA INVOICE', left + 86, 94);
+
+        doc.moveTo(left + 51, 65).lineTo(left + 51, 77).stroke(line);
+
+        let y = 155;
+        drawCell(left, y, width / 2, 16, 'Date:', { size: 8 });
+        drawCell(left + width / 2, y, width / 2, 16, new Date(quote.created_at).toLocaleDateString('en-PH', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }), { size: 8 });
+        y += 16;
+        drawCell(left, y, width / 2, 38, 'Client:', { size: 8 });
+        drawCell(left + width / 2, y, width / 2, 38, clientLines.join('\n'), { size: 8 });
+
+        doc.font('Helvetica')
+            .fontSize(9)
+            .fillColor('#000000')
+            .text(
+                'We are pleased to submit our Firm / Offer Pro-Forma Invoice for your consideration and approval regarding your medical supply requirements.',
+                left + 7,
+                236,
+                { width: width - 14, lineGap: 2 }
+            );
+    };
+
+    const drawItemsTable = () => {
+        const columns = [
+            { title: 'Description', width: 160 },
+            { title: 'Quantity', width: 90 },
+            { title: 'Unit Price', width: 110 },
+            { title: 'Amount', width: 110 }
+        ];
+        let x = left;
+        let y = 302;
+
+        columns.forEach((column) => {
+            drawCell(x, y, column.width, 14, column.title, { bold: true, size: 8 });
+            x += column.width;
+        });
+        y += 14;
+
+        for (const item of quote.items) {
+            if (y + rowHeight > 660) {
+                doc.addPage();
+                y = 70;
+                x = left;
+                columns.forEach((column) => {
+                    drawCell(x, y, column.width, 14, column.title, { bold: true, size: 8 });
+                    x += column.width;
+                });
+                y += 14;
+            }
+
+            const effectiveUnitPrice = Number(item.effective_unit_price || item.unit_price || 0);
+            const quantityText = `${item.quantity} ${item.stock_unit || 'Box'}`;
+            const description = `${item.name}\n(${item.sku})`;
+            x = left;
+            drawCell(x, y, columns[0].width, rowHeight, description, { size: 8 });
+            x += columns[0].width;
+            drawCell(x, y, columns[1].width, rowHeight, quantityText, { size: 8 });
+            x += columns[1].width;
+            drawCell(x, y, columns[2].width, rowHeight, money(effectiveUnitPrice), { size: 8 });
+            x += columns[2].width;
+            drawCell(x, y, columns[3].width, rowHeight, money(item.line_total), { size: 8 });
+            y += rowHeight;
+        }
+
+        return y + 30;
+    };
+
+    if (existsSync(pdfLogoPath)) {
+        drawInvoiceHeader();
+    } else {
+        drawInvoiceHeader();
+    }
+
+    let y = drawItemsTable();
+    doc.font('Helvetica-Bold')
+        .fontSize(12)
+        .fillColor(navy)
+        .text(`TOTAL AMOUNT: ${money(quote.totals.grand_total)} (VAT Inclusive)`, left + 272, y, { width: 260 });
+
+    y += 55;
+    doc.font('Helvetica-Bold').fontSize(11).fillColor('#000000').text('Terms and Conditions', left + 7, y);
+    y += 26;
+    const terms = [
+        'Payment Terms: Cash / Online Banking',
+        'Delivery: To be arranged upon confirmation',
+        'VAT-Exclusive Transactions: Acknowledgement Receipt shall be issued',
+        'VAT-Inclusive Transactions: Sales Invoice and Collection Receipt shall be issued',
+        'Prices are subject to change without prior notice'
+    ];
+    doc.font('Helvetica').fontSize(8.5);
+    terms.forEach((term, index) => {
+        doc.text(`${index + 1}.   ${term}`, left + 7, y);
+        y += 16;
     });
 
-    doc.moveDown();
-    doc.fontSize(12).text(`Subtotal: ${money(quote.totals.subtotal)}`, { align: 'right' });
-    doc.text(`Carton Discount: ${money(quote.totals.carton_discount)}`, { align: 'right' });
-    doc.fontSize(15).text(`Grand Total: ${money(quote.totals.grand_total)}`, { align: 'right' });
-    doc.moveDown();
-    doc.fontSize(9).fillColor('#555555').text('Generated by the K-Pick local quote backend. Final approval and stock confirmation may still be required.', { align: 'center' });
+    y += 24;
+    doc.text('Thank you for the opportunity to provide this quotation. Should you have any questions or inquiries, please feel free to contact us anytime.', left + 7, y, { width: width - 20 });
+
+    y += 64;
+    doc.font('Helvetica').fontSize(9).fillColor('#000000');
+    doc.text('Prepared By:', left + 7, y);
+    doc.text('Approved By:', left + 274, y);
+    doc.text('K-Pick Trading Corp.', left + 7, y + 36);
+    doc.text('Medical Representative', left + 7, y + 52);
+    doc.moveTo(left + 274, y + 55).lineTo(left + 445, y + 55).stroke(line);
+    doc.text(`${clientName}\nAuthorized Signature`, left + 274, y + 60);
+
+    doc.addPage();
+    doc.font('Helvetica').fontSize(9).fillColor('#000000').text('Sales Manager\n123456789', 80, 28);
+    doc.text('Mr. Lee Min-Ho\nPresident', 80, 74);
+    doc.font('Helvetica-Bold').fontSize(11).text('Visit Our Website', 0, 140, { align: 'center' });
+    doc.rect(pageWidth / 2 - 55, 170, 110, 110).stroke(line);
+    doc.font('Helvetica').fontSize(8).text('QR code placeholder', pageWidth / 2 - 45, 218, { width: 90, align: 'center' });
+    doc.font('Helvetica-Oblique')
+        .fontSize(7)
+        .text('K-PICK TRADING CORP. | Korean Medical Products & Distribution', 0, 306, { align: 'center' });
     doc.end();
 }
 

@@ -8,14 +8,14 @@
       { "sku": "SUN-IS-BL-100-31G-08", "name": "BLISTER 1ml 31G 8mm", "packaging": "Blister", "boxes_per_carton": 36 },
       { "sku": "SUN-IS-BL-100-31G-06", "name": "BLISTER 1ml 31G 6mm", "packaging": "Blister", "boxes_per_carton": 36 },
       { "sku": "SUN-IS-BL-050-32G-08", "name": "BLISTER 0.5ml 32G 8mm", "packaging": "Blister", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-050-30G-08", "name": "POLYBAG 0.5ml 30G 8mm", "packaging": "Polybag", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-050-31G-08", "name": "POLYBAG 0.5ml 31G 8mm", "packaging": "Polybag", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-050-32G-08", "name": "POLYBAG 0.5ml 32G 8mm", "packaging": "Polybag", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-29G-13", "name": "POLYBAG 1ml 29G 13mm", "packaging": "Polybag", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-30G-08", "name": "POLYBAG 1ml 30G 8mm", "packaging": "Polybag", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-30G-13", "name": "POLYBAG 1ml 30G 13mm", "packaging": "Polybag", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-31G-08", "name": "POLYBAG 1ml 31G 8mm", "packaging": "Polybag", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-32G-08", "name": "POLYBAG 1ml 32G 8mm", "packaging": "Polybag", "boxes_per_carton": 36 }
+      { "sku": "SUN-IS-PB-050-30G-08", "name": "POLYBAG 0.5ml 30G 8mm", "packaging": "Polybag", "unit_price": 619, "discounted_unit_price": 529, "boxes_per_carton": 36 },
+      { "sku": "SUN-IS-PB-050-31G-08", "name": "POLYBAG 0.5ml 31G 8mm", "packaging": "Polybag", "unit_price": 629, "discounted_unit_price": 529, "boxes_per_carton": 36 },
+      { "sku": "SUN-IS-PB-050-32G-08", "name": "POLYBAG 0.5ml 32G 8mm", "packaging": "Polybag", "unit_price": 699, "discounted_unit_price": 599, "boxes_per_carton": 36 },
+      { "sku": "SUN-IS-PB-100-29G-13", "name": "POLYBAG 1ml 29G 13mm", "packaging": "Polybag", "unit_price": 599, "discounted_unit_price": 519, "boxes_per_carton": 36 },
+      { "sku": "SUN-IS-PB-100-30G-08", "name": "POLYBAG 1ml 30G 8mm", "packaging": "Polybag", "unit_price": 619, "discounted_unit_price": 519, "boxes_per_carton": 36 },
+      { "sku": "SUN-IS-PB-100-30G-13", "name": "POLYBAG 1ml 30G 13mm", "packaging": "Polybag", "unit_price": 619, "discounted_unit_price": 519, "boxes_per_carton": 36 },
+      { "sku": "SUN-IS-PB-100-31G-08", "name": "POLYBAG 1ml 31G 8mm", "packaging": "Polybag", "unit_price": 629, "discounted_unit_price": 519, "boxes_per_carton": 36 },
+      { "sku": "SUN-IS-PB-100-32G-08", "name": "POLYBAG 1ml 32G 8mm", "packaging": "Polybag", "unit_price": 699, "discounted_unit_price": 599, "boxes_per_carton": 36 }
     ]
   },
   {

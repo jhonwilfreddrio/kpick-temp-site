@@ -86,9 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const detail = item.carton || item.packaging || 'Sungshim';
             const stock = item.stock_quantity ?? null;
             const price = item.unit_price ?? null;
+            const discountPrice = item.discounted_unit_price ?? null;
             const inventoryDetails = [
                 stock !== null ? `Stock: ${stock} ${item.stock_unit || 'box'}` : null,
-                price !== null ? `Price: ${price}` : null
+                price !== null ? `Price: ${price}` : null,
+                discountPrice !== null ? `Carton price: ${discountPrice}` : null
             ].filter(Boolean).join(' | ');
 
             return `
@@ -127,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>
                     <strong>${escapeHtml(item.name)}</strong>
                     <span>${escapeHtml(item.category)}${item.unit_price !== null && item.unit_price !== undefined ? ` | ${escapeHtml(item.unit_price)} per ${escapeHtml(item.stock_unit || 'box')}` : ''}</span>
-                    ${item.discountEligible ? `<span class="quote-discount-note">15% carton discount applied (${item.groupQuantity}/${item.boxes_per_carton} boxes group)</span>` : ''}
+                    ${item.discountEligible ? `<span class="quote-discount-note">Carton discount applied (${item.groupQuantity}/${item.boxes_per_carton} boxes group)${item.effectiveUnitPrice !== item.unit_price ? `: ${escapeHtml(item.effectiveUnitPrice)} per ${escapeHtml(item.stock_unit || 'box')}` : ''}</span>` : ''}
                 </div>
                 <div class="quote-quantity">
                     <button type="button" data-step-product="${escapeAttr(item.sku)}" data-step="-1">-</button>
@@ -180,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        addressInput.required = !addressAfterPaymentInput.checked;
+        addressInput.required = false;
         addressInput.disabled = addressAfterPaymentInput.checked;
         if (mapsUrlInput) {
             mapsUrlInput.disabled = addressAfterPaymentInput.checked;
@@ -244,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <article>
                             <strong>${escapeHtml(item.name)}</strong>
                             <span>Qty: ${escapeHtml(item.quantity)} ${escapeHtml(item.stock_unit || 'box')} | Unit: ${money(item.unit_price)} | Line: ${money(item.line_total)}</span>
-                            ${item.line_discount ? `<span>15% carton discount: ${money(item.line_discount)}</span>` : ''}
+                            ${item.line_discount ? `<span>Carton discount: ${money(item.line_discount)}</span>` : ''}
                         </article>
                     `).join('')}
                 </div>
@@ -313,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const items = Array.from(selected.values()).map((item) => ({
             ...item,
             unit_price: Number(item.unit_price) || 0,
+            discounted_unit_price: item.discounted_unit_price === null || item.discounted_unit_price === undefined ? null : Number(item.discounted_unit_price),
             quantity: Number(item.quantity) || 0,
             boxes_per_carton: Number(item.boxes_per_carton) || 0,
             carton_discount_rate: Number.isFinite(Number(item.carton_discount_rate)) ? Number(item.carton_discount_rate) : 0.15
@@ -334,7 +337,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const lineSubtotal = item.unit_price * item.quantity;
             const groupQuantity = groupTotals.get(String(item.boxes_per_carton)) || 0;
             const discountEligible = item.boxes_per_carton > 0 && groupQuantity >= item.boxes_per_carton;
-            const lineDiscount = discountEligible ? lineSubtotal * item.carton_discount_rate : 0;
+            const hasFixedDiscountPrice = discountEligible
+                && Number.isFinite(item.discounted_unit_price)
+                && item.discounted_unit_price >= 0
+                && item.discounted_unit_price < item.unit_price;
+            const lineDiscount = hasFixedDiscountPrice
+                ? (item.unit_price - item.discounted_unit_price) * item.quantity
+                : (discountEligible ? lineSubtotal * item.carton_discount_rate : 0);
 
             subtotal += lineSubtotal;
             discount += lineDiscount;
@@ -344,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lineSubtotal,
                 lineDiscount,
                 lineTotal: lineSubtotal - lineDiscount,
+                effectiveUnitPrice: hasFixedDiscountPrice ? item.discounted_unit_price : item.unit_price,
                 discountEligible,
                 groupQuantity
             };
@@ -377,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const price = item.unit_price !== null && item.unit_price !== undefined
                 ? ` | Price: ${item.unit_price}/${item.stock_unit || 'box'}`
                 : '';
-            const discount = item.lineDiscount ? ` | 15% Discount: ${money(item.lineDiscount)} | Line Total: ${money(item.lineTotal)}` : '';
+            const discount = item.lineDiscount ? ` | Carton Discount: ${money(item.lineDiscount)} | Line Total: ${money(item.lineTotal)}` : '';
             return `${index + 1}. ${item.name} - Qty: ${item.quantity}${detail ? ` (${detail})` : ''}${price}${discount}`;
         });
 
