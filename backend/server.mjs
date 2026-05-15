@@ -14,6 +14,7 @@ const dbPath = join(dataDir, 'kpick_quote.sqlite3');
 const seedPath = join(backendDir, 'seed_products.json');
 const logPath = join(dataDir, 'server.log');
 const pdfLogoPath = join(rootDir, 'img', 'KpickLogoDark.png');
+const websiteQrPath = join(rootDir, 'img', 'kpick-qr.jpg');
 const host = process.env.KPICK_HOST || (process.env.PORT ? '0.0.0.0' : '127.0.0.1');
 const port = getPort(process.env.KPICK_PORT || process.env.PORT);
 const isLocalHost = ['127.0.0.1', 'localhost', '::1'].includes(host);
@@ -1467,7 +1468,7 @@ function deleteQuote(id, payload, actor) {
 }
 
 function sendQuotePdf(response, quote) {
-    const doc = new PDFDocument({ margin: 45, size: 'A4' });
+    const doc = new PDFDocument({ margin: 32, size: 'A4' });
     const chunks = [];
 
     doc.on('data', (chunk) => chunks.push(chunk));
@@ -1482,24 +1483,33 @@ function sendQuotePdf(response, quote) {
     });
 
     const pageWidth = doc.page.width;
-    const left = 45;
-    const right = pageWidth - 45;
+    const left = 32;
+    const right = pageWidth - 32;
     const width = right - left;
-    const navy = '#172c4f';
     const line = '#111111';
-    const rowHeight = 42;
+    const rowHeight = 28;
+    const websiteUrl = 'https://kpick-temp-site-production.up.railway.app/';
 
     const clientName = quote.customer.contact || 'Client';
+    const invoiceDate = new Date(quote.created_at).toLocaleDateString('en-PH', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
     const clientLines = [
-        quote.customer.company,
-        clientName,
-        quote.customer.mobile ? `Contact: ${quote.customer.mobile}` : '',
-        quote.customer.email ? `Email: ${quote.customer.email}` : '',
-        quote.customer.address_after_payment ? 'Delivery address to be added after payment' : quote.customer.address
+        `To : ${quote.customer.company || clientName}`,
+        `Attn. : ${clientName}`,
+        quote.customer.mobile ? `Tel./Fax. : ${quote.customer.mobile}` : '',
+        quote.customer.email ? `Email : ${quote.customer.email}` : '',
+        quote.customer.address_after_payment ? 'Address : To be added after payment' : (quote.customer.address ? `Address : ${quote.customer.address}` : '')
     ].filter(Boolean);
 
     const drawCell = (x, y, cellWidth, height, text, options = {}) => {
-        doc.rect(x, y, cellWidth, height).stroke(line);
+        if (options.fill) {
+            doc.rect(x, y, cellWidth, height).fillAndStroke(options.fill, line);
+        } else {
+            doc.rect(x, y, cellWidth, height).stroke(line);
+        }
         doc.font(options.bold ? 'Helvetica-Bold' : 'Helvetica')
             .fontSize(options.size || 8.5)
             .fillColor(options.color || '#000000')
@@ -1512,134 +1522,147 @@ function sendQuotePdf(response, quote) {
 
     const drawInvoiceHeader = () => {
         if (existsSync(pdfLogoPath)) {
-            doc.image(pdfLogoPath, 108, 35, { width: 250 });
+            doc.image(pdfLogoPath, left + 8, 26, { width: 210 });
         } else {
-            doc.font('Helvetica-Bold').fontSize(24).fillColor('#222222').text('K-PICK TRADING CORP.', 108, 35);
+            doc.font('Helvetica-Bold').fontSize(22).fillColor('#222222').text('K-PICK TRADING CORP.', left + 8, 28);
         }
 
-        doc.font('Helvetica-Bold')
-            .fontSize(20)
-            .fillColor(navy)
-            .text('FIRM / OFFER PRO-FORMA INVOICE', left + 86, 94);
-
-        doc.moveTo(left + 51, 65).lineTo(left + 51, 77).stroke(line);
-
-        let y = 155;
-        drawCell(left, y, width / 2, 16, 'Date:', { size: 8 });
-        drawCell(left + width / 2, y, width / 2, 16, new Date(quote.created_at).toLocaleDateString('en-PH', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        }), { size: 8 });
-        y += 16;
-        drawCell(left, y, width / 2, 38, 'Client:', { size: 8 });
-        drawCell(left + width / 2, y, width / 2, 38, clientLines.join('\n'), { size: 8 });
-
         doc.font('Helvetica')
-            .fontSize(9)
+            .fontSize(8)
             .fillColor('#000000')
-            .text(
-                'We are pleased to submit our Firm / Offer Pro-Forma Invoice for your consideration and approval regarding your medical supply requirements.',
-                left + 7,
-                236,
-                { width: width - 14, lineGap: 2 }
-            );
+            .text('Medical Supplies & Korean Healthcare Products Distribution', left + 8, 62)
+            .text('Dakota Building, 555 Gen. Malvar St. cor Adriatico St., Malate, Manila', left + 8, 74)
+            .text('E-mail : kpickmedicalmarketing@gmail.com', right - 215, 38, { width: 210, align: 'right' })
+            .text('Tel. : +63 917 315 8420', right - 215, 50, { width: 210, align: 'right' });
+
+        doc.moveTo(left, 91).lineTo(right, 91).stroke(line);
+        doc.font('Helvetica-Bold')
+            .fontSize(12)
+            .fillColor('#000000')
+            .text('PROFORMA-INVOICE', 0, 98, { align: 'center', underline: true });
+
+        doc.font('Helvetica').fontSize(8.5).fillColor('#000000');
+        doc.text(clientLines.join('\n'), left, 122, { width: 310, lineGap: 2 });
+        doc.text(`Date : ${invoiceDate}\nNo. : ${quote.request_number}`, right - 150, 122, { width: 150, align: 'right' });
+
+        doc.font('Helvetica-Bold').fontSize(8.5).text('Dear Sirs,', left, 178);
+        doc.font('Helvetica').fontSize(8.5).text('We take much pleasure in offering you as follows :', left, 192, { underline: true });
+
+        const termsLeft = left;
+        const termsRight = left + 300;
+        let y = 210;
+        const offerTerms = [
+            ['Manufacturer', 'K-Pick Trading Corp.'],
+            ['Brand Name', 'K-Pick / Sungshim Brand'],
+            ['Origin', 'Republic of Korea'],
+            ['Payment', 'Cash / Online Banking'],
+            ['Packing', 'Domestic standard packing'],
+            ['Delivery', 'To be arranged upon confirmation'],
+            ['Validity', 'Prices are subject to change without prior notice'],
+            ['Remarks', 'Final approval and stock confirmation may still be required']
+        ];
+        offerTerms.forEach(([label, value], index) => {
+            const x = index === 1 ? termsRight : termsLeft;
+            const rowY = index === 1 ? 210 : y;
+            doc.font('Helvetica-Bold').text(`-. ${label} :`, x, rowY, { continued: true });
+            doc.font('Helvetica').text(` ${value}`);
+            if (index !== 0 && index !== 1) {
+                y += 13;
+            } else if (index === 0) {
+                y += 13;
+            }
+        });
     };
 
     const drawItemsTable = () => {
         const columns = [
-            { title: 'Description', width: 160 },
-            { title: 'Quantity', width: 90 },
-            { title: 'Unit Price', width: 110 },
-            { title: 'Amount', width: 110 }
+            { title: 'Description of Commodities', width: 245 },
+            { title: 'C/T', width: 38 },
+            { title: 'Quantity', width: 82 },
+            { title: 'Unit-Price', width: 82 },
+            { title: 'Amount', width: 82 }
         ];
         let x = left;
-        let y = 302;
+        let y = 318;
 
+        doc.font('Helvetica-Bold').fontSize(8).text('FOB Manila', left, y - 13, { width, align: 'right' });
         columns.forEach((column) => {
-            drawCell(x, y, column.width, 14, column.title, { bold: true, size: 8 });
+            drawCell(x, y, column.width, 18, column.title, { bold: true, size: 7.5, align: 'center', fill: '#f1f4f8' });
             x += column.width;
         });
-        y += 14;
+        y += 18;
 
         for (const item of quote.items) {
-            if (y + rowHeight > 660) {
+            if (y + rowHeight > 690) {
                 doc.addPage();
-                y = 70;
+                y = 52;
                 x = left;
                 columns.forEach((column) => {
-                    drawCell(x, y, column.width, 14, column.title, { bold: true, size: 8 });
+                    drawCell(x, y, column.width, 18, column.title, { bold: true, size: 7.5, align: 'center', fill: '#f1f4f8' });
                     x += column.width;
                 });
-                y += 14;
+                y += 18;
             }
 
             const effectiveUnitPrice = Number(item.effective_unit_price || item.unit_price || 0);
-            const quantityText = `${item.quantity} ${item.stock_unit || 'Box'}`;
-            const description = `${item.name}\n(${item.sku})`;
+            const cartons = Number(item.boxes_per_carton) ? Number(item.quantity || 0) / Number(item.boxes_per_carton) : '';
+            const cartonText = Number.isFinite(cartons) && cartons ? Number(cartons.toFixed(2)).toString() : '';
+            const quantityText = `${Number(item.quantity || 0).toLocaleString('en-PH')} ${item.stock_unit || 'box'}`;
+            const description = `${item.name}\n${item.sku}`;
             x = left;
-            drawCell(x, y, columns[0].width, rowHeight, description, { size: 8 });
+            drawCell(x, y, columns[0].width, rowHeight, description, { size: 7.5 });
             x += columns[0].width;
-            drawCell(x, y, columns[1].width, rowHeight, quantityText, { size: 8 });
+            drawCell(x, y, columns[1].width, rowHeight, cartonText, { size: 7.5, align: 'center' });
             x += columns[1].width;
-            drawCell(x, y, columns[2].width, rowHeight, money(effectiveUnitPrice), { size: 8 });
+            drawCell(x, y, columns[2].width, rowHeight, quantityText, { size: 7.5, align: 'center' });
             x += columns[2].width;
-            drawCell(x, y, columns[3].width, rowHeight, money(item.line_total), { size: 8 });
+            drawCell(x, y, columns[3].width, rowHeight, money(effectiveUnitPrice), { size: 7.5, align: 'right' });
+            x += columns[3].width;
+            drawCell(x, y, columns[4].width, rowHeight, money(item.line_total), { size: 7.5, align: 'right' });
             y += rowHeight;
         }
 
-        return y + 30;
+        drawCell(left, y, columns[0].width + columns[1].width + columns[2].width + columns[3].width, 18, 'Grand-Total :', { bold: true, size: 8 });
+        drawCell(left + columns[0].width + columns[1].width + columns[2].width + columns[3].width, y, columns[4].width, 18, money(quote.totals.grand_total), { bold: true, size: 8, align: 'right' });
+        return y + 56;
     };
 
-    if (existsSync(pdfLogoPath)) {
-        drawInvoiceHeader();
-    } else {
-        drawInvoiceHeader();
-    }
+    drawInvoiceHeader();
 
     let y = drawItemsTable();
-    doc.font('Helvetica-Bold')
-        .fontSize(12)
-        .fillColor(navy)
-        .text(`TOTAL AMOUNT: ${money(quote.totals.grand_total)} (VAT Inclusive)`, left + 272, y, { width: 260 });
+    if (y > 640) {
+        doc.addPage();
+        y = 70;
+    }
 
-    y += 55;
-    doc.font('Helvetica-Bold').fontSize(11).fillColor('#000000').text('Terms and Conditions', left + 7, y);
-    y += 26;
-    const terms = [
-        'Payment Terms: Cash / Online Banking',
-        'Delivery: To be arranged upon confirmation',
-        'VAT-Exclusive Transactions: Acknowledgement Receipt shall be issued',
-        'VAT-Inclusive Transactions: Sales Invoice and Collection Receipt shall be issued',
-        'Prices are subject to change without prior notice'
-    ];
-    doc.font('Helvetica').fontSize(8.5);
-    terms.forEach((term, index) => {
-        doc.text(`${index + 1}.   ${term}`, left + 7, y);
-        y += 16;
-    });
+    doc.font('Helvetica-Bold').fontSize(8).fillColor('#000000').text('Accepted & Confirmed by ;', left, y);
+    doc.text('K-PICK TRADING CORP.', right - 205, y, { width: 205, align: 'center', underline: true });
 
-    y += 24;
-    doc.text('Thank you for the opportunity to provide this quotation. Should you have any questions or inquiries, please feel free to contact us anytime.', left + 7, y, { width: width - 20 });
+    y += 58;
+    doc.font('Helvetica').fontSize(8);
+    doc.text('Buyer :', left, y);
+    doc.moveTo(left + 38, y + 9).lineTo(left + 190, y + 9).stroke(line);
+    doc.text('Date :', left, y + 18);
+    doc.moveTo(left + 38, y + 27).lineTo(left + 190, y + 27).stroke(line);
 
-    y += 64;
-    doc.font('Helvetica').fontSize(9).fillColor('#000000');
-    doc.text('Prepared By:', left + 7, y);
-    doc.text('Approved By:', left + 274, y);
-    doc.text('K-Pick Trading Corp.', left + 7, y + 36);
-    doc.text('Medical Representative', left + 7, y + 52);
-    doc.moveTo(left + 274, y + 55).lineTo(left + 445, y + 55).stroke(line);
-    doc.text(`${clientName}\nAuthorized Signature`, left + 274, y + 60);
+    doc.font('Helvetica-Bold').fontSize(8).text('Ms. Ays San Antonio', right - 205, y - 4, { width: 205, align: 'center' });
+    doc.font('Helvetica').fontSize(7.5).text('Medical Representative', right - 205, y + 9, { width: 205, align: 'center' });
+    doc.font('Helvetica-Bold').fontSize(8).text('Sir Ian Jones Duelo', right - 205, y + 32, { width: 205, align: 'center' });
+    doc.font('Helvetica').fontSize(7.5).text('General Manager', right - 205, y + 45, { width: 205, align: 'center' });
+    doc.font('Helvetica-Bold').fontSize(8).text('Youn Dong Ho', right - 205, y + 68, { width: 205, align: 'center' });
+    doc.font('Helvetica').fontSize(7.5).text('CEO', right - 205, y + 81, { width: 205, align: 'center' });
 
-    doc.addPage();
-    doc.font('Helvetica').fontSize(9).fillColor('#000000').text('Sales Manager\n123456789', 80, 28);
-    doc.text('Mr. Lee Min-Ho\nPresident', 80, 74);
-    doc.font('Helvetica-Bold').fontSize(11).text('Visit Our Website', 0, 140, { align: 'center' });
-    doc.rect(pageWidth / 2 - 55, 170, 110, 110).stroke(line);
-    doc.font('Helvetica').fontSize(8).text('QR code placeholder', pageWidth / 2 - 45, 218, { width: 90, align: 'center' });
+    const qrY = y + 116;
+    doc.font('Helvetica-Bold').fontSize(9).text('Visit Our Website', 0, qrY, { align: 'center' });
+    if (existsSync(websiteQrPath)) {
+        doc.image(websiteQrPath, pageWidth / 2 - 48, qrY + 18, { width: 96 });
+    } else {
+        doc.rect(pageWidth / 2 - 48, qrY + 18, 96, 96).stroke(line);
+        doc.font('Helvetica').fontSize(7).text(websiteUrl, pageWidth / 2 - 44, qrY + 57, { width: 88, align: 'center' });
+    }
     doc.font('Helvetica-Oblique')
         .fontSize(7)
-        .text('K-PICK TRADING CORP. | Korean Medical Products & Distribution', 0, 306, { align: 'center' });
+        .text('K-PICK TRADING CORP. | Korean Medical Products & Distribution', 0, qrY + 124, { align: 'center' });
     doc.end();
 }
 
