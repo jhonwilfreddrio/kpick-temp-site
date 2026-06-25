@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /request.htm
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /landing-page-backups/
+Disallow: /docs/
 
 User-agent: GPTBot
 Allow: /
@@ -13,4 +18,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://kokogo1business2-svg.github.io/kpick-temp-site/sitemap.xml
+Sitemap: https://kpicktrading.com/sitemap.xml

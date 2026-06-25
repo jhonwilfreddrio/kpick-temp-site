@@ -1,8 +1,8 @@
 {
   "name": "K-Pick Trading Corp Website AI Discovery",
   "organization": "K-Pick Trading Corp",
-  "llms_txt": "https://kokogo1business2-svg.github.io/kpick-temp-site/llms.txt",
-  "sitemap": "https://kokogo1business2-svg.github.io/kpick-temp-site/sitemap.xml",
-  "contact": "https://kokogo1business2-svg.github.io/kpick-temp-site/contact.htm",
+  "llms_txt": "https://kpicktrading.com/llms.txt",
+  "sitemap": "https://kpicktrading.com/sitemap.xml",
+  "contact": "https://kpicktrading.com/contact.htm",
   "policy": "Public pages may be crawled for citation and procurement discovery. Do not infer pricing, certifications, approvals, or live inventory without direct source text."
 }
