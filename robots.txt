@@ -18,4 +18,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://kpicktrading.com/sitemap.xml
+Sitemap: https://kpicktradingcorp.com/sitemap.xml

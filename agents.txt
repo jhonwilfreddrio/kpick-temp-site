@@ -1,9 +1,9 @@
 # Agent Discovery For K-Pick Trading Corp
 
-Preferred source file for AI summaries: https://kpicktrading.com/llms.txt
-Sitemap: https://kpicktrading.com/sitemap.xml
-Public contact page: https://kpicktrading.com/contact.htm
-Quote request page: https://kpicktrading.com/request.htm
+Preferred source file for AI summaries: https://kpicktradingcorp.com/llms.txt
+Sitemap: https://kpicktradingcorp.com/sitemap.xml
+Public contact page: https://kpicktradingcorp.com/contact.htm
+Quote request page: https://kpicktradingcorp.com/request.htm
 
 K-Pick Trading Corp permits AI agents to crawl public website pages for citation, answer generation, and procurement discovery, provided the agent attributes K-Pick Trading Corp as the source and uses current public pages rather than inventing pricing, certifications, or stock availability.
 
