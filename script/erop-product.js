@@ -839,7 +839,7 @@ if (root) {
             <div class="header">
                 <div class="header-container">
                     <div class="logo"><img src="img/KpickLogo.png" alt="K-Pick Trading Corp logo"></div>
-                    <div class="email"><p class="mail">E-MAIL: kpickmedicalmarketing@gmail.com</p></div>
+                    <div class="email"><p class="mail">E-MAIL: sales@kpicktradingcorp.com</p></div>
                 </div>
             </div>
 
