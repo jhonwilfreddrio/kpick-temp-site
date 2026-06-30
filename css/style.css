@@ -926,6 +926,54 @@ body{
     color: rgba(255, 255, 255, 0.78);
     font-size: 17px;
 }
+.site-footer__policy-link {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: inherit;
+}
+.site-footer__policy-link:hover { color: #ffffff; }
+
+/* ===========================================
+   PRIVACY POLICY page
+   =========================================== */
+.policy-content {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+}
+.policy-content h1 {
+    font-size: clamp(22px, 3vw, 34px);
+    color: #041A4F;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+.policy-content .policy-meta {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 40px;
+    display: block;
+}
+.policy-content h2 {
+    font-size: 16px;
+    color: #041A4F;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.policy-content p,
+.policy-content li {
+    font-size: 15px;
+    color: #3a3a3a;
+    line-height: 1.75;
+    margin-bottom: 12px;
+}
+.policy-content ul {
+    padding-left: 22px;
+    margin-bottom: 12px;
+}
+.policy-content a { color: #0f4ca3; }
 .back-to-top{
     position: fixed;
     right: 24px;
