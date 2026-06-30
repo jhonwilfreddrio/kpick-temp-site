@@ -6259,6 +6259,12 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .brand-cta__btn--primary:hover { background: #ddeafc; transform: translateY(-1px); }
 .brand-cta__btn--secondary { background: rgba(255,255,255,0.1); color: #ffffff; border: 1.5px solid rgba(255,255,255,0.28); }
 .brand-cta__btn--secondary:hover { background: rgba(255,255,255,0.18); }
+.brand-cta__trust {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.58);
+    letter-spacing: 0.025em;
+}
 
 /* ===========================================
    K-PICK CERTIFICATIONS — Homepage section
