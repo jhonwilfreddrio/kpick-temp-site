@@ -78,9 +78,28 @@
             </div>
         </section>
 
-        <section class="quote-workspace" aria-label="Quote request builder">
-            <aside class="quote-panel quote-panel--customer">
-                <h2>Customer Details</h2>
+        <!-- Step indicator -->
+        <div class="quote-steps" aria-label="Form progress">
+            <div class="quote-step is-active">
+                <div class="quote-step__dot"><span>1</span></div>
+                <div class="quote-step__label">Customer</div>
+            </div>
+            <div class="quote-step__bar"></div>
+            <div class="quote-step">
+                <div class="quote-step__dot"><span>2</span></div>
+                <div class="quote-step__label">Products</div>
+            </div>
+            <div class="quote-step__bar"></div>
+            <div class="quote-step">
+                <div class="quote-step__dot"><span>3</span></div>
+                <div class="quote-step__label">Review</div>
+            </div>
+        </div>
+
+        <!-- Stage 1: Customer Details -->
+        <section class="quote-stage" id="quote-stage-1" aria-label="Customer details">
+            <div class="quote-stage__inner quote-stage__inner--narrow">
+                <h2 class="quote-stage__title">Customer Details</h2>
                 <form class="quote-customer-form">
                     <label>
                         Company / Clinic / Hospital / Buyer Name
@@ -115,39 +134,55 @@
                     </label>
                     <label>
                         Notes
-                        <textarea name="notes" rows="4" placeholder="Delivery location, preferred timeline, special request"></textarea>
+                        <textarea name="notes" rows="3" placeholder="Delivery location, preferred timeline, special request"></textarea>
                     </label>
                 </form>
-            </aside>
-
-            <section class="quote-panel quote-panel--products">
-                <div class="quote-panel__header">
-                    <div>
-                        <h2>Products</h2>
-                        <p>Products listed from the current available K-Pick catalog.</p>
-                        <p class="quote-discount-criteria">Discount criteria: Sungshim carton prices apply only when the selected quantity reaches the carton requirement for that product group. Hansol sets have no carton discount.</p>
-                    </div>
-                    <input class="quote-search" type="search" placeholder="Search product" aria-label="Search product">
+                <div class="quote-stage__nav">
+                    <button class="quote-button" type="button" data-next-stage>Next: Select Products &rarr;</button>
                 </div>
-                <div class="quote-category-tabs" role="tablist" aria-label="Product categories"></div>
-                <div class="quote-product-list" aria-live="polite"></div>
-            </section>
+            </div>
+        </section>
 
-            <aside class="quote-panel quote-panel--summary">
-                <div class="quote-panel__header">
-                    <div>
-                        <h2>Request Summary</h2>
-                        <p class="quote-summary-count">No products selected.</p>
-                    </div>
+        <!-- Stage 2: Products -->
+        <section class="quote-stage" id="quote-stage-2" aria-label="Product selection" hidden>
+            <div class="quote-stage__inner">
+                <h2 class="quote-stage__title">Products</h2>
+                <p class="quote-discount-criteria">Discount: Sungshim carton pricing applies when quantity reaches the carton threshold for that SKU group. Hansol sets have no carton discount.</p>
+                <div class="qt-table-wrap">
+                    <table class="qt-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Unit Price</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="qt-body"></tbody>
+                    </table>
                 </div>
-                <div class="quote-selected-list"></div>
-                <div class="quote-actions">
-                    <button class="quote-button quote-button--secondary" type="button" data-clear-quote>Clear</button>
-                    <button class="quote-button" type="button" data-copy-quote>Copy Summary</button>
+                <button class="quote-button quote-button--add-row" type="button" data-add-row>+ Add Product Row</button>
+                <div id="qt-pricing"></div>
+                <div class="quote-stage__nav">
+                    <button class="quote-button quote-button--secondary" type="button" data-prev-stage>&larr; Back</button>
+                    <button class="quote-button" type="button" data-next-stage>Next: Review &rarr;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stage 3: Review & Submit -->
+        <section class="quote-stage" id="quote-stage-3" aria-label="Review and submit" hidden>
+            <div class="quote-stage__inner">
+                <h2 class="quote-stage__title">Review &amp; Submit</h2>
+                <div id="qt-review"></div>
+                <div class="quote-stage__nav">
+                    <button class="quote-button quote-button--secondary" type="button" data-prev-stage>&larr; Back</button>
+                    <button class="quote-button quote-button--secondary" type="button" data-copy-quote>Copy Summary</button>
                     <button class="quote-button quote-button--submit" type="button" data-submit-quote>Submit Request</button>
                 </div>
                 <p class="quote-copy-status" role="status" aria-live="polite"></p>
-            </aside>
+            </div>
         </section>
     </main>
 
