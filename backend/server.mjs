@@ -22,7 +22,7 @@ const websiteQrPath = join(rootDir, 'img', 'kpick-qr.jpg');
 const host = process.env.KPICK_HOST || (process.env.PORT ? '0.0.0.0' : '127.0.0.1');
 const port = getPort(process.env.KPICK_PORT || process.env.PORT);
 const isLocalHost = ['127.0.0.1', 'localhost', '::1'].includes(host);
-const adminPassword = process.env.KPICK_ADMIN_PASSWORD || (isLocalHost ? 'kpick0324admin' : '');
+const adminPassword = process.env.KPICK_ADMIN_PASSWORD || (isLocalHost ? 'change-me-local-admin' : '');
 const authSecret = process.env.KPICK_AUTH_SECRET || (isLocalHost ? `${adminPassword}:${dbPath}` : '');
 const googleSheetCsvUrl = process.env.KPICK_INVENTORY_CSV_URL
     || 'https://docs.google.com/spreadsheets/d/1lyGPgs3edGO7EV-Q1mnpzjvsbghojdQ6ocCp4Dxcsak/gviz/tq?tqx=out:csv&sheet=Backend%20Mirror';
@@ -274,12 +274,14 @@ function seedStaffUsers() {
         return;
     }
 
+    // Seed passwords come from the env-derived adminPassword (no hardcoded secret).
+    // Set KPICK_ADMIN_PASSWORD before first seed to control the initial staff password.
     const defaults = [
-        { id: 'admin', name: 'K-Pick Admin', role: 'Admin', password: 'kpick0324admin', managerCode: 'kpick0324admin' },
-        { id: 'cs001', name: 'CS Staff', role: 'CS', password: 'kpick0324admin' },
-        { id: 'inv001', name: 'Inventory Staff', role: 'Inventory', password: 'kpick0324admin' },
-        { id: 'mgr001', name: 'Manager', role: 'Manager', password: 'kpick0324admin', managerCode: 'kpick0324admin' },
-        { id: 'boss001', name: 'Boss', role: 'Boss', password: 'kpick0324admin' }
+        { id: 'admin', name: 'K-Pick Admin', role: 'Admin', password: adminPassword, managerCode: adminPassword },
+        { id: 'cs001', name: 'CS Staff', role: 'CS', password: adminPassword },
+        { id: 'inv001', name: 'Inventory Staff', role: 'Inventory', password: adminPassword },
+        { id: 'mgr001', name: 'Manager', role: 'Manager', password: adminPassword, managerCode: adminPassword },
+        { id: 'boss001', name: 'Boss', role: 'Boss', password: adminPassword }
     ];
     const existing = db.prepare('SELECT id_number FROM staff_users WHERE id_number = ?');
     const insert = db.prepare(`

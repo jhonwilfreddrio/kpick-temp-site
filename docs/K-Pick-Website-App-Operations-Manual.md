@@ -188,7 +188,7 @@ On first startup, the app creates default local accounts:
 - `mgr001` / default password / Manager
 - `boss001` / default password / Boss
 
-The default password comes from `KPICK_ADMIN_PASSWORD`; locally it falls back to `kpick0324admin`.
+The default password comes from `KPICK_ADMIN_PASSWORD`; locally it falls back to `change-me-local-admin`.
 
 After first deployment:
 - Log in as `admin`.

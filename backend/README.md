@@ -74,17 +74,17 @@ On Render, attach a persistent disk at the same `KPICK_DATA_DIR` path. On Railwa
 Default local accounts are created automatically the first time the backend starts:
 
 ```text
-admin  / kpick0324admin / Admin
-cs001  / kpick0324admin / CS
-inv001 / kpick0324admin / Inventory
-mgr001 / kpick0324admin / Manager
-boss001 / kpick0324admin / Boss
+admin  / YOUR_ADMIN_PASSWORD / Admin
+cs001  / YOUR_ADMIN_PASSWORD / CS
+inv001 / YOUR_ADMIN_PASSWORD / Inventory
+mgr001 / YOUR_ADMIN_PASSWORD / Manager
+boss001 / YOUR_ADMIN_PASSWORD / Boss
 ```
 
 Manager code for CS order, price, and total revisions:
 
 ```text
-kpick0324admin
+YOUR_ADMIN_PASSWORD
 ```
 
 Admin can alter everything. CS can update SI number, assigned inventory staff, customer details, and order revisions. CS status is automatic: no SI keeps `Generated`; once CS inputs an SI number, CS must also assign inventory staff before saving the workflow, which moves the PO to `Pending for Picking`. CS product, price, quantity, removed-product, or total revisions require the manager code while the PO is still unpaid/generated. Once a PO is paid or beyond `Generated`, CS can no longer delete the PO or change/remove products. CS/Admin can delete a cancelled or unreachable unpaid PO from the active list. Inventory can only update PO condition to `Picking Products`, `For Repacking`, `Ready for Shipment`, or `Released / Shipped`, and only for POs assigned to that logged-in inventory account. Manager and Boss are view/report roles.
