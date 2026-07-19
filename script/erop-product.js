@@ -460,6 +460,83 @@ function renderFeaturePanel(product) {
 }
 
 function renderAfterSpecPanel(product) {
+    if (product.id === "eroptix") {
+        const capabilities = [
+            {
+                image: "img/ert011.png",
+                title: "End-effector built for minimally invasive surgery",
+                description: "Attaches and detaches quickly during a procedure, and accepts endoscope cameras across a range of sizes rather than a single proprietary scope.",
+            },
+            {
+                image: "img/ert012.png",
+                title: "7-axis force / torque sensing",
+                description: "Force and torque are measured on all seven axes, giving the arm the precision and compliant movement required to work alongside the surgical team.",
+            },
+            {
+                image: "img/ert005.png",
+                title: "One-handed joystick control",
+                description: "The surgeon directs the arm with a single hand, so the other stays on the instrument. A Normal / Reverse switch flips the control orientation to match how the surgeon is standing.",
+            },
+            {
+                image: "img/ert009.png",
+                title: "Height-adjustable electric cart",
+                description: "A powered table lift sets working height for the case, and an integrated teaching pendant holder keeps the control unit within reach.",
+            },
+        ];
+
+        return `
+            <section class="eroptix-intro" aria-label="What EROPTIX is">
+                <div class="eroptix-intro__inner">
+                    <span class="eroptix-intro__eyebrow">Surgery-assisted cooperative robot</span>
+                    <h3>A robotic arm that holds the endoscope, directed by the surgeon.</h3>
+                    <p>In laparoscopic surgery the endoscope has to be held steady, at the right angle, for the length of the operation. EROPTIX is a cooperative robot &mdash; a cobot &mdash; that takes on that task. The arm carries the scope through a trocar, and the surgeon repositions it with a one-handed joystick as the procedure moves.</p>
+                    <p>Because it is cooperative rather than autonomous, the surgeon stays in control of every movement. The system is delivered as a mobile unit: robot arm, end-effector, joystick and powered cart, with a scope holder, trocar holder and dedicated robot trocar among the supplies.</p>
+                </div>
+            </section>
+
+            <section class="eroptix-rcm" aria-label="Remote centre of motion">
+                <div class="eroptix-rcm__copy">
+                    <h3>Remote centre of motion</h3>
+                    <p>The arm's control algorithm pivots every movement around one fixed point &mdash; the incision itself. However the scope is angled or advanced, that entry point stays still.</p>
+                    <p>This is what makes a robotic arm safe to use through a keyhole incision: the instrument can sweep through a wide arc inside the body while the abdominal wall at the port is not levered or stretched.</p>
+                </div>
+                <figure class="eroptix-rcm__figure">
+                    <svg viewBox="0 0 420 300" role="img" aria-label="Diagram showing the arm pivoting about a fixed point at the incision">
+                        <rect x="30" y="150" width="360" height="18" rx="9" fill="#dfe7f3"/>
+                        <text x="42" y="188" class="erx-lbl-s">Abdominal wall</text>
+                        <g stroke="#0b1f4b" stroke-width="7" stroke-linecap="round" opacity=".22">
+                            <line x1="120" y1="28" x2="210" y2="159"/>
+                            <line x1="300" y1="28" x2="210" y2="159"/>
+                        </g>
+                        <line x1="210" y1="20" x2="210" y2="159" stroke="#0b1f4b" stroke-width="8" stroke-linecap="round"/>
+                        <line x1="210" y1="159" x2="210" y2="250" stroke="#4d7ec8" stroke-width="5" stroke-linecap="round"/>
+                        <path d="M120,60 A 110 110 0 0 1 300,60" fill="none" stroke="#4d7ec8" stroke-width="2" stroke-dasharray="5 5"/>
+                        <circle cx="210" cy="159" r="11" fill="#fff" stroke="#0b1f4b" stroke-width="3"/>
+                        <circle cx="210" cy="159" r="4" fill="#0b1f4b"/>
+                        <text x="232" y="150" class="erx-lbl">Pivot point stays fixed</text>
+                        <text x="232" y="168" class="erx-lbl-s">at the incision</text>
+                        <text x="150" y="272" class="erx-lbl-s">Scope sweeps inside the cavity</text>
+                    </svg>
+                </figure>
+            </section>
+
+            <section class="eroptix-capabilities" aria-label="EROPTIX capabilities">
+                <h3>System capabilities</h3>
+                <div class="eroptix-capabilities__grid">
+                    ${capabilities.map((item) => `
+                        <article class="eroptix-capability">
+                            <div class="eroptix-capability__media">
+                                <img src="${item.image}" alt="" aria-hidden="true">
+                            </div>
+                            <h4>${item.title}</h4>
+                            <p>${item.description}</p>
+                        </article>
+                    `).join("")}
+                </div>
+            </section>
+        `;
+    }
+
     if (product.id === "chito-block") {
         const features = [
             {
@@ -853,6 +930,7 @@ if (root) {
                         <li class="nav home"><a href="index.html">Home</a></li>
                         <li class="nav aboutus"><a href="index.html#about">About Us</a></li>
                         <li class="nav brands"><a href="index.html#TieUps">Brands</a></li>
+                        <li class="nav learn"><a href="learn.html">Learn</a></li>
                         <li class="nav generatePO"><a href="request.htm">Generate Quote / PO</a></li>
                         <li class="nav contactus"><a href="contact.htm">Contact Us</a></li>
                     </ul>

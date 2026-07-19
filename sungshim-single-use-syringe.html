@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="K-Pick Trading Corp supplies Sungshim Korean single-use syringes in the Philippines for sterile disposable injection and fluid administration workflows in hospitals, clinics, and reseller channels.">
     <link rel="icon" type="image/png" href="img/kpickicon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260702-1">
+    <link rel="stylesheet" href="css/style.css?v=20260719-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -80,6 +80,7 @@
                         </div>
                     </li>
                     <li class="nav aboutus"><a href="index.html#about">About Us</a></li>
+                    <li class="nav learn"><a href="learn.html">Learn</a></li>
                     <li class="nav generatePO"><a href="request.htm">Generate Quote / PO</a></li>
                     <li class="nav contactus"><a href="contact.htm">Contact Us</a></li>
                 </ul>
@@ -141,14 +142,68 @@
                     <h2>Product features:</h2>
                 </div>
                 <ul class="product-features">
-                    <li>Manufactured in compliance with international quality standards</li>
-                    <li>Designed with advanced engineering for optimal performance</li>
-                    <li>Ensures smooth and comfortable needle penetration</li>
-                    <li>Low dead space design helps minimize medication waste</li>
-                    <li>Offered in a range of sizes to suit different needs</li>
-                    <li>Sterilized using EO gas for safety and hygiene</li>
-                    <li>Proudly manufactured in Korea</li>
+                    <li>Non-toxic, non-pyrogenic</li>
+                    <li>Latex free</li>
+                    <li>EO gas sterilization</li>
+                    <li>Highly transparent barrel for easy recognition</li>
+                    <li>Available in a wide range of sizes, from 1 mL to 60 mL</li>
+                    <li>Luer slip and luer lock syringes are available</li>
+                    <li>Syringes with and without needles are available</li>
+                    <li>Made in Korea</li>
                 </ul>
+            </section>
+
+            <section class="product-section">
+                <div class="product-section__bar">
+                    <h2>Compare the sizes</h2>
+                </div>
+                <div class="sx" data-sx-capacity>
+                    <p class="sx__lede">Sungshim produces this syringe from <strong>1 mL to 60 mL</strong>. Pick a capacity to see it drawn against the 3&nbsp;mL for scale, along with the needles and packing offered for that size.</p>
+
+                    <div class="sx__stage">
+                        <svg class="sx__svg" data-sx-svg viewBox="0 0 720 210" role="img" aria-label="Scale diagram of the selected syringe capacity"></svg>
+                    </div>
+                    <p class="sx__hint">&#8596; Swipe the diagram to see the full syringe</p>
+
+                    <div class="sx__controls">
+                        <div class="sx__group">
+                            <span class="sx__label" id="sx-cap2-label">Capacity</span>
+                            <div class="sx__btns" role="group" aria-labelledby="sx-cap2-label">
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="1" aria-pressed="false">1 <small>mL</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="2" aria-pressed="false">2 <small>mL</small></button>
+                                <button type="button" class="sx__btn is-active" data-sx-set="size" data-sx-value="3" aria-pressed="true">3 <small>mL</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="5" aria-pressed="false">5 <small>mL</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="10" aria-pressed="false">10 <small>mL</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="20" aria-pressed="false">20 <small>mL</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="30" aria-pressed="false">30 <small>mL</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="50" aria-pressed="false">50 <small>mL</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="size" data-sx-value="60" aria-pressed="false">60 <small>irrig.</small></button>
+                            </div>
+                        </div>
+
+                        <div class="sx__group" data-sx-tipwrap>
+                            <span class="sx__label" id="sx-tip-label">Tip type</span>
+                            <div class="sx__btns" role="group" aria-labelledby="sx-tip-label">
+                                <button type="button" class="sx__btn is-active" data-sx-set="tip" data-sx-value="slip" aria-pressed="true">Luer <small>Slip</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="tip" data-sx-value="lock" aria-pressed="false">Luer <small>Lock</small></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sx__readout" data-sx-readout></div>
+
+                    <div class="sx__cols">
+                        <div>
+                            <span class="sx__label">Needle options</span>
+                            <ul class="sx__list" data-sx-needles></ul>
+                        </div>
+                        <div>
+                            <span class="sx__label">Typical use</span>
+                            <p class="sx__note" data-sx-use></p>
+                        </div>
+                    </div>
+                    <p class="sx__src">Luer lock threads onto the syringe and will not separate under pressure; luer slip pushes on by friction. Specifications as published by Sungshim Medical.</p>
+                </div>
             </section>
 
             <section class="product-section">
@@ -159,53 +214,101 @@
                     <table class="product-table">
                         <thead>
                             <tr>
-                                <th>Tip Type</th>
                                 <th>Capacity</th>
+                                <th>Tip Type</th>
                                 <th>Needle Size</th>
-                                <th>Carton Packing</th>
+                                <th>Inner Box</th>
+                                <th>Carton Box</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td rowspan="4">Luer Slip</td>
-                                <td>1 mL</td>
-                                <td>26G x 13 mm</td>
-                                <td>36 boxes per carton</td>
+                                <td rowspan="6">1 mL/cc</td>
+                                <td rowspan="6">Luer Slip</td>
+                                <td>23G x 25 mm (1")</td>
+                                <td rowspan="6">100 pcs</td>
+                                <td rowspan="6">3,600 pcs</td>
+                            </tr>
+                            <tr><td>26G x 13 mm (1/2")</td></tr>
+                            <tr><td>27G x 13 mm (1/2")</td></tr>
+                            <tr><td>27G x 25 mm (1")</td></tr>
+                            <tr><td>30G x 13 mm (1/2")</td></tr>
+                            <tr><td>Without needle</td></tr>
+                            <tr>
+                                <td>2 mL/cc</td>
+                                <td>Luer Slip, Luer Lock</td>
+                                <td>23G x 25 mm (1")</td>
+                                <td>100 pcs</td>
+                                <td>2,400 pcs</td>
                             </tr>
                             <tr>
-                                <td>3 mL</td>
-                                <td>23G x 25 mm</td>
-                                <td>24 boxes per carton</td>
+                                <td rowspan="3">3 mL/cc</td>
+                                <td rowspan="3">Luer Slip, Luer Lock</td>
+                                <td>23G x 25 mm (1")</td>
+                                <td rowspan="3">100 pcs</td>
+                                <td rowspan="3">2,400 pcs</td>
                             </tr>
+                            <tr><td>24G x 19 mm (3/4")</td></tr>
+                            <tr><td>Without needle</td></tr>
                             <tr>
-                                <td>5 mL</td>
-                                <td>21G x 32 mm</td>
-                                <td>18 boxes per carton</td>
+                                <td rowspan="4">5 mL/cc</td>
+                                <td rowspan="4">Luer Slip, Luer Lock</td>
+                                <td>23G x 25 mm (1")</td>
+                                <td rowspan="4">100 pcs</td>
+                                <td rowspan="4">1,800 pcs</td>
                             </tr>
+                            <tr><td>22G x 32 mm (1 1/4")</td></tr>
+                            <tr><td>21G x 32 mm (1 1/4")</td></tr>
+                            <tr><td>Without needle</td></tr>
                             <tr>
-                                <td>10 mL</td>
-                                <td>23G x 25 mm</td>
-                                <td>12 boxes per carton</td>
+                                <td rowspan="4">10 mL/cc</td>
+                                <td rowspan="4">Luer Slip, Luer Lock</td>
+                                <td>23G x 25 mm (1")</td>
+                                <td rowspan="4">100 pcs</td>
+                                <td rowspan="4">1,200 pcs</td>
                             </tr>
+                            <tr><td>22G x 32 mm (1 1/4")</td></tr>
+                            <tr><td>21G x 32 mm (1 1/4")</td></tr>
+                            <tr><td>Without needle</td></tr>
                             <tr>
-                                <td rowspan="3">Luer Lock</td>
-                                <td>3 mL</td>
-                                <td>23G x 25 mm</td>
-                                <td>24 boxes per carton</td>
+                                <td rowspan="5">20 mL/cc</td>
+                                <td rowspan="5">Luer Slip, Luer Lock</td>
+                                <td>23G x 25 mm (1")</td>
+                                <td rowspan="5">50 pcs</td>
+                                <td rowspan="5">800 pcs</td>
                             </tr>
+                            <tr><td>22G x 32 mm (1 1/4")</td></tr>
+                            <tr><td>21G x 32 mm (1 1/4")</td></tr>
+                            <tr><td>18G x 38 mm (1 1/2")</td></tr>
+                            <tr><td>Without needle</td></tr>
                             <tr>
-                                <td>5 mL</td>
-                                <td>21G x 32 mm</td>
-                                <td>18 boxes per carton</td>
+                                <td rowspan="3">30 mL/cc</td>
+                                <td rowspan="3">Luer Slip, Luer Lock</td>
+                                <td>21G x 32 mm (1 1/4")</td>
+                                <td rowspan="3">50 pcs</td>
+                                <td rowspan="3">600 pcs</td>
                             </tr>
+                            <tr><td>18G x 38 mm (1 1/2")</td></tr>
+                            <tr><td>Without needle</td></tr>
                             <tr>
-                                <td>10 mL</td>
-                                <td>23G x 25 mm</td>
-                                <td>12 boxes per carton</td>
+                                <td rowspan="2">50 mL/cc</td>
+                                <td rowspan="2">Luer Slip, Luer Lock</td>
+                                <td>21G x 32 mm (1 1/4")</td>
+                                <td rowspan="2">25 pcs</td>
+                                <td rowspan="2">400 pcs</td>
+                            </tr>
+                            <tr><td>18G x 38 mm (1 1/2")</td></tr>
+                            <tr>
+                                <td>60 mL/cc</td>
+                                <td>Irrigation syringe</td>
+                                <td>Without needle (Catheter tip)</td>
+                                <td>25 pcs</td>
+                                <td>400 pcs</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <p class="product-note">For other sizes, please contact us.</p>
             </section>
 
             <section class="product-section">
@@ -286,7 +389,7 @@
                     <h2>Product Specifications</h2>
                 </div>
                 <ul class="product-features">
-                    <li>Shelf Life: 3 years from the date of manufacture</li>
+                    <li>Shelf Life: 5 years from the date of manufacture</li>
                     <li>Packaging: Individual sterile packaging by listed size and tip-type variant</li>
                     <li>Storage Conditions: Store at room temperature; avoid exposure to direct sunlight, heat, and humidity</li>
                 </ul>
@@ -326,5 +429,6 @@
     <script src="script/navbar.js"></script>
     <script src="script/single-use-carousel.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/sungshim-modules.js"></script>
 </body>
 </html>

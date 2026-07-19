@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Source Sungshim Korean insulin syringes from K-Pick Trading Corp in Manila for accurate insulin dosing, blister or polybag packaging, and bulk medical supply procurement in the Philippines.">
     <link rel="icon" type="image/png" href="img/kpickicon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260702-1">
+    <link rel="stylesheet" href="css/style.css?v=20260719-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -80,6 +80,7 @@
                         </div>
                     </li>
                     <li class="nav aboutus"><a href="index.html#about">About Us</a></li>
+                    <li class="nav learn"><a href="learn.html">Learn</a></li>
                     <li class="nav generatePO"><a href="request.htm">Generate Quote / PO</a></li>
                     <li class="nav contactus"><a href="contact.htm">Contact Us</a></li>
                 </ul>
@@ -147,14 +148,58 @@
                     <h2>Product features:</h2>
                 </div>
                 <ul class="product-features">
-                    <li>Manufactured in compliance with international quality standards</li>
-                    <li>Designed with advanced engineering for optimal performance</li>
-                    <li>Ensures smooth and comfortable needle penetration</li>
-                    <li>Low dead space design helps minimize medication waste</li>
-                    <li>Offered in a range of sizes to suit different needs</li>
-                    <li>Sterilized using EO gas for safety and hygiene</li>
-                    <li>Proudly manufactured in Korea</li>
+                    <li>Non-toxic, non-pyrogenic</li>
+                    <li>EO gas sterilization</li>
+                    <li>Nearly pain-free injection with comfort</li>
+                    <li>Low dead space design for more accurate dosage</li>
+                    <li>Clearly printed graduation lines with bold marking</li>
+                    <li>Available in both polybag and blister packaging</li>
+                    <li>Made in Korea</li>
                 </ul>
+            </section>
+
+            <section class="product-section">
+                <div class="product-section__bar">
+                    <h2>Explore the range</h2>
+                </div>
+                <div class="sx" data-syringe-explorer>
+                    <p class="sx__lede">Insulin syringes are graduated in <strong>units</strong>, not millilitres &mdash; and the needle is fixed to the barrel. Choose a barrel and a needle below to see how the five Sungshim variants compare.</p>
+
+                    <div class="sx__stage">
+                        <svg class="sx__svg" data-sx-svg viewBox="0 0 900 210" role="img" aria-label="Scale diagram of the selected insulin syringe"></svg>
+                    </div>
+                    <p class="sx__hint">&#8596; Swipe the diagram to see the full syringe</p>
+
+                    <div class="sx__controls">
+                        <div class="sx__group">
+                            <span class="sx__label" id="sx-cap-label">Barrel capacity</span>
+                            <div class="sx__btns" role="group" aria-labelledby="sx-cap-label">
+                                <button type="button" class="sx__btn is-active" data-sx-set="capacity" data-sx-value="1" aria-pressed="true">1 mL <small>100 units</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="capacity" data-sx-value="0.5" aria-pressed="false">0.5 mL <small>50 units</small></button>
+                            </div>
+                        </div>
+
+                        <div class="sx__group">
+                            <span class="sx__label" id="sx-ndl-label">Needle</span>
+                            <div class="sx__btns" role="group" aria-labelledby="sx-ndl-label">
+                                <button type="button" class="sx__btn" data-sx-set="needle" data-sx-value="29-13" aria-pressed="false">29G <small>13 mm</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="needle" data-sx-value="30-13" aria-pressed="false">30G <small>13 mm</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="needle" data-sx-value="30-8" aria-pressed="false">30G <small>8 mm</small></button>
+                                <button type="button" class="sx__btn" data-sx-set="needle" data-sx-value="31-8" aria-pressed="false">31G <small>8 mm</small></button>
+                                <button type="button" class="sx__btn is-active" data-sx-set="needle" data-sx-value="32-8" aria-pressed="true">32G <small>8 mm</small></button>
+                            </div>
+                        </div>
+
+                        <div class="sx__group sx__group--slider">
+                            <label class="sx__label" for="sx-dose">Draw a dose &mdash; <output data-sx-dose-out>30</output> units</label>
+                            <input class="sx__range" type="range" id="sx-dose" data-sx-dose min="0" max="100" step="1" value="30">
+                        </div>
+                    </div>
+
+                    <div class="sx__readout" data-sx-readout></div>
+                    <p class="sx__note" data-sx-note></p>
+                    <p class="sx__src">Higher gauge numbers mean a thinner needle. Specifications as published by Sungshim Medical.</p>
+                </div>
             </section>
 
             <section class="product-section">
@@ -165,73 +210,37 @@
                     <table class="product-table">
                         <thead>
                             <tr>
-                                <th>Packaging</th>
                                 <th>Capacity</th>
                                 <th>Needle Size</th>
+                                <th>Inner Box</th>
+                                <th>Carton Box</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td rowspan="6">Blister</td>
-                                <td>0.5 mL</td>
-                                <td>32G x 8 mm</td>
+                                <td rowspan="5">1 mL/cc <span class="u-muted">(100 units)</span></td>
+                                <td>32G x 8 mm (5/16")</td>
+                                <td rowspan="5">100 pcs</td>
+                                <td rowspan="5">3,600 pcs</td>
                             </tr>
+                            <tr><td>31G x 8 mm (5/16")</td></tr>
+                            <tr><td>30G x 13 mm (1/2")</td></tr>
+                            <tr><td>30G x 8 mm (5/16")</td></tr>
+                            <tr><td>29G x 13 mm (1/2")</td></tr>
                             <tr>
-                                <td>0.5 mL</td>
-                                <td>31G x 6 mm</td>
+                                <td rowspan="5">0.5 mL/cc <span class="u-muted">(50 units)</span></td>
+                                <td>32G x 8 mm (5/16")</td>
+                                <td rowspan="5">100 pcs</td>
+                                <td rowspan="5">3,600 pcs</td>
                             </tr>
-                            <tr>
-                                <td>0.5 mL</td>
-                                <td>31G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>32G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>31G x 6 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>31G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="8">Polybag</td>
-                                <td>0.5 mL</td>
-                                <td>32G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>0.5 mL</td>
-                                <td>31G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>0.5 mL</td>
-                                <td>30G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>32G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>31G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>30G x 8 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>30G x 13 mm</td>
-                            </tr>
-                            <tr>
-                                <td>1 mL</td>
-                                <td>29G x 13 mm</td>
-                            </tr>
+                            <tr><td>31G x 8 mm (5/16")</td></tr>
+                            <tr><td>30G x 13 mm (1/2")</td></tr>
+                            <tr><td>30G x 8 mm (5/16")</td></tr>
+                            <tr><td>29G x 13 mm (1/2")</td></tr>
                         </tbody>
                     </table>
                 </div>
+                <p class="product-note">Both polybag and blister packaging are available across the range. For other sizes, please contact us.</p>
             </section>
 
             <section class="product-section">
@@ -313,7 +322,7 @@
                     <h2>Product Specifications</h2>
                 </div>
                 <ul class="product-features">
-                    <li>Shelf Life: 3 years from the date of manufacture</li>
+                    <li>Shelf Life: 5 years from the date of manufacture</li>
                     <li>Available packaging: Blister and polybag variants</li>
                     <li>Blister packaging: 100 individually packed syringes per box</li>
                     <li>Polybag packaging: 10 syringes per pack, 10 packs per box, 100 syringes per box</li>
@@ -355,5 +364,6 @@
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
     <script src="script/packaging-magnifier.js"></script>
+    <script src="script/insulin-syringe-explorer.js"></script>
 </body>
 </html>

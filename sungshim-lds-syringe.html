@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="K-Pick Trading Corp distributes Sungshim Korean low dead space syringes in the Philippines for procurement teams seeking LDS syringe options that reduce residual medication waste.">
     <link rel="icon" type="image/png" href="img/kpickicon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260702-1">
+    <link rel="stylesheet" href="css/style.css?v=20260719-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -80,6 +80,7 @@
                         </div>
                     </li>
                     <li class="nav aboutus"><a href="index.html#about">About Us</a></li>
+                    <li class="nav learn"><a href="learn.html">Learn</a></li>
                     <li class="nav generatePO"><a href="request.htm">Generate Quote / PO</a></li>
                     <li class="nav contactus"><a href="contact.htm">Contact Us</a></li>
                 </ul>
@@ -123,38 +124,94 @@
                     <h2>Product features:</h2>
                 </div>
                 <ul class="product-features">
-                    <li>Manufactured in compliance with international quality standards</li>
-                    <li>Designed with advanced engineering for optimal performance</li>
-                    <li>Ensures smooth and comfortable needle penetration</li>
-                    <li>Low dead space design helps minimize medication waste</li>
-                    <li>Offered in a range of sizes to suit different needs</li>
-                    <li>Sterilized using EO gas for safety and hygiene</li>
-                    <li>Proudly manufactured in Korea</li>
+                    <li>Low dead space design for more accurate dosage and minimal medication waste</li>
+                    <li>Unibody type has a permanently attached needle to further reduce waste</li>
+                    <li>Non-toxic, non-pyrogenic</li>
+                    <li>EO gas sterilization</li>
+                    <li>Nearly pain-free injection with comfort</li>
+                    <li>Clearly printed graduation lines with bold marking</li>
+                    <li>Blister package</li>
+                    <li>Made in Korea</li>
                 </ul>
+            </section>
+
+            <section class="product-section">
+                <div class="product-section__bar">
+                    <h2>See what low dead space means</h2>
+                </div>
+                <div class="sx" data-sx-lds>
+                    <p class="sx__lede">&ldquo;Dead space&rdquo; is the medication left inside the hub after the plunger has been pushed all the way down. It is drawn up, paid for, and then thrown away with the syringe. Switch between the two designs below.</p>
+
+                    <div class="sx__stage">
+                        <svg class="sx__svg" data-sx-svg viewBox="0 0 720 250" role="img" aria-label="Cutaway comparison of standard and low dead space syringe hubs"></svg>
+                    </div>
+                    <p class="sx__hint">&#8596; Swipe the diagram to see it in full</p>
+
+                    <div class="sx__controls">
+                        <div class="sx__group">
+                            <span class="sx__label" id="sx-mode-label">Syringe design</span>
+                            <div class="sx__btns" role="group" aria-labelledby="sx-mode-label">
+                                <button type="button" class="sx__btn" data-sx-set="mode" data-sx-value="std" aria-pressed="false">Standard <small>hub cavity</small></button>
+                                <button type="button" class="sx__btn is-active" data-sx-set="mode" data-sx-value="lds" aria-pressed="true">LDS <small>filled hub</small></button>
+                            </div>
+                        </div>
+                        <div class="sx__group sx__group--slider">
+                            <label class="sx__label" for="sx-vial">Vial size &mdash; <output data-sx-vial-out>5</output> mL</label>
+                            <input class="sx__range" type="range" id="sx-vial" data-sx-vial min="2" max="10" step="1" value="5">
+                        </div>
+                    </div>
+
+                    <div class="sx__readout" data-sx-readout></div>
+                    <p class="sx__note" data-sx-note></p>
+                    <p class="sx__src">Modelled on a 0.5 mL dose. The standard hub residual of approximately 0.07 mL is a widely cited figure that varies by syringe and technique; it illustrates the principle and is not a Sungshim specification.</p>
+                </div>
             </section>
 
             <section class="product-section">
                 <div class="product-section__bar">
                     <h2>LDS Product Types</h2>
                 </div>
+                <p class="product-copy">Sungshim produces LDS syringes in two designs. The <strong>unibody type</strong> has a permanently attached needle, which removes the hub cavity entirely and minimises residual medication. The <strong>normal type</strong> is a luer slip syringe with a low dead space plunger, offered across a wider gauge range.</p>
                 <div class="product-table-wrap">
                     <table class="product-table">
                         <thead>
                             <tr>
+                                <th>Design</th>
                                 <th>Capacity</th>
+                                <th>Tip Type</th>
                                 <th>Needle Size</th>
-                                <th>Carton Packing</th>
+                                <th>Inner Box</th>
+                                <th>Carton Box</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1 mL LDS</td>
-                                <td>23G x 25 mm</td>
-                                <td>36 boxes per carton</td>
+                                <td rowspan="2">Unibody <span class="u-muted">(fixed needle)</span></td>
+                                <td>1 mL/cc</td>
+                                <td>Fixed needle</td>
+                                <td>23G x 25 mm (1")</td>
+                                <td>100 pcs</td>
+                                <td>3,600 pcs</td>
+                            </tr>
+                            <tr>
+                                <td>1 mL/cc</td>
+                                <td>Fixed needle</td>
+                                <td>25G x 25 mm (1")</td>
+                                <td>100 pcs</td>
+                                <td>3,600 pcs</td>
+                            </tr>
+                            <tr>
+                                <td>Normal type</td>
+                                <td>1 mL/cc</td>
+                                <td>Luer Slip</td>
+                                <td>23G &ndash; 30G</td>
+                                <td>100 pcs</td>
+                                <td>3,600 pcs</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <p class="product-note">Syringes with and without needles are available on the normal type. For other sizes, please contact us.</p>
             </section>
 
             <section class="product-section">
@@ -233,7 +290,7 @@
                     <h2>Product Specifications</h2>
                 </div>
                 <ul class="product-features">
-                    <li>Shelf Life: 3 years from the date of manufacture</li>
+                    <li>Shelf Life: 5 years from the date of manufacture</li>
                     <li>Packaging: Individual sterile packaging for safe single-use handling</li>
                     <li>Storage Conditions: Store at room temperature; avoid exposure to direct sunlight, heat, and humidity</li>
                 </ul>
@@ -272,5 +329,6 @@
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/sungshim-modules.js"></script>
 </body>
 </html>
