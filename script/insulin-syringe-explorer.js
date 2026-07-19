@@ -145,8 +145,10 @@
     function syncReadout() {
         var cap = CAPACITIES[state.capacity];
         var nd = needle();
+        var pct = Math.round((state.dose / cap.units) * 100);
         readout.innerHTML =
-            '<div><span>Dose</span><strong>' + state.dose + ' units</strong></div>' +
+            '<div><span>Dose</span><strong>' + state.dose + ' of ' + cap.units + ' units</strong></div>' +
+            '<div><span>Barrel filled</span><strong>' + pct + '%</strong></div>' +
             '<div><span>Volume</span><strong>' + (state.dose / 100).toFixed(2) + ' mL</strong></div>' +
             '<div><span>Gauge</span><strong>' + nd.gauge + 'G</strong></div>' +
             '<div><span>Needle length</span><strong>' + nd.len + ' mm</strong></div>' +
