@@ -390,7 +390,7 @@ Problem: Data disappeared after deploy.
 Problem: Contact form does not send.
 - `contact.htm` posts to Web3Forms.
 - Confirm the hidden `access_key` in `contact.htm` is valid.
-- If Web3Forms is down, customers can email `kpickmedicalmarketing@gmail.com`.
+- If Web3Forms is down, customers can email `sales@kpicktradingcorp.com`.
 
 ## 15. Safe Maintenance Checklist
 

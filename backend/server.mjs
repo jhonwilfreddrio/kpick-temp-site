@@ -1555,7 +1555,7 @@ function sendQuotePdf(response, quote) {
             190
         );
         drawLetterheadLine(letterheadPhoneIconPath, '+63 917 563 5656', contactX, 53, 190);
-        drawLetterheadLine(letterheadEmailIconPath, 'kpick324@gmail.com or kokogo1business2@gmail.com', contactX, 70, 190);
+        drawLetterheadLine(letterheadEmailIconPath, 'sales@kpicktradingcorp.com', contactX, 70, 190);
 
         doc.moveTo(left, 91).lineTo(right, 91).stroke(line);
         doc.font('Helvetica-Bold')

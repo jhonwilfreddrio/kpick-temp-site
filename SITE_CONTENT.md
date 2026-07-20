@@ -13,7 +13,7 @@
 **Founded:** 2020, Manila, Philippines  
 **Address:** Dakota Building, 555 Gen Malvar St. cor Adriatico St., Brgy. 698 Zone 076 Malate, Manila  
 **Phone:** +639173158420  
-**Email:** kpickmedicalmarketing@gmail.com  
+**Email:** sales@kpicktradingcorp.com  
 **Tagline:** Premium Korean Medical Supplies, Trusted Worldwide.
 
 **What they do:** K-Pick Trading Corp imports and distributes certified Korean medical devices to hospitals, clinics, pharmacies, resellers, and healthcare procurement teams across the Philippines. They hold exclusive Philippine distribution rights for Sungshim, EROP, and Insufine.
