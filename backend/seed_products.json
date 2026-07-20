@@ -46,12 +46,12 @@
     ]
   },
   {
-    "category": "Hansol Cupping Sets",
+    "category": "Insufine Pen Needles",
     "items": [
-      { "sku": "HAN-BH-010", "name": "Hansol Bu-Hang 10-Cup Set", "packaging": "Cupping set", "stock_unit": "set", "unit_price": 1259, "carton_discount_rate": 0 },
-      { "sku": "HAN-BH-017", "name": "Hansol Bu-Hang 17-Cup Set", "packaging": "Cupping set", "stock_unit": "set", "unit_price": 1789, "carton_discount_rate": 0 },
-      { "sku": "HAN-BH-019", "name": "Hansol Bu-Hang 19-Cup Set", "packaging": "Cupping set", "stock_unit": "set", "unit_price": 2359, "carton_discount_rate": 0 },
-      { "sku": "HAN-BH-030", "name": "Hansol Bu-Hang 30-Cup Set", "packaging": "Cupping set", "stock_unit": "set", "unit_price": 2999, "carton_discount_rate": 0 }
+      { "sku": "INS-PN-32G-04", "name": "Insufine Pen Needle 32G 4mm", "gauge": "32G", "boxes_per_carton": 48 },
+      { "sku": "INS-PN-32G-05", "name": "Insufine Pen Needle 32G 5mm", "gauge": "32G", "boxes_per_carton": 48 },
+      { "sku": "INS-PN-32G-06", "name": "Insufine Pen Needle 32G 6mm", "gauge": "32G", "boxes_per_carton": 48 },
+      { "sku": "INS-PN-31G-08", "name": "Insufine Pen Needle 31G 8mm", "gauge": "31G", "boxes_per_carton": 48 }
     ]
   }
 ]

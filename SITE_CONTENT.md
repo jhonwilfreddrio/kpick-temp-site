@@ -16,7 +16,7 @@
 **Email:** kpickmedicalmarketing@gmail.com  
 **Tagline:** Premium Korean Medical Supplies, Trusted Worldwide.
 
-**What they do:** K-Pick Trading Corp imports and distributes certified Korean medical devices to hospitals, clinics, pharmacies, resellers, and healthcare procurement teams across the Philippines. They hold exclusive Philippine distribution rights for Sungshim and EROP, and supply Hansol Bu-Hang cupping therapy sets nationwide.
+**What they do:** K-Pick Trading Corp imports and distributes certified Korean medical devices to hospitals, clinics, pharmacies, resellers, and healthcare procurement teams across the Philippines. They hold exclusive Philippine distribution rights for Sungshim, EROP, and Insufine.
 
 **Credentials:**
 - DTI Registered (Department of Trade and Industry, Philippines)
@@ -33,7 +33,7 @@
 | Homepage | index.html | Main landing page — all brands, about, timeline, articles, certifications, FAQ |
 | Sungshim | sungshim.html | Sungshim brand page — product categories and certifications |
 | EROP | erop.html | EROP brand page — surgical device categories and research citation |
-| Hansol | hansol.html | Hansol Bu-Hang cupping set page |
+| Insufine | insufine.html | Insufine insulin pen needle page |
 | Contact | contact.htm | Contact form and company contact details |
 | Generate Quote/PO | request.htm | Online quote and purchase order generation tool |
 | Sungshim — Insulin Syringe | sungshim-insulin-syringe.html | Product detail page |
@@ -99,12 +99,12 @@
 - **Certifications:** ISO 13485 · CE Marked · MFDS Certified
 - **CTA:** Explore EROP →
 
-#### Hansol Bu-Hang (Cupping Therapy Sets · Philippine Supplier)
-- **Headline:** Multi-cup Korean cupping therapy sets for targeted treatment, recovery, and clinical wellness.
-- **Description:** Hansol Bu-Hang cupping sets are designed to support muscle relaxation, circulation, and structured recovery care. Available in four configurations for therapy clinics, wellness centers, and professional reseller buyers across the Philippines.
-- **Products:** 10-Cup Set · 17-Cup Set · 19-Cup Set · 30-Cup Set
-- **Certifications:** MFDS Certified · Korean Quality Standard
-- **CTA:** Explore Hansol →
+#### Insufine (Insulin Pen Needles · Exclusive PH Distributor)
+- **Headline:** Fine-gauge Korean insulin pen needles engineered for smoother, more comfortable injections.
+- **Description:** Insufine sterile, single-use pen needles are made by Tae-Chang Industrial, a Korean medical needle manufacturer exporting to more than 50 countries. K-Pick Trading Corp is the exclusive distributor of Insufine in the Philippines, supplying pharmacies, clinics, and diabetes care retailers nationwide.
+- **Products:** 32G × 4mm · 32G × 5mm · 32G × 6mm · 31G × 8mm (100 pen needles per box)
+- **Certifications:** ISO 13485 · CE Marked · KGMP Certified
+- **CTA:** Explore Insufine →
 
 ---
 
@@ -143,9 +143,9 @@ Established in 1995, Sungshim Medical is listed by the Korea Medical Devices Ass
 In April 2025, EROP's New Port single-port trocar (KSILS-2PB) was used in a peer-reviewed clinical study published in the *Annals of Coloproctology* by surgeons at St. Vincent's Hospital, Catholic University of Korea. The study evaluated minimally invasive transanal surgical techniques across 133 patients — direct evidence that EROP devices are trusted in active clinical practice.  
 **Source:** Mun JY et al. Ann Coloproctol 2025;41(2):162-168. https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/
 
-#### Hansol Story
-**Title:** Stocked by Professional Therapy Suppliers in USA, Australia & Southeast Asia  
-Hansol Bu-Hang cupping sets are sold by professional therapy suppliers worldwide including Tenspros (USA), Terra Rosa (Australia), Acudepot, AA Wellness Supply, and Niel Asher Education. Over 4,830 verified reviews on Amazon. A licensed massage therapist with 6 years of professional experience wrote: *"I've tried all different brands of cups over the years and I keep going back to Hansol — the build of all the pieces is uniform and precise."*
+#### Insufine Story
+**Title:** Made by Korea's Leading Insulin Pen Needle Exporter, Shipping to 50+ Countries  
+Insufine pen needles are manufactured by Tae-Chang Industrial Co., Ltd., a Korean medical needle maker operating since 1991 and ranked the #1 South Korean exporter of insulin pen needles by shipment count (Volza trade data). Produced under ISO 13485, KGMP, and CE-certified quality systems, with electro-polished triple-bevel tips and fine 31G–32G gauges designed to comply with ISO 11608.
 
 ---
 
@@ -157,11 +157,10 @@ Hansol Bu-Hang cupping sets are sold by professional therapy suppliers worldwide
 - **Full citation:** Mun JY, Geong GS, Yoo N, Kim HJ, Cho HM, Kye BH. Minimally invasive transanal excision for rectal tumors: technical feasibility compared to conventional approach. Ann Coloproctol. 2025;41(2):162-168. DOI: 10.3393/ac.2024.00864.0123
 - **PubMed link:** https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/
 
-#### Hansol — Professional Practitioner Review
-- **Source:** Verified professional review, Amazon.com
-- **Quote:** "I've tried all different brands of cups over the years and I keep going back to the Hansol brand. The build of all the pieces is uniform and precise."
-- **Reviewer:** Licensed massage therapist · 6 years professional cupping therapy experience
-- **Total reviews:** 4,830+ (Amazon, 19-cup set)
+#### Insufine — Trade Data Recognition
+- **Source:** Volza global trade data
+- **Statement:** Tae-Chang Industrial, the maker of Insufine, ranks as South Korea's #1 exporter of insulin pen needles by shipment count — supplying markets in more than 50 countries worldwide.
+- **Supporting facts:** ISO 13485 · KGMP · CE-certified manufacturer · Pen needles compliant with ISO 11608
 
 #### Sungshim — KMDA Recognition
 - **Source:** Korea Medical Devices Association (KMDA)
@@ -220,7 +219,7 @@ After your purchase order is confirmed and payment is processed, orders for Metr
 Yes. K-Pick regularly supports procurement inquiries from hospitals, LGU health offices, and government healthcare facilities. We can assist with formal quotation preparation, product specification documentation, and compliance paperwork required for public procurement processes such as PhilGEPS submissions.
 
 **Q9: Can I become a reseller or dealer of K-Pick products?**  
-Yes. K-Pick supports reseller and dealer inquiries for Sungshim, EROP, and Hansol Bu-Hang products. We offer structured pricing for qualified dealer partners. Contact us through the Contact page with your business details to begin the partnership discussion.
+Yes. K-Pick supports reseller and dealer inquiries for Sungshim, EROP, and Insufine products. We offer structured pricing for qualified dealer partners. Contact us through the Contact page with your business details to begin the partnership discussion.
 
 **Q10: What happens if a product is found defective or damaged on arrival?**  
 All products are inspected prior to shipment. If a defect or damage is discovered upon delivery, please contact our team within 48 hours with photographic documentation. K-Pick will coordinate an appropriate resolution, which may include replacement, credit note, or return processing, depending on the nature of the issue.
@@ -336,43 +335,46 @@ K-Pick supports Philippine hospital procurement teams with EROP laparoscopic and
 
 ---
 
-## Hansol Bu-Hang Brand Page (hansol.html)
+## Insufine Brand Page (insufine.html)
 
 ### Brand Hero
-HANSOL BU-HANG — Cupping Therapy Sets
+INSUFiNE — Insulin Pen Needles by Tae-Chang Industrial
 
 ### Brand Intro
-- **Eyebrow:** Cupping Therapy Sets
-- **H2:** Multiple cup set options for targeted therapy, recovery, and wellness routines.
-- **Description:** Hansol Bu-Hang cupping sets are designed for therapeutic applications such as muscle relaxation, circulation support, and recovery care across professional therapy environments and personal wellness routines.
-- **Citation:** K-Pick Trading Corp supplies Hansol Bu-Hang Korean cupping therapy sets in the Philippines, including 10-cup, 17-cup, 19-cup, and 30-cup configurations for therapy clinics, wellness channels, reseller buyers, and structured recovery care routines.
-- **Facts:** Options: 4 sets · Range: 10–30 cups · Use: Therapy care
+- **Eyebrow:** Insulin Pen Needles
+- **H2:** Fine-gauge comfort engineered for everyday insulin therapy.
+- **Description:** Insufine sterile, single-use insulin pen needles are manufactured by Tae-Chang Industrial Co., Ltd., a Korean medical needle maker operating since 1991 and exporting to more than 50 countries. Every needle is produced from SUS 304 stainless steel tube with an electro-polished tip and a medical-grade siliconized surface for a smoother, more comfortable injection, and is designed to fit widely used insulin pen models.
+- **Citation:** K-Pick Trading Corp is the exclusive distributor of Insufine in the Philippines, supplying pharmacies, clinics, hospitals, resellers, and diabetes care retailers with 31G and 32G pen needles in 4mm, 5mm, 6mm, and 8mm lengths, packed 100 pen needles per box.
+- **Facts:** Gauges: 31G–32G · Lengths: 4–8 mm · Pack: 100 pcs/box
 
-### Available Set Options
+### Available Needle Sizes
 
-#### 10-Cup Set (Starter set)
-Compact option for focused treatments, small-area applications, and entry-level cupping therapy use.
+#### 32G × 4mm (Shortest option)
+The shortest Insufine needle — for injection without a pinch-up, and ideal for children, adolescents, and very thin patients.
 
-#### 17-Cup Set (Balanced set)
-A balanced set suitable for regular therapy sessions with wider cup-size coverage for different muscle groups.
+#### 32G × 5mm (Short needle)
+For patients who inject without a pinch-up — a short-needle option recommended to help reduce intramuscular injections.
 
-#### 19-Cup Set (Extended set)
-Extended coverage for clinics and wellness teams that need more cup options across multiple treatment areas.
+#### 32G × 6mm (Standard option)
+For normal-weight adults injecting without a pinch-up, and for patients newly starting injection therapy.
 
-#### 30-Cup Set (Complete set)
-Largest option for broader therapy workflows, multiple body areas, and professional treatment preparation.
+#### 31G × 8mm (Longer needle)
+For patients who use a lifted skin-fold technique or prefer a longer needle. Suitable for most adults.
 
-### Hansol Certifications
-- **MFDS Certified** — Certified by the Korean Ministry of Food and Drug Safety as a regulated therapeutic device product.
-- **Korean Standard** — Manufactured to Korean national quality standards for medical and therapeutic devices.
-- **PH FDA Registered** — Hansol products supplied by K-Pick carry proper Philippine FDA documentation. *(On File — Available on Request)*
+*(Length guidance sourced from the Tae-Chang Industrial catalogue. All sizes packed 100 pen needles per box.)*
+
+### Insufine Certifications
+- **ISO 13485** — Manufactured under an ISO 13485-certified quality management system for medical devices.
+- **CE Marked** — Insufine pen needles carry CE 0120 marking for conformity with European medical device requirements.
+- **KGMP Certified** — Korean Good Manufacturing Practice approval covering Tae-Chang's medical needle production.
+- **ISO 11608 Compliant** — Pen needles comply with the ISO 11608 standard for needle-based injection systems.
 
 ### Brand Showcase
-Hansol cupping therapy devices are used to support muscle relaxation, promote circulation, and assist recovery. With multiple cup counts and set sizes, Hansol provides practical options for therapy clinics, wellness centers, and structured care routines.
+Insufine pen needles combine fine 31G–32G gauges with electro-polished, triple-bevel needle tips and extra-thin-wall technology for maximum flow rate — engineered by Tae-Chang Industrial for a smoother, more comfortable injection experience in daily diabetes care.
 
 ### Brand CTA
 "Generate Quote / PO" | "Contact Our Team"  
-K-Pick supplies Hansol Bu-Hang cupping therapy sets to therapy clinics, wellness centers, and reseller buyers across the Philippines.
+K-Pick Trading Corp is the exclusive Philippine distributor of Insufine, supplying pharmacies, clinics, hospitals, and reseller buyers nationwide.
 
 ---
 
@@ -383,7 +385,7 @@ All pages share the same navbar with the following links:
 - **Brands** (dropdown) →
   - Sungshim — Injection Devices → sungshim.html
   - EROP — Surgical Devices → erop.html
-  - Hansol Bu-Hang — Cupping Therapy → hansol.html
+  - Insufine — Insulin Pen Needles → insufine.html
   - View All Brands → index.html#TieUps
 - **About Us** → index.html#about
 - **Generate Quote / PO** → request.htm
@@ -397,7 +399,7 @@ All pages share the same navbar with the following links:
 |---|---|---|
 | Sungshim | Blue | #0f4ca3 |
 | EROP | Green | #08713d |
-| Hansol Bu-Hang | Red | #b32424 |
+| Insufine | Teal | #0e7c86 |
 | K-Pick | Navy | #041A4F |
 
 ---
@@ -409,8 +411,9 @@ All pages share the same navbar with the following links:
 | Annals of Coloproctology (PMC) | https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/ | EROP clinical citation |
 | Sungshim TradeKorea (KMDA) | https://sungmedi.tradekorea.com/company.do | Sungshim company data |
 | Expert Market Research | https://www.expertmarketresearch.com/reports/philippines-medical-devices-market | Philippines market stats |
-| Amazon Hansol 19-cup reviews | https://www.amazon.com/Hansol-Hang-Cupping-Set-19PCS/product-reviews/B0068JOKEO | Hansol practitioner quote |
-| Terra Rosa Australia | https://terrarosa.com.au/product/tools/hansol-premium-cupping-set-30-pieces/ | Hansol professional context |
+| Tae-Chang Industrial (global site) | http://global.needles.co.kr | Insufine manufacturer data |
+| Tae-Chang catalogue (MedicalExpo) | https://pdf.medicalexpo.com/pdf/taechang-industry/taechang-industrial-co-ltd/300180-241329.html | Insufine product specifications |
+| Volza trade data | https://www.volza.com | Insufine exporter ranking claim |
 
 ---
 
@@ -546,8 +549,8 @@ All pages share the same navbar with the following links:
 ## Important Business Notes
 
 - All three brands are Korean-manufactured with international certifications (ISO 13485, CE, MFDS).
-- Sungshim and EROP: K-Pick holds **exclusive** Philippine distribution rights.
-- Hansol: K-Pick is an **authorized Philippine supplier** (not stated as exclusive).
+- Sungshim, EROP, and Insufine: K-Pick holds **exclusive** Philippine distribution rights (management-confirmed for Insufine, July 2026).
+- Insufine competes in the same category as Sungshim pen needles; site copy presents each brand on its own strengths and never frames them against each other.
 - All B2B only — no retail/consumer sales. Minimum buyers: hospitals, clinics, pharmacies, resellers, procurement teams.
 - PhilGEPS procurement support available for government buyers.
 - Dealer/reseller partnership inquiries accepted.

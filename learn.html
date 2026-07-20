@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An interactive guide to injection devices from K-Pick Trading Corp. Learn how syringe gauges, needle lengths, low dead space design and 5 micron filtration actually work.">
     <link rel="icon" type="image/png" href="img/kpickicon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260719-1">
+    <link rel="stylesheet" href="css/style.css?v=20260720-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -49,9 +49,9 @@
                                 <span class="nav__dropdown-avatar nav__dropdown-avatar--erop">E</span>
                                 <span class="nav__dropdown-label"><strong>EROP</strong><small>Surgical Devices</small></span>
                             </a>
-                            <a href="hansol.html" role="menuitem" class="nav__dropdown-item">
-                                <span class="nav__dropdown-avatar nav__dropdown-avatar--hansol">H</span>
-                                <span class="nav__dropdown-label"><strong>Hansol Bu-Hang</strong><small>Cupping Therapy</small></span>
+                            <a href="insufine.html" role="menuitem" class="nav__dropdown-item">
+                                <span class="nav__dropdown-avatar nav__dropdown-avatar--insufine">I</span>
+                                <span class="nav__dropdown-label"><strong>Insufine</strong><small>Insulin Pen Needles</small></span>
                             </a>
                             <div class="nav__dropdown-divider"></div>
                             <a href="index.html#TieUps" role="menuitem" class="nav__dropdown-item nav__dropdown-item--all">View All Brands &rarr;</a>
@@ -67,10 +67,26 @@
     </section>
 
     <header class="learn-hero">
+        <div class="learn-hero__glow" aria-hidden="true"></div>
+        <div class="learn-hero__grid" aria-hidden="true"></div>
         <div class="learn-hero__inner">
             <span class="learn-hero__eyebrow">K-Pick Learning Centre</span>
             <h1>How injection devices actually work.</h1>
-            <p>Six devices we supply, explained by letting you operate them. Change a gauge and watch the needle redraw at true scale. Push a plunger and see the medication that gets left behind. Snap an ampoule and find out what a 5&nbsp;micron filter is for.</p>
+            <p>Six devices, explained by letting you operate them. Change a gauge and watch the needle redraw at true scale. Push a plunger and see the medication that gets left behind. Snap an ampoule and find out what a 5&nbsp;micron filter is for.</p>
+            <div class="learn-hero__facts" aria-label="What this guide covers">
+                <div>
+                    <strong>5</strong>
+                    <span>Interactive modules</span>
+                </div>
+                <div>
+                    <strong>6</strong>
+                    <span>Devices explained</span>
+                </div>
+                <div>
+                    <strong>True scale</strong>
+                    <span>Diagrams from published specs</span>
+                </div>
+            </div>
             <p class="learn-hero__meta">Every specification shown is taken from the manufacturer&rsquo;s published data.</p>
         </div>
     </header>
@@ -87,14 +103,14 @@
 
         <!-- ============ 01 INSULIN SYRINGE ============ -->
         <section class="learn-section" id="insulin-syringe">
-            <div class="learn-section__head">
+            <div class="learn-section__head animate-in">
                 <span class="learn-section__num">01</span>
                 <div>
                     <h2>Insulin syringe</h2>
                     <p class="learn-section__kicker">Why insulin syringes are not interchangeable with ordinary ones</p>
                 </div>
             </div>
-            <div class="learn-section__copy">
+            <div class="learn-section__copy animate-in">
                 <p>An insulin syringe is graduated in <strong>units</strong>, not millilitres, and its needle is fixed to the barrel rather than screwed on. A 1&nbsp;mL barrel carries 100&nbsp;units; a 0.5&nbsp;mL barrel carries 50&nbsp;units across the same length of barrel, so the markings sit further apart and small doses are easier to read accurately.</p>
             </div>
 
@@ -136,14 +152,14 @@
 
         <!-- ============ 02 SINGLE-USE SYRINGE ============ -->
         <section class="learn-section" id="single-use">
-            <div class="learn-section__head">
+            <div class="learn-section__head animate-in">
                 <span class="learn-section__num">02</span>
                 <div>
                     <h2>Single-use syringe</h2>
                     <p class="learn-section__kicker">Capacity, tip type, and why the choice matters</p>
                 </div>
             </div>
-            <div class="learn-section__copy">
+            <div class="learn-section__copy animate-in">
                 <p>The general-purpose syringe, made from 1&nbsp;mL up to 60&nbsp;mL. Two things vary and both appear on every tender document: the <strong>capacity</strong>, and the <strong>tip type</strong>. A luer slip tip pushes on by friction; a luer lock tip threads on and cannot separate under pressure. The 60&nbsp;mL is different again &mdash; it takes a catheter tip for irrigation and feeding, and no needle at all.</p>
             </div>
 
@@ -193,14 +209,14 @@
 
         <!-- ============ 03 LDS ============ -->
         <section class="learn-section" id="lds">
-            <div class="learn-section__head">
+            <div class="learn-section__head animate-in">
                 <span class="learn-section__num">03</span>
                 <div>
                     <h2>Low dead space syringe</h2>
                     <p class="learn-section__kicker">The medication you pay for but never deliver</p>
                 </div>
             </div>
-            <div class="learn-section__copy">
+            <div class="learn-section__copy animate-in">
                 <p>Every syringe holds a little medication in the hub after the plunger has bottomed out. It was drawn from the vial, it was paid for, and it goes in the sharps bin. A low dead space design shapes the plunger tip to occupy that cavity, so almost nothing remains. Across a vaccination programme, those fractions add up to whole extra doses from the same stock.</p>
             </div>
 
@@ -232,15 +248,16 @@
 
         <!-- ============ 04 PEN NEEDLES ============ -->
         <section class="learn-section" id="pen-needle">
-            <div class="learn-section__head">
+            <div class="learn-section__head animate-in">
                 <span class="learn-section__num">04</span>
                 <div>
                     <h2>Insulin pen needles</h2>
                     <p class="learn-section__kicker">Length decides which tissue layer the dose reaches</p>
                 </div>
             </div>
-            <div class="learn-section__copy">
+            <div class="learn-section__copy animate-in">
                 <p>An insulin pen carries its own cartridge; the needle is the part the patient replaces at every injection. Insulin is meant for the <strong>subcutaneous layer</strong> &mdash; the fat beneath the skin. Too long a needle can pass through it into muscle, where insulin is absorbed faster and less predictably.</p>
+                <p>K-Pick supplies pen needles from two Korean manufacturers, Sungshim and Insufine. The selector below is drawn from the Sungshim range; the Insufine range is listed on its own page.</p>
             </div>
 
             <div class="sx" data-sx-pen>
@@ -259,19 +276,22 @@
                 <p class="sx__note" data-sx-note></p>
                 <p class="sx__src">Tissue depths shown are typical adult values and vary between patients and injection sites. Always follow the prescriber&rsquo;s instruction on needle length and technique.</p>
             </div>
-            <a class="learn-cta" href="sungshim-insulin-pen-needles.html">See the full specification &rarr;</a>
+            <div class="learn-cta-row">
+                <a class="learn-cta" href="sungshim-insulin-pen-needles.html">Sungshim pen needle specification &rarr;</a>
+                <a class="learn-cta" href="insufine.html">Insufine pen needle range &rarr;</a>
+            </div>
         </section>
 
         <!-- ============ 05 FILTER ============ -->
         <section class="learn-section" id="filter">
-            <div class="learn-section__head">
+            <div class="learn-section__head animate-in">
                 <span class="learn-section__num">05</span>
                 <div>
                     <h2>Filter syringe &amp; filter needle</h2>
                     <p class="learn-section__kicker">What happens when you snap a glass ampoule</p>
                 </div>
             </div>
-            <div class="learn-section__copy">
+            <div class="learn-section__copy animate-in">
                 <p>Opening a glass ampoule sheds microscopic glass fragments into the medication inside it. Drawing that medication up with an ordinary needle carries those fragments into the patient. A filter syringe and a filter needle both solve this with a <strong>5 micron membrane</strong> that traps glass, rubber and other particulates on the way in.</p>
                 <p>The difference between the two is workflow. A filter syringe filters as you draw and then injects. A filter needle is a draw-up device only &mdash; it is removed and swapped for a normal needle before the injection is given.</p>
                 <p class="learn-note"><strong>Note:</strong> filter syringes and filter needles are manufactured by Sungshim but are not yet part of the K-Pick range. Contact us if you would like them included in a quotation.</p>
@@ -310,11 +330,15 @@
         </section>
 
         <section class="learn-outro">
-            <h2>Need any of these for your facility?</h2>
-            <p>K-Pick Trading Corp supplies hospitals, clinics, pharmacies and dealers across the Philippines.</p>
-            <div class="learn-outro__actions">
-                <a class="brand-cta__btn brand-cta__btn--primary" href="request.htm">Generate Quote / PO</a>
-                <a class="brand-cta__btn brand-cta__btn--secondary" href="contact.htm">Contact Our Team</a>
+            <div class="learn-outro__panel animate-in">
+                <span class="learn-outro__eyebrow">Ready to Order?</span>
+                <h2>Need any of these for your facility?</h2>
+                <p>K-Pick Trading Corp supplies hospitals, clinics, pharmacies and dealers across the Philippines.</p>
+                <div class="learn-outro__actions">
+                    <a class="brand-cta__btn brand-cta__btn--primary" href="request.htm">Generate Quote / PO</a>
+                    <a class="brand-cta__btn brand-cta__btn--secondary" href="contact.htm">Contact Our Team</a>
+                </div>
+                <p class="learn-outro__trust">Serving hospitals &middot; clinics &middot; pharmacies &middot; dealers across the Philippines</p>
             </div>
         </section>
     </main>
@@ -337,6 +361,7 @@
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/learn-nav.js"></script>
     <script src="script/insulin-syringe-explorer.js"></script>
     <script src="script/sungshim-modules.js"></script>
     <script src="script/sungshim-filter.js"></script>

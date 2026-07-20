@@ -289,6 +289,186 @@ body{
     line-height: 1.35;
     font-weight: 900;
 }
+/* Distributor hero — Big-3 brands above the fold */
+.dashboardarea--distributor{
+    grid-template-columns: minmax(0, 1fr);
+    gap: 46px;
+    padding: 112px 0 72px;
+    justify-items: center;
+}
+.dashboardarea--distributor .dashboardarea__content{
+    max-width: 880px;
+    text-align: center;
+}
+.dashboardarea--distributor h1{
+    font-size: clamp(34px, 4.2vw, 56px);
+    line-height: 1.04;
+}
+.dashboardarea--distributor .dashboardarea__eyebrow::after{
+    content: "";
+    width: 34px;
+    height: 2px;
+    margin-left: 12px;
+    background: #69b77d;
+}
+.dashboardarea--distributor .dashboardarea__lede{
+    max-width: 640px;
+    margin: 20px auto 0;
+    font-size: 17px;
+}
+.hero-brands{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    /* Matches the h1 measure so the card row and headline share an edge. */
+    max-width: 880px;
+    margin: 32px auto 0;
+}
+.hero-brand{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 18px 19px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.07) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 14px;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    text-decoration: none;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+.hero-brand:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.hero-brand__logo-wrap{
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Sized for optical balance, not equal pixel height. The glyphs fill their files
+   very differently (Sungshim 80% of frame, EROP 56%), and Insufine is bold set
+   type, which carries more mass than Sungshim's fine wordmark at equal height. */
+.hero-brand__logo{
+    max-height: 52px;
+    max-width: 200px;
+    width: auto;
+    object-fit: contain;
+}
+/* EROP's letterforms are heavy; held back so the lighter Sungshim wordmark
+   (the flagship line) is not visually outweighed. */
+.hero-brand__logo--erop{
+    max-height: 44px;
+}
+.hero-brand__wordmark{
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.hero-brand__type{
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.hero-brand__cta{
+    font-size: 13px;
+    font-weight: 800;
+}
+.hero-brand--sungshim .hero-brand__cta{ color: #9cc4ff; }
+.hero-brand--erop     .hero-brand__cta{ color: #8ce0b0; }
+.hero-brand--insufine .hero-brand__cta{ color: #8fe0e8; }
+.dashboardarea--distributor .dashboardarea__actions{
+    justify-content: center;
+}
+.dashboardarea--distributor .dashboardarea__stats{
+    margin: 42px auto 0;
+    text-align: center;
+}
+.dashboardarea--distributor .dashboardarea__stats div{
+    padding: 18px 12px;
+}
+.dashboardarea--distributor .dashboardarea__supply-panel{
+    width: 100%;
+}
+.dashboardarea--distributor .dashboardarea__panel-head{
+    max-width: 520px;
+}
+.dashboardarea--distributor .dashboardarea__supply-list{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.dashboardarea--distributor .dashboardarea__supply-list li{
+    border-bottom: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 20px 18px;
+}
+.dashboardarea--distributor .dashboardarea__supply-list li:last-child{
+    border-right: 0;
+}
+@media (max-width: 960px){
+    .dashboardarea--distributor .dashboardarea__supply-list{
+        grid-template-columns: 1fr;
+    }
+    .dashboardarea--distributor .dashboardarea__supply-list li{
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 20px 0;
+    }
+    .dashboardarea--distributor .dashboardarea__supply-list li:last-child{
+        border-bottom: 0;
+    }
+}
+@media (max-width: 640px){
+    .dashboardarea--distributor{
+        padding-top: 108px;
+    }
+    .dashboardarea--distributor .dashboardarea__lede{
+        font-size: 15px;
+        line-height: 1.5;
+    }
+    .hero-brands{
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 24px;
+    }
+    .hero-brand{
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+    /* Same optical-balance ratios as desktop, scaled down. Sizing these to an
+       equal max-height starves EROP (its glyph fills only 56% of its file) and
+       lets the bold Insufine text dominate the flagship Sungshim wordmark. */
+    .hero-brand__logo-wrap{
+        height: 40px;
+    }
+    .hero-brand__logo{
+        max-height: 38px;
+        max-width: 150px;
+    }
+    .hero-brand__logo--erop{
+        max-height: 32px;
+    }
+    .hero-brand__wordmark{
+        font-size: 19px;
+    }
+    .hero-brand__type{
+        font-size: 10px;
+        text-align: right;
+    }
+    .hero-brand__cta{
+        display: none;
+    }
+}
 .tagline-anchor{
     padding: 24px 20px;
     background: #ffffff;
@@ -759,8 +939,8 @@ body{
 .EropCard:hover{
     background-color: #108048;
 }
-.HansolCard:hover{
-    background-color: #b32424;
+.InsufineCard:hover{
+    background-color: #0e7c86;
 }
 .brand-card:hover{
     transform: translateY(-10px);
@@ -777,7 +957,7 @@ body{
     transition: opacity 0.25s ease;
 }
 .EropCard .brand-card__image--default,
-.HansolCard .brand-card__image--default{
+.InsufineCard .brand-card__image--default{
     transform: scale(0.84);
 }
 .brand-card__hover-content{
@@ -804,7 +984,7 @@ body{
     transform: translateY(-24px);
 }
 .EropCard .brand-card__product-image,
-.HansolCard .brand-card__product-image{
+.InsufineCard .brand-card__product-image{
     max-width: 340px;
     height: 400px;
 }
@@ -1036,10 +1216,16 @@ body{
     background-size: cover;
     background-position: center;
 }
-.brand-hero--hansol{
-    background-image: url("../img/hansol-17-cup-set.png");
+.brand-hero--insufine{
+    background-image: url("../img/insufine-hero.jpg");
     background-size: cover;
-    background-position: center 48%;
+    background-position: center 62%;
+}
+@media (max-width: 700px){
+    .brand-hero--insufine{
+        background-image: url("../img/insufine-hero-mobile.jpg");
+        background-position: center 28%;
+    }
 }
 .brand-hero__overlay{
     position: absolute;
@@ -1049,8 +1235,8 @@ body{
 .brand-hero__overlay--erop{
     background: rgba(8, 31, 76, 0.45);
 }
-.brand-hero__overlay--hansol{
-    background: linear-gradient(90deg, rgba(5, 24, 67, 0.78) 0%, rgba(15, 45, 107, 0.5) 52%, rgba(15, 45, 107, 0.2) 100%);
+.brand-hero__overlay--insufine{
+    background: linear-gradient(180deg, rgba(5, 24, 67, 0.42) 0%, rgba(5, 24, 67, 0.62) 45%, rgba(5, 24, 67, 0.5) 100%);
 }
 .brand-hero__content{
     position: relative;
@@ -1065,6 +1251,15 @@ body{
     font-weight: 900;
     letter-spacing: 0;
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+.brand-hero__subtitle{
+    margin: 12px 0 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 .brand-hero__logo{
     display: block;
@@ -1102,8 +1297,8 @@ body{
 .brand-intro--sungshim .brand-intro__eyebrow{
     color: #0f6fa8;
 }
-.brand-intro--hansol .brand-intro__eyebrow{
-    color: #425a98;
+.brand-intro--insufine .brand-intro__eyebrow{
+    color: #0e7c86;
 }
 .brand-intro__copy{
     max-width: 700px;
@@ -1441,11 +1636,11 @@ body{
 .product-card__media--pen{
     padding-top: 42px;
 }
-.hansol-sets{
+.insufine-sizes{
     position: relative;
     padding: 76px 0 44px;
 }
-.hansol-sets::before{
+.insufine-sizes::before{
     content: "";
     position: absolute;
     top: 36px;
@@ -1455,79 +1650,87 @@ body{
     background: linear-gradient(90deg, transparent 0%, rgba(15, 45, 107, 0.2) 50%, transparent 100%);
     transform: translateX(-50%);
 }
-.hansol-sets__header{
+.insufine-sizes__header{
     max-width: 780px;
     margin: 0 auto 42px;
     text-align: center;
 }
-.hansol-sets__header .section-eyebrow{
+.insufine-sizes__header .section-eyebrow{
     justify-content: center;
 }
-.hansol-sets__header h2{
+.insufine-sizes__header h2{
     margin: 0;
     color: #0f2d6b;
     font-size: 48px;
     line-height: 1.06;
     font-weight: 900;
 }
-.hansol-sets__header p{
+.insufine-sizes__header p{
     max-width: 680px;
     margin: 16px auto 0;
     color: #4e5868;
     font-size: 16px;
     line-height: 1.65;
 }
-.hansol-sets__grid{
+.insufine-sizes__grid{
     display: grid;
     grid-template-columns: repeat(2, minmax(260px, 1fr));
     gap: 22px;
 }
-.hansol-set-card{
+.insufine-size-card{
     position: relative;
-    min-height: 390px;
+    min-height: 460px;
     overflow: hidden;
     background: #ffffff;
     border: 1px solid rgba(15, 45, 107, 0.08);
     box-shadow: 0 14px 30px rgba(15, 32, 73, 0.12);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.hansol-set-card:hover{
+.insufine-size-card:hover{
     transform: translateY(-8px);
     box-shadow: 0 22px 42px rgba(15, 32, 73, 0.18);
 }
-.hansol-set-card__media{
+.insufine-size-card__media{
     position: absolute;
     inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 18px 18px 112px;
     background: #eef2f8;
 }
-.hansol-set-card__media::after{
+.insufine-size-card--4mm .insufine-size-card__media{ background: #eef8ea; }
+.insufine-size-card--5mm .insufine-size-card__media{ background: #fdeef1; }
+.insufine-size-card--6mm .insufine-size-card__media{ background: #fef4e8; }
+.insufine-size-card--8mm .insufine-size-card__media{ background: #eaf5fd; }
+.insufine-size-card__media::after{
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(14, 31, 72, 0);
+    background: rgba(7, 31, 88, 0);
     transition: background-color 0.25s ease;
 }
-.hansol-set-card:hover .hansol-set-card__media::after{
-    background: rgba(14, 31, 72, 0.45);
+.insufine-size-card:hover .insufine-size-card__media::after{
+    background: rgba(7, 31, 88, 0.62);
 }
-.hansol-set-card__image{
+.insufine-size-card__image{
     position: relative;
     z-index: 1;
     display: block;
-    width: min(520px, 100%);
-    max-height: 275px;
+    width: 100%;
+    height: auto;
+    max-height: 330px;
     object-fit: contain;
-    filter: drop-shadow(0 12px 24px rgba(15, 32, 73, 0.18));
+    mix-blend-mode: multiply;
     transition: transform 0.3s ease, opacity 0.25s ease;
 }
-.hansol-set-card:hover .hansol-set-card__image{
-    transform: scale(1.12);
-    opacity: 0.78;
+.insufine-size-card:hover .insufine-size-card__image{
+    transform: scale(1.1);
+    opacity: 0.55;
 }
-.hansol-set-card__label{
+.insufine-size-card__label{
     position: absolute;
     left: 0;
     right: 0;
@@ -1539,7 +1742,7 @@ body{
     text-align: center;
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
-.hansol-set-card__label span{
+.insufine-size-card__label span{
     display: block;
     margin-bottom: 8px;
     color: #b7d9ff;
@@ -1548,18 +1751,18 @@ body{
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
-.hansol-set-card__label h3{
+.insufine-size-card__label h3{
     margin: 0;
     color: #ffffff;
     font-size: 30px;
     line-height: 1.1;
     font-weight: 900;
 }
-.hansol-set-card:hover .hansol-set-card__label{
+.insufine-size-card:hover .insufine-size-card__label{
     opacity: 0;
     transform: translateY(100%);
 }
-.hansol-set-card__overlay{
+.insufine-size-card__overlay{
     position: absolute;
     inset: 0;
     z-index: 3;
@@ -1571,15 +1774,15 @@ body{
     transition: opacity 0.25s ease, transform 0.25s ease;
     pointer-events: none;
 }
-.hansol-set-card:hover .hansol-set-card__overlay{
+.insufine-size-card:hover .insufine-size-card__overlay{
     opacity: 1;
     transform: translateY(0);
 }
-.hansol-set-card__overlay p{
+.insufine-size-card__overlay p{
     max-width: 520px;
     margin: 0;
     color: #ffffff;
-    font-size: 25px;
+    font-size: 23px;
     line-height: 1.45;
     font-weight: 500;
     text-align: center;
@@ -1589,7 +1792,7 @@ body{
     margin-top: 24px;
     background-color: #ffffff;
 }
-.brand-showcase--hansol{
+.brand-showcase--insufine{
     margin-top: 0;
 }
 .brand-showcase__media{
@@ -1603,10 +1806,10 @@ body{
     object-fit: cover;
     object-position: center;
 }
-.brand-showcase__image--hansol{
+.brand-showcase__image--insufine{
     height: 520px;
     object-fit: contain;
-    background: #eef2f8;
+    background: #f5f8fb;
 }
 .brand-showcase__content{
     padding: 56px 9% 72px;
@@ -1617,6 +1820,36 @@ body{
     color: #2d3442;
     font-size: 22px;
     line-height: 1.7;
+}
+/* Desktop only: seat the showcase copy inside the photo's empty right side so
+   image and text read as one composition. Mobile keeps the stacked layout. */
+@media (min-width: 901px){
+    .brand-showcase--insufine{
+        position: relative;
+    }
+    .brand-showcase--insufine .brand-showcase__image--insufine{
+        height: min(640px, 44vw);
+        object-fit: cover;
+        object-position: center 58%;
+    }
+    .brand-showcase--insufine .brand-showcase__content{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(48%, 640px);
+        display: flex;
+        align-items: center;
+        padding: 0 clamp(36px, 5vw, 92px) 0 clamp(24px, 3vw, 56px);
+        /* Feathered scrim: invisible over the photo's white side, but keeps the
+           copy legible on narrower desktops where a box creeps into the column. */
+        background: linear-gradient(90deg, rgba(244, 248, 251, 0) 0%, rgba(244, 248, 251, 0.82) 26%, rgba(244, 248, 251, 0.94) 55%, rgba(244, 248, 251, 0.97) 100%);
+    }
+    .brand-showcase--insufine .brand-showcase__content p{
+        color: #17233c;
+        font-size: clamp(17px, 1.45vw, 21px);
+        line-height: 1.72;
+    }
 }
 .product-hero{
     position: relative;
@@ -4917,16 +5150,19 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .product-categories__grid{
         grid-template-columns: repeat(2, minmax(180px, 1fr));
     }
-    .hansol-sets__grid{
+    .insufine-sizes__grid{
         grid-template-columns: repeat(2, minmax(220px, 1fr));
     }
-    .hansol-set-card{
-        min-height: 360px;
+    .insufine-size-card{
+        min-height: 410px;
     }
-    .hansol-set-card__overlay{
+    .insufine-size-card__image{
+        max-height: 270px;
+    }
+    .insufine-size-card__overlay{
         padding: 30px;
     }
-    .hansol-set-card__overlay p{
+    .insufine-size-card__overlay p{
         font-size: 21px;
     }
     .brand-showcase__image{
@@ -5302,7 +5538,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
         height: 240px;
     }
     .EropCard .brand-card__product-image,
-    .HansolCard .brand-card__product-image{
+    .InsufineCard .brand-card__product-image{
         max-width: 260px;
         height: 300px;
     }
@@ -5369,42 +5605,42 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .product-categories__grid{
         grid-template-columns: 1fr;
     }
-    .hansol-sets{
+    .insufine-sizes{
         padding-top: 48px;
     }
-    .hansol-sets::before{
+    .insufine-sizes::before{
         top: 22px;
         width: 66vw;
     }
-    .hansol-sets__header{
+    .insufine-sizes__header{
         margin-bottom: 28px;
     }
-    .hansol-sets__header h2{
+    .insufine-sizes__header h2{
         font-size: 28px;
     }
-    .hansol-sets__header p{
+    .insufine-sizes__header p{
         font-size: 14px;
     }
-    .hansol-sets__grid{
+    .insufine-sizes__grid{
         grid-template-columns: 1fr;
         gap: 16px;
     }
-    .hansol-set-card{
-        min-height: 330px;
+    .insufine-size-card{
+        min-height: 350px;
     }
-    .hansol-set-card__media{
-        padding: 24px;
+    .insufine-size-card__media{
+        padding: 16px 16px 100px;
     }
-    .hansol-set-card__image{
-        max-height: 220px;
+    .insufine-size-card__image{
+        max-height: 230px;
     }
-    .hansol-set-card__label{
+    .insufine-size-card__label{
         padding: 20px;
     }
-    .hansol-set-card__label h3{
+    .insufine-size-card__label h3{
         font-size: 24px;
     }
-    .hansol-set-card__overlay p{
+    .insufine-size-card__overlay p{
         font-size: 18px;
     }
     .erop-categories__grid{
@@ -5444,7 +5680,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .brand-showcase__image{
         height: 300px;
     }
-    .brand-showcase__image--hansol{
+    .brand-showcase__image--insufine{
         height: 340px;
     }
     .brand-showcase__content p{
@@ -5958,9 +6194,9 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     border-top: 1px solid #cce7d8;
     border-bottom: 1px solid #cce7d8;
 }
-.brand-spotlight--hansol {
-    background: linear-gradient(135deg, #fff2f2 0%, #ffffff 65%);
-    border-top: 1px solid #f0d8d8;
+.brand-spotlight--insufine {
+    background: linear-gradient(135deg, #ecf8f9 0%, #ffffff 65%);
+    border-top: 1px solid #cfe7ea;
 }
 .brand-spotlight__inner {
     display: grid;
@@ -5983,6 +6219,11 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     object-fit: contain;
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.13));
 }
+.brand-spotlight__product-img--insufine {
+    border-radius: 16px;
+    filter: none;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.13);
+}
 .brand-spotlight__logo-wrap { margin-bottom: 10px; }
 .brand-spotlight__logo { height: 42px; object-fit: contain; }
 .brand-spotlight__logo--erop { height: 34px; }
@@ -5992,7 +6233,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     font-weight: 900;
     letter-spacing: 0.04em;
 }
-.brand-spotlight__brand-name--hansol { color: #b32424; }
+.brand-spotlight__brand-name--insufine { color: #0e7c86; }
 .brand-spotlight__category {
     display: inline-flex;
     align-items: center;
@@ -6014,7 +6255,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 }
 .brand-spotlight--sungshim .brand-spotlight__category { color: #0f4ca3; }
 .brand-spotlight--erop     .brand-spotlight__category { color: #08713d; }
-.brand-spotlight--hansol   .brand-spotlight__category { color: #b32424; }
+.brand-spotlight--insufine .brand-spotlight__category { color: #0e7c86; }
 .brand-spotlight__content h3 {
     font-size: clamp(20px, 2vw, 27px);
     font-weight: 800;
@@ -6044,7 +6285,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 }
 .brand-spotlight--sungshim .brand-spotlight__product-tag { background: #dde8fc; color: #0f4ca3; }
 .brand-spotlight--erop     .brand-spotlight__product-tag { background: #d6eddf; color: #08713d; }
-.brand-spotlight--hansol   .brand-spotlight__product-tag { background: #fcd8d8; color: #b32424; }
+.brand-spotlight--insufine .brand-spotlight__product-tag { background: #d3edf0; color: #0e7c86; }
 .brand-spotlight__certs {
     display: flex;
     flex-wrap: wrap;
@@ -6066,6 +6307,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .cert-badge--blue  { border-color: #0f4ca3; color: #0f4ca3; background: #eef4ff; }
 .cert-badge--green { border-color: #08713d; color: #08713d; background: #edfaf3; }
 .cert-badge--red   { border-color: #b32424; color: #b32424; background: #fff2f2; }
+.cert-badge--teal  { border-color: #0e7c86; color: #0e7c86; background: #ecf8f9; }
 .cert-badge--navy  { border-color: #041A4F; color: #041A4F; background: #eef4ff; }
 .cert-badge__check {
     width: 13px;
@@ -6082,6 +6324,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .cert-badge--blue  .cert-badge__check { background: #0f4ca3; color: #fff; }
 .cert-badge--green .cert-badge__check { background: #08713d; color: #fff; }
 .cert-badge--red   .cert-badge__check { background: #b32424; color: #fff; }
+.cert-badge--teal  .cert-badge__check { background: #0e7c86; color: #fff; }
 .cert-badge--navy  .cert-badge__check { background: #041A4F; color: #fff; }
 .brand-spotlight__cta {
     display: inline-flex;
@@ -6098,8 +6341,8 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .brand-spotlight--sungshim .brand-spotlight__cta:hover { background: #0a3a7f; transform: translateY(-1px); }
 .brand-spotlight--erop     .brand-spotlight__cta { background: #08713d; color: #fff; }
 .brand-spotlight--erop     .brand-spotlight__cta:hover { background: #065a30; transform: translateY(-1px); }
-.brand-spotlight--hansol   .brand-spotlight__cta { background: #b32424; color: #fff; }
-.brand-spotlight--hansol   .brand-spotlight__cta:hover { background: #8f1c1c; transform: translateY(-1px); }
+.brand-spotlight--insufine .brand-spotlight__cta { background: #0e7c86; color: #fff; }
+.brand-spotlight--insufine .brand-spotlight__cta:hover { background: #0a616c; transform: translateY(-1px); }
 
 /* ===========================================
    FAQ ACCORDION
@@ -6232,7 +6475,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 }
 .cert-card--sungshim .cert-card__icon { color: #0f4ca3; background: #e8f0fd; }
 .cert-card--erop     .cert-card__icon { color: #08713d; background: #e0f2e8; }
-.cert-card--hansol   .cert-card__icon { color: #b32424; background: #fde8e8; }
+.cert-card--insufine .cert-card__icon { color: #0e7c86; background: #dff2f4; }
 .cert-card--kpick    .cert-card__icon { color: #041A4F; background: #e0e8f4; }
 .cert-card h3 { font-size: 14px; font-weight: 800; color: #041A4F; margin: 0; }
 .cert-card p { font-size: 12.5px; color: #637083; line-height: 1.55; margin: 0; }
@@ -6440,7 +6683,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .story-card--kpick    .story-card__accent { background: #041A4F; }
 .story-card--sungshim .story-card__accent { background: #0f4ca3; }
 .story-card--erop     .story-card__accent { background: #08713d; }
-.story-card--hansol   .story-card__accent { background: #b32424; }
+.story-card--insufine .story-card__accent { background: #0e7c86; }
 .story-card__body { padding: 22px 22px 20px; flex: 1; display: flex; flex-direction: column; }
 .story-card__category {
     display: inline-flex;
@@ -6457,7 +6700,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .story-card--kpick    .story-card__category { background: #e0e8f4; color: #041A4F; }
 .story-card--sungshim .story-card__category { background: #dde8fc; color: #0f4ca3; }
 .story-card--erop     .story-card__category { background: #d6eddf; color: #08713d; }
-.story-card--hansol   .story-card__category { background: #fcd8d8; color: #b32424; }
+.story-card--insufine .story-card__category { background: #d3edf0; color: #0e7c86; }
 .story-card h3 {
     font-size: 16px;
     font-weight: 800;
@@ -6485,7 +6728,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .story-card--kpick    .story-card__cta { color: #041A4F; }
 .story-card--sungshim .story-card__cta { color: #0f4ca3; }
 .story-card--erop     .story-card__cta { color: #08713d; }
-.story-card--hansol   .story-card__cta { color: #b32424; }
+.story-card--insufine .story-card__cta { color: #0e7c86; }
 @media (max-width: 640px) {
     .brand-stories__grid { grid-template-columns: 1fr; }
 }
@@ -6593,6 +6836,29 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     text-transform: none;
 }
 .nav__dropdown-item:hover { background: #f4f7fb; }
+/* The generic `.navigation li a` rule has higher specificity and was forcing
+   these items to inline-block, so the three brands flowed inline and wrapped
+   into a ragged 2-up grid with an empty cell. Re-assert the single-column row
+   layout here, and strip the top-level nav's underline sweep and hover lift. */
+.navigation li a.nav__dropdown-item {
+    display: flex;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-weight: 400;
+}
+.navigation li a.nav__dropdown-item::after { content: none; }
+.navigation li a.nav__dropdown-item:hover {
+    background: #f4f7fb;
+    color: #041A4F;
+    transform: none;
+}
+.navigation li a.nav__dropdown-item--all {
+    justify-content: center;
+    font-weight: 700;
+    color: #0f4ca3;
+}
+.navigation li a.nav__dropdown-item--all:hover { background: #eef4ff; color: #0f4ca3; }
 .nav__dropdown-avatar {
     width: 36px;
     height: 36px;
@@ -6608,7 +6874,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 }
 .nav__dropdown-avatar--sungshim { background: #0f4ca3; }
 .nav__dropdown-avatar--erop     { background: #08713d; }
-.nav__dropdown-avatar--hansol   { background: #b32424; }
+.nav__dropdown-avatar--insufine { background: #0e7c86; }
 .nav__dropdown-label strong {
     display: block;
     font-size: 13.5px;
@@ -6658,8 +6924,15 @@ body[data-erop-product="new-port-pack"] .erop-spec{
         transition: max-height 0.28s ease, visibility 0s linear 0.28s;
     }
     .nav__dropdown::before { display: none; }
+    /* The desktop open-state rule centres the panel with translateX(-50%) and
+       outranks the plain `.nav__dropdown` reset above, so on mobile the open
+       menu was being shifted half its width off the left edge. Cancel it here. */
+    .nav--has-dropdown:hover .nav__dropdown,
     .nav--has-dropdown.is-dropdown-open .nav__dropdown {
-        max-height: 240px;
+        transform: none;
+    }
+    .nav--has-dropdown.is-dropdown-open .nav__dropdown {
+        max-height: 320px;
         visibility: visible;
         transition: max-height 0.28s ease;
         pointer-events: auto;
@@ -6733,7 +7006,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     transform: translateY(-2px);
 }
 .recognition-card--journal  { border-top: 4px solid #08713d; }
-.recognition-card--review   { border-top: 4px solid #b32424; }
+.recognition-card--review   { border-top: 4px solid #0e7c86; }
 .recognition-card--global   { border-top: 4px solid #0f4ca3; }
 .recognition-card__source {
     font-size: 10.5px;
@@ -6758,7 +7031,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     flex-shrink: 0;
 }
 .recognition-card--journal  .recognition-card__source-icon { background: #08713d; }
-.recognition-card--review   .recognition-card__source-icon { background: #b32424; }
+.recognition-card--review   .recognition-card__source-icon { background: #0e7c86; }
 .recognition-card--global   .recognition-card__source-icon { background: #0f4ca3; }
 .recognition-card__quote {
     font-size: 14.5px;
@@ -6788,7 +7061,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     align-self: flex-start;
 }
 .recognition-card__tag--erop     { background: #d6eddf; color: #08713d; }
-.recognition-card__tag--hansol   { background: #fcd8d8; color: #b32424; }
+.recognition-card__tag--insufine { background: #d3edf0; color: #0e7c86; }
 .recognition-card__tag--sungshim { background: #dde8fc; color: #0f4ca3; }
 .recognition-card__cite {
     font-size: 11.5px;
@@ -7578,51 +7851,144 @@ body[data-erop-product="new-port-pack"] .erop-spec{
    Learning Centre  (learn.html)
    ============================================================ */
 .learn-hero {
-    background: linear-gradient(135deg, #041A4F 0%, #0f4ca3 68%, #1d63c9 100%);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: linear-gradient(135deg, #03133c 0%, #0a3271 46%, #0f4ca3 100%);
     color: #fff;
-    padding: 70px 24px 60px;
+    padding: 92px 24px 84px;
 }
-.learn-hero__inner { max-width: 860px; margin: 0 auto; }
+/* Two soft light sources give the flat gradient depth. */
+.learn-hero__glow {
+    position: absolute;
+    inset: -30% -10% auto auto;
+    width: min(760px, 68vw);
+    aspect-ratio: 1;
+    background:
+        radial-gradient(circle at 62% 38%, rgba(120, 178, 255, 0.34) 0%, rgba(120, 178, 255, 0) 62%),
+        radial-gradient(circle at 30% 74%, rgba(31, 209, 168, 0.14) 0%, rgba(31, 209, 168, 0) 60%);
+    pointer-events: none;
+    z-index: -1;
+}
+/* Fine engineering grid — reads as precision rather than decoration. */
+.learn-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(115% 88% at 22% 40%, #000 24%, transparent 76%);
+    -webkit-mask-image: radial-gradient(115% 88% at 22% 40%, #000 24%, transparent 76%);
+    pointer-events: none;
+    z-index: -1;
+}
+.learn-hero__inner { max-width: 900px; margin: 0 auto; }
 .learn-hero__eyebrow {
-    display: inline-block;
-    font-size: 11.5px; font-weight: 800; letter-spacing: .16em;
-    text-transform: uppercase; color: #9dc2ff; margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 11.5px; font-weight: 900; letter-spacing: .16em;
+    text-transform: uppercase; color: #9dc2ff; margin-bottom: 18px;
+}
+.learn-hero__eyebrow::before {
+    content: "";
+    width: 34px; height: 2px;
+    margin-right: 12px;
+    background: #69b77d;
 }
 .learn-hero h1 {
-    font-size: clamp(28px, 4.6vw, 46px);
-    font-weight: 800; line-height: 1.15; letter-spacing: -.02em;
-    margin: 0 0 20px;
+    font-size: clamp(30px, 4.8vw, 52px);
+    font-weight: 900; line-height: 1.08; letter-spacing: -.025em;
+    margin: 0 0 22px;
+    text-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
 }
-.learn-hero p { font-size: 16.5px; line-height: 1.75; color: #d3e0f7; margin: 0 0 12px; max-width: 66ch; }
-.learn-hero__meta { font-size: 13.5px !important; color: #9dc2ff !important; }
+.learn-hero p { font-size: 17px; line-height: 1.75; color: #d3e0f7; margin: 0 0 12px; max-width: 64ch; }
+.learn-hero__meta { font-size: 13.5px !important; color: #9dc2ff !important; margin-top: 20px !important; }
 
+.learn-hero__facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 720px;
+    margin: 30px 0 0;
+}
+.learn-hero__facts > div {
+    padding: 18px 18px 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.06) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+}
+.learn-hero__facts strong {
+    display: block;
+    font-size: 26px;
+    line-height: 1.1;
+    font-weight: 900;
+    color: #ffffff;
+}
+.learn-hero__facts span {
+    display: block;
+    margin-top: 6px;
+    font-size: 11.5px;
+    font-weight: 800;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+/* Sits below the fixed site navbar, which occupies 5-75px once scrolled;
+   at top:0 the section nav was sliding underneath it and became unusable. */
 .learn-nav {
-    position: sticky; top: 0; z-index: 20;
+    position: sticky; top: 82px; z-index: 20;
     display: flex; gap: 6px; overflow-x: auto;
-    padding: 10px 20px;
-    background: rgba(255,255,255,.94);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #dfe7f3;
+    justify-content: center;
+    padding: 12px 20px;
+    background: rgba(255,255,255,.86);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid #e6ecf5;
     scrollbar-width: none;
+    transition: box-shadow .25s ease, border-color .25s ease;
+}
+.learn-nav.is-stuck {
+    box-shadow: 0 10px 30px rgba(4, 26, 79, 0.09);
+    border-bottom-color: #dbe5f2;
 }
 .learn-nav::-webkit-scrollbar { display: none; }
 .learn-nav__link {
     flex: none; text-decoration: none;
     font-size: 13px; font-weight: 700; color: #55657f;
-    padding: 7px 14px; border-radius: 100px; border: 1px solid transparent;
+    padding: 8px 16px; border-radius: 100px; border: 1px solid transparent;
     white-space: nowrap;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
 }
 .learn-nav__link:hover { background: #f0f6ff; color: #0f4ca3; border-color: #cfe1fb; }
+.learn-nav__link.is-current {
+    background: #0f4ca3;
+    border-color: #0f4ca3;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(15, 76, 163, 0.26);
+}
 
 .learn-main { max-width: 1020px; margin: 0 auto; padding: 12px 20px 60px; }
-.learn-section { padding: 52px 0; border-bottom: 1px solid #e6ecf5; scroll-margin-top: 62px; }
+.learn-section { padding: 68px 0 60px; border-bottom: 1px solid #e6ecf5; scroll-margin-top: 150px; }
 .learn-section:last-of-type { border-bottom: none; }
-.learn-section__head { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 18px; }
+.learn-section__head { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
 .learn-section__num {
     flex: none;
-    font-size: 12px; font-weight: 800; letter-spacing: .1em;
-    color: #0f4ca3; background: #e8f1ff;
-    border-radius: 8px; padding: 8px 11px; margin-top: 4px;
+    display: grid;
+    place-items: center;
+    width: 46px; height: 46px;
+    font-size: 13px; font-weight: 900; letter-spacing: .06em;
+    color: #0f4ca3;
+    background: #ffffff;
+    border: 1.5px solid #cfe1fb;
+    border-radius: 50%;
+    box-shadow: 0 6px 18px rgba(15, 76, 163, 0.12);
+    margin-top: 2px;
 }
 .learn-section h2 {
     font-size: clamp(23px, 3.2vw, 32px);
@@ -7654,22 +8020,93 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .sx__run:focus-visible { outline: 3px solid #7eb8ff; outline-offset: 2px; }
 
 .learn-cta {
-    display: inline-block; margin-top: 20px;
-    font-size: 14.5px; font-weight: 700; color: #0f4ca3;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 22px;
+    padding: 11px 20px;
+    font-size: 14.5px; font-weight: 800; color: #0f4ca3;
     text-decoration: none;
-    border-bottom: 2px solid transparent;
+    background: #f2f7ff;
+    border: 1px solid #d9e6fa;
+    border-radius: 10px;
+    transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
 }
-.learn-cta:hover { border-bottom-color: #0f4ca3; }
+.learn-cta:hover {
+    background: #e4eefd;
+    border-color: #b9d3f6;
+    transform: translateY(-1px);
+}
+.learn-cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
 
-.learn-outro { text-align: center; padding: 58px 20px 20px; }
-.learn-outro h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: #041A4F; margin: 0 0 10px; }
-.learn-outro p { color: #55657f; font-size: 15.5px; margin: 0 0 24px; }
-.learn-outro__actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+/* Elevated module card — scoped to the Learning Centre so the same modules
+   embedded in the product pages keep their flatter inline treatment. */
+.learn-page .sx {
+    border-color: #e2e9f4;
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 2px 4px rgba(4, 26, 79, 0.03), 0 18px 44px rgba(4, 26, 79, 0.07);
+}
+.learn-page .sx__stage { border-radius: 14px; }
 
+.learn-outro { padding: 64px 0 12px; }
+.learn-outro__panel {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 58px 32px 52px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #041A4F 0%, #0f2d6b 62%, #12459b 100%);
+    box-shadow: 0 26px 60px rgba(4, 26, 79, 0.24);
+}
+.learn-outro__panel::before {
+    content: "";
+    position: absolute;
+    inset: -55% -20% auto auto;
+    width: min(520px, 70%);
+    aspect-ratio: 1;
+    background: radial-gradient(circle at 60% 40%, rgba(120, 178, 255, 0.28) 0%, rgba(120, 178, 255, 0) 62%);
+    pointer-events: none;
+}
+.learn-outro__eyebrow {
+    position: relative;
+    display: inline-block;
+    font-size: 11px; font-weight: 900;
+    text-transform: uppercase; letter-spacing: .1em;
+    color: #b7d9ff; margin-bottom: 14px;
+}
+.learn-outro h2 {
+    position: relative;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 900; color: #ffffff; margin: 0 0 12px; line-height: 1.22;
+}
+.learn-outro p { position: relative; color: rgba(255,255,255,.74); font-size: 15.5px; margin: 0 0 26px; }
+.learn-outro__actions { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.learn-outro__trust {
+    margin: 22px 0 0 !important;
+    font-size: 13px;
+    color: rgba(255,255,255,.56) !important;
+    letter-spacing: .025em;
+}
+
+@media (max-width: 860px) {
+    .learn-hero__facts { grid-template-columns: 1fr; gap: 10px; max-width: 420px; }
+    .learn-hero__facts > div { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px; }
+    .learn-hero__facts strong { font-size: 21px; flex: none; white-space: nowrap; }
+    .learn-hero__facts span { margin-top: 0; }
+}
 @media (max-width: 620px) {
-    .learn-hero { padding: 48px 20px 42px; }
-    .learn-section { padding: 40px 0; }
-    .learn-section__head { gap: 12px; }
+    .learn-hero { padding: 56px 20px 48px; }
+    .learn-section { padding: 46px 0 42px; }
+    .learn-section__head { gap: 14px; }
+    .learn-section__num { width: 38px; height: 38px; font-size: 12px; }
+    .learn-page .sx { padding: 18px; border-radius: 14px; }
+    .learn-outro__panel { padding: 44px 22px 40px; border-radius: 18px; }
+}
+/* Below 840px the site navbar collapses to a 60px circle at top-left. */
+@media (max-width: 840px) {
+    .learn-nav { top: 74px; justify-content: flex-start; }
+    .learn-section { scroll-margin-top: 132px; }
 }
 @media (prefers-reduced-motion: reduce) {
     .sx__run { transition: none; }

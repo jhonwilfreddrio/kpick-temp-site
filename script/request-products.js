@@ -58,15 +58,15 @@ window.KPICK_PRODUCTS = [
         ]
     },
     {
-        id: "hansol-cupping-sets",
-        name: "Hansol Cupping Sets",
-        brand: "Hansol",
-        levels: ["Cup Count"],
+        id: "insufine-pen-needles",
+        name: "Insufine Pen Needles",
+        brand: "Insufine",
+        levels: ["Gauge", "Needle Length"],
         items: [
-            { sku: "HAN-BH-010", path: ["10-Cup Set"], unit_price: 1259, in_stock: true,  stock_unit: "set", boxes_per_carton: 0, carton_discount_rate: 0 },
-            { sku: "HAN-BH-017", path: ["17-Cup Set"], unit_price: 1789, in_stock: true,  stock_unit: "set", boxes_per_carton: 0, carton_discount_rate: 0 },
-            { sku: "HAN-BH-019", path: ["19-Cup Set"], unit_price: 2359, in_stock: true,  stock_unit: "set", boxes_per_carton: 0, carton_discount_rate: 0 },
-            { sku: "HAN-BH-030", path: ["30-Cup Set"], unit_price: 2999, in_stock: false, stock_unit: "set", boxes_per_carton: 0, carton_discount_rate: 0 }
+            { sku: "INS-PN-32G-04", path: ["32G", "4 mm"], unit_price: null, in_stock: true, stock_unit: "box", boxes_per_carton: 48, carton_discount_rate: 0 },
+            { sku: "INS-PN-32G-05", path: ["32G", "5 mm"], unit_price: null, in_stock: true, stock_unit: "box", boxes_per_carton: 48, carton_discount_rate: 0 },
+            { sku: "INS-PN-32G-06", path: ["32G", "6 mm"], unit_price: null, in_stock: true, stock_unit: "box", boxes_per_carton: 48, carton_discount_rate: 0 },
+            { sku: "INS-PN-31G-08", path: ["31G", "8 mm"], unit_price: null, in_stock: true, stock_unit: "box", boxes_per_carton: 48, carton_discount_rate: 0 }
         ]
     }
 ];

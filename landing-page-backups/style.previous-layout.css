@@ -293,7 +293,7 @@ body{
 .EropCard:hover{
     background-color: #108048;
 }
-.HansolCard:hover{
+.InsufineCard:hover{
     background-color: #b32424;
 }
 .brand-card:hover{
@@ -311,7 +311,7 @@ body{
     transition: opacity 0.25s ease;
 }
 .EropCard .brand-card__image--default,
-.HansolCard .brand-card__image--default{
+.InsufineCard .brand-card__image--default{
     transform: scale(0.84);
 }
 .brand-card__hover-content{
@@ -338,7 +338,7 @@ body{
     transform: translateY(-24px);
 }
 .EropCard .brand-card__product-image,
-.HansolCard .brand-card__product-image{
+.InsufineCard .brand-card__product-image{
     max-width: 340px;
     height: 400px;
 }
@@ -2954,7 +2954,7 @@ body[data-erop-product="forcep"] .erop-spec{
         height: 240px;
     }
     .EropCard .brand-card__product-image,
-    .HansolCard .brand-card__product-image{
+    .InsufineCard .brand-card__product-image{
         max-width: 260px;
         height: 300px;
     }
