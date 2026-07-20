@@ -42,12 +42,7 @@
       { "sku": "SUN-PN-32G-04", "name": "Pen Needle 32G 4mm", "gauge": "32G", "boxes_per_carton": 48 },
       { "sku": "SUN-PN-32G-05", "name": "Pen Needle 32G 5mm", "gauge": "32G", "boxes_per_carton": 48 },
       { "sku": "SUN-PN-32G-06", "name": "Pen Needle 32G 6mm", "gauge": "32G", "boxes_per_carton": 48 },
-      { "sku": "SUN-PN-31G-08", "name": "Pen Needle 31G 8mm", "gauge": "31G", "boxes_per_carton": 48 }
-    ]
-  },
-  {
-    "category": "Insufine Pen Needles",
-    "items": [
+      { "sku": "SUN-PN-31G-08", "name": "Pen Needle 31G 8mm", "gauge": "31G", "boxes_per_carton": 48 },
       { "sku": "INS-PN-32G-04", "name": "Insufine Pen Needle 32G 4mm", "gauge": "32G", "boxes_per_carton": 48 },
       { "sku": "INS-PN-32G-05", "name": "Insufine Pen Needle 32G 5mm", "gauge": "32G", "boxes_per_carton": 48 },
       { "sku": "INS-PN-32G-06", "name": "Insufine Pen Needle 32G 6mm", "gauge": "32G", "boxes_per_carton": 48 },
@@ -55,4 +50,3 @@
     ]
   }
 ]
-
