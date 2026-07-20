@@ -522,10 +522,46 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/products', { headers: { Accept: 'application/json' } });
             if (!response.ok) throw new Error('unavailable');
             const result = await response.json();
-            // API must return new path-based format: { categories: [...] }
-            if (Array.isArray(result.categories) && result.categories.length > 0) {
-                categories = result.categories;
+            const apiCategories = Array.isArray(result.categories) ? result.categories : [];
+            if (!apiCategories.length) return;
+
+            // The API returns a flat item list per category carrying live price
+            // and stock, but no `levels` or per-item `path` — the cascade
+            // structure lives in request-products.js. Replacing `categories`
+            // wholesale therefore left family.levels undefined and threw as
+            // soon as a product was picked, which blocked ordering entirely.
+            // Merge by SKU instead: keep the local structure, take pricing and
+            // availability from the server.
+            const liveBySku = new Map();
+            for (const category of apiCategories) {
+                for (const item of (category.items || [])) {
+                    if (item && item.sku) liveBySku.set(item.sku, item);
+                }
             }
+            if (!liveBySku.size) return;
+
+            categories = categories
+                .map(category => ({
+                    ...category,
+                    items: category.items
+                        .map(item => {
+                            const live = liveBySku.get(item.sku);
+                            if (!live) return null; // no longer carried by the backend
+                            const stock = Number(live.stock_quantity);
+                            return {
+                                ...item,
+                                unit_price: live.unit_price ?? null,
+                                discounted_unit_price: live.discounted_unit_price ?? null,
+                                stock_unit: live.stock_unit || item.stock_unit,
+                                boxes_per_carton: live.boxes_per_carton ?? item.boxes_per_carton,
+                                carton_discount_rate: live.carton_discount_rate ?? item.carton_discount_rate,
+                                stock_quantity: live.stock_quantity,
+                                in_stock: Number.isFinite(stock) ? stock > 0 : item.in_stock !== false
+                            };
+                        })
+                        .filter(Boolean)
+                }))
+                .filter(category => category.items.length > 0);
         } catch { /* use local fallback silently */ }
     };
 
