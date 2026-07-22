@@ -1,7 +1,7 @@
 # K-Pick Trading Corp — Complete Website Content Reference
 
-> **Status:** Pre-deployment. Live site not yet published. This document is the authoritative content reference for the full website.
-> **Last updated:** June 2026
+> **Status:** Deployed — canonical domain `https://kpicktradingcorp.com` (GitHub Pages; sitemap.xml and robots.txt in place; quote backend deployable to Railway). This document is the authoritative content reference for the full website.
+> **Last updated:** 2026-07-21
 > **Local path:** `c:\Internal ERP-lite system\WebDraft\`
 
 ---
@@ -13,7 +13,8 @@
 **Founded:** 2020, Manila, Philippines  
 **Address:** Dakota Building, 555 Gen Malvar St. cor Adriatico St., Brgy. 698 Zone 076 Malate, Manila  
 **Phone:** +639173158420  
-**Email:** sales@kpicktradingcorp.com  
+**Email:** sales@kpicktradingcorp.com (primary)  
+**Company mailboxes (July 2026):** sales@ (quotes/orders) · support@ (product inquiries, contact form) · compliance@ (regulatory/documentation) · accounts@ (billing) — all @kpicktradingcorp.com  
 **Tagline:** Premium Korean Medical Supplies, Trusted Worldwide.
 
 **What they do:** K-Pick Trading Corp imports and distributes certified Korean medical devices to hospitals, clinics, pharmacies, resellers, and healthcare procurement teams across the Philippines. They hold exclusive Philippine distribution rights for Sungshim, EROP, and Insufine.
@@ -36,6 +37,9 @@
 | Insufine | insufine.html | Insufine insulin pen needle page |
 | Contact | contact.htm | Contact form and company contact details |
 | Generate Quote/PO | request.htm | Online quote and purchase order generation tool |
+| Learning Centre | learn.html | Interactive infographics hub — 5 device-education modules (see section below) |
+| Privacy Policy | privacy.htm | Privacy policy (linked from the footer of every page) |
+| Quote Admin | request-admin.htm | Internal admin page for the quote tool (not linked in public navigation) |
 | Sungshim — Insulin Syringe | sungshim-insulin-syringe.html | Product detail page |
 | Sungshim — LDS Syringe | sungshim-lds-syringe.html | Product detail page |
 | Sungshim — Single-Use Syringe | sungshim-single-use-syringe.html | Product detail page |
@@ -378,6 +382,23 @@ K-Pick Trading Corp is the exclusive Philippine distributor of Insufine, supplyi
 
 ---
 
+## Learning Centre (learn.html)
+
+Standalone interactive infographics hub — one page, brand-agnostic, built July 2026 for the mid-August 2026 exhibition (reachable from the site nav and intended for a QR code at the booth).
+
+**Five interactive modules, each teaching one decision:**
+1. **Insulin syringe dose explorer** — `script/insulin-syringe-explorer.js`
+2. **Single-use capacity comparator** (1–60 mL, luer slip vs lock) — `script/sungshim-modules.js`
+3. **LDS dead-space simulator** (doses per vial) — `script/sungshim-modules.js`
+4. **Pen needle depth selector** (15 SKUs vs skin layers; labelled as the Sungshim range, with a note that pen needles come from both Sungshim and Insufine) — `script/sungshim-modules.js`
+5. **Filter syringe / filter needle particle demo** — `script/sungshim-filter.js`
+
+Modules 1–4 are also embedded in their individual Sungshim product pages (each module self-activates on a `data-sx-*` attribute and no-ops when absent, so one script loads anywhere). The filter syringe/needle module is included deliberately even though **K-Pick does not currently carry those products** — the page carries a visible note saying so.
+
+Design notes: premium restyle (2026-07-20) with layered hero, sticky scroll-spy section nav (`script/learn-nav.js`; the nav needs its 82px top offset because the site navbar is fixed), and scroll-reveal sections. Module card elevation is scoped to `.learn-page` on purpose — the same modules keep a flatter inline look on product pages.
+
+---
+
 ## Navigation Structure
 
 All pages share the same navbar with the following links:
@@ -388,8 +409,11 @@ All pages share the same navbar with the following links:
   - Insufine — Insulin Pen Needles → insufine.html
   - View All Brands → index.html#TieUps
 - **About Us** → index.html#about
+- **Learn** → learn.html
 - **Generate Quote / PO** → request.htm
 - **Contact Us** → contact.htm
+
+Every page footer links to the **Privacy Policy** (privacy.htm).
 
 ---
 
@@ -556,3 +580,23 @@ All pages share the same navbar with the following links:
 - Dealer/reseller partnership inquiries accepted.
 - Certificate documents (DTI, SEC, FDA LTO) available upon formal request.
 - K-Pick certificate placeholder is present on the website pending document upload.
+- **Sungshim is the flagship brand.** The homepage hero background is deliberately a Sungshim syringe photo even though the headline covers all three brands (management-confirmed 2026-07-20; do not change). In the Big-3 hero cards, Sungshim must never be visually outweighed by EROP or Insufine — logo sizes are tuned by apparent mass, not equal pixel height.
+- **Insufine claim boundaries:** all specs must trace to the Tae-Chang Industrial catalogue or the July 2026 verified brief. Do NOT claim for Insufine: EO sterilization, shelf life, named pen brand compatibility, MFDS approval numbers, or Philippine FDA registration of Insufine specifically.
+- ⚠️ `img/ForRev.png` must never be published — its rendered box print shows incorrect specs.
+
+### Quote / PO Tool (request.htm)
+
+- Node.js backend (SQLite product DB) with PDF output on K-Pick letterhead; proforma invoice layout with carton discounts applied per matching product and base unit price shown for discounted items.
+- Deployable to Railway; admin page at request-admin.htm. The admin password comes from the `KPICK_ADMIN_PASSWORD` environment variable (hardcoded password removed, July 2026).
+- Product ordering in the tool was fixed against the live API (2026-07-20), and Insufine seed categories align with the inventory sheet.
+
+### SEO / Deployment
+
+- Canonical URLs, robots.txt, and sitemap.xml all point at `https://kpicktradingcorp.com`.
+- SEO hardening pass completed July 2026 alongside the move of contact addresses to company mailboxes.
+
+### Open Items
+
+1. **Insufine logo** — no official asset yet; the site uses styled text "INSUFiNE". Brand assets requested from Tae-Chang.
+2. **Insufine quote-tool SKUs** (INS-PN-*) are seeded with NULL unit price, 0 stock, 0 carton discount — team must set real prices, stock, and discount policy.
+3. **K-Pick certificate document** still pending upload (placeholder live).
