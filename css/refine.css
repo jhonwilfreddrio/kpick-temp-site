@@ -53,7 +53,10 @@
 /* ---------------------------------------------------------------------------
    1. Global rendering — crisp type is the whole premium game
    ------------------------------------------------------------------------- */
-html { -webkit-text-size-adjust: 100%; }
+html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden; /* clip the ~scrollbar-width overflow from full-bleed bands (§11) */
+}
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -212,11 +215,19 @@ h1, h2, h3, .dashboardarea h1 {
 }
 
 /* ---------------------------------------------------------------------------
-   11. About card — raised neumorphism ("bump", not pressed "hole")
-       Neumorphism only reads when the card and the surface behind it share
-       one colour, so we tint the whole .about band to a soft neutral and
-       extrude the card from it: a light top-left highlight + a dark
-       bottom-right shadow = raised. (inset shadows would make it a hole.)
+   11. Neumorphism ("bump", never a pressed "hole")
+       Neumorphism only reads when the card and the surface *behind* it share
+       one colour, so the whole band is tinted and small cards extrude from
+       it (light top-left highlight + dark bottom-right shadow = raised).
+       inset shadows would make a hole — we never use inset here.
+
+       Sides fix: .about / .recognition-section live inside .body (margin
+       0 15%/8%/5%), so their tint used to float mid-page with white gutters
+       and the card's highlight fell on white (killing the bump). We full-
+       bleed the band to the viewport edges and restore the content column
+       with symmetric padding — both are breakpoint-proof because they track
+       the same 50%/50vw delta as .body's own margin. <body> already clips
+       overflow-x, so no horizontal scrollbar appears.
    ------------------------------------------------------------------------- */
 :root {
     --rf-neu-surface: #e7ecf3;         /* soft cool-grey surface */
@@ -224,46 +235,69 @@ h1, h2, h3, .dashboardarea h1 {
     --rf-neu-dark:    rgba(15, 32, 73, 0.16);    /* bottom-right shadow */
 }
 
-/* Band behind the card must match the card colour for the bump to show */
-.about {
+/* Full-bleed grey bands (edge-to-edge tint, content restored to the column) */
+.about,
+.recognition-section {
     background: var(--rf-neu-surface);
+    margin-left:  calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left:  calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
 }
 
+/* Outer About wrapper is now flat — the band supplies the surface, and the
+   raised bumps live only on appropriately-sized child cards (no card-in-card
+   rectangle, which is what looked off at the sides). */
 .about-container {
-    background: var(--rf-neu-surface);
-    border: 1px solid rgba(255, 255, 255, 0.55); /* soft top edge, no hard line */
-    border-radius: 22px;
-    /* Raised: highlight up-left, shadow down-right */
-    box-shadow:
-        -10px -10px 22px var(--rf-neu-light),
-         12px  12px 28px var(--rf-neu-dark);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-/* Inner highlight cards get a subtle matching lift so they read as part of
-   the same soft, extruded surface (still additive, still reversible). */
+/* Reusable raised bumps ------------------------------------------------------ */
 .about-highlights {
     border-top: 0;
     border-bottom: 0;
     gap: 14px;
     margin-top: 28px;
 }
+.about-highlights div,
+.recognition-card {
+    background: var(--rf-neu-surface);
+    border: 0;
+    box-shadow:
+        -6px -6px 14px var(--rf-neu-light),
+         7px  7px 16px var(--rf-neu-dark);
+}
 .about-highlights div {
     padding: 16px 18px;
     border-bottom: 0;
     border-radius: 14px;
-    background: var(--rf-neu-surface);
-    box-shadow:
-        -5px -5px 12px var(--rf-neu-light),
-         6px  6px 14px var(--rf-neu-dark);
 }
 .about-highlights div:last-child { border-bottom: 0; }
 
-/* Keep the product image consistent with the soft surface */
 .about-image img {
     border-radius: 18px;
     box-shadow:
         -8px -8px 18px var(--rf-neu-light),
          10px 10px 24px var(--rf-neu-dark);
+}
+
+/* Recognition cards: drop the multi-colour top-border "AI-generic" look and
+   the hard 1px outline — extrude them as soft bumps instead. */
+.recognition-section { background: var(--rf-neu-surface); }
+.recognition-card {
+    border-radius: 16px;
+}
+.recognition-card--journal,
+.recognition-card--review,
+.recognition-card--global { border-top: 0; }
+.recognition-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        -8px -8px 18px var(--rf-neu-light),
+         11px 11px 24px var(--rf-neu-dark);
 }
 
 /* ---------------------------------------------------------------------------
