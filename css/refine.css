@@ -208,11 +208,66 @@ h1, h2, h3, .dashboardarea h1 {
 .trust-bar__item {
     letter-spacing: 0.06em;
     font-weight: 600;
-    color: var(--rf-text-soft);
+    color: #ffffff;
 }
 
 /* ---------------------------------------------------------------------------
-   10. Motion restraint — honour reduced-motion (medical accessibility)
+   11. About card — raised neumorphism ("bump", not pressed "hole")
+       Neumorphism only reads when the card and the surface behind it share
+       one colour, so we tint the whole .about band to a soft neutral and
+       extrude the card from it: a light top-left highlight + a dark
+       bottom-right shadow = raised. (inset shadows would make it a hole.)
+   ------------------------------------------------------------------------- */
+:root {
+    --rf-neu-surface: #e7ecf3;         /* soft cool-grey surface */
+    --rf-neu-light:   rgba(255, 255, 255, 0.92); /* top-left highlight */
+    --rf-neu-dark:    rgba(15, 32, 73, 0.16);    /* bottom-right shadow */
+}
+
+/* Band behind the card must match the card colour for the bump to show */
+.about {
+    background: var(--rf-neu-surface);
+}
+
+.about-container {
+    background: var(--rf-neu-surface);
+    border: 1px solid rgba(255, 255, 255, 0.55); /* soft top edge, no hard line */
+    border-radius: 22px;
+    /* Raised: highlight up-left, shadow down-right */
+    box-shadow:
+        -10px -10px 22px var(--rf-neu-light),
+         12px  12px 28px var(--rf-neu-dark);
+}
+
+/* Inner highlight cards get a subtle matching lift so they read as part of
+   the same soft, extruded surface (still additive, still reversible). */
+.about-highlights {
+    border-top: 0;
+    border-bottom: 0;
+    gap: 14px;
+    margin-top: 28px;
+}
+.about-highlights div {
+    padding: 16px 18px;
+    border-bottom: 0;
+    border-radius: 14px;
+    background: var(--rf-neu-surface);
+    box-shadow:
+        -5px -5px 12px var(--rf-neu-light),
+         6px  6px 14px var(--rf-neu-dark);
+}
+.about-highlights div:last-child { border-bottom: 0; }
+
+/* Keep the product image consistent with the soft surface */
+.about-image img {
+    border-radius: 18px;
+    box-shadow:
+        -8px -8px 18px var(--rf-neu-light),
+         10px 10px 24px var(--rf-neu-dark);
+}
+
+/* ---------------------------------------------------------------------------
+   12. Motion restraint — honour reduced-motion (medical accessibility)
    ------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
     * {
