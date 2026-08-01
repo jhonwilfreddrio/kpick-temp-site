@@ -398,6 +398,9 @@ h1, h2, h3, .dashboardarea h1 {
 /* Partner-section CTA: rounded edges */
 .partner-section__button { border-radius: 999px; }
 
+/* Header logo centered (the E-MAIL line that used to sit opposite it is gone) */
+.header-container { justify-content: center; }
+
 /* ---------------------------------------------------------------------------
    12. Motion restraint — honour reduced-motion (medical accessibility)
    ------------------------------------------------------------------------- */
