@@ -237,6 +237,7 @@ h1, h2, h3, .dashboardarea h1 {
 
 /* Full-bleed grey bands (edge-to-edge tint, content restored to the column) */
 .about,
+.brand-stories,
 .recognition-section {
     background: var(--rf-neu-surface);
     margin-left:  calc(50% - 50vw);
@@ -263,7 +264,8 @@ h1, h2, h3, .dashboardarea h1 {
     margin-top: 28px;
 }
 .about-highlights div,
-.recognition-card {
+.recognition-card,
+.story-card {
     background: var(--rf-neu-surface);
     border: 0;
     box-shadow:
@@ -294,6 +296,18 @@ h1, h2, h3, .dashboardarea h1 {
 .recognition-card--review,
 .recognition-card--global { border-top: 0; }
 .recognition-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        -8px -8px 18px var(--rf-neu-light),
+         11px 11px 24px var(--rf-neu-dark);
+}
+
+/* "About Our Partners" story cards: same treatment — drop the coloured
+   top accent bar + 1px outline, extrude as soft bumps. Brand colour stays
+   in the category pill and the CTA. */
+.story-card { border-radius: 16px; }
+.story-card__accent { display: none; }
+.story-card:hover {
     transform: translateY(-2px);
     box-shadow:
         -8px -8px 18px var(--rf-neu-light),
