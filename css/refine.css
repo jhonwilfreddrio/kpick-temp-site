@@ -388,6 +388,17 @@ h1, h2, h3, .dashboardarea h1 {
 .brand-cta .brand-cta__trust { margin-top: 32px; }
 
 /* ---------------------------------------------------------------------------
+   11e. Small touch-ups
+   ------------------------------------------------------------------------- */
+/* Company-history timeline year titles: 900 was heavy — semibold reads
+   cleaner without going thin. Scoped to timeline only (the base selector is
+   shared with .service-grid / .faq-grid h3, which we leave untouched). */
+.timeline-grid h3 { font-weight: 650; }
+
+/* Partner-section CTA: rounded edges */
+.partner-section__button { border-radius: 999px; }
+
+/* ---------------------------------------------------------------------------
    12. Motion restraint — honour reduced-motion (medical accessibility)
    ------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
