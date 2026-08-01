@@ -1,0 +1,224 @@
+/* ============================================================================
+   refine.css — Premium Korean Minimal theme layer for K-Pick Trading Corp
+   ----------------------------------------------------------------------------
+   Loaded AFTER style.css. Purely additive / refinement — no layout rewrites.
+   Direction (per the dev.to style ranking, tuned for medical B2B):
+     Base    = Minimalist  → whitespace, quiet type, high legibility
+     Accent  = Frost UI     → the existing frosted pill nav, kept & refined
+     Crisp   = Neo-brutalist→ hairline borders + confident CTAs for trust
+     Avoided = Neumorphism / Claymorphism / heavy Glassmorphism
+   Goal: clean, professional, neat, premium — Korean brand restraint.
+   Safe to delete this file + its <link> to fully revert.
+   ========================================================================== */
+
+:root {
+    /* ---- Ink / navy scale (mapped from existing brand navies) ---- */
+    --rf-ink-900: #041a4f;   /* deepest brand navy */
+    --rf-ink-800: #0a2559;
+    --rf-ink-700: #102a67;
+    --rf-ink-600: #0f2d6b;
+    --rf-ink-500: #0f4ca3;   /* mid brand blue */
+
+    /* ---- Single disciplined accent (teal) ---- */
+    --rf-accent: #0e7c86;
+    --rf-accent-soft: #e6f4f5;
+
+    /* ---- Warm-neutral text + surfaces (premium, not cold) ---- */
+    --rf-text: #1a2438;      /* body text on light */
+    --rf-text-soft: #55607a; /* secondary text */
+    --rf-hairline: #e4e8f0;  /* hairline borders */
+    --rf-hairline-strong: #d3d9e6;
+    --rf-surface: #ffffff;
+    --rf-surface-sub: #f6f8fb;
+
+    /* ---- Radii — tight & consistent (neat, not bubbly) ---- */
+    --rf-r-sm: 8px;
+    --rf-r-md: 12px;
+    --rf-r-lg: 16px;
+
+    /* ---- Elevation — layered soft shadows (premium depth, low opacity) ---- */
+    --rf-shadow-sm: 0 1px 2px rgba(4, 26, 79, 0.06),
+                    0 2px 6px rgba(4, 26, 79, 0.05);
+    --rf-shadow-md: 0 4px 10px rgba(4, 26, 79, 0.06),
+                    0 12px 28px rgba(4, 26, 79, 0.08);
+    --rf-shadow-lg: 0 10px 24px rgba(4, 26, 79, 0.08),
+                    0 28px 60px rgba(4, 26, 79, 0.12);
+
+    /* ---- Motion — one restrained easing ---- */
+    --rf-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --rf-fast: 0.18s;
+    --rf-med: 0.32s;
+}
+
+/* ---------------------------------------------------------------------------
+   1. Global rendering — crisp type is the whole premium game
+   ------------------------------------------------------------------------- */
+html { -webkit-text-size-adjust: 100%; }
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    color: var(--rf-text);
+}
+
+/* Optical tracking + weight discipline on headings.
+   The base sets h1 to weight 900 / letter-spacing 0 which reads heavy;
+   premium branding wants a touch lighter with negative tracking. */
+h1, h2, h3, .dashboardarea h1 {
+    letter-spacing: -0.02em;
+    font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
+}
+
+/* ---------------------------------------------------------------------------
+   2. Hero headline — from condensed/heavy to confident/refined
+   ------------------------------------------------------------------------- */
+.dashboardarea h1 {
+    font-weight: 760;
+    letter-spacing: -0.025em;
+    line-height: 1.03;
+    text-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+}
+.dashboardarea__lede,
+.dashboardarea p {
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.7;
+}
+
+/* Eyebrow — quiet, spaced, single accent */
+.dashboardarea__eyebrow,
+.section-eyebrow {
+    letter-spacing: 0.2em;
+    font-weight: 650;
+    text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+   3. Section headings — refine the shouty uppercase H2s
+   ------------------------------------------------------------------------- */
+.brand-spotlights__header h2,
+.section-eyebrow + h2 {
+    letter-spacing: -0.01em;
+    font-weight: 720;
+}
+
+/* Generous, consistent vertical rhythm between major bands */
+.brand-spotlights { padding-top: clamp(56px, 7vw, 104px); padding-bottom: clamp(56px, 7vw, 104px); }
+
+/* ---------------------------------------------------------------------------
+   4. Buttons — neat radius, confident (not shouty) weight, premium lift
+      Primary  = solid, high-trust      Secondary = hairline / frost
+   ------------------------------------------------------------------------- */
+.dashboardarea__button {
+    border-radius: var(--rf-r-sm);
+    font-weight: 640;
+    letter-spacing: 0.01em;
+    font-size: 14.5px;
+    padding: 0 26px;
+    min-height: 50px;
+    transition: transform var(--rf-fast) var(--rf-ease),
+                box-shadow var(--rf-med) var(--rf-ease),
+                background-color var(--rf-med) var(--rf-ease),
+                color var(--rf-med) var(--rf-ease);
+}
+.dashboardarea__button--primary {
+    background: #ffffff;
+    color: var(--rf-ink-600);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+.dashboardarea__button--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+}
+.dashboardarea__button--secondary {
+    border-color: rgba(255, 255, 255, 0.38);
+    background: rgba(255, 255, 255, 0.06);
+}
+.dashboardarea__button--secondary:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------------------
+   5. Nav pill — keep the frost, refine to a cleaner hairline & shadow
+   ------------------------------------------------------------------------- */
+.navbar {
+    border: 1px solid var(--rf-hairline);
+    box-shadow: var(--rf-shadow-md);
+    background: rgba(255, 255, 255, 0.86);
+}
+.navbar.navbar-scrolled {
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--rf-shadow-lg);
+}
+.navigation a {
+    letter-spacing: 0.005em;
+    transition: color var(--rf-fast) var(--rf-ease);
+}
+
+/* ---------------------------------------------------------------------------
+   6. Hero brand cards — hairline + soft depth, refined hover
+   ------------------------------------------------------------------------- */
+.hero-brand {
+    border-radius: var(--rf-r-md);
+    transition: transform var(--rf-med) var(--rf-ease),
+                box-shadow var(--rf-med) var(--rf-ease),
+                border-color var(--rf-med) var(--rf-ease);
+}
+.hero-brand:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--rf-shadow-md);
+}
+
+/* ---------------------------------------------------------------------------
+   7. Brand spotlight blocks + product tags — neat borders, quiet surfaces
+   ------------------------------------------------------------------------- */
+.brand-spotlight__product-tag {
+    border: 1px solid var(--rf-hairline-strong);
+    border-radius: 999px;
+    background: var(--rf-surface-sub);
+    color: var(--rf-text-soft);
+    font-weight: 550;
+    letter-spacing: 0.005em;
+    transition: border-color var(--rf-fast) var(--rf-ease),
+                color var(--rf-fast) var(--rf-ease);
+}
+.brand-spotlight__product-tag:hover {
+    border-color: var(--rf-accent);
+    color: var(--rf-accent);
+}
+.brand-spotlight__cta {
+    font-weight: 640;
+    letter-spacing: 0.01em;
+}
+
+/* ---------------------------------------------------------------------------
+   8. Certification badges — crisp, trust-signalling (neo-brutalist restraint)
+   ------------------------------------------------------------------------- */
+.cert-badge {
+    border-radius: var(--rf-r-sm);
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    box-shadow: var(--rf-shadow-sm);
+}
+
+/* ---------------------------------------------------------------------------
+   9. Trust bar — quiet, evenly-spaced credential row
+   ------------------------------------------------------------------------- */
+.trust-bar__item {
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    color: var(--rf-text-soft);
+}
+
+/* ---------------------------------------------------------------------------
+   10. Motion restraint — honour reduced-motion (medical accessibility)
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
