@@ -295,6 +295,11 @@ h1, h2, h3, .dashboardarea h1 {
 .recognition-card--journal,
 .recognition-card--review,
 .recognition-card--global { border-top: 0; }
+/* 3 cards (odd): only ever 1×3 (wide) or 3×1 (narrow), never a 2 + 1 orphan. */
+.recognition-grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) {
+    .recognition-grid { grid-template-columns: 1fr; }
+}
 .recognition-card:hover {
     transform: translateY(-2px);
     box-shadow:
@@ -313,6 +318,74 @@ h1, h2, h3, .dashboardarea h1 {
         -8px -8px 18px var(--rf-neu-light),
          11px 11px 24px var(--rf-neu-dark);
 }
+
+/* Story-card grid: only ever 1×4 (wide), 2×2 (medium) or 4×1 (narrow) —
+   the base auto-fit produced an ugly 3 + 1 orphan row. */
+.brand-stories__grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) {
+    .brand-stories__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .brand-stories__grid { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------------------
+   11b. Navy-capped neumorphic panels (ph-market-strip, learn-outro)
+        A dark-navy bar keeps its brand colour across the TOP; the body below
+        becomes a grey neumorphic raised bump. Body text + buttons recoloured
+        to navy/grey so they stay legible on the light surface.
+   ------------------------------------------------------------------------- */
+.ph-market-strip,
+.learn-outro__panel {
+    background: linear-gradient(#041a4f 0, #041a4f 16px, var(--rf-neu-surface) 16px);
+    border: 0;
+    box-shadow:
+        -8px -8px 18px var(--rf-neu-light),
+         10px 10px 24px var(--rf-neu-dark);
+}
+
+/* ph-market-strip: stat text on grey */
+.ph-market-strip__stat { border-right-color: rgba(15, 32, 73, 0.12); }
+.ph-market-strip__stat strong { color: var(--rf-ink-900); }
+.ph-market-strip__stat span   { color: var(--rf-text-soft); }
+
+/* learn-outro: drop the dark-bg glow, recolour content + buttons for grey */
+.learn-outro__panel::before { display: none; }
+.learn-outro__eyebrow { color: var(--rf-ink-500); }
+.learn-outro h2       { color: var(--rf-ink-900); }
+.learn-outro p        { color: var(--rf-text-soft); }
+.learn-outro__trust   { color: var(--rf-text-soft) !important; }
+.learn-outro .brand-cta__btn--primary {
+    background: var(--rf-ink-900);
+    color: #ffffff;
+}
+.learn-outro .brand-cta__btn--primary:hover { background: var(--rf-ink-700); }
+.learn-outro .brand-cta__btn--secondary {
+    background: transparent;
+    color: var(--rf-ink-700);
+    border-color: rgba(15, 32, 73, 0.30);
+}
+.learn-outro .brand-cta__btn--secondary:hover { background: rgba(15, 32, 73, 0.06); }
+
+/* ---------------------------------------------------------------------------
+   11c. EROP research citation → soft neumorphic bump
+        (green icon / label / link kept for brand identity)
+   ------------------------------------------------------------------------- */
+.erop-research-cite {
+    background: var(--rf-neu-surface);
+    border: 0;
+    border-radius: 14px;
+    box-shadow:
+        -6px -6px 14px var(--rf-neu-light),
+         7px  7px 16px var(--rf-neu-dark);
+}
+
+/* ---------------------------------------------------------------------------
+   11d. Brand CTA — breathing room between the buttons and the trust line.
+        Needs .brand-cta prefix to outrank `.brand-cta p { margin: 0 0 28px }`
+        (0,1,1), which was pinning margin-top to 0 (the "sticking").
+   ------------------------------------------------------------------------- */
+.brand-cta .brand-cta__trust { margin-top: 32px; }
 
 /* ---------------------------------------------------------------------------
    12. Motion restraint — honour reduced-motion (medical accessibility)

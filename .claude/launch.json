@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "webdraft",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["backend/server.mjs"],
+      "port": 8000
+    }
+  ]
+}
