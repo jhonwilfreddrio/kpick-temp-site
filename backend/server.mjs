@@ -6,7 +6,7 @@ import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import PDFDocument from 'pdfkit';
-import { isMailerConfigured, sendLeadNotification, sendAutoResponder } from './mailer.mjs';
+import { isMailerConfigured, sendLeadNotification, sendAutoResponder, sendMail } from './mailer.mjs';
 
 const backendDir = fileURLToPath(new URL('.', import.meta.url));
 const rootDir = resolve(backendDir, '..');
@@ -1475,20 +1475,14 @@ function deleteQuote(id, payload, actor) {
     };
 }
 
-function sendQuotePdf(response, quote) {
+function buildQuotePdf(quote) {
+    return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ margin: 32, size: 'A4' });
     const chunks = [];
 
     doc.on('data', (chunk) => chunks.push(chunk));
-    doc.on('end', () => {
-        const pdf = Buffer.concat(chunks);
-        response.writeHead(200, {
-            'Content-Type': 'application/pdf',
-            'Content-Disposition': `attachment; filename="${quote.request_number}.pdf"`,
-            'Content-Length': pdf.length
-        });
-        response.end(pdf);
-    });
+    doc.on('error', reject);
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
 
     const pageWidth = doc.page.width;
     const pageHeight = doc.page.height;
@@ -1705,6 +1699,64 @@ function sendQuotePdf(response, quote) {
         .fontSize(7)
         .text('K-PICK TRADING CORP. | Korean Medical Products & Distribution', 0, footerY, { align: 'center' });
     doc.end();
+    });
+}
+
+async function sendQuotePdf(response, quote) {
+    const pdf = await buildQuotePdf(quote);
+    response.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${quote.request_number}.pdf"`,
+        'Content-Length': pdf.length
+    });
+    response.end(pdf);
+}
+
+const SALES_INBOX = process.env.SALES_INBOX || 'sales@kpicktradingcorp.com';
+
+// Fire-and-forget: quotation emails must never delay or fail quote creation.
+async function sendQuoteEmails(quote) {
+    if (!isMailerConfigured()) {
+        return;
+    }
+    let attachments = [];
+    try {
+        const pdf = await buildQuotePdf(quote);
+        attachments = [{ filename: `${quote.request_number}.pdf`, content: pdf }];
+    } catch (error) {
+        console.error(`Quote PDF for email failed (${quote.request_number}):`, error.message);
+    }
+    const customer = quote.customer || {};
+    const totals = quote.totals || {};
+    const itemLines = (quote.items || [])
+        .map((item) => `- ${item.name} x ${item.quantity} (${money(item.line_total)})`)
+        .join('\n');
+    try {
+        await sendMail({
+            to: SALES_INBOX,
+            fromName: 'K-Pick Website',
+            replyTo: customer.email || undefined,
+            subject: `New Quote Request ${quote.request_number} — ${customer.company}`,
+            text: `New quote request from the website.\n\nRequest No.: ${quote.request_number}\nCompany: ${customer.company}\nContact: ${customer.contact}\nMobile: ${customer.mobile}\nEmail: ${customer.email || '—'}\nAddress: ${customer.address || '—'}\nNotes: ${customer.notes || '—'}\n\nItems:\n${itemLines}\n\nGrand Total: ${money(totals.grand_total)}\n\nThe formal quotation PDF is attached. Manage this request in request-admin.htm.`,
+            attachments
+        });
+    } catch (error) {
+        console.error(`Sales quote email failed (${quote.request_number}):`, error.message);
+    }
+    if (customer.email) {
+        try {
+            await sendMail({
+                to: customer.email,
+                fromName: 'K-Pick Trading Corp',
+                replyTo: SALES_INBOX,
+                subject: `Your K-Pick Quotation — ${quote.request_number}`,
+                text: `Dear ${customer.contact},\n\nThank you for your quotation request. Your formal K-Pick quotation ${quote.request_number} is attached as a PDF for your procurement records.\n\nA senior accounts director will follow up within 1 business day to confirm availability, delivery terms, and any documentation your organization requires.\n\nShould your timeline require immediate attention:\nPhone / Viber: +63 917 315 8420\nDirect inquiries: sales@kpicktradingcorp.com\n\nK-PICK TRADING CORP\nDakota Building, 555 Gen. Malvar St. cor. Adriatico St.,\nBrgy. 698 Zone 076, Malate, Manila, Philippines\nExclusive Philippine Distributor — Sungshim · EROP · Insufine\nBuilding Partnerships. Delivering Quality. Improving Lives.`,
+                attachments
+            });
+        } catch (error) {
+            console.error(`Customer quote email failed (${quote.request_number}):`, error.message);
+        }
+    }
 }
 
 async function readLeadPayload(request) {
@@ -1921,7 +1973,7 @@ async function handleRequest(request, response) {
             return;
         }
 
-        sendQuotePdf(response, quote);
+        await sendQuotePdf(response, quote);
         return;
     }
 
@@ -1929,6 +1981,9 @@ async function handleRequest(request, response) {
         try {
             const payload = await getJsonBody(request);
             const quote = createQuote(payload);
+            sendQuoteEmails(quote).catch((error) => {
+                console.error(`Quote emails failed (${quote.request_number}):`, error.message);
+            });
             sendJson(response, 201, { quote });
         } catch (error) {
             sendJson(response, 400, { error: error.message || 'Invalid request.' });

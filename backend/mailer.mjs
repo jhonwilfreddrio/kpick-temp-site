@@ -43,6 +43,18 @@ function escapeHtml(value) {
         .replaceAll('"', '&quot;');
 }
 
+export async function sendMail({ to, subject, text, html, replyTo, attachments, fromName }) {
+    await getTransporter().sendMail({
+        from: `"${fromName || 'K-Pick Trading Corp'}" <${SMTP_USER}>`,
+        to,
+        replyTo: replyTo || undefined,
+        subject,
+        text,
+        html: html || undefined,
+        attachments: attachments && attachments.length ? attachments : undefined
+    });
+}
+
 export async function sendLeadNotification({ subject, replyTo, lines }) {
     const text = lines.map(([label, value]) => `${label}: ${value}`).join('\n');
     const rows = lines
