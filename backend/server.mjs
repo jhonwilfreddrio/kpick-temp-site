@@ -1664,13 +1664,12 @@ function buildQuotePdf(quote) {
     const closingY = shortQuote ? Math.min(Math.max(y, 545), 570) : y;
     const buyerY = closingY + 44;
     const qrY = shortQuote ? 670 : buyerY + 116;
-    const signatureStartX = left + 220;
     const signatureWidth = 105;
     const signatories = [
-        ['Ays San Antonio', 'Medical Representative'],
         ['Ian Jones Duelo', 'General Manager'],
         ['Youn DongHo', 'CEO']
     ];
+    const signatureStartX = right - (signatories.length * signatureWidth);
 
     doc.font('Helvetica-Bold').fontSize(8).fillColor('#000000').text('Accepted & Confirmed by ;', left, closingY);
     doc.text('K-PICK TRADING CORP.', signatureStartX, closingY, { width: right - signatureStartX, align: 'center', underline: true });
