@@ -555,3 +555,40 @@ h1, h2, h3, .dashboardarea h1 {
         font-size: 12px;
     }
 }
+
+/* Verified-documents block in the homepage certifications section —
+   replaces the dashed "documents will be displayed here" placeholder. */
+.kpick-cert-docs {
+    background: var(--kp-surface, #ffffff);
+    border: 1px solid var(--kp-border, #E2E6EE);
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+}
+.kpick-cert-docs strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 620;
+    color: var(--kp-text, #10182B);
+    margin-bottom: 12px;
+}
+.kpick-cert-docs ul {
+    list-style: none;
+    margin: 0 0 14px;
+    padding: 0;
+}
+.kpick-cert-docs li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--kp-border, #E2E6EE);
+    font-size: 14px;
+    line-height: 1.5;
+}
+.kpick-cert-docs li:last-child { border-bottom: none; }
+.kpick-cert-docs li a {
+    color: var(--kp-accent, #0B3D91);
+    font-weight: 600;
+    text-decoration: none;
+}
+.kpick-cert-docs li a:hover { color: var(--kp-accent-hover, #082C6B); text-decoration: underline; }
+.kpick-cert-docs li span { color: var(--kp-text-2, #4B5468); font-size: 12.5px; margin-left: 8px; }
+.kpick-cert-docs > p { font-size: 12.5px; color: var(--kp-text-2, #4B5468); line-height: 1.6; margin: 0; }
+.kpick-cert-docs > p a { color: var(--kp-accent, #0B3D91); font-weight: 600; }
