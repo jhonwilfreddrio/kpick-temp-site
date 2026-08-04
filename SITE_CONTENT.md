@@ -477,7 +477,7 @@ Every page footer links to the **Privacy Policy** (privacy.htm).
 | Polybag | 1 mL | 30G × 13 mm |
 | Polybag | 1 mL | 29G × 13 mm |
 
-**Shelf life:** 3 years from manufacture  
+**Shelf life:** 5 years from the date of manufacture  
 **Storage:** Room temperature; avoid sunlight, heat, humidity  
 **Intended use:** Insulin administration for daily diabetes therapy  
 **Warning:** Using incorrect syringe for insulin concentration or dosage may cause hypoglycemia
@@ -507,7 +507,7 @@ Every page footer links to the **Privacy Policy** (privacy.htm).
 | Luer Lock | 5 mL | 21G × 32 mm | 18 boxes/carton |
 | Luer Lock | 10 mL | 23G × 25 mm | 12 boxes/carton |
 
-**Shelf life:** 3 years from manufacture  
+**Shelf life:** 5 years from the date of manufacture  
 **Storage:** Room temperature; avoid sunlight, heat, humidity  
 **Intended use:** Single-use medication administration and general clinical injection
 
@@ -528,7 +528,7 @@ Every page footer links to the **Privacy Policy** (privacy.htm).
 |---|---|---|
 | 1 mL LDS | 23G × 25 mm | 36 boxes/carton |
 
-**Shelf life:** 3 years from manufacture  
+**Shelf life:** 5 years from the date of manufacture  
 **Storage:** Room temperature; avoid sunlight, heat, humidity  
 **Intended use:** Injections where reduced residual medication and improved dosing accuracy are required  
 **Particularly suited for:** Vaccine administration and applications where medication waste reduction is critical

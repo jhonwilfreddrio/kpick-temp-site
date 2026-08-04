@@ -481,7 +481,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeQuoteModal = () => { if (quoteModal) quoteModal.hidden = true; };
 
     // ── Submit request ─────────────────────────────────────────────────────
+    const PENDING_QUOTE_KEY = 'kpick_pending_quote';
+    const SUBMIT_TIMEOUT_MS = 8000; // user-facing submit — SMX congested wifi budget
+    const RETRY_TIMEOUT_MS  = 6000; // silent background retry — fail fast, don't linger
+
+    let quoteInFlight = false;
+
+    const buildMailtoFallback = () => {
+        const summary = buildSummary();
+        const body = summary.length > 1800 ? `${summary.slice(0, 1800)}\n…` : summary;
+        const subject = encodeURIComponent('K-Pick Quote / PO Request');
+        return `mailto:sales@kpicktradingcorp.com?subject=${subject}&body=${encodeURIComponent(body)}`;
+    };
+
+    const savePendingQuote = (payload) => {
+        try { localStorage.setItem(PENDING_QUOTE_KEY, JSON.stringify(payload)); } catch { /* storage unavailable */ }
+    };
+
+    const clearPendingQuote = () => {
+        try { localStorage.removeItem(PENDING_QUOTE_KEY); } catch { /* storage unavailable */ }
+    };
+
+    // Network/timeout failures (offline, DNS, aborted) vs. a live server that
+    // responded with an error — only the former should trigger the mailto/tel
+    // fallback + local save.
+    const isNetworkFailure = (error) => error instanceof TypeError || error?.name === 'AbortError';
+
+    const postQuotePayload = (payload, timeoutMs = SUBMIT_TIMEOUT_MS) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+        return fetch('/api/quote-requests', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(payload),
+            signal: controller.signal,
+        }).finally(() => clearTimeout(timer));
+    };
+
     const submitQuote = async () => {
+        if (quoteInFlight) return; // guard against double-submit while in flight
+
         const submitBtn  = document.querySelector('[data-submit-quote]');
         const pricing    = calculatePricing();
 
@@ -490,30 +529,57 @@ document.addEventListener('DOMContentLoaded', () => {
         const hasAnyProduct = rows.size > 0 && Array.from(rows.values()).some(r => getRowResolvedItem(r));
         if (!hasAnyProduct) { setCopyStatus('Add at least one product before submitting.'); return; }
 
+        const payload = {
+            customer: getCustomer(),
+            items: pricing.items.map(i => ({ sku: i.sku, quantity: i.quantity })),
+        };
+
+        quoteInFlight = true;
         setCopyStatus('Submitting request...');
-        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting...'; }
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
 
         try {
-            const response = await fetch('/api/quote-requests', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({
-                    customer: getCustomer(),
-                    items: pricing.items.map(i => ({ sku: i.sku, quantity: i.quantity })),
-                }),
-            });
+            const response = await postQuotePayload(payload, SUBMIT_TIMEOUT_MS);
             const result = response.headers.get('content-type')?.includes('application/json')
                 ? await response.json() : {};
             if (!response.ok) throw new Error(result.error || 'Unable to submit request.');
+            clearPendingQuote();
             setCopyStatus(`Request saved: ${result.quote.request_number}`);
             showQuoteModal(result.quote);
         } catch (error) {
-            setCopyStatus(error instanceof TypeError
-                ? 'Backend not running yet. Copy the summary and send it to sales@kpicktradingcorp.com.'
-                : error.message || 'Unable to submit request.');
+            if (isNetworkFailure(error)) {
+                savePendingQuote(payload);
+                const mailtoHref = buildMailtoFallback();
+                if (copyStatus) {
+                    copyStatus.innerHTML = 'Could not reach the server. Your request was saved on this device — '
+                        + `<a href="${esc(mailtoHref)}">email the summary to sales@kpicktradingcorp.com</a> or `
+                        + '<a href="tel:+639173158420">Call or text +63 917 315 8420</a>.';
+                }
+            } else {
+                setCopyStatus(error.message || 'Unable to submit request.');
+            }
         } finally {
+            quoteInFlight = false;
             if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Request'; }
         }
+    };
+
+    // ── Retry a previously failed submission, once, silently ────────────────
+    const retryPendingQuote = async () => {
+        let payload;
+        try {
+            const raw = localStorage.getItem(PENDING_QUOTE_KEY);
+            if (!raw) return;
+            payload = JSON.parse(raw);
+        } catch {
+            clearPendingQuote(); // corrupt payload — discard rather than retry forever
+            return;
+        }
+
+        try {
+            const response = await postQuotePayload(payload, RETRY_TIMEOUT_MS);
+            if (response.ok) clearPendingQuote();
+        } catch { /* still unreachable or timed out — keep the pending payload for next time */ }
     };
 
     // ── Load products from API (overwrites local fallback if available) ─────
@@ -642,4 +708,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Init ───────────────────────────────────────────────────────────────
     syncAddressToggle();
     loadProducts().then(() => createRow());
+    retryPendingQuote();
 });

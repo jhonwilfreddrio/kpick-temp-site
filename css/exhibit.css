@@ -1,0 +1,437 @@
+/* ============================================================================
+   exhibit.css — Standalone stylesheet for the trade-show QR landing page
+   (exhibit.htm). Self-contained: does NOT depend on style.css or refine.css.
+   Tokens per approved blueprint. Mobile-first, single centered column.
+   ========================================================================== */
+
+:root {
+    --ex-bg: #F7F9FC;
+    --ex-surface: #FFFFFF;
+    --ex-text: #10182B;
+    --ex-secondary: #4B5468;
+    --ex-accent: #0B3D91;
+    --ex-accent-hover: #082C6B;
+    --ex-accent-soft: #EAF0FB;
+    --ex-border: #E2E6EE;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    background: var(--ex-bg);
+    color: var(--ex-text);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', 'Malgun Gothic', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+h1, h2, h3 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 0.5em;
+    color: var(--ex-text);
+}
+
+p { margin: 0 0 1em; }
+
+.exhibit-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ---- Top bar ---- */
+.exhibit-topbar {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 18px 20px 0;
+}
+
+.exhibit-wordmark {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ex-accent);
+}
+
+/* ---- Hero ---- */
+.exhibit-hero {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 20px 32px;
+}
+
+.exhibit-hero h1 {
+    font-size: 30px;
+    margin-top: 12px;
+}
+
+.exhibit-hero__sub {
+    color: var(--ex-secondary);
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.exhibit-badges {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.exhibit-badges li {
+    background: var(--ex-accent-soft);
+    color: var(--ex-accent);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+/* ---- Buttons ---- */
+.exhibit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    min-height: 56px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    width: 100%;
+}
+
+.exhibit-btn--primary {
+    background: var(--ex-accent);
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(11, 61, 145, 0.25);
+    transition: background-color 0.1s ease;
+}
+
+.exhibit-btn--primary:hover,
+.exhibit-btn--primary:active {
+    background: var(--ex-accent-hover);
+}
+
+.exhibit-btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.exhibit-btn-row .exhibit-btn { width: auto; flex: 1 1 0; }
+
+.exhibit-btn--secondary {
+    background: var(--ex-surface);
+    color: var(--ex-accent);
+    border-color: var(--ex-border);
+}
+
+.exhibit-btn--secondary:hover,
+.exhibit-btn--secondary:active {
+    background: var(--ex-accent-soft);
+}
+
+/* ---- Form section ---- */
+.exhibit-form-section {
+    background: var(--ex-surface);
+    border-top: 1px solid var(--ex-border);
+    border-bottom: 1px solid var(--ex-border);
+    padding: 32px 0 40px;
+}
+
+.exhibit-form-wrap { max-width: 640px; margin: 0 auto; padding: 0 20px; min-height: 200px; }
+
+.exhibit-form-step {
+    margin-bottom: 26px;
+}
+
+.exhibit-form-step__label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ex-secondary);
+    margin-bottom: 12px;
+}
+
+.exhibit-field {
+    margin-bottom: 14px;
+}
+
+.exhibit-field label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ex-text);
+    margin-bottom: 6px;
+}
+
+.exhibit-field input[type="text"],
+.exhibit-field input[type="tel"],
+.exhibit-field input[type="email"] {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--ex-text);
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border);
+    border-radius: 10px;
+}
+
+.exhibit-field input:focus {
+    outline: none;
+    border-color: var(--ex-accent);
+    box-shadow: 0 0 0 3px var(--ex-accent-soft);
+}
+
+/* honeypot */
+.exhibit-botcheck {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+/* ---- Chip groups (checkboxes) ---- */
+.exhibit-chip-group { margin-bottom: 18px; }
+
+.exhibit-chip-group__label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ex-accent);
+    margin-bottom: 8px;
+}
+
+.exhibit-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.exhibit-chip { position: relative; }
+
+.exhibit-chip input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.exhibit-chip label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ex-text);
+    background: var(--ex-bg);
+    border: 1px solid var(--ex-border);
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease;
+}
+
+.exhibit-chip input:checked + label {
+    background: var(--ex-accent);
+    border-color: var(--ex-accent);
+    color: #ffffff;
+}
+
+.exhibit-chip input:focus-visible + label {
+    outline: 2px solid var(--ex-accent);
+    outline-offset: 2px;
+}
+
+/* ---- Radio pills (Step 3) ---- */
+.exhibit-radio-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exhibit-radio-pill { position: relative; }
+
+.exhibit-radio-pill input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.exhibit-radio-pill label {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ex-text);
+    background: var(--ex-bg);
+    border: 1px solid var(--ex-border);
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease;
+}
+
+.exhibit-radio-pill input:checked + label {
+    background: var(--ex-accent-soft);
+    border-color: var(--ex-accent);
+    color: var(--ex-accent-hover);
+    font-weight: 600;
+}
+
+.exhibit-radio-pill input:focus-visible + label {
+    outline: 2px solid var(--ex-accent);
+    outline-offset: 2px;
+}
+
+.exhibit-submit {
+    margin-top: 8px;
+}
+
+.exhibit-form-status {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--ex-secondary);
+    min-height: 44px;
+}
+
+.exhibit-form-status[data-state="error"] { color: #B3261E; }
+
+/* ---- Confirmation ---- */
+.exhibit-confirm {
+    text-align: center;
+    padding: 12px 0 4px;
+}
+
+.exhibit-confirm h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.exhibit-confirm p {
+    color: var(--ex-secondary);
+}
+
+.exhibit-fallback {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ex-secondary);
+}
+
+.exhibit-fallback a {
+    color: var(--ex-accent);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* ---- Brand cards ---- */
+.exhibit-brands {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 20px 8px;
+}
+
+.exhibit-brand-card {
+    display: block;
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--ex-border);
+}
+
+.exhibit-brand-card:last-child { border-bottom: none; }
+
+.exhibit-brand-card strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ex-text);
+    margin-bottom: 3px;
+}
+
+.exhibit-brand-card span {
+    display: block;
+    font-size: 14px;
+    color: var(--ex-secondary);
+}
+
+/* ---- Trust block ---- */
+.exhibit-trust {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 20px 40px;
+    text-align: center;
+}
+
+.exhibit-trust p {
+    color: var(--ex-secondary);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ---- Product line card CTA ---- */
+.exhibit-linecard {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px 24px;
+}
+
+/* ---- Footer ---- */
+.exhibit-footer {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 20px 40px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--ex-secondary);
+    border-top: 1px solid var(--ex-border);
+}
+
+.exhibit-footer a {
+    color: var(--ex-accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.exhibit-footer p { margin: 0 0 6px; }
+
+/* ---- Dark mode ---- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ex-bg: #0B1220;
+        --ex-surface: #10182B;
+        --ex-text: #F2F5FA;
+        --ex-secondary: #A6AEC2;
+        --ex-accent: #5C8DF0;
+        --ex-accent-hover: #7BA3F5;
+        --ex-accent-soft: #182A4D;
+        --ex-border: #26314A;
+    }
+
+    .exhibit-btn--primary { color: #0B1220; }
+    .exhibit-radio-pill input:checked + label { color: var(--ex-accent); }
+}

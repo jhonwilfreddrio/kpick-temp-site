@@ -1,3 +1,6 @@
 backend/data/
 node_modules/
 .env
+img/_unused/
+deploy/
+DEPLOYMENT.md

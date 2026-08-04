@@ -412,3 +412,146 @@ h1, h2, h3, .dashboardarea h1 {
         scroll-behavior: auto !important;
     }
 }
+
+/* ===== TOKEN LAYER — 2026-08-04 exhibit polish (delete this block to revert) ===== */
+
+/* ---------------------------------------------------------------------------
+   1. Palette tokens
+   ------------------------------------------------------------------------- */
+:root {
+    --kp-bg: #F7F9FC;
+    --kp-surface: #FFFFFF;
+    --kp-text: #10182B;
+    --kp-text-2: #4B5468;
+    --kp-accent: #0B3D91;
+    --kp-accent-hover: #082C6B;
+    --kp-accent-soft: #EAF0FB;
+    --kp-border: #E2E6EE;
+}
+
+/* ---------------------------------------------------------------------------
+   2. Font stack — override the base `*{font-family:'Inter'}` rule (and the
+      one explicit outlier, .faq-question) so headings inherit it too.
+      Pretendard <link> is being added to the pages separately; Inter is the
+      fallback already in use.
+   ------------------------------------------------------------------------- */
+* ,
+.faq-question {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+                 'Inter', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+   3. Weight ceiling — style.css hardcodes 900 on ~79 selectors. Major
+      standalone headings capped at 620; smaller in-card h2/h3 tags capped
+      at 600. Logo/wordmark and small uppercase eyebrow labels are left
+      untouched on purpose (never capped, never re-weighted here).
+   ------------------------------------------------------------------------- */
+.dashboardarea h1,
+.learn-hero h1,
+.about-title h1,
+.about-title h2,
+.section-panel-header h2,
+.coverage-section h2,
+.partner-section__title,
+.brand-hero__title,
+.brand-intro h1,
+.brand-intro h2,
+.contact-page__title,
+.quote-hero h1,
+.tieupsTitle,
+.insufine-sizes__header h2,
+.erop-spec h2,
+.brand-cta h2,
+.brand-spotlights__header h2,
+.learn-outro h2 {
+    font-weight: 620;
+}
+.packaging-placeholder h2,
+.service-grid h3,
+.faq-grid h3,
+.insufine-size-card__label h3 {
+    font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+   4. Borderless cards — flat surface, shadow only appears on the existing
+      :hover rules in style.css. .about-container intentionally skipped: it
+      is already flattened to `transparent` by the neumorphic band treatment
+      in §11 above, and giving it a white surface here would fight that.
+   ------------------------------------------------------------------------- */
+.brand-card,
+.product-card,
+.erop-category-card,
+.insufine-size-card {
+    border: none;
+    box-shadow: none;
+    background: var(--kp-surface);
+}
+
+/* Internal grid hairlines removed; gap added so cards stay visually
+   separated once the dividing line is gone. */
+.timeline-grid article,
+.service-grid article,
+.faq-grid article {
+    border-right: none;
+    border-bottom: none;
+}
+.coverage-list span {
+    border-right: none;
+    border-bottom: none;
+}
+.timeline-grid { gap: 28px; }
+.service-grid,
+.faq-grid { gap: 28px; }
+.coverage-list { gap: 16px; }
+
+/* ---------------------------------------------------------------------------
+   5. Container — .body used a 15%/8%/5% percentage margin at three
+      breakpoints; replaced with an auto-centered, max-width column so line
+      lengths stay sane on the ultra-wide monitors a trade-show booth kiosk
+      tends to use. Same rule beats all three percentage variants (equal
+      specificity, later in cascade) without needing to repeat it per query.
+   ------------------------------------------------------------------------- */
+.body {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1240px;
+    padding-left: clamp(20px, 4vw, 64px);
+    padding-right: clamp(20px, 4vw, 64px);
+}
+
+/* ---------------------------------------------------------------------------
+   6. Accent consolidation — only the brand-neutral, clicked-most CTAs.
+      Per-brand CTAs (Sungshim blue / EROP green / Insufine teal) and the
+      dark-navy footer links are left alone on purpose: those colors are
+      either deliberate brand identity or a contrast-risk on a dark surface.
+   ------------------------------------------------------------------------- */
+.dashboardarea__button--primary {
+    color: var(--kp-accent);
+}
+.dashboardarea__button--primary:hover {
+    color: var(--kp-accent-hover);
+}
+.partner-section__button {
+    color: var(--kp-accent);
+}
+.partner-section__button:hover {
+    color: var(--kp-accent-hover);
+}
+.quote-button {
+    background: var(--kp-accent);
+}
+.quote-button:hover {
+    background: var(--kp-accent-hover);
+}
+
+/* ---------------------------------------------------------------------------
+   7. Mobile legibility — 10px eyebrow-adjacent label was under the
+      ~12-13px comfortable floor for hospital-floor lighting/viewing angles.
+   ------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    .hero-brand__type {
+        font-size: 12px;
+    }
+}
