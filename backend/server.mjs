@@ -6,6 +6,7 @@ import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import PDFDocument from 'pdfkit';
+import { isMailerConfigured, sendLeadNotification, sendAutoResponder } from './mailer.mjs';
 
 const backendDir = fileURLToPath(new URL('.', import.meta.url));
 const rootDir = resolve(backendDir, '..');
@@ -1974,6 +1975,91 @@ async function handleRequest(request, response) {
             sendJson(response, 200, { quote });
         } catch (error) {
             sendJson(response, 400, { error: error.message || 'Unable to update PO workflow.' });
+        }
+        return;
+    }
+
+    if (request.method === 'POST' && pathname === '/api/exhibit-lead') {
+        try {
+            const payload = await getJsonBody(request);
+            if (payload.botcheck) {
+                sendJson(response, 200, { ok: true });
+                return;
+            }
+            const name = String(payload.name || '').trim();
+            const mobile = String(payload.mobile || '').trim();
+            if (!name || !mobile) {
+                sendJson(response, 400, { error: 'Name and mobile number are required.' });
+                return;
+            }
+            if (!isMailerConfigured()) {
+                sendJson(response, 503, { error: 'Mail service is not configured.' });
+                return;
+            }
+            const email = String(payload.email || '').trim();
+            const products = Array.isArray(payload.products)
+                ? payload.products.map((item) => String(item)).join(', ')
+                : String(payload.products || '');
+            await sendLeadNotification({
+                subject: 'Trade Show Lead — K-Pick Website',
+                replyTo: email || undefined,
+                lines: [
+                    ['Name', name],
+                    ['Mobile', mobile],
+                    ['Email', email || '—'],
+                    ['Organization', String(payload.organization || '').trim() || '—'],
+                    ['Products', products || '—'],
+                    ['Intent', String(payload.intent || '').trim() || '—'],
+                    ['Lead source', String(payload.lead_source || 'exhibit').trim()]
+                ]
+            });
+            if (email) {
+                try {
+                    await sendAutoResponder({ to: email, name });
+                } catch {
+                    // Lead is already in the inbox — a failed courtesy email must not fail the request.
+                }
+            }
+            sendJson(response, 200, { ok: true });
+        } catch (error) {
+            sendJson(response, 500, { error: error.message || 'Unable to send your request.' });
+        }
+        return;
+    }
+
+    if (request.method === 'POST' && pathname === '/api/contact-message') {
+        try {
+            const payload = await getJsonBody(request);
+            if (payload.botcheck) {
+                sendJson(response, 200, { ok: true });
+                return;
+            }
+            const name = String(payload.name || '').trim();
+            const email = String(payload.email || '').trim();
+            const subject = String(payload.subject || '').trim();
+            const message = String(payload.message || '').trim();
+            if (!name || !email || !subject || !message) {
+                sendJson(response, 400, { error: 'Name, email, subject, and message are required.' });
+                return;
+            }
+            if (!isMailerConfigured()) {
+                sendJson(response, 503, { error: 'Mail service is not configured.' });
+                return;
+            }
+            await sendLeadNotification({
+                subject: `Website Inquiry — ${subject.slice(0, 120)}`,
+                replyTo: email,
+                lines: [
+                    ['Name / Company', name],
+                    ['Email', email],
+                    ['Phone', String(payload.phone || '').trim() || '—'],
+                    ['Subject', subject],
+                    ['Message', message]
+                ]
+            });
+            sendJson(response, 200, { ok: true });
+        } catch (error) {
+            sendJson(response, 500, { error: error.message || 'Unable to send your message.' });
         }
         return;
     }

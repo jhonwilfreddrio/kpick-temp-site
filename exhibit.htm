@@ -285,22 +285,49 @@
                 statusEl.removeAttribute('data-state');
                 statusEl.textContent = 'Sending...';
 
-                var controller = ('AbortController' in window) ? new AbortController() : null;
-                var timer = controller ? setTimeout(function () {
-                    controller.abort();
-                }, 8000) : null;
+                function postWithTimeout(url, options) {
+                    var controller = ('AbortController' in window) ? new AbortController() : null;
+                    var timer = controller ? setTimeout(function () { controller.abort(); }, 8000) : null;
+                    if (controller) { options.signal = controller.signal; }
+                    return fetch(url, options).then(function (res) {
+                        return res.json().then(function (data) {
+                            return { ok: res.ok && data && (data.ok || data.success), data: data };
+                        });
+                    }).finally(function () {
+                        if (timer) { clearTimeout(timer); }
+                    });
+                }
 
-                fetch('https://api.web3forms.com/submit', {
+                var payload = {
+                    name: name,
+                    mobile: mobile,
+                    email: String(formData.get('email') || '').trim(),
+                    organization: String(formData.get('organization') || '').trim(),
+                    products: formData.getAll('products'),
+                    intent: String(formData.get('intent') || ''),
+                    lead_source: String(formData.get('lead_source') || 'exhibit'),
+                    botcheck: formData.get('botcheck') ? true : false
+                };
+
+                /* Primary: K-Pick's own backend, straight to info@ (also sends the
+                   auto-responder). Backup lane: Web3Forms. Last resort: mailto/tel. */
+                postWithTimeout('/api/exhibit-lead', {
                     method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: formData,
-                    signal: controller ? controller.signal : undefined
-                }).then(function (res) {
-                    return res.json().then(function (data) {
-                        return { ok: res.ok && data && data.success, data: data };
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(function () {
+                    return { ok: false };
+                }).then(function (result) {
+                    if (result.ok) { return result; }
+                    statusEl.textContent = 'Still sending...';
+                    return postWithTimeout('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json' },
+                        body: formData
+                    }).catch(function () {
+                        return { ok: false };
                     });
                 }).then(function (result) {
-                    if (timer) { clearTimeout(timer); }
                     if (result.ok) {
                         showConfirmation(name);
                     } else {
@@ -310,13 +337,6 @@
                         }
                         showFallback(name, mobile);
                     }
-                }).catch(function () {
-                    if (timer) { clearTimeout(timer); }
-                    if (submitBtn) {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = originalLabel;
-                    }
-                    showFallback(name, mobile);
                 });
             });
         }

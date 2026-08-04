@@ -44,6 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const formData = new FormData(form);
+        const payload = {
+            name: String(formData.get('name') || '').trim(),
+            email: String(formData.get('email') || '').trim(),
+            phone: String(formData.get('phone') || '').trim(),
+            subject: String(formData.get('subject') || '').trim(),
+            message: String(formData.get('message') || '').trim(),
+            botcheck: formData.get('botcheck') ? true : false
+        };
         setStatus('Sending your message...', null);
 
         isSending = true;
@@ -58,16 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(form.action, {
                 method: 'POST',
-                body: formData,
+                body: JSON.stringify(payload),
                 headers: {
+                    'Content-Type': 'application/json',
                     Accept: 'application/json'
                 },
                 signal: controller.signal
             });
             const result = await response.json();
 
-            if (!response.ok || !result.success) {
-                throw new Error(result.message || 'Unable to send message.');
+            if (!response.ok || !result.ok) {
+                throw new Error(result.error || 'Unable to send message.');
             }
 
             form.reset();
