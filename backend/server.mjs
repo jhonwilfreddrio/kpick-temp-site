@@ -1730,14 +1730,15 @@ async function sendQuoteEmails(quote) {
     const itemLines = (quote.items || [])
         .map((item) => `- ${item.name} x ${item.quantity} (${money(item.line_total)})`)
         .join('\n');
+    /* Sales copy is deliberately plain: no attachment, no external reply-to.
+       Hostinger's filter silently drops same-domain mail carrying either
+       (verified 2026-08-04) — the PDF goes as a tokenized download link. */
     try {
         await sendMail({
             to: SALES_INBOX,
             fromName: 'K-Pick Website',
-            replyTo: customer.email || undefined,
             subject: `New Quote Request ${quote.request_number} — ${customer.company}`,
-            text: `New quote request from the website.\n\nRequest No.: ${quote.request_number}\nCompany: ${customer.company}\nContact: ${customer.contact}\nMobile: ${customer.mobile}\nEmail: ${customer.email || '—'}\nAddress: ${customer.address || '—'}\nNotes: ${customer.notes || '—'}\n\nItems:\n${itemLines}\n\nGrand Total: ${money(totals.grand_total)}\n\nThe formal quotation PDF is attached. Manage this request in request-admin.htm.`,
-            attachments
+            text: `New quote request from the website.\n\nRequest No.: ${quote.request_number}\nCompany: ${customer.company}\nContact: ${customer.contact}\nMobile: ${customer.mobile}\nEmail: ${customer.email || '—'}\nAddress: ${customer.address || '—'}\nNotes: ${customer.notes || '—'}\n\nItems:\n${itemLines}\n\nGrand Total: ${money(totals.grand_total)}\n\nDownload the quotation PDF (link valid 14 days):\nhttps://kpicktradingcorp.com${quotePdfUrl(quote)}\n\nManage this request in request-admin.htm. Reply to the customer at: ${customer.email || customer.mobile}`
         });
     } catch (error) {
         console.error(`Sales quote email failed (${quote.request_number}):`, error.message);
