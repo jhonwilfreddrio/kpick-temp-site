@@ -1706,6 +1706,21 @@ function sendQuotePdf(response, quote) {
     doc.end();
 }
 
+async function readLeadPayload(request) {
+    // Lead forms normally send JSON, but a browser holding a stale cached
+    // script (or a no-JS native submit) posts urlencoded/multipart instead —
+    // accept urlencoded and fail multipart with an actionable message.
+    const contentType = String(request.headers['content-type'] || '');
+    if (contentType.includes('application/x-www-form-urlencoded')) {
+        const bodyText = await getRequestBody(request);
+        return Object.fromEntries(new URLSearchParams(bodyText));
+    }
+    if (contentType.includes('multipart/form-data')) {
+        throw new Error('Please refresh this page and submit again.');
+    }
+    return getJsonBody(request);
+}
+
 function sendJson(response, status, data) {
     const body = JSON.stringify(data);
     response.writeHead(status, {
@@ -1981,7 +1996,7 @@ async function handleRequest(request, response) {
 
     if (request.method === 'POST' && pathname === '/api/exhibit-lead') {
         try {
-            const payload = await getJsonBody(request);
+            const payload = await readLeadPayload(request);
             if (payload.botcheck) {
                 sendJson(response, 200, { ok: true });
                 return;
@@ -2029,7 +2044,7 @@ async function handleRequest(request, response) {
 
     if (request.method === 'POST' && pathname === '/api/contact-message') {
         try {
-            const payload = await getJsonBody(request);
+            const payload = await readLeadPayload(request);
             if (payload.botcheck) {
                 sendJson(response, 200, { ok: true });
                 return;
