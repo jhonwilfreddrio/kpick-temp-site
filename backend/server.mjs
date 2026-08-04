@@ -19,7 +19,7 @@ const letterheadLogoPath = join(rootDir, 'img', 'kpick-letterhead-logo.jpeg');
 const letterheadLocationIconPath = join(rootDir, 'img', 'letterhead-location.png');
 const letterheadPhoneIconPath = join(rootDir, 'img', 'letterhead-phone.png');
 const letterheadEmailIconPath = join(rootDir, 'img', 'letterhead-email.png');
-const websiteQrPath = join(rootDir, 'img', 'kpick-qr.jpg');
+const websiteQrPath = join(rootDir, 'img', 'website-qr.png');
 const host = process.env.KPICK_HOST || (process.env.PORT ? '0.0.0.0' : '127.0.0.1');
 const port = getPort(process.env.KPICK_PORT || process.env.PORT);
 const isLocalHost = ['127.0.0.1', 'localhost', '::1'].includes(host);
@@ -1491,7 +1491,7 @@ function buildQuotePdf(quote) {
     const width = right - left;
     const line = '#111111';
     const rowHeight = 28;
-    const websiteUrl = 'https://kpick-temp-site-production.up.railway.app/';
+    const websiteUrl = 'https://kpicktradingcorp.com/';
 
     const clientName = quote.customer.contact || 'Client';
     const invoiceDate = new Date(quote.created_at).toLocaleDateString('en-PH', {
