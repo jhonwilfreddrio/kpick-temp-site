@@ -1,52 +1,326 @@
-﻿[
+[
   {
     "category": "Insulin Syringe",
     "items": [
-      { "sku": "SUN-IS-BL-050-31G-08", "name": "BLISTER 0.5ml 31G 8mm", "packaging": "Blister", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-BL-050-31G-06", "name": "BLISTER 0.5ml 31G 6mm", "packaging": "Blister", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-BL-100-32G-08", "name": "BLISTER 1ml 32G 8mm", "packaging": "Blister", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-BL-100-31G-08", "name": "BLISTER 1ml 31G 8mm", "packaging": "Blister", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-BL-100-31G-06", "name": "BLISTER 1ml 31G 6mm", "packaging": "Blister", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-BL-050-32G-08", "name": "BLISTER 0.5ml 32G 8mm", "packaging": "Blister", "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-050-30G-08", "name": "POLYBAG 0.5ml 30G 8mm", "packaging": "Polybag", "unit_price": 619, "discounted_unit_price": 529, "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-050-31G-08", "name": "POLYBAG 0.5ml 31G 8mm", "packaging": "Polybag", "unit_price": 629, "discounted_unit_price": 529, "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-050-32G-08", "name": "POLYBAG 0.5ml 32G 8mm", "packaging": "Polybag", "unit_price": 699, "discounted_unit_price": 599, "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-29G-13", "name": "POLYBAG 1ml 29G 13mm", "packaging": "Polybag", "unit_price": 599, "discounted_unit_price": 519, "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-30G-08", "name": "POLYBAG 1ml 30G 8mm", "packaging": "Polybag", "unit_price": 619, "discounted_unit_price": 519, "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-30G-13", "name": "POLYBAG 1ml 30G 13mm", "packaging": "Polybag", "unit_price": 619, "discounted_unit_price": 519, "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-31G-08", "name": "POLYBAG 1ml 31G 8mm", "packaging": "Polybag", "unit_price": 629, "discounted_unit_price": 519, "boxes_per_carton": 36 },
-      { "sku": "SUN-IS-PB-100-32G-08", "name": "POLYBAG 1ml 32G 8mm", "packaging": "Polybag", "unit_price": 699, "discounted_unit_price": 599, "boxes_per_carton": 36 }
+      {
+        "sku": "SUN-IS-BL-050-31G-08",
+        "name": "BLISTER 0.5ml 31G 8mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-0-5ML-0276",
+        "unit_price": 709.0
+      },
+      {
+        "sku": "SUN-IS-BL-050-31G-06",
+        "name": "BLISTER 0.5ml 31G 6mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-0-5ML-0277",
+        "unit_price": 749.0
+      },
+      {
+        "sku": "SUN-IS-BL-100-32G-08",
+        "name": "BLISTER 1ml 32G 8mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE",
+        "unit_price": 759.0
+      },
+      {
+        "sku": "SUN-IS-BL-100-31G-08",
+        "name": "BLISTER 1ml 31G 8mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-2",
+        "unit_price": 709.0
+      },
+      {
+        "sku": "SUN-IS-BL-100-31G-06",
+        "name": "BLISTER 1ml 31G 6mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-1ML-0-0280",
+        "unit_price": 749.0
+      },
+      {
+        "sku": "SUN-IS-BL-050-32G-08",
+        "name": "BLISTER 0.5ml 32G 8mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-0-5ML-0275",
+        "unit_price": 759.0
+      },
+      {
+        "sku": "SUN-IS-PB-050-30G-08",
+        "name": "POLYBAG 0.5ml 30G 8mm",
+        "packaging": "Polybag",
+        "unit_price": 659.0,
+        "discounted_unit_price": 529,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-0-5ML-0271"
+      },
+      {
+        "sku": "SUN-IS-PB-050-31G-08",
+        "name": "POLYBAG 0.5ml 31G 8mm",
+        "packaging": "Polybag",
+        "unit_price": 659.0,
+        "discounted_unit_price": 529,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-0-5ML-0272"
+      },
+      {
+        "sku": "SUN-IS-PB-050-32G-08",
+        "name": "POLYBAG 0.5ml 32G 8mm",
+        "packaging": "Polybag",
+        "unit_price": 709.0,
+        "discounted_unit_price": 599,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-0-5ML-0273"
+      },
+      {
+        "sku": "SUN-IS-PB-100-29G-13",
+        "name": "POLYBAG 1ml 29G 13mm",
+        "packaging": "Polybag",
+        "unit_price": 599.0,
+        "discounted_unit_price": 519,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-1ML-0-0266"
+      },
+      {
+        "sku": "SUN-IS-PB-100-30G-08",
+        "name": "POLYBAG 1ml 30G 8mm",
+        "packaging": "Polybag",
+        "unit_price": 619.0,
+        "discounted_unit_price": 519,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-1ML-0-0267"
+      },
+      {
+        "sku": "SUN-IS-PB-100-30G-13",
+        "name": "POLYBAG 1ml 30G 13mm",
+        "packaging": "Polybag",
+        "unit_price": 659.0,
+        "discounted_unit_price": 519,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-1ML-0-0268"
+      },
+      {
+        "sku": "SUN-IS-PB-100-31G-08",
+        "name": "POLYBAG 1ml 31G 8mm",
+        "packaging": "Polybag",
+        "unit_price": 659.0,
+        "discounted_unit_price": 519,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-1ML-0-0269"
+      },
+      {
+        "sku": "SUN-IS-PB-100-32G-08",
+        "name": "POLYBAG 1ml 32G 8mm",
+        "packaging": "Polybag",
+        "unit_price": 709.0,
+        "discounted_unit_price": 599,
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-INSULIN-SYRINGE-1ML-0-0270"
+      },
+      {
+        "sku": "SUN-IS-BL-050-30G-08",
+        "name": "BLISTER 0.5ml 30G 8mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUNG-SUNGSHIM-INSULIN-SYRINGE-30MM-3",
+        "unit_price": 709.0
+      },
+      {
+        "sku": "SUN-IS-BL-100-29G-13",
+        "name": "BLISTER 1ml 29G 13mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUNG-SUNGSHIM-INSULIN-SYRINGE-33MM",
+        "unit_price": 699.0
+      },
+      {
+        "sku": "SUN-IS-BL-100-30G-08",
+        "name": "BLISTER 1ml 30G 8mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUNG-SUNGSHIM-INSULIN-SYRINGE-30MM-2",
+        "unit_price": 709.0
+      },
+      {
+        "sku": "SUN-IS-BL-100-30G-13",
+        "name": "BLISTER 1ml 30G 13mm",
+        "packaging": "Blister",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUNG-SUNGSHIM-INSULIN-SYRINGE-30MM",
+        "unit_price": 709.0
+      }
     ]
   },
   {
     "category": "Single-Use Syringe",
     "items": [
-      { "sku": "SUN-SU-001-26G-13-LS", "name": "1ml 26G 13mm Luer Slip", "carton": "36 boxes per carton", "boxes_per_carton": 36 },
-      { "sku": "SUN-SU-003-23G-25-LS", "name": "3ml 23G 25mm Luer Slip", "carton": "24 boxes per carton", "boxes_per_carton": 24 },
-      { "sku": "SUN-SU-003-23G-25-LL", "name": "3ml 23G 25mm Luer Lock", "carton": "24 boxes per carton", "boxes_per_carton": 24 },
-      { "sku": "SUN-SU-005-21G-32-LS", "name": "5ml 21G 32mm Luer Slip", "carton": "18 boxes per carton", "boxes_per_carton": 18 },
-      { "sku": "SUN-SU-005-21G-32-LL", "name": "5ml 21G 32mm Luer Lock", "carton": "18 boxes per carton", "boxes_per_carton": 18 },
-      { "sku": "SUN-SU-010-23G-25-LS", "name": "10ml 23G 25mm Luer Slip", "carton": "12 boxes per carton", "boxes_per_carton": 12 },
-      { "sku": "SUN-SU-010-23G-25-LL", "name": "10ml 23G 25mm Luer Lock", "carton": "12 boxes per carton", "boxes_per_carton": 12 }
+      {
+        "sku": "SUN-SU-001-26G-13-LS",
+        "name": "1ml 26G 13mm Luer Slip",
+        "carton": "36 boxes per carton",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-1ML-26GX13MM-100EA-0281",
+        "unit_price": 699.0
+      },
+      {
+        "sku": "SUN-SU-003-23G-25-LS",
+        "name": "3ml 23G 25mm Luer Slip",
+        "carton": "24 boxes per carton",
+        "boxes_per_carton": 24,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-3ML-23GX25MM-100EA-0282",
+        "unit_price": 699.0
+      },
+      {
+        "sku": "SUN-SU-003-23G-25-LL",
+        "name": "3ml 23G 25mm Luer Lock",
+        "carton": "24 boxes per carton",
+        "boxes_per_carton": 24,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-3ML-23GX25MM-100EA-0290",
+        "unit_price": 699.0
+      },
+      {
+        "sku": "SUN-SU-005-21G-32-LS",
+        "name": "5ml 21G 32mm Luer Slip",
+        "carton": "18 boxes per carton",
+        "boxes_per_carton": 18,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-5ML-21GX32MM-100EA-0284",
+        "unit_price": 699.0
+      },
+      {
+        "sku": "SUN-SU-005-21G-32-LL",
+        "name": "5ml 21G 32mm Luer Lock",
+        "carton": "18 boxes per carton",
+        "boxes_per_carton": 18,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-5ML-21GX32MM-100EA-0291",
+        "unit_price": 799.0
+      },
+      {
+        "sku": "SUN-SU-010-23G-25-LS",
+        "name": "10ml 23G 25mm Luer Slip",
+        "carton": "12 boxes per carton",
+        "boxes_per_carton": 12,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-10ML-23GX25MM-100EA-0286",
+        "unit_price": 899.0
+      },
+      {
+        "sku": "SUN-SU-010-23G-25-LL",
+        "name": "10ml 23G 25mm Luer Lock",
+        "carton": "12 boxes per carton",
+        "boxes_per_carton": 12,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-10ML-23GX25MM-100EA-0292",
+        "unit_price": 999.0
+      },
+      {
+        "sku": "SUN-SU-003-NN",
+        "name": "3ml Without Needle",
+        "carton": "24 boxes per carton",
+        "boxes_per_carton": 24,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-3ML-WITHOUT-NEEDLE-0283",
+        "unit_price": 399.0
+      },
+      {
+        "sku": "SUN-SU-005-23G-25-LS",
+        "name": "5ml 23G 25mm Luer Slip",
+        "carton": "18 boxes per carton",
+        "boxes_per_carton": 18,
+        "erp_sku": "SUN-MED-SUNGSHIM-SYRINGE-5ML-23GX25MM-100EA-0285",
+        "unit_price": 699.0
+      },
+      {
+        "sku": "SUN-SU-005-23G-25-LL",
+        "name": "5ml 23G 25mm Luer Lock",
+        "carton": "18 boxes per carton",
+        "boxes_per_carton": 18,
+        "erp_sku": "SUNGSHIM-SYRINGE-5ML-23GX25MM-100EA",
+        "unit_price": 799.0
+      }
     ]
   },
   {
     "category": "LDS Syringe",
     "items": [
-      { "sku": "SUN-LDS-001-23G-25", "name": "1ml LDS 23G 25mm", "carton": "36 boxes per carton", "boxes_per_carton": 36 }
+      {
+        "sku": "SUN-LDS-001-23G-25",
+        "name": "1ml LDS 23G 25mm",
+        "carton": "36 boxes per carton",
+        "boxes_per_carton": 36,
+        "erp_sku": "SUN-MED-SUNGSHIM-LDS-SYRINGE-1ML-23G-0274",
+        "unit_price": 899.0
+      }
     ]
   },
   {
     "category": "Pen Needles",
     "items": [
-      { "sku": "SUN-PN-32G-04", "name": "Pen Needle 32G 4mm", "gauge": "32G", "boxes_per_carton": 48 },
-      { "sku": "SUN-PN-32G-05", "name": "Pen Needle 32G 5mm", "gauge": "32G", "boxes_per_carton": 48 },
-      { "sku": "SUN-PN-32G-06", "name": "Pen Needle 32G 6mm", "gauge": "32G", "boxes_per_carton": 48 },
-      { "sku": "SUN-PN-31G-08", "name": "Pen Needle 31G 8mm", "gauge": "31G", "boxes_per_carton": 48 },
-      { "sku": "INS-PN-32G-04", "name": "Insufine Pen Needle 32G 4mm", "gauge": "32G", "boxes_per_carton": 48 },
-      { "sku": "INS-PN-32G-05", "name": "Insufine Pen Needle 32G 5mm", "gauge": "32G", "boxes_per_carton": 48 },
-      { "sku": "INS-PN-32G-06", "name": "Insufine Pen Needle 32G 6mm", "gauge": "32G", "boxes_per_carton": 48 },
-      { "sku": "INS-PN-31G-08", "name": "Insufine Pen Needle 31G 8mm", "gauge": "31G", "boxes_per_carton": 48 }
+      {
+        "sku": "SUN-PN-32G-04",
+        "name": "Pen Needle 32G 4mm",
+        "gauge": "32G",
+        "boxes_per_carton": 48,
+        "erp_sku": "SUN-MED-SUNGSHIM-4MM-32G-PEN-NEEDLE-0330",
+        "unit_price": 499.0
+      },
+      {
+        "sku": "SUN-PN-32G-05",
+        "name": "Pen Needle 32G 5mm",
+        "gauge": "32G",
+        "boxes_per_carton": 48,
+        "erp_sku": "SUN-MED-SUNGSHIM-5MM-32G-PEN-NEEDLE-0331",
+        "unit_price": 499.0
+      },
+      {
+        "sku": "SUN-PN-32G-06",
+        "name": "Pen Needle 32G 6mm",
+        "gauge": "32G",
+        "boxes_per_carton": 48,
+        "erp_sku": "SUN-MED-SUNGSHIM-6MM-32G-PEN-NEEDLE-0332",
+        "unit_price": 499.0
+      },
+      {
+        "sku": "SUN-PN-31G-08",
+        "name": "Pen Needle 31G 8mm",
+        "gauge": "31G",
+        "boxes_per_carton": 48,
+        "erp_sku": "SUN-MED-SUNGSHIM-8MM-31G-PEN-NEEDLE-0333",
+        "unit_price": 499.0
+      },
+      {
+        "sku": "INS-PN-32G-04",
+        "name": "Insufine Pen Needle 32G 4mm",
+        "gauge": "32G",
+        "boxes_per_carton": 48,
+        "erp_sku": "INS-MED-INSUFINE-4MM-32G-100EA-0326",
+        "unit_price": 499.0
+      },
+      {
+        "sku": "INS-PN-32G-05",
+        "name": "Insufine Pen Needle 32G 5mm",
+        "gauge": "32G",
+        "boxes_per_carton": 48,
+        "erp_sku": "INS-MED-INSUFINE-5MM-32G-100EA-0327",
+        "unit_price": 499.0
+      },
+      {
+        "sku": "INS-PN-32G-06",
+        "name": "Insufine Pen Needle 32G 6mm",
+        "gauge": "32G",
+        "boxes_per_carton": 48,
+        "erp_sku": "INS-MED-INSUFINE-6MM-32G-100EA-0328",
+        "unit_price": 499.0
+      },
+      {
+        "sku": "INS-PN-31G-08",
+        "name": "Insufine Pen Needle 31G 8mm",
+        "gauge": "31G",
+        "boxes_per_carton": 48,
+        "erp_sku": "INS-MED-INSUFINE-8MM-31G-100EA-0329",
+        "unit_price": 499.0
+      }
     ]
   }
 ]

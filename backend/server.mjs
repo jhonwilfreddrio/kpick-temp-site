@@ -28,6 +28,11 @@ const authSecret = process.env.KPICK_AUTH_SECRET || (isLocalHost ? `${adminPassw
 const googleSheetCsvUrl = process.env.KPICK_INVENTORY_CSV_URL
     || 'https://docs.google.com/spreadsheets/d/1lyGPgs3edGO7EV-Q1mnpzjvsbghojdQ6ocCp4Dxcsak/gviz/tq?tqx=out:csv&sheet=Backend%20Mirror';
 const autoSyncInventory = process.env.KPICK_AUTO_SYNC_INVENTORY !== '0';
+/* When the ERP push sync is configured it becomes the source of truth for
+   stock + prices; the scheduled Google Sheet pull is skipped so stale sheet
+   values can't overwrite ERP data. The manual admin "Sync now" button keeps
+   working as a fallback. */
+const erpSyncToken = (process.env.KPICK_ERP_SYNC_TOKEN || '').trim();
 const inventorySyncIntervalMs = getPositiveInteger(process.env.KPICK_INVENTORY_SYNC_INTERVAL_MS, 30 * 60 * 1000);
 const inventorySyncTimeoutMs = getPositiveInteger(process.env.KPICK_INVENTORY_SYNC_TIMEOUT_MS, 15 * 1000);
 
@@ -173,6 +178,7 @@ function initDb() {
             boxes_per_carton INTEGER,
             carton_discount_rate REAL,
             last_synced_at TEXT,
+            erp_sku TEXT,
             active INTEGER NOT NULL DEFAULT 1,
             updated_at TEXT NOT NULL
         );
@@ -234,6 +240,7 @@ function initDb() {
         ['boxes_per_carton', 'ALTER TABLE products ADD COLUMN boxes_per_carton INTEGER'],
         ['carton_discount_rate', 'ALTER TABLE products ADD COLUMN carton_discount_rate REAL'],
         ['last_synced_at', 'ALTER TABLE products ADD COLUMN last_synced_at TEXT'],
+        ['erp_sku', 'ALTER TABLE products ADD COLUMN erp_sku TEXT'],
         ['totals_json', 'ALTER TABLE quote_requests ADD COLUMN totals_json TEXT'],
         ['address', 'ALTER TABLE quote_requests ADD COLUMN address TEXT'],
         ['maps_url', 'ALTER TABLE quote_requests ADD COLUMN maps_url TEXT'],
@@ -329,8 +336,8 @@ async function seedProducts() {
     const updatedAt = nowIso();
     db.prepare('UPDATE products SET active = 0, updated_at = ?').run(updatedAt);
     const statement = db.prepare(`
-        INSERT INTO products (sku, category, name, packaging, carton, gauge, stock_unit, unit_price, discounted_unit_price, boxes_per_carton, carton_discount_rate, active, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+        INSERT INTO products (sku, category, name, packaging, carton, gauge, stock_unit, unit_price, discounted_unit_price, boxes_per_carton, carton_discount_rate, erp_sku, active, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
         ON CONFLICT(sku) DO UPDATE SET
             category = excluded.category,
             name = excluded.name,
@@ -342,6 +349,7 @@ async function seedProducts() {
             discounted_unit_price = excluded.discounted_unit_price,
             boxes_per_carton = excluded.boxes_per_carton,
             carton_discount_rate = excluded.carton_discount_rate,
+            erp_sku = excluded.erp_sku,
             active = 1,
             updated_at = excluded.updated_at
     `);
@@ -368,6 +376,7 @@ async function seedProducts() {
                 Number.isFinite(Number(item.discounted_unit_price)) ? Number(item.discounted_unit_price) : null,
                 item.boxes_per_carton || null,
                 Number.isFinite(Number(item.carton_discount_rate)) ? Number(item.carton_discount_rate) : 0.15,
+                item.erp_sku || null,
                 updatedAt
             );
         }
@@ -603,6 +612,79 @@ async function syncInventorySafely(reason) {
         });
 
     return inventorySyncInProgress;
+}
+
+function normalizeProductName(value) {
+    return String(value || '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+/* Applies a stock/price push from the ERP (Mac Mini). Items are matched to
+   the curated website catalog by erp_sku first, then by normalized product
+   name; ERP items with no website counterpart are ignored on purpose — the
+   website only sells what the catalog (seed_products.json + request-products.js)
+   lists. */
+function applyErpSync(payload) {
+    const items = Array.isArray(payload?.items) ? payload.items : [];
+    if (items.length === 0) {
+        throw new Error('items must be a non-empty array.');
+    }
+
+    const syncedAt = nowIso();
+    const webProducts = db.prepare('SELECT sku, name, erp_sku FROM products WHERE active = 1').all();
+    const byErpSku = new Map();
+    const byName = new Map();
+    for (const product of webProducts) {
+        if (product.erp_sku) {
+            byErpSku.set(String(product.erp_sku), product.sku);
+        }
+        const nameKey = normalizeProductName(product.name);
+        if (!byName.has(nameKey)) {
+            byName.set(nameKey, []);
+        }
+        byName.get(nameKey).push(product.sku);
+    }
+
+    const update = db.prepare(`
+        UPDATE products
+        SET stock_quantity = ?,
+            unit_price = COALESCE(?, unit_price),
+            last_synced_at = ?,
+            updated_at = ?
+        WHERE sku = ?
+    `);
+
+    let matched = 0;
+    let updated = 0;
+    const covered = new Set();
+    for (const item of items) {
+        const erpSku = String(item.erp_sku || '').trim();
+        let targets = erpSku && byErpSku.has(erpSku) ? [byErpSku.get(erpSku)] : null;
+        if (!targets) {
+            targets = byName.get(normalizeProductName(item.name)) || null;
+        }
+        if (!targets) {
+            continue;
+        }
+        matched += 1;
+
+        const stock = Number(item.stock_box);
+        const price = Number(item.price_box_php);
+        const stockValue = Number.isFinite(stock) && stock > 0 ? Math.round(stock * 100) / 100 : 0;
+        const priceValue = Number.isFinite(price) && price > 0 ? price : null;
+        for (const sku of targets) {
+            updated += update.run(stockValue, priceValue, syncedAt, syncedAt, sku).changes;
+            covered.add(sku);
+        }
+    }
+
+    return {
+        ok: true,
+        received: items.length,
+        matched,
+        updated,
+        uncovered_website_skus: webProducts.map((product) => product.sku).filter((sku) => !covered.has(sku)),
+        synced_at: syncedAt
+    };
 }
 
 function getRequestBody(request) {
@@ -1997,6 +2079,29 @@ async function handleRequest(request, response) {
         return;
     }
 
+    if (request.method === 'POST' && pathname === '/api/erp-sync') {
+        if (!erpSyncToken) {
+            sendJson(response, 503, { error: 'ERP sync is not configured (KPICK_ERP_SYNC_TOKEN unset).' });
+            return;
+        }
+        const provided = Buffer.from(String(request.headers['x-kpick-sync-token'] || ''));
+        const expected = Buffer.from(erpSyncToken);
+        if (provided.length !== expected.length || !timingSafeEqual(provided, expected)) {
+            sendJson(response, 401, { error: 'Invalid sync token.' });
+            return;
+        }
+        try {
+            const payload = await getJsonBody(request);
+            const result = applyErpSync(payload);
+            await writeLog(`ERP sync: received ${result.received}, matched ${result.matched}, updated ${result.updated}.`);
+            sendJson(response, 200, result);
+        } catch (error) {
+            await writeLog(error.stack || error.message);
+            sendJson(response, 400, { error: error.message || 'Unable to apply ERP sync.' });
+        }
+        return;
+    }
+
     if (request.method === 'POST' && pathname === '/api/inventory/sync') {
         if (!requireUser(request, response, ['Admin'])) {
             return;
@@ -2153,7 +2258,7 @@ initDb();
 seedStaffUsers();
 await seedProducts();
 
-if (autoSyncInventory) {
+if (autoSyncInventory && !erpSyncToken) {
     await syncInventorySafely('startup');
 }
 
@@ -2167,7 +2272,9 @@ const server = createServer((request, response) => {
 server.listen(port, host, async () => {
     await writeLog(`K-Pick Node backend running at http://${host}:${port}/request.htm`);
     await writeLog(`SQLite DB: ${dbPath}`);
-    if (autoSyncInventory && inventorySyncIntervalMs > 0) {
+    if (erpSyncToken) {
+        await writeLog('ERP push sync enabled; Google Sheet auto-sync is off (manual sync still available).');
+    } else if (autoSyncInventory && inventorySyncIntervalMs > 0) {
         setInterval(() => {
             syncInventorySafely('scheduled').catch(() => {});
         }, inventorySyncIntervalMs).unref();
