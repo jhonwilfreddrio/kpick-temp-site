@@ -2488,6 +2488,9 @@ body{
     font-size: 14px;
     line-height: 1.5;
 }
+.contact-form__status:empty{
+    display: none;
+}
 .contact-form__status.is-success{
     color: #d9ffe6;
 }
@@ -5177,6 +5180,10 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .brand-product-nav{
         flex-direction: column;
     }
+    .contact-page{
+        padding-left: 26px;
+        padding-right: 26px;
+    }
     .contact-page__title{
         font-size: 36px;
     }
@@ -5709,7 +5716,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     }
     .contact-page{
         margin-top: 22px;
-        padding: 64px 0 74px;
+        padding: 64px 20px 74px;
         border-radius: 28px;
     }
     .contact-page__title{
@@ -5719,8 +5726,14 @@ body[data-erop-product="new-port-pack"] .erop-spec{
         font-size: 16px;
     }
     .contact-card{
-        padding: 22px 18px;
+        padding: 30px 24px;
         border-radius: 22px;
+    }
+    .contact-card::before{
+        inset: 10px;
+    }
+    .contact-form{
+        gap: 14px;
     }
     .contact-form__field input,
     .contact-form__field textarea{
@@ -6010,7 +6023,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
         min-height: 380px;
     }
     .contact-card{
-        padding: 18px 14px;
+        padding: 26px 20px;
     }
     .single-use-carousel__viewport{
         min-height: 250px;

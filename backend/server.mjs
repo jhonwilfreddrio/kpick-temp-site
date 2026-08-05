@@ -741,7 +741,7 @@ function calculateQuotePricing(items) {
         const discountEligible = boxesPerCarton > 0 && groupQuantity >= boxesPerCarton;
         const hasFixedDiscountPrice = discountEligible
             && Number.isFinite(discountedUnitPrice)
-            && discountedUnitPrice >= 0
+            && discountedUnitPrice > 0
             && discountedUnitPrice < unitPrice;
         const lineSubtotal = unitPrice * quantity;
         const lineDiscount = hasFixedDiscountPrice
@@ -1561,14 +1561,18 @@ function buildQuotePdf(quote) {
 
         doc.font('Helvetica').fontSize(8.5).fillColor('#000000');
         doc.text(clientLines.join('\n'), left, 125, { width: 310, lineGap: 2 });
+        const clientBottom = doc.y;
         doc.text(`Date : ${invoiceDate}\nNo. : ${quote.request_number}`, right - 150, 125, { width: 150, align: 'right' });
 
-        doc.font('Helvetica-Bold').fontSize(8.5).text('Dear Customer,', left, 176);
-        doc.font('Helvetica').fontSize(8.5).text('We take much pleasure in offering you as follows :', left, 190, { underline: true });
+        // The client block is 3–5 lines and may wrap, so everything below flows from its bottom.
+        const dearY = Math.max(176, clientBottom + 8);
+        doc.font('Helvetica-Bold').fontSize(8.5).text('Dear Customer,', left, dearY);
+        doc.font('Helvetica').fontSize(8.5).text('We take much pleasure in offering you as follows :', left, dearY + 14, { underline: true });
 
         const termsLeft = left;
         const termsRight = left + 300;
-        let y = 207;
+        const termsTop = dearY + 31;
+        let y = termsTop;
         const offerTerms = [
             ['Manufacturer', 'Sungshim'],
             ['Brand Name', 'Sungshim'],
@@ -1582,7 +1586,7 @@ function buildQuotePdf(quote) {
         ];
         offerTerms.forEach(([label, value], index) => {
             const x = index === 1 ? termsRight : termsLeft;
-            const rowY = index === 1 ? 207 : y;
+            const rowY = index === 1 ? termsTop : y;
             doc.font('Helvetica-Bold').text(`-. ${label} :`, x, rowY, { continued: true });
             doc.font('Helvetica').text(` ${value}`);
             if (index !== 0 && index !== 1) {
@@ -1591,9 +1595,10 @@ function buildQuotePdf(quote) {
                 y += 13;
             }
         });
+        return y;
     };
 
-    const drawItemsTable = () => {
+    const drawItemsTable = (startY) => {
         const columns = [
             { title: 'Description of Commodities', width: 245 },
             { title: 'C/T', width: 38 },
@@ -1602,7 +1607,7 @@ function buildQuotePdf(quote) {
             { title: 'Amount', width: 82 }
         ];
         let x = left;
-        let y = 320;
+        let y = startY;
 
         doc.font('Helvetica-Bold').fontSize(8).text('FOB Manila', left, y - 13, { width, align: 'right' });
         columns.forEach((column) => {
@@ -1651,9 +1656,9 @@ function buildQuotePdf(quote) {
         return y + 56;
     };
 
-    drawInvoiceHeader();
+    const headerBottom = drawInvoiceHeader();
 
-    let y = drawItemsTable();
+    let y = drawItemsTable(Math.max(320, headerBottom + 9));
     const shortQuote = quote.items.length < 7;
     if (!shortQuote && y > 640) {
         doc.addPage();

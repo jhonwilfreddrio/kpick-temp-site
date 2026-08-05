@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const discountEligible = item.boxes_per_carton > 0 && groupQty >= item.boxes_per_carton;
             const hasFixed = discountEligible
                 && Number.isFinite(item.discounted_unit_price)
-                && item.discounted_unit_price >= 0
+                && item.discounted_unit_price > 0
                 && item.discounted_unit_price < item.unit_price;
             const lineDiscount = hasFixed
                 ? (item.unit_price - item.discounted_unit_price) * item.quantity
