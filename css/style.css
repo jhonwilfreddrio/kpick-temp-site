@@ -6261,6 +6261,17 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .brand-spotlight--erop     .brand-spotlight__product-img { --spotlight-shadow-color: 18, 70, 45; }
 .brand-spotlight--insufine .brand-spotlight__product-img { --spotlight-shadow-color: 20, 60, 90; }
 .brand-spotlight__logo-wrap { margin-bottom: 10px; }
+/* Sungshim and EROP logo files are white-on-transparent — invisible on the
+   pale section gradients without a brand-colored chip behind them. */
+.brand-spotlight--sungshim .brand-spotlight__logo-wrap,
+.brand-spotlight--erop .brand-spotlight__logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 16px;
+    border-radius: 12px;
+}
+.brand-spotlight--sungshim .brand-spotlight__logo-wrap { background: #0f4ca3; }
+.brand-spotlight--erop .brand-spotlight__logo-wrap { background: #08713d; }
 .brand-spotlight__logo { height: 42px; object-fit: contain; }
 .brand-spotlight__logo--erop { height: 34px; }
 .brand-spotlight__brand-name {
