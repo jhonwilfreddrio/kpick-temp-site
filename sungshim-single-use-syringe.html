@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="img/kpickicon.png">
     <meta name="theme-color" content="#0B3D91">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260806-1">
+    <link rel="stylesheet" href="css/style.css?v=20260806b-1">
     <link rel="stylesheet" href="css/refine.css?v=20260804-2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,28 +118,40 @@
             </div>
 
             <section class="single-use-carousel" aria-label="Single-use syringe packaging carousel">
-                <button class="single-use-carousel__nav single-use-carousel__nav--prev" type="button" aria-label="Show previous package">
-                    &#8249;
-                </button>
-                <div class="single-use-carousel__viewport" tabindex="0" aria-live="polite">
-                    <div class="single-use-carousel__track">
-                        <article class="single-use-card" data-item-index="0">
-                            <img src="img/singleuse1ml.png" alt="Sungshim single-use syringe 1 mL package" class="single-use-card__image" loading="lazy">
-                        </article>
-                        <article class="single-use-card" data-item-index="1">
-                            <img src="img/singleuse3ml.png" alt="Sungshim single-use syringe 3 mL package" class="single-use-card__image" loading="lazy">
-                        </article>
-                        <article class="single-use-card" data-item-index="2">
-                            <img src="img/singleuse5ml.png" alt="Sungshim single-use syringe 5 mL package" class="single-use-card__image" loading="lazy">
-                        </article>
-                        <article class="single-use-card" data-item-index="3">
-                            <img src="img/singleuse10ml.png" alt="Sungshim single-use syringe 10 mL package" class="single-use-card__image" loading="lazy">
-                        </article>
+                <div class="single-use-carousel__row">
+                    <button class="single-use-carousel__nav single-use-carousel__nav--prev" type="button" aria-label="Show previous package">
+                        &#8249;
+                    </button>
+                    <div class="single-use-carousel__viewport" tabindex="0" aria-label="Single-use syringe packaging, scroll or use the arrows to browse sizes">
+                        <div class="single-use-carousel__track">
+                            <article class="single-use-card" data-item-index="0">
+                                <img src="img/singleuse1ml.png" alt="Sungshim single-use syringe 1 mL package" class="single-use-card__image" loading="lazy">
+                                <p class="single-use-card__label">1 mL</p>
+                            </article>
+                            <article class="single-use-card" data-item-index="1">
+                                <img src="img/singleuse3ml.png" alt="Sungshim single-use syringe 3 mL package" class="single-use-card__image" loading="lazy">
+                                <p class="single-use-card__label">3 mL</p>
+                            </article>
+                            <article class="single-use-card" data-item-index="2">
+                                <img src="img/singleuse5ml.png" alt="Sungshim single-use syringe 5 mL package" class="single-use-card__image" loading="lazy">
+                                <p class="single-use-card__label">5 mL</p>
+                            </article>
+                            <article class="single-use-card" data-item-index="3">
+                                <img src="img/singleuse10ml.png" alt="Sungshim single-use syringe 10 mL package" class="single-use-card__image" loading="lazy">
+                                <p class="single-use-card__label">10 mL</p>
+                            </article>
+                        </div>
                     </div>
+                    <button class="single-use-carousel__nav single-use-carousel__nav--next" type="button" aria-label="Show next package">
+                        &#8250;
+                    </button>
                 </div>
-                <button class="single-use-carousel__nav single-use-carousel__nav--next" type="button" aria-label="Show next package">
-                    &#8250;
-                </button>
+                <div class="single-use-carousel__dots" role="tablist" aria-label="Package size selector">
+                    <button type="button" role="tab" aria-selected="true" aria-label="Show 1 mL package" data-dot-index="0"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Show 3 mL package" data-dot-index="1"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Show 5 mL package" data-dot-index="2"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-label="Show 10 mL package" data-dot-index="3"></button>
+                </div>
             </section>
             <section class="product-section">
                 <div class="product-section__bar">
@@ -239,13 +251,6 @@
                             <tr><td>30G x 13 mm (1/2")</td></tr>
                             <tr><td>Without needle</td></tr>
                             <tr>
-                                <td>2 mL/cc</td>
-                                <td>Luer Slip, Luer Lock</td>
-                                <td>23G x 25 mm (1")</td>
-                                <td>100 pcs</td>
-                                <td>2,400 pcs</td>
-                            </tr>
-                            <tr>
                                 <td rowspan="3">3 mL/cc</td>
                                 <td rowspan="3">Luer Slip, Luer Lock</td>
                                 <td>23G x 25 mm (1")</td>
@@ -302,13 +307,6 @@
                                 <td rowspan="2">400 pcs</td>
                             </tr>
                             <tr><td>18G x 38 mm (1 1/2")</td></tr>
-                            <tr>
-                                <td>60 mL/cc</td>
-                                <td>Irrigation syringe</td>
-                                <td>Without needle (Catheter tip)</td>
-                                <td>25 pcs</td>
-                                <td>400 pcs</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -432,7 +430,7 @@
 
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
-    <script src="script/single-use-carousel.js"></script>
+    <script src="script/single-use-carousel.js?v=20260806b"></script>
     <script src="script/back-to-top.js"></script>
     <script src="script/sungshim-modules.js"></script>
 </body>

@@ -2024,7 +2024,7 @@ body{
     width: 100%;
     max-width: none;
     min-height: 420px;
-    object-fit: cover;
+    object-fit: contain;
 }
 .packaging-placeholders{
     display: grid;
@@ -2200,90 +2200,134 @@ body{
     background-position: center;
 }
 .single-use-carousel{
-    position: relative;
+    margin: 26px 0 28px;
+}
+.single-use-carousel__row{
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 8px;
-    margin: 26px 0 28px;
+    gap: 16px;
 }
 .single-use-carousel__viewport{
     position: relative;
-    width: min(100%, 820px);
-    margin: 0 auto;
-    min-height: 410px;
-    overflow: hidden;
-    perspective: 1500px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     outline: none;
+    padding: 6px 0 10px;
+}
+.single-use-carousel__viewport::-webkit-scrollbar{
+    display: none;
+}
+.single-use-carousel__viewport:focus-visible{
+    box-shadow: inset 0 0 0 3px rgba(15, 45, 107, 0.25);
+    border-radius: 20px;
 }
 .single-use-carousel__track{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
+    display: flex;
+    gap: 20px;
+}
+/* Real flex spacers so the first and last cards can reach the snap center —
+   spacer boxes extend the scroll range on both ends, which padding on a
+   block-width track cannot do. --edge-pad is set by single-use-carousel.js. */
+.single-use-carousel__track::before,
+.single-use-carousel__track::after{
+    content: "";
+    flex: 0 0 var(--edge-pad, 0px);
 }
 .single-use-card{
-    --offset: 0;
-    --abs-offset: 0;
-    --direction: 1;
-    position: absolute;
-    top: 32px;
-    left: 50%;
-    width: min(100%, 370px);
-    min-height: 250px;
-    padding: 18px 20px 24px;
+    flex: 0 0 min(100%, 360px);
     box-sizing: border-box;
-    border-radius: 28px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 249, 255, 0.94) 100%);
-    border: 1px solid rgba(15, 45, 107, 0.02);
-    box-shadow: 0 12px 24px rgba(20, 39, 86, 0.06);
-    transform-origin: center center;
-    transform:
-        translateX(-50%)
-        rotateY(calc(var(--offset) * -48deg))
-        translateX(calc(var(--direction) * var(--abs-offset) * 68px))
-        translateZ(calc((1 - var(--abs-offset)) * 170px - var(--abs-offset) * 138px))
-        scale(calc(1 - var(--abs-offset) * 0.2));
-    opacity: calc(1 - var(--abs-offset) * 0.28);
-    filter: blur(calc(var(--abs-offset) * 1.8px));
-    transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.35s ease, filter 0.35s ease;
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 24px 20px;
+    background-color: #ffffff;
+    border: 1px solid rgba(15, 45, 107, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 10px 24px rgba(20, 39, 86, 0.08);
+    opacity: 0.55;
+    transform: scale(0.96);
+    transition: transform 0.22s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.18s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .single-use-card.is-active{
-    z-index: 4;
-    filter: none;
     opacity: 1;
+    transform: scale(1);
 }
 .single-use-card__image{
     display: block;
     width: 100%;
-    max-width: 320px;
-    margin: 18px auto 0;
+    max-width: 300px;
     height: auto;
     object-fit: contain;
 }
+.single-use-card__label{
+    margin: 14px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #0f2d6b;
+    text-align: center;
+    text-transform: uppercase;
+}
 .single-use-carousel__nav{
-    width: 30px;
-    height: 30px;
-    border: 0;
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(15, 45, 107, 0.15);
     border-radius: 50%;
     background-color: #ffffff;
     color: #0f2d6b;
-    box-shadow: 0 14px 30px rgba(16, 42, 103, 0.12);
-    font-size: 40px;
+    font-size: 20px;
     line-height: 1;
     cursor: pointer;
-    margin: 0 -2px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+    transition: transform 0.16s ease-out, box-shadow 0.16s ease-out;
 }
-.single-use-carousel__nav:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 18px 34px rgba(16, 42, 103, 0.18);
-    color: #1f58d1;
+@media (hover: hover) and (pointer: fine){
+    .single-use-carousel__nav:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(16, 42, 103, 0.15);
+    }
 }
 .single-use-carousel__nav:disabled{
-    opacity: 0.45;
+    opacity: 0.4;
     cursor: default;
     transform: none;
+    box-shadow: none;
+}
+.single-use-carousel__dots{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+.single-use-carousel__dots button{
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background-color: rgba(15, 45, 107, 0.25);
+    cursor: pointer;
+    transition: width 0.2s ease-out, background-color 0.2s ease-out;
+}
+.single-use-carousel__dots button.is-active{
+    width: 18px;
+    background-color: #0f2d6b;
+}
+@media (prefers-reduced-motion: reduce){
+    .single-use-card{
+        transition-duration: 0.001s;
+    }
+    .single-use-carousel__dots button{
+        transition-duration: 0.001s;
+    }
 }
 .product-table-wrap{
     overflow-x: auto;
@@ -5205,26 +5249,11 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .product-gallery--single{
         max-width: 100%;
     }
-    .single-use-carousel{
-        grid-template-columns: 1fr;
+    .single-use-carousel__row{
         gap: 12px;
     }
-    .single-use-carousel__viewport{
-        order: 1;
-        width: min(100%, 620px);
-        margin: 0 auto;
-        min-height: 390px;
-    }
-    .single-use-carousel__nav{
-        order: 2;
-        justify-self: center;
-    }
-    .single-use-carousel__nav--prev{
-        margin-right: 64px;
-    }
-    .single-use-carousel__nav--next{
-        margin-left: 64px;
-        margin-top: -66px;
+    .single-use-card{
+        flex-basis: min(88vw, 340px);
     }
     .product-gallery__card{
         min-height: 280px;
@@ -5765,36 +5794,25 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .product-steps > li{
         font-size: 15px;
     }
+    .single-use-carousel{
+        margin-left: -5vw;
+        margin-right: -5vw;
+    }
+    .single-use-carousel__row{
+        grid-template-columns: 1fr;
+    }
+    .single-use-carousel__nav{
+        display: none;
+    }
     .single-use-carousel__viewport{
-        min-height: 320px;
+        padding: 6px 5vw 10px;
     }
     .single-use-card{
-        top: 18px;
-        width: min(100%, 280px);
-        min-height: 200px;
-        padding: 16px 16px 20px;
-        transform:
-            translateX(-50%)
-            rotateY(calc(var(--offset) * -42deg))
-            translateX(calc(var(--direction) * var(--abs-offset) * 56px))
-            translateZ(calc((1 - var(--abs-offset)) * 120px - var(--abs-offset) * 140px))
-            scale(calc(1 - var(--abs-offset) * 0.22));
+        flex-basis: 78vw;
+        padding: 20px 20px 18px;
     }
     .single-use-card__image{
         max-width: 236px;
-        margin-top: 22px;
-    }
-    .single-use-carousel__nav{
-        width: 46px;
-        height: 46px;
-        font-size: 34px;
-    }
-    .single-use-carousel__nav--prev{
-        margin-right: 52px;
-    }
-    .single-use-carousel__nav--next{
-        margin-left: 52px;
-        margin-top: -58px;
     }
     .product-gallery__card{
         min-height: 240px;
@@ -5978,15 +5996,15 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .single-use-carousel{
         margin-top: 16px;
     }
-    .single-use-carousel__viewport{
-        min-height: 280px;
-    }
     .single-use-card{
-        width: min(100%, 240px);
-        padding: 14px;
+        flex-basis: 82vw;
+        padding: 16px;
     }
     .single-use-card__image{
         max-width: 204px;
+    }
+    .single-use-card__label{
+        font-size: 13px;
     }
     .product-table{
         min-width: 560px;
@@ -6026,11 +6044,8 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     .contact-card{
         padding: 26px 20px;
     }
-    .single-use-carousel__viewport{
-        min-height: 250px;
-    }
     .single-use-card{
-        width: min(100%, 214px);
+        padding: 14px;
     }
     .single-use-card__image{
         max-width: 184px;
@@ -6227,17 +6242,24 @@ body[data-erop-product="new-port-pack"] .erop-spec{
     align-items: center;
 }
 .brand-spotlight__product-img {
+    /* Neumorphic soft-UI card: dual shadow (dark toward bottom-right, light
+       highlight toward top-left) plus a faint inner hairline for a pressed-
+       glass edge. --spotlight-shadow-color is tinted per brand below so the
+       dark shadow harmonises with each section's background gradient. */
     width: 100%;
     max-width: 420px;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.13));
+    border-radius: 26px;
+    --spotlight-shadow-color: 20, 45, 90;
+    box-shadow:
+        18px 18px 36px rgba(var(--spotlight-shadow-color), 0.14),
+        -14px -14px 30px rgba(255, 255, 255, 0.85),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
-.brand-spotlight__product-img--insufine {
-    border-radius: 16px;
-    filter: none;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.13);
-}
+.brand-spotlight--sungshim .brand-spotlight__product-img { --spotlight-shadow-color: 20, 45, 90; }
+.brand-spotlight--erop     .brand-spotlight__product-img { --spotlight-shadow-color: 18, 70, 45; }
+.brand-spotlight--insufine .brand-spotlight__product-img { --spotlight-shadow-color: 20, 60, 90; }
 .brand-spotlight__logo-wrap { margin-bottom: 10px; }
 .brand-spotlight__logo { height: 42px; object-fit: contain; }
 .brand-spotlight__logo--erop { height: 34px; }
@@ -6653,6 +6675,15 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 @media (max-width: 640px) {
     .brand-spotlight { padding: 56px 0; }
     .brand-spotlight__inner { padding: 0 20px; gap: 28px; }
+    /* Tighter viewport, tighter padding — pull the shadow in so it can't
+       get clipped by .brand-spotlights' overflow:hidden or force scroll. */
+    .brand-spotlight__product-img {
+        border-radius: 20px;
+        box-shadow:
+            10px 10px 22px rgba(var(--spotlight-shadow-color), 0.13),
+            -8px -8px 18px rgba(255, 255, 255, 0.85),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    }
     .trust-bar__item { padding: 6px 12px; font-size: 10px; }
     .trust-bar__divider { display: none; }
     .cert-cards-grid { grid-template-columns: repeat(2, 1fr); }
