@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="K-Pick Trading Corp — exclusive Philippine distributor of Sungshim and EROP Korean medical devices. Request samples, a formal quote, or regulatory documents.">
+    <meta name="description" content="K-Pick Trading Corp — exclusive Philippine distributor of Sungshim and EROP Korean medical devices. Request samples, product information, or regulatory documents.">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#0B3D91">
     <link rel="icon" type="image/png" href="img/apple-touch-icon.png">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <link rel="preconnect" href="https://api.web3forms.com">
     <link rel="stylesheet" href="css/exhibit.css">
-    <title>K-Pick Trading Corp — Trade Show | Request Samples &amp; Quotes</title>
+    <title>K-Pick Trading Corp — Trade Show | Request Samples &amp; Product Info</title>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
                 <li>Korean MFDS</li>
                 <li>PH FDA LTO</li>
             </ul>
-            <a href="#lead-form" class="exhibit-btn exhibit-btn--primary">Request Samples / Get a Quote</a>
+            <a href="#lead-form" class="exhibit-btn exhibit-btn--primary">Request Samples / Product Info</a>
             <div class="exhibit-btn-row">
                 <a href="#" class="exhibit-btn exhibit-btn--secondary js-save-contact" download="kpick.vcf">Save Our Contact</a>
                 <a href="https://wa.me/639173158420" class="exhibit-btn exhibit-btn--secondary" target="_blank" rel="noopener">WhatsApp Us</a>
@@ -149,8 +149,8 @@
                                 <label for="ex-i1">Request samples</label>
                             </span>
                             <span class="exhibit-radio-pill">
-                                <input type="radio" id="ex-i2" name="intent" value="Request a formal quote">
-                                <label for="ex-i2">Request a formal quote</label>
+                                <input type="radio" id="ex-i2" name="intent" value="Request product information">
+                                <label for="ex-i2">Request product information</label>
                             </span>
                             <span class="exhibit-radio-pill">
                                 <input type="radio" id="ex-i3" name="intent" value="Request regulatory documents (ISO, CE, MFDS, FDA)">
@@ -183,6 +183,7 @@
         <section class="exhibit-trust">
             <p>Founded 2020 &middot; Exclusive Philippine Distributor</p>
             <p>Nationwide Coverage &mdash; Metro Manila, Luzon, Visayas, Mindanao</p>
+            <p style="font-size:0.85em;opacity:0.85;">In keeping with PhilMed 2026 exhibit guidelines, no sales or quotations are made at our booth &mdash; our office follows up after the show.</p>
         </section>
 
         <section class="exhibit-linecard">
@@ -247,7 +248,7 @@
         }
 
         function showFallback(name, mobile) {
-            var body = 'Name: ' + (name || '') + '%0AMobile: ' + (mobile || '') + '%0A%0A(Please describe what you need: samples, quote, or regulatory documents.)';
+            var body = 'Name: ' + (name || '') + '%0AMobile: ' + (mobile || '') + '%0A%0A(Please describe what you need: samples, product information, or regulatory documents.)';
             var mailtoHref = 'mailto:info@kpicktradingcorp.com?subject=Trade%20Show%20Inquiry&body=' + body;
             statusEl.setAttribute('data-state', 'error');
             statusEl.innerHTML = 'We could not send your request automatically. Please reach us directly: ' +
