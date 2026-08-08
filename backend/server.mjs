@@ -2190,6 +2190,9 @@ async function handleRequest(request, response) {
                     ['Mobile', mobile],
                     ['Email', email || '—'],
                     ['Organization', String(payload.organization || '').trim() || '—'],
+                    ['Profession / Role', String(payload.profession || '').trim() || '—'],
+                    ['PRC License', String(payload.prc_license || '').trim() || '—'],
+                    ['HCP attestation', String(payload.hcp_attestation || '').trim() || 'NOT CONFIRMED'],
                     ['Products', products || '—'],
                     ['Intent', String(payload.intent || '').trim() || '—'],
                     ['Lead source', String(payload.lead_source || 'exhibit').trim()]

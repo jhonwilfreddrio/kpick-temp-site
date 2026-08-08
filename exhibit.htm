@@ -62,6 +62,14 @@
                             <label for="ex-org">Organization</label>
                             <input id="ex-org" name="organization" type="text" autocomplete="organization">
                         </div>
+                        <div class="exhibit-field">
+                            <label for="ex-profession">Profession / Role</label>
+                            <input id="ex-profession" name="profession" type="text" placeholder="e.g. Physician, Nurse, Pharmacist, Procurement" required>
+                        </div>
+                        <div class="exhibit-field">
+                            <label for="ex-prc">PRC License No. <span style="font-weight:normal;opacity:0.7;">(if applicable)</span></label>
+                            <input id="ex-prc" name="prc_license" type="text" autocomplete="off">
+                        </div>
                     </div>
 
                     <div class="exhibit-form-step">
@@ -163,6 +171,13 @@
                         </div>
                     </div>
 
+                    <div class="exhibit-form-step">
+                        <label style="display:flex;gap:8px;align-items:flex-start;font-size:0.9em;cursor:pointer;">
+                            <input type="checkbox" id="ex-hcp" name="hcp_attestation" value="Confirmed: licensed healthcare professional or authorized representative of a healthcare organization" style="margin-top:3px;flex-shrink:0;">
+                            <span>I confirm I am a licensed healthcare professional or an authorized representative of a healthcare organization or institutional buyer. (Samples and product information for professional use are provided to healthcare professionals only, per DOH regulations.)</span>
+                        </label>
+                    </div>
+
                     <button type="submit" class="exhibit-btn exhibit-btn--primary exhibit-submit">Send My Request</button>
                     <p class="exhibit-form-status" id="exhibit-form-status" role="status" aria-live="polite"></p>
                 </form>
@@ -258,6 +273,12 @@
         if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
+                var attest = document.getElementById('ex-hcp');
+                if (attest && !attest.checked) {
+                    statusEl.setAttribute('data-state', 'error');
+                    statusEl.textContent = 'Please confirm you are a healthcare professional or an authorized organizational representative before sending.';
+                    return;
+                }
                 var nameField = document.getElementById('ex-name');
                 var mobileField = document.getElementById('ex-mobile');
                 var name = nameField ? nameField.value.trim() : '';
@@ -290,6 +311,9 @@
                     mobile: mobile,
                     email: String(formData.get('email') || '').trim(),
                     organization: String(formData.get('organization') || '').trim(),
+                    profession: String(formData.get('profession') || '').trim(),
+                    prc_license: String(formData.get('prc_license') || '').trim(),
+                    hcp_attestation: String(formData.get('hcp_attestation') || ''),
                     products: formData.getAll('products'),
                     intent: String(formData.get('intent') || ''),
                     lead_source: String(formData.get('lead_source') || 'exhibit'),
