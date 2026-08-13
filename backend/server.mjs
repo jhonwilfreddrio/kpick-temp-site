@@ -2183,18 +2183,18 @@ async function handleRequest(request, response) {
                 ? payload.products.map((item) => String(item)).join(', ')
                 : String(payload.products || '');
             await sendLeadNotification({
-                subject: 'Trade Show Lead — K-Pick Website',
+                subject: 'HCP Inquiry — PhilMed Expo 2026 (K-Pick Website)',
                 replyTo: email || undefined,
                 lines: [
                     ['Name', name],
                     ['Mobile', mobile],
                     ['Email', email || '—'],
-                    ['Organization', String(payload.organization || '').trim() || '—'],
-                    ['Profession / Role', String(payload.profession || '').trim() || '—'],
-                    ['PRC License', String(payload.prc_license || '').trim() || '—'],
+                    ['Institution / Clinic / Hospital', String(payload.organization || '').trim() || '—'],
+                    ['Profession / Position', String(payload.profession || '').trim() || '—'],
                     ['HCP attestation', String(payload.hcp_attestation || '').trim() || 'NOT CONFIRMED'],
-                    ['Products', products || '—'],
-                    ['Intent', String(payload.intent || '').trim() || '—'],
+                    ['Areas of interest', products || '—'],
+                    ['Preferred follow-up', String(payload.preferred_time || payload.intent || '').trim() || '—'],
+                    ['Message', String(payload.message || '').trim() || '—'],
                     ['Lead source', String(payload.lead_source || 'exhibit').trim()]
                 ]
             });

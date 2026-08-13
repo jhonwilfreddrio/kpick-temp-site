@@ -1,7 +1,9 @@
 /* ============================================================================
    exhibit.css — Standalone stylesheet for the trade-show QR landing page
    (exhibit.htm). Self-contained: does NOT depend on style.css or refine.css.
-   Tokens per approved blueprint. Mobile-first, single centered column.
+   Layout mirrors the printed PhilMed 2026 "HCP Inquiry Form": white section
+   cards with navy tab headers, underline-style inputs, square checkboxes.
+   Mobile-first, single centered column.
    ========================================================================== */
 
 :root {
@@ -13,6 +15,7 @@
     --ex-accent-hover: #082C6B;
     --ex-accent-soft: #EAF0FB;
     --ex-border: #E2E6EE;
+    --ex-required: #D3382C;
 }
 
 * { box-sizing: border-box; }
@@ -42,61 +45,97 @@ h1, h2, h3 {
 
 p { margin: 0 0 1em; }
 
-.exhibit-wrap {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* ---- Top bar ---- */
-.exhibit-topbar {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 18px 20px 0;
-}
-
-.exhibit-wordmark {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: var(--ex-accent);
-}
-
-/* ---- Hero ---- */
-.exhibit-hero {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 20px 20px 32px;
-}
-
-.exhibit-hero h1 {
-    font-size: 30px;
-    margin-top: 12px;
-}
-
-.exhibit-hero__sub {
-    color: var(--ex-secondary);
-    font-size: 16px;
-    margin-bottom: 18px;
-}
-
-.exhibit-badges {
-    list-style: none;
-    margin: 0 0 24px;
-    padding: 0;
+/* ---- Brand bar (K-Pick | EROP | Sungshim) — fixed navy in both themes
+   because the only EROP/Sungshim logo assets are white-on-transparent. */
+.exhibit-brandbar {
+    background: #0B3D91;
+    padding: 12px 20px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     flex-wrap: wrap;
-    gap: 8px;
 }
 
-.exhibit-badges li {
-    background: var(--ex-accent-soft);
-    color: var(--ex-accent);
-    font-size: 12.5px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 999px;
+.exhibit-brandbar__kpick {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.exhibit-brandbar__kpick img { height: 26px; width: auto; }
+
+.exhibit-brandbar__tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-left: 1px solid rgba(255, 255, 255, 0.45);
+    padding-left: 10px;
     white-space: nowrap;
+}
+
+.exhibit-brandbar__partners {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.exhibit-brandbar__partners img { height: 22px; width: auto; }
+
+/* ---- Form head: HCP INQUIRY FORM + expo badge ---- */
+.exhibit-formhead {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 28px 20px 8px;
+}
+
+.exhibit-formhead__bar {
+    background: var(--ex-surface);
+    border: 2px solid var(--ex-accent);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.exhibit-formhead__bar h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--ex-accent);
+}
+
+.exhibit-formhead__badge {
+    display: inline-block;
+    background: var(--ex-accent);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    transform: skewX(-12deg);
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.exhibit-formhead__badge > span {
+    display: inline-block;
+    transform: skewX(12deg);
+}
+
+.exhibit-formhead__sub {
+    text-align: center;
+    color: var(--ex-accent);
+    font-size: 14.5px;
+    font-weight: 600;
+    margin: 14px 0 0;
 }
 
 /* ---- Buttons ---- */
@@ -149,58 +188,91 @@ p { margin: 0 0 1em; }
 
 /* ---- Form section ---- */
 .exhibit-form-section {
-    background: var(--ex-surface);
-    border-top: 1px solid var(--ex-border);
-    border-bottom: 1px solid var(--ex-border);
-    padding: 32px 0 40px;
+    padding: 8px 0 32px;
 }
 
 .exhibit-form-wrap { max-width: 640px; margin: 0 auto; padding: 0 20px; min-height: 200px; }
 
-.exhibit-form-step {
-    margin-bottom: 26px;
+/* ---- Section cards with overlapping navy tab (like the print form) ---- */
+.exhibit-card {
+    position: relative;
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(16, 24, 43, 0.05);
+    padding: 28px 18px 18px;
+    margin: 30px 0 0;
 }
 
-.exhibit-form-step__label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
+.exhibit-card__tab {
+    position: absolute;
+    top: -14px;
+    left: 14px;
+    background: var(--ex-accent);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--ex-secondary);
-    margin-bottom: 12px;
+    padding: 5px 16px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(11, 61, 145, 0.3);
 }
 
-.exhibit-field {
-    margin-bottom: 14px;
+.exhibit-card__grid { display: block; }
+
+@media (min-width: 560px) {
+    .exhibit-card__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 28px;
+        align-items: start;
+    }
 }
 
-.exhibit-field label {
+/* ---- Underline fields ---- */
+.exhibit-line-field {
+    margin-bottom: 18px;
+}
+
+.exhibit-line-field label {
     display: block;
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--ex-text);
-    margin-bottom: 6px;
+    margin-bottom: 2px;
 }
 
-.exhibit-field input[type="text"],
-.exhibit-field input[type="tel"],
-.exhibit-field input[type="email"] {
+.exhibit-line-field input,
+.exhibit-line-field textarea {
     width: 100%;
-    min-height: 48px;
-    padding: 10px 14px;
+    min-height: 42px;
+    padding: 8px 2px;
     font-size: 16px;
     font-family: inherit;
     color: var(--ex-text);
-    background: var(--ex-surface);
-    border: 1px solid var(--ex-border);
-    border-radius: 10px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1.5px solid var(--ex-border);
+    border-radius: 0;
 }
 
-.exhibit-field input:focus {
+.exhibit-line-field textarea {
+    min-height: 88px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.exhibit-line-field input:focus,
+.exhibit-line-field textarea:focus {
     outline: none;
-    border-color: var(--ex-accent);
-    box-shadow: 0 0 0 3px var(--ex-accent-soft);
+    border-bottom-color: var(--ex-accent);
+    box-shadow: 0 1.5px 0 0 var(--ex-accent);
+}
+
+.exhibit-req {
+    color: var(--ex-required);
+    font-weight: 700;
 }
 
 /* honeypot */
@@ -212,112 +284,126 @@ p { margin: 0 0 1em; }
     opacity: 0;
 }
 
-/* ---- Chip groups (checkboxes) ---- */
-.exhibit-chip-group { margin-bottom: 18px; }
+/* ---- Square checkbox / radio grids ---- */
+.exhibit-checkset {
+    border: 0;
+    padding: 0;
+    margin: 0 0 14px;
+    min-width: 0;
+}
 
-.exhibit-chip-group__label {
-    display: block;
-    font-size: 12.5px;
+.exhibit-checkset legend {
+    padding: 0;
+    font-size: 13.5px;
     font-weight: 700;
-    color: var(--ex-accent);
-    margin-bottom: 8px;
+    color: var(--ex-text);
+    margin-bottom: 6px;
 }
 
-.exhibit-chips {
+.exhibit-checkset legend em {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--ex-secondary);
+}
+
+.exhibit-checkgrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 12px;
+}
+
+.exhibit-checkgrid--time { grid-template-columns: 1fr; }
+
+@media (min-width: 560px) {
+    .exhibit-checkgrid--time { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.exhibit-check {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.exhibit-chip { position: relative; }
-
-.exhibit-chip input {
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-}
-
-.exhibit-chip label {
-    display: inline-flex;
     align-items: center;
-    min-height: 48px;
-    padding: 12px 16px;
-    font-size: 14px;
+    gap: 9px;
+    min-height: 42px;
+    font-size: 14.5px;
     font-weight: 500;
     color: var(--ex-text);
-    background: var(--ex-bg);
-    border: 1px solid var(--ex-border);
-    border-radius: 999px;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.1s ease;
 }
 
-.exhibit-chip input:checked + label {
-    background: var(--ex-accent);
-    border-color: var(--ex-accent);
-    color: #ffffff;
+.exhibit-check input[type="checkbox"],
+.exhibit-check input[type="radio"] {
+    width: 19px;
+    height: 19px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--ex-accent);
+    cursor: pointer;
 }
 
-.exhibit-chip input:focus-visible + label {
-    outline: 2px solid var(--ex-accent);
-    outline-offset: 2px;
+.exhibit-check--others {
+    grid-column: 1 / -1;
+    flex-wrap: nowrap;
 }
 
-/* ---- Radio pills (Step 3) ---- */
-.exhibit-radio-pills {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.exhibit-radio-pill { position: relative; }
-
-.exhibit-radio-pill input {
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-}
-
-.exhibit-radio-pill label {
-    display: flex;
-    align-items: center;
-    min-height: 56px;
-    padding: 12px 16px;
+.exhibit-inline-line {
+    flex: 1 1 60px;
+    min-width: 60px;
+    min-height: 34px;
+    padding: 4px 2px;
     font-size: 15px;
-    font-weight: 500;
+    font-family: inherit;
     color: var(--ex-text);
-    background: var(--ex-bg);
-    border: 1px solid var(--ex-border);
-    border-radius: 10px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1.5px solid var(--ex-border);
+    border-radius: 0;
+}
+
+.exhibit-inline-line:focus {
+    outline: none;
+    border-bottom-color: var(--ex-accent);
+}
+
+/* ---- HCP attestation ---- */
+.exhibit-attest {
+    margin: 22px 0 18px;
+}
+
+.exhibit-attest label {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.9em;
+    color: var(--ex-secondary);
     cursor: pointer;
-    user-select: none;
-    transition: background-color 0.1s ease;
 }
 
-.exhibit-radio-pill input:checked + label {
-    background: var(--ex-accent-soft);
-    border-color: var(--ex-accent);
-    color: var(--ex-accent-hover);
-    font-weight: 600;
-}
-
-.exhibit-radio-pill input:focus-visible + label {
-    outline: 2px solid var(--ex-accent);
-    outline-offset: 2px;
+.exhibit-attest input {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--ex-accent);
 }
 
 .exhibit-submit {
     margin-top: 8px;
 }
 
+.exhibit-form-note {
+    margin: 14px 0 0;
+    text-align: center;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ex-secondary);
+}
+
 .exhibit-form-status {
-    margin-top: 12px;
+    margin-top: 10px;
     font-size: 14px;
     color: var(--ex-secondary);
     min-height: 44px;
+    text-align: center;
 }
 
 .exhibit-form-status[data-state="error"] { color: #B3261E; }
@@ -349,11 +435,18 @@ p { margin: 0 0 1em; }
     text-decoration: underline;
 }
 
+/* ---- Save contact / WhatsApp row ---- */
+.exhibit-contact-row {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 /* ---- Brand cards ---- */
 .exhibit-brands {
     max-width: 640px;
     margin: 0 auto;
-    padding: 32px 20px 8px;
+    padding: 24px 20px 8px;
 }
 
 .exhibit-brand-card {
@@ -430,8 +523,11 @@ p { margin: 0 0 1em; }
         --ex-accent-hover: #7BA3F5;
         --ex-accent-soft: #182A4D;
         --ex-border: #26314A;
+        --ex-required: #F2735F;
     }
 
     .exhibit-btn--primary { color: #0B1220; }
-    .exhibit-radio-pill input:checked + label { color: var(--ex-accent); }
+
+    .exhibit-card__tab { color: #0B1220; }
+    .exhibit-formhead__badge { color: #0B1220; }
 }
