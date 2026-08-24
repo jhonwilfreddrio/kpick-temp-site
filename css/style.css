@@ -1659,6 +1659,17 @@ body{
     margin: 0 auto;
     border-radius: 14px;
 }
+.product-photo{
+    display: block;
+    width: min(680px, 100%);
+    margin: 0 auto;
+    border-radius: 14px;
+}
+.product-card__image--photo{
+    height: 220px;
+    width: 100%;
+    object-fit: contain;
+}
 .insufine-sizes{
     position: relative;
     padding: 76px 0 44px;
