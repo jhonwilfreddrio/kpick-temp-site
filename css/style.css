@@ -799,6 +799,104 @@ body{
     padding: 92px 0;
     border-top: 1px solid rgba(15, 45, 107, 0.08);
 }
+.timeline-flow{
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 8px 0 4px;
+}
+.timeline-flow::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18px;
+    width: 3px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgba(15, 45, 107, 0.05), rgba(15, 45, 107, 0.35) 10%, rgba(15, 45, 107, 0.35) 90%, rgba(15, 45, 107, 0.05));
+}
+.timeline-flow article{
+    position: relative;
+    margin: 0 0 22px 52px;
+    padding: 20px 22px 22px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 45, 107, 0.12);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(15, 32, 73, 0.07);
+}
+.timeline-flow article:last-child{
+    margin-bottom: 0;
+}
+.timeline-flow article::before{
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: -42px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #102a67;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 3px rgba(15, 45, 107, 0.22);
+}
+.timeline-flow span{
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: #102a67;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+.timeline-flow h3{
+    margin: 0;
+    color: #0f2d6b;
+    font-size: 19px;
+    line-height: 1.25;
+    font-weight: 900;
+}
+.timeline-flow p{
+    margin: 10px 0 0;
+    color: #4e5868;
+    font-size: 14.5px;
+    line-height: 1.6;
+}
+@media (min-width: 861px){
+    .timeline-flow::before{
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .timeline-flow article{
+        width: calc(50% - 46px);
+        margin: 0 0 28px 0;
+    }
+    .timeline-flow article:nth-child(odd){
+        margin-right: auto;
+    }
+    .timeline-flow article:nth-child(odd)::before{
+        left: auto;
+        right: -55px;
+    }
+    .timeline-flow article:nth-child(even){
+        margin-left: auto;
+        margin-top: 44px;
+    }
+    .timeline-flow article:nth-child(2){
+        margin-top: 64px;
+    }
+    .timeline-flow article:nth-child(even)::before{
+        left: -55px;
+    }
+    .timeline-flow article:nth-child(odd):not(:first-child){
+        margin-top: -20px;
+    }
+    .timeline-flow article:last-child{
+        margin-bottom: 0;
+    }
+}
 .timeline-grid{
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
