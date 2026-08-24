@@ -16,7 +16,7 @@
     <link rel="canonical" href="https://kpicktradingcorp.com/sungshim-filter-needle.html">
     <meta property="og:title" content="Filter Needle Supplier Philippines | Sungshim K-Pick">
     <meta property="og:description" content="K-Pick Trading Corp supplies Sungshim Korean filter needles in the Philippines for aspirating medication with reduced particulate risk in hospitals, clinics, and reseller channels.">
-    <meta property="og:image" content="https://kpicktradingcorp.com/img/sungshimLogo.png">
+    <meta property="og:image" content="https://kpicktradingcorp.com/img/filterNeedle.jpg">
     <meta property="og:url" content="https://kpicktradingcorp.com/sungshim-filter-needle.html">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     },
     "category": "Filter needles",
     "description": "Single-use needle fitted with a filter that reduces particulates of glass, rubber, and other contaminants larger than 5 microns when aspirating medication, supplied by K-Pick Trading Corp in the Philippines.",
-    "image": "https://kpicktradingcorp.com/img/sungshimLogo.png",
+    "image": "https://kpicktradingcorp.com/img/filterNeedle.jpg",
     "distributor": {
         "@type": "MedicalOrganization",
         "name": "K-Pick Trading Corp",
@@ -123,7 +123,7 @@
             </div>
 
             <figure class="product-media">
-                <img class="product-placeholder" src="img/sungshim-placeholder.svg" alt="Filter Needle - product image coming soon" loading="lazy">
+                <img class="product-photo" src="img/filterNeedle.jpg" alt="Sungshim 18G filter needles with protective caps" loading="lazy">
             </figure>
 
             <section class="product-section">
@@ -160,6 +160,56 @@
                     </table>
                 </div>
                 <p class="product-note">For other sizes, please contact us.</p>
+            </section>
+
+            <section class="product-section">
+                <div class="product-section__bar">
+                    <h2>Filter Process</h2>
+                </div>
+                <div class="fp" data-filter-process>
+                    <p class="fp__lede">Watch how the <strong>5&nbsp;µm filter</strong> stops particulates before they reach the barrel. Use the steps below to explore each stage.</p>
+                    <div class="fp__stage">
+                        <svg id="fp-svg" viewBox="0 0 720 270" role="img" aria-label="Animated cross-section: particulates are trapped at the 5 micron filter while clean fluid fills the barrel">
+                            <!-- needle channel -->
+                            <rect x="16" y="143" width="184" height="14" rx="3" fill="#8f8378"/>
+                            <rect x="20" y="147" width="180" height="6" fill="#aecbe8"/>
+                            <!-- tip cone -->
+                            <polygon points="200,138 240,114 240,186 200,162" fill="#8f8378"/>
+                            <polygon points="200,147 240,128 240,172 200,153" fill="#aecbe8"/>
+                            <!-- filter housing and chamber -->
+                            <rect x="240" y="108" width="80" height="104" rx="6" fill="#8f8378"/>
+                            <rect x="246" y="118" width="68" height="84" fill="#dfe9f4"/>
+                            <!-- 5 micron filter disc -->
+                            <rect x="270" y="118" width="12" height="84" fill="#7fbf6f" stroke="#4c8a3f" stroke-width="1.5"/>
+                            <!-- particulates (populated by script) -->
+                            <g id="fp-particles"></g>
+                            <!-- barrel -->
+                            <rect x="320" y="98" width="330" height="12" fill="#8f8378"/>
+                            <rect x="320" y="210" width="330" height="12" fill="#8f8378"/>
+                            <rect x="320" y="110" width="330" height="100" fill="#f6f9fd"/>
+                            <rect id="fp-fill" x="320" y="110" width="20" height="100" fill="#aecbe8"/>
+                            <rect x="644" y="86" width="8" height="148" rx="2" fill="#8f8378"/>
+                            <!-- plunger (translated by script) -->
+                            <g id="fp-plunger">
+                                <rect x="340" y="110" width="14" height="100" rx="3" fill="#102a67"/>
+                                <rect x="354" y="145" width="340" height="30" rx="4" fill="#3d5388"/>
+                                <rect x="690" y="118" width="10" height="84" rx="3" fill="#102a67"/>
+                            </g>
+                            <!-- labels -->
+                            <text x="118" y="96" font-size="15" font-weight="600" fill="#d64545">Particulates</text>
+                            <line x1="150" y1="103" x2="170" y2="140" stroke="#d64545" stroke-width="1.5"/>
+                            <text x="276" y="242" font-size="15" font-weight="600" fill="#2f6b26" text-anchor="middle">5 µm filter</text>
+                            <text x="470" y="250" font-size="15" font-weight="600" fill="#5a6e8c" text-anchor="middle">Clean fluid</text>
+                        </svg>
+                    </div>
+                    <div class="fp__controls" role="group" aria-label="Filter process steps">
+                        <button type="button" class="fp__btn is-active" data-step="0" aria-pressed="true">1 &middot; Draw up</button>
+                        <button type="button" class="fp__btn" data-step="1" aria-pressed="false">2 &middot; Filter traps &ge;5 µm</button>
+                        <button type="button" class="fp__btn" data-step="2" aria-pressed="false">3 &middot; Clean dose</button>
+                        <button type="button" class="fp__btn fp__btn--replay">&#8635; Replay</button>
+                    </div>
+                    <p class="fp__caption">Medication is drawn up through the needle channel toward the barrel.</p>
+                </div>
             </section>
 
             <section class="product-section">
@@ -273,6 +323,7 @@
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/filter-process.js"></script>
 <script src="script/expo-mode.js?v=20260808" defer></script>
 </body>
 </html>
