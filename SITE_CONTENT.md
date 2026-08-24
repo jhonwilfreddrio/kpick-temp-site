@@ -130,10 +130,12 @@
 ---
 
 ### 6. Company Timeline
-- **2020** — Company founded. K-Pick Trading Corp began operations in Manila with a focus on Korean healthcare products.
-- **2023** — INSUFiNE distribution. K-Pick established Philippine distribution representation for Korean insulin delivery products.
-- **2024** — Sungshim exclusive PH distributor. K-Pick became the exclusive Philippine distributor for Sungshim syringes and injection devices.
-- **2025** — EROP exclusive PH distributor. K-Pick expanded into Korean laparoscopic and surgical device distribution through EROP.
+- **2020** — Company founded. K-Pick Trading Corp was founded in Manila and began distributing Korean insulin pen needles.
+- **2021** — Broader medical supplies. K-Pick started distributing a wider range of medical supplies for the Philippine market.
+- **2022** — Expanded capabilities. Expanded product sourcing, logistics, distribution, and online retail capabilities.
+- **2024** — Sungshim exclusive PH distributor. K-Pick became the exclusive Philippine distributor for Sungshim syringes and needles.
+- **2025** — EROP exclusive PH distributor. K-Pick expanded into Korean laparoscopic device distribution through EROP.
+- **Today** — Continuing growth. K-Pick continues to develop its hospital, institutional, B2B, and e-commerce distribution networks while introducing new healthcare technologies to the Philippines.
 
 ---
 
