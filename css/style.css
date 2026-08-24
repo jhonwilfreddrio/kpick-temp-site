@@ -1636,6 +1636,29 @@ body{
 .product-card__media--pen{
     padding-top: 42px;
 }
+.product-card__media--placeholder{
+    align-items: center;
+    padding: 24px 18px 78px;
+}
+.product-card__image--placeholder{
+    height: 180px;
+    width: 100%;
+    object-fit: contain;
+    opacity: 0.92;
+}
+.product-card:hover .product-card__media--placeholder{
+    transform: translateY(8px) scale(1.1);
+}
+.product-media{
+    margin: 26px 0 28px;
+    text-align: center;
+}
+.product-placeholder{
+    display: block;
+    width: min(560px, 100%);
+    margin: 0 auto;
+    border-radius: 14px;
+}
 .insufine-sizes{
     position: relative;
     padding: 76px 0 44px;
@@ -2190,6 +2213,15 @@ body{
     background-position: center;
 }
 .product-hero--pen{
+    background-image: url("../img/sungshimDashboard.png");
+    background-size: cover;
+    background-position: center;
+}
+.product-hero--needle,
+.product-hero--nano,
+.product-hero--filter-syringe,
+.product-hero--filter-needle,
+.product-hero--infusion{
     background-image: url("../img/sungshimDashboard.png");
     background-size: cover;
     background-position: center;

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Product image coming soon">
+  <rect width="800" height="500" fill="#EEF2F8"/>
+  <rect x="14" y="14" width="772" height="472" rx="18" fill="none" stroke="#C6D2E4" stroke-width="3" stroke-dasharray="10 8"/>
+  <g stroke="#9FB2CC" stroke-width="10" stroke-linecap="round" fill="none">
+    <rect x="300" y="205" width="170" height="56" rx="10"/>
+    <line x1="470" y1="233" x2="530" y2="233"/>
+    <line x1="530" y1="233" x2="586" y2="233" stroke-width="5"/>
+    <line x1="286" y1="205" x2="286" y2="261"/>
+    <line x1="238" y1="233" x2="286" y2="233"/>
+    <line x1="228" y1="211" x2="228" y2="255" stroke-width="14"/>
+  </g>
+  <text x="400" y="330" text-anchor="middle" font-family="Inter, Pretendard, Arial, sans-serif" font-size="26" fill="#5A6E8C" font-weight="600">Product image coming soon</text>
+  <text x="400" y="366" text-anchor="middle" font-family="Inter, Pretendard, Arial, sans-serif" font-size="17" fill="#8296B2">Sungshim Medical &#183; K-Pick Trading Corp</text>
+</svg>

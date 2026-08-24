@@ -44,6 +44,11 @@
 | Sungshim — LDS Syringe | sungshim-lds-syringe.html | Product detail page |
 | Sungshim — Single-Use Syringe | sungshim-single-use-syringe.html | Product detail page |
 | Sungshim — Insulin Pen Needles | sungshim-insulin-pen-needles.html | Product detail page |
+| Sungshim — Single-Use Needle | sungshim-single-use-needle.html | Product detail page |
+| Sungshim — Nano Needle | sungshim-nano-needle.html | Product detail page |
+| Sungshim — Filter Syringe | sungshim-filter-syringe.html | Product detail page |
+| Sungshim — Filter Needle | sungshim-filter-needle.html | Product detail page |
+| Sungshim — Infusion Set (I.V. Set) | sungshim-infusion-set.html | Product detail page |
 | EROP — Eroptix | erop-eroptix.html | Product detail page |
 | EROP — Trocar | erop-trocar.html | Product detail page |
 | EROP — Forcep | erop-forcep.html | Product detail page |
@@ -66,8 +71,8 @@
 - **Stats:** Founded 2020 in Manila · 3 Exclusive lines · Nationwide PH coverage
 
 **Supply Focus panel:**
-1. Surgical Devices — Laparoscopic and procedural tools for controlled clinical use
-2. Injection Products — Syringes, LDS syringes, and pen needles for consistent delivery
+1. Laparoscopic Devices — Laparoscopic and procedural tools for controlled clinical use
+2. Syringes and Needles — Syringes, LDS syringes, and pen needles for consistent delivery
 3. Clinical Support — Reliable products that support dependable care workflows
 - Distribution: Metro Manila with reach to Luzon, Visayas, and Mindanao
 
@@ -89,14 +94,14 @@
 
 ### 4. Brand Spotlights — Exclusive Philippine Distributor of
 
-#### Sungshim (Injection Devices · Exclusive PH Distributor)
+#### Sungshim (Syringes and Needles · Exclusive PH Distributor)
 - **Headline:** Precision-engineered syringes and insulin pen needles built for reliable clinical performance.
 - **Description:** Sungshim develops injection devices designed for accurate dosing, controlled delivery, and consistent performance. K-Pick Trading Corp is the exclusive Philippine distributor supplying hospitals, clinics, pharmacies, and procurement teams across the country.
-- **Products:** Insulin Syringe · Single-Use Syringe · LDS Syringe · Insulin Pen Needles
+- **Products:** Insulin Syringe · Single-Use Syringe · LDS Syringe · Insulin Pen Needles · Single-Use Needle · Nano Needle · Filter Syringe · Filter Needle · Infusion Set
 - **Certifications:** ISO 13485 · CE Marked · MFDS Certified
 - **CTA:** Explore Sungshim →
 
-#### EROP (Surgical Medical Devices · Exclusive PH Distributor)
+#### EROP (Laparoscopic Devices · Exclusive PH Distributor)
 - **Headline:** Surgeon-developed laparoscopic instruments engineered for precision and better patient outcomes.
 - **Description:** EROP designs surgical devices built around ideas from the operating room, with a mission to benefit both doctors and patients. K-Pick Trading Corp is the exclusive Philippine distributor for EROP surgical instruments supporting hospital procurement teams nationwide. In 2025, EROP's New Port trocar was cited in peer-reviewed clinical research published in the Annals of Coloproctology by surgeons at the Catholic University of Korea.
 - **Products:** Trocar · Forcep · Eroptix · Dual Guard · New Port · Chito Block · T Closure · S-Sustener
@@ -242,10 +247,10 @@ All products are inspected prior to shipment. If a defect or damage is discovere
 ## Sungshim Brand Page (sungshim.html)
 
 ### Brand Hero
-SUNGSHIM — Injection Devices
+SUNGSHIM — Syringes and Needles
 
 ### Brand Intro
-- **Eyebrow:** Injection Devices
+- **Eyebrow:** Syringes and Needles
 - **H1:** Built for accurate delivery, dependable handling, and everyday clinical use.
 - **Description:** Sungshim develops precision-engineered syringes and insulin pen needles designed for consistent dosing, controlled delivery, and reliable performance across modern healthcare settings.
 - **Citation:** K-Pick Trading Corp is the exclusive Philippine distributor of Sungshim Korean injection devices, supplying insulin syringes, low dead space syringes, single-use syringes, and insulin pen needles for hospitals, clinics, pharmacies, resellers, and healthcare procurement teams in the Philippines.
@@ -280,10 +285,10 @@ K-Pick Trading Corp is the exclusive Philippine distributor of Sungshim Korean i
 ## EROP Brand Page (erop.html)
 
 ### Brand Hero
-EROP — Surgical Medical Devices
+EROP — Laparoscopic Devices
 
 ### Brand Intro
-- **Eyebrow:** Surgical Medical Devices
+- **Eyebrow:** Laparoscopic Devices
 - **H1:** Designed around clinical ideas, surgical efficiency, and patient outcomes.
 - **Description:** EROP develops surgical medical devices with a mission to benefit both doctors and patients by bringing surgeon-led ideas into clinical practice. In 2025, EROP's New Port trocar was cited in peer-reviewed clinical research published in the *Annals of Coloproctology* by surgeons at the Catholic University of Korea.
 - **Citation:** K-Pick Trading Corp is the exclusive Philippine distributor of EROP Korean surgical medical devices, supporting procurement inquiries for laparoscopic trocars, forceps, wound protectors, port systems, skin closure products, and surgical support devices across the Philippines.
@@ -404,8 +409,8 @@ Design notes: premium restyle (2026-07-20) with layered hero, sticky scroll-spy 
 All pages share the same navbar with the following links:
 - **Home** → index.html
 - **Brands** (dropdown) →
-  - Sungshim — Injection Devices → sungshim.html
-  - EROP — Surgical Devices → erop.html
+  - Sungshim — Syringes and Needles → sungshim.html
+  - EROP — Laparoscopic Devices → erop.html
   - Insufine — Insulin Pen Needles → insufine.html
   - View All Brands → index.html#TieUps
 - **About Us** → index.html#about
