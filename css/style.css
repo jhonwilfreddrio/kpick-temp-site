@@ -1670,6 +1670,60 @@ body{
     width: 100%;
     object-fit: contain;
 }
+.fp{
+    background: #EEF2F8;
+    border-radius: 16px;
+    padding: 22px 18px 16px;
+    margin-top: 14px;
+}
+.fp__lede{
+    margin: 0 0 14px;
+    text-align: center;
+    color: #3d4f6e;
+    font-size: 15px;
+}
+.fp__stage svg{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.fp__controls{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 16px 0 10px;
+}
+.fp__btn{
+    padding: 8px 18px;
+    border: 1.5px solid #102a67;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #102a67;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+.fp__btn:hover{
+    background: #dbe6f7;
+}
+.fp__btn.is-active{
+    background: #102a67;
+    color: #ffffff;
+}
+.fp__btn--replay{
+    border-style: dashed;
+    font-weight: 500;
+}
+.fp__caption{
+    min-height: 40px;
+    margin: 0;
+    text-align: center;
+    color: #33436a;
+    font-size: 14.5px;
+    line-height: 1.45;
+}
 .insufine-sizes{
     position: relative;
     padding: 76px 0 44px;
