@@ -7,8 +7,9 @@
     <link rel="icon" type="image/png" href="img/kpickicon.png">
     <meta name="theme-color" content="#0B3D91">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260824">
+    <link rel="stylesheet" href="css/style.css?v=20260825">
     <link rel="stylesheet" href="css/refine.css?v=20260804-2">
+    <link rel="stylesheet" href="css/product-demos.css?v=20260825-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" crossorigin="anonymous" />
@@ -121,6 +122,41 @@
                 <p>The Infusion Set (I.V. Set) is a sterile disposable medical device designed for the controlled administration of intravenous fluids, medications, and blood products to patients in hospital and clinic settings. It supports safe, contamination-reduced fluid delivery for use by trained healthcare professionals.</p>
                 <p>Sungshim's infusion set range includes standard sets, air-vent cap sets, Y-site sets, flow regulator sets, extension tubes, and specialty filter and regulator sets, giving healthcare facilities configuration options suited to different fluid administration needs.</p>
             </div>
+
+            <section class="product-section pd-section" id="infusion-demo">
+                <div class="product-section__bar">
+                    <h2>See the Infusion Path</h2>
+                </div>
+                <div class="sx pd" data-product-demo="infusion">
+                    <p class="sx__lede">Follow the fluid path from the container through priming and an illustrative clamp adjustment.</p>
+                    <div class="sx__stage pd__stage">
+                        <svg class="sx__svg pd__svg" data-pd-svg viewBox="0 0 900 300" role="img" aria-label="Interactive illustration of an infusion set being spiked, primed, and regulated"></svg>
+                    </div>
+                    <p class="pd__hint">&#8596; Swipe the diagram to see it in full</p>
+                    <div class="sx__controls">
+                        <div class="sx__group sx__group--wide">
+                            <span class="sx__label" id="pd-iv-step">Process step</span>
+                            <div class="sx__btns" role="group" aria-labelledby="pd-iv-step">
+                                <button type="button" class="sx__btn is-active" data-pd-set="step" data-pd-value="spike" aria-pressed="true">1 · Spike<small>fluid container</small></button>
+                                <button type="button" class="sx__btn" data-pd-set="step" data-pd-value="prime" aria-pressed="false">2 · Prime<small>chamber &amp; tubing</small></button>
+                                <button type="button" class="sx__btn" data-pd-set="step" data-pd-value="regulate" aria-pressed="false">3 · Regulate<small>prescribed flow</small></button>
+                                <button type="button" class="sx__btn pd__replay" data-pd-replay>&#8635; Replay<small>current step</small></button>
+                            </div>
+                        </div>
+                        <div class="sx__group sx__group--wide">
+                            <span class="sx__label" id="pd-iv-clamp">Illustrative clamp opening</span>
+                            <div class="sx__btns" role="group" aria-labelledby="pd-iv-clamp">
+                                <button type="button" class="sx__btn" data-pd-set="clamp" data-pd-value="closed" aria-pressed="false">Closed<small>paused preview</small></button>
+                                <button type="button" class="sx__btn is-active" data-pd-set="clamp" data-pd-value="partial" aria-pressed="true">Partly open<small>slower preview</small></button>
+                                <button type="button" class="sx__btn" data-pd-set="clamp" data-pd-value="open" aria-pressed="false">More open<small>faster preview</small></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sx__readout pd__readout" data-pd-readout aria-live="polite"></div>
+                    <p class="sx__note pd__note" data-pd-note></p>
+                    <p class="sx__src">Illustrative process only—not a flow-rate or dosing calculator. Product instructions, the prescription, and facility protocol control clinical use.</p>
+                </div>
+            </section>
 
             <section class="product-section">
                 <div class="product-section__bar">
@@ -794,6 +830,7 @@
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/sungshim-product-demos.js?v=20260825-1"></script>
 <script src="script/expo-mode.js?v=20260808" defer></script>
 </body>
 </html>

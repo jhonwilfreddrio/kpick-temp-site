@@ -7,8 +7,9 @@
     <link rel="icon" type="image/png" href="img/kpickicon.png">
     <meta name="theme-color" content="#0B3D91">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260824">
+    <link rel="stylesheet" href="css/style.css?v=20260825">
     <link rel="stylesheet" href="css/refine.css?v=20260804-2">
+    <link rel="stylesheet" href="css/product-demos.css?v=20260825-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" crossorigin="anonymous" />
@@ -125,6 +126,41 @@
             <figure class="product-media">
                 <img class="product-photo" src="img/nanoNeedle.jpg" alt="Sungshim Nano Needle boxes, 32G, 33G, and 34G, with fine-gauge needles" loading="lazy">
             </figure>
+
+            <section class="product-section pd-section" id="nano-explorer">
+                <div class="product-section__bar">
+                    <h2>See the Fine-Gauge Design</h2>
+                </div>
+                <div class="sx pd" data-product-demo="nano">
+                    <p class="sx__lede">Select an available gauge and length, then inspect the needle point through the magnified view.</p>
+                    <div class="sx__stage pd__stage">
+                        <svg class="sx__svg pd__svg" data-pd-svg viewBox="0 0 900 260" role="img" aria-label="Interactive relative-size diagram of a Sungshim nano needle and its micro-polished bevel"></svg>
+                    </div>
+                    <p class="pd__hint">&#8596; Swipe the diagram to see it in full</p>
+                    <div class="sx__controls">
+                        <div class="sx__group">
+                            <span class="sx__label" id="pd-nano-gauge">Gauge</span>
+                            <div class="sx__btns" role="group" aria-labelledby="pd-nano-gauge">
+                                <button type="button" class="sx__btn" data-pd-set="gauge" data-pd-value="30" aria-pressed="false">30G<small>fine</small></button>
+                                <button type="button" class="sx__btn is-active" data-pd-set="gauge" data-pd-value="32" aria-pressed="true">32G<small>finer</small></button>
+                                <button type="button" class="sx__btn" data-pd-set="gauge" data-pd-value="34" aria-pressed="false">34G<small>finest shown</small></button>
+                            </div>
+                        </div>
+                        <div class="sx__group">
+                            <span class="sx__label" id="pd-nano-length">Available length</span>
+                            <div class="sx__btns" role="group" aria-labelledby="pd-nano-length" data-pd-options="length">
+                                <button type="button" class="sx__btn" data-pd-set="length" data-pd-value="4" aria-pressed="false">4<small>mm</small></button>
+                                <button type="button" class="sx__btn" data-pd-set="length" data-pd-value="6" aria-pressed="false">6<small>mm</small></button>
+                                <button type="button" class="sx__btn is-active" data-pd-set="length" data-pd-value="8" aria-pressed="true">8<small>mm</small></button>
+                                <button type="button" class="sx__btn" data-pd-set="length" data-pd-value="13" aria-pressed="false">13<small>mm</small></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sx__readout pd__readout" data-pd-readout aria-live="polite"></div>
+                    <p class="sx__note pd__note" data-pd-note></p>
+                    <p class="sx__src">Relative visual only; the magnified bevel and shaft dimensions are not drawn to physical scale.</p>
+                </div>
+            </section>
 
             <section class="product-section">
                 <div class="product-section__bar">
@@ -299,6 +335,7 @@
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/sungshim-product-demos.js?v=20260825-1"></script>
 <script src="script/expo-mode.js?v=20260808" defer></script>
 </body>
 </html>

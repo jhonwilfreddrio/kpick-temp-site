@@ -1,0 +1,195 @@
+/* Sungshim product explainers: single-use needle, nano needle, and infusion set. */
+.pd-section {
+    scroll-margin-top: 132px;
+}
+
+.pd {
+    margin-top: 0;
+}
+
+.pd__stage {
+    position: relative;
+}
+
+.pd__svg {
+    min-width: 640px;
+}
+
+.pd__hint {
+    display: none;
+    margin: 7px 0 0;
+    color: #6d81a0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .02em;
+}
+
+.pd .sx__controls {
+    gap: 18px 28px;
+}
+
+.pd .sx__group {
+    min-width: 180px;
+}
+
+.pd .sx__btn {
+    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, transform 150ms cubic-bezier(.23, 1, .32, 1);
+}
+
+.pd .sx__btn:hover {
+    transform: none;
+}
+
+.pd .sx__btn:active {
+    transform: scale(.97);
+}
+
+.pd__replay {
+    align-self: flex-end;
+    color: #0f4ca3;
+    background: #f4f9ff;
+}
+
+.pd__readout {
+    min-height: 72px;
+}
+
+.pd__note {
+    min-height: 48px;
+}
+
+.pd-svg-label {
+    fill: #314159;
+    font: 700 13px Inter, system-ui, sans-serif;
+}
+
+.pd-svg-small {
+    fill: #6d81a0;
+    font: 600 11px Inter, system-ui, sans-serif;
+    letter-spacing: .02em;
+}
+
+.pd-svg-cap {
+    fill: #8fa2bd;
+    font: 700 9px Inter, system-ui, sans-serif;
+    letter-spacing: .09em;
+}
+
+.pd-svg-measure {
+    fill: #0f4ca3;
+    font: 800 12px Inter, system-ui, sans-serif;
+}
+
+.pd-svg-prime {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+}
+
+.pd-svg-bubble {
+    opacity: 0;
+}
+
+.pd-svg-drop {
+    opacity: .72;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.pd.is-animating .pd-svg-spike {
+    animation: pd-spike 700ms cubic-bezier(.23, 1, .32, 1) both;
+}
+
+.pd.is-animating .pd-svg-prime {
+    animation: pd-prime 1250ms cubic-bezier(.77, 0, .175, 1) both;
+}
+
+.pd.is-animating .pd-svg-bubble {
+    animation: pd-bubble 1100ms cubic-bezier(.23, 1, .32, 1) both;
+}
+
+.pd.is-animating .pd-svg-drop {
+    animation: pd-drop 900ms linear both;
+}
+
+.pd.is-animating .pd-svg-drop:nth-of-type(2) {
+    animation-delay: 160ms;
+}
+
+.pd.is-animating .pd-svg-drop:nth-of-type(3) {
+    animation-delay: 320ms;
+}
+
+.pd.is-animating .pd-svg-drop:nth-of-type(4) {
+    animation-delay: 480ms;
+}
+
+.pd.is-animating .pd-svg-drop:nth-of-type(5) {
+    animation-delay: 640ms;
+}
+
+@keyframes pd-spike {
+    from { transform: translateY(-18px); opacity: .55; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pd-prime {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes pd-bubble {
+    0% { transform: translateX(0); opacity: .9; }
+    82% { opacity: .55; }
+    100% { transform: translateX(135px); opacity: 0; }
+}
+
+@keyframes pd-drop {
+    0% { transform: translateY(-8px); opacity: 0; }
+    24% { opacity: .9; }
+    100% { transform: translateY(25px); opacity: 0; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .pd .sx__btn:hover {
+        border-color: #0f4ca3;
+        transform: translateY(-1px);
+    }
+}
+
+@media (max-width: 760px) {
+    .pd__svg {
+        min-width: 580px;
+    }
+
+    .pd__hint {
+        display: block;
+    }
+}
+
+@media (max-width: 620px) {
+    .pd .sx__controls {
+        gap: 16px;
+    }
+
+    .pd .sx__group {
+        min-width: 150px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pd .sx__btn {
+        transition: none;
+    }
+
+    .pd .sx__btn:hover,
+    .pd .sx__btn:active {
+        transform: none;
+    }
+
+    .pd.is-animating .pd-svg-spike,
+    .pd.is-animating .pd-svg-prime,
+    .pd.is-animating .pd-svg-bubble,
+    .pd.is-animating .pd-svg-drop {
+        animation: none;
+    }
+}

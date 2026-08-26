@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="img/kpickicon.png">
     <meta name="theme-color" content="#0B3D91">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260824">
+    <link rel="stylesheet" href="css/style.css?v=20260825">
     <link rel="stylesheet" href="css/refine.css?v=20260804-2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -252,10 +252,10 @@
                 <div class="product-section__bar">
                     <h2>Filter Process</h2>
                 </div>
-                <div class="fp" data-filter-process>
+                <div class="fp" data-filter-process data-filter-device="syringe">
                     <p class="fp__lede">Watch how the built-in <strong>5&nbsp;µm filter</strong> stops particulates before they reach the barrel. Use the steps below to explore each stage.</p>
                     <div class="fp__stage">
-                        <svg id="fp-svg" viewBox="0 0 720 270" role="img" aria-label="Animated cross-section of a filter syringe: particulates are trapped at the 5 micron filter while clean fluid fills the barrel">
+                        <svg id="fp-svg" data-filter-svg viewBox="0 0 900 260" role="img" aria-label="Animated filter syringe process: medication is drawn from an opened ampoule, particulates stop at the integrated 5 micron filter, and filtered medication fills the barrel">
                             <!-- needle channel -->
                             <rect x="16" y="143" width="184" height="14" rx="3" fill="#8f8378"/>
                             <rect x="20" y="147" width="180" height="6" fill="#aecbe8"/>
@@ -288,12 +288,14 @@
                             <text x="470" y="250" font-size="15" font-weight="600" fill="#5a6e8c" text-anchor="middle">Clean fluid</text>
                         </svg>
                     </div>
+                    <p class="fp__hint">&#8596; Swipe the diagram to see it in full</p>
                     <div class="fp__controls" role="group" aria-label="Filter process steps">
                         <button type="button" class="fp__btn is-active" data-step="0" aria-pressed="true">1 &middot; Draw up</button>
                         <button type="button" class="fp__btn" data-step="1" aria-pressed="false">2 &middot; Filter traps &ge;5 µm</button>
                         <button type="button" class="fp__btn" data-step="2" aria-pressed="false">3 &middot; Clean dose</button>
                         <button type="button" class="fp__btn fp__btn--replay">&#8635; Replay</button>
                     </div>
+                    <div class="sx__readout fp__readout" data-filter-readout></div>
                     <p class="fp__caption">Medication is drawn up through the needle channel toward the barrel.</p>
                 </div>
             </section>
@@ -411,7 +413,7 @@
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
-    <script src="script/filter-process.js"></script>
+    <script src="script/filter-process.js?v=20260825-3"></script>
 <script src="script/expo-mode.js?v=20260808" defer></script>
 </body>
 </html>
