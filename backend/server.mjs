@@ -49,6 +49,9 @@ const contentTypes = {
     '.png': 'image/png',
     '.svg': 'image/svg+xml',
     '.txt': 'text/plain; charset=utf-8',
+    '.webp': 'image/webp',
+    '.woff': 'font/woff',
+    '.woff2': 'font/woff2',
     '.xml': 'application/xml; charset=utf-8'
 };
 
@@ -1885,7 +1888,7 @@ function isPathInsideRoot(filePath) {
 }
 
 function isPublicStaticPath(pathname) {
-    const publicPrefixes = ['/css/', '/img/', '/script/', '/certs/'];
+    const publicPrefixes = ['/css/', '/img/', '/script/', '/certs/', '/fonts/'];
     const publicRootFiles = new Set([
         '/',
         '/index.html',
@@ -1909,7 +1912,26 @@ function isPublicStaticPath(pathname) {
         && !pathname.toLowerCase().startsWith('/node_modules/');
 }
 
+async function sendNotFound(response, pathname) {
+    const wantsHtml = pathname === '/' || /\.html?$/i.test(pathname) || !/\.[a-z0-9]+$/i.test(pathname);
+    if (wantsHtml) {
+        try {
+            const body = await readFile(resolve(rootDir, '404.html'));
+            response.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+            response.end(body);
+            return;
+        } catch {}
+    }
+    sendText(response, 404, 'Not found');
+}
+
 async function serveStatic(request, response, pathname) {
+    if (pathname === '/index.html') {
+        response.writeHead(301, { Location: '/' });
+        response.end();
+        return;
+    }
+
     let requestedPath;
     try {
         requestedPath = pathname === '/' ? '/index.html' : decodeURIComponent(pathname);
@@ -1919,7 +1941,7 @@ async function serveStatic(request, response, pathname) {
     }
 
     if (!isPublicStaticPath(requestedPath)) {
-        sendText(response, 404, 'Not found');
+        await sendNotFound(response, requestedPath);
         return;
     }
 
@@ -1938,7 +1960,7 @@ async function serveStatic(request, response, pathname) {
         });
         response.end(body);
     } catch (error) {
-        sendText(response, 404, 'Not found');
+        await sendNotFound(response, requestedPath);
     }
 }
 

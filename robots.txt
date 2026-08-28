@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /request.htm
 Disallow: /request-admin.htm
 Disallow: /sungshim-navigation-draft.htm
 Disallow: /admin/

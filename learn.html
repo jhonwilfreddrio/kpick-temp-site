@@ -7,13 +7,11 @@
     <link rel="icon" type="image/png" href="img/kpickicon.png">
     <meta name="theme-color" content="#0B3D91">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260825">
+    <link rel="preload" href="fonts/pretendard-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/inter-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/style.css?v=20260828">
     <link rel="stylesheet" href="css/refine.css?v=20260804-2">
     <link rel="stylesheet" href="css/product-demos.css?v=20260825-1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..900&display=swap" rel="stylesheet">
     <link rel="canonical" href="https://kpicktradingcorp.com/learn.html">
     <meta property="og:title" content="Learning Centre | Interactive Guide to Medical Delivery Devices | K-Pick">
     <meta property="og:description" content="An interactive guide to Sungshim injection and infusion devices. Explore syringe gauges, needle lengths, low dead space design, filtration, and IV flow paths.">
@@ -22,27 +20,43 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:locale" content="en_PH">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Learning Centre: How medical delivery devices work",
+    "url": "https://kpicktradingcorp.com/learn.html",
+    "inLanguage": "en",
+    "educationalLevel": "Professional",
+    "audience": {"@type": "Audience", "audienceType": "Healthcare procurement and clinical staff"},
+    "about": ["Syringe gauges", "Needle length", "Low dead space syringes", "Filter syringes and needles", "IV infusion sets"],
+    "author": {"@type": "Organization", "name": "K-Pick Trading Corp", "url": "https://kpicktradingcorp.com/about.html"},
+    "publisher": {"@type": "MedicalOrganization", "name": "K-Pick Trading Corp"},
+    "reviewedBy": {"@type": "Organization", "name": "K-Pick Trading Corp regulatory and product team"},
+    "dateModified": "2026-08-28"
+}
+    </script>
     <title>Learning Centre | Interactive Guide to Medical Delivery Devices | K-Pick</title>
 </head>
 <body class="brand-page learn-page">
     <section class="heading">
         <div class="header">
             <div class="header-container">
-                <div class="logo"><img src="img/KpickLogo.png" alt="K-Pick Trading Corp logo"></div>
+                <div class="logo"><img width="566" height="82" src="img/KpickLogo.png" alt="K-Pick Trading Corp logo"></div>
             </div>
         </div>
 
         <div class="navbar">
-            <a class="navlogo" href="index.html" aria-label="K-Pick Trading Corp home">
-                <img src="img/KpickLogoDark-nav.png" alt="K-Pick Trading Corp" class="nav-logo">
+            <a class="navlogo" href="/" aria-label="K-Pick Trading Corp home">
+                <img width="400" height="53" src="img/KpickLogoDark-nav.png" alt="K-Pick Trading Corp" class="nav-logo">
             </a>
             <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <div class="navigations">
                 <ul class="navigation" id="primary-navigation">
-                    <li class="nav home"><a href="index.html">Home</a></li>
+                    <li class="nav home"><a href="/">Home</a></li>
                     <li class="nav brands nav--has-dropdown">
                         <span class="nav__dropdown-trigger">
-                            <a href="index.html#TieUps">Brands <i class="nav__arrow" aria-hidden="true">&#9662;</i></a>
+                            <a href="/#TieUps">Brands <i class="nav__arrow" aria-hidden="true">&#9662;</i></a>
                             <button class="nav__dropdown-toggle" aria-expanded="false" aria-label="Show brand options">&#9662;</button>
                         </span>
                         <div class="nav__dropdown" role="menu">
@@ -59,10 +73,10 @@
                                 <span class="nav__dropdown-label"><strong>Insufine</strong><small>Insulin Pen Needles</small></span>
                             </a>
                             <div class="nav__dropdown-divider"></div>
-                            <a href="index.html#TieUps" role="menuitem" class="nav__dropdown-item nav__dropdown-item--all">View All Brands &rarr;</a>
+                            <a href="/#TieUps" role="menuitem" class="nav__dropdown-item nav__dropdown-item--all">View All Brands &rarr;</a>
                         </div>
                     </li>
-                    <li class="nav aboutus"><a href="index.html#about">About Us</a></li>
+                    <li class="nav aboutus"><a href="/#about">About Us</a></li>
                     <li class="nav learn is-active"><a href="learn.html">Learn</a></li>
                     <li class="nav generatePO"><a href="request.htm">Generate Quote / PO</a></li>
                     <li class="nav contactus"><a href="contact.htm">Contact Us</a></li>
@@ -77,6 +91,7 @@
         <div class="learn-hero__inner">
             <span class="learn-hero__eyebrow">K-Pick Learning Centre</span>
             <h1>How medical delivery devices actually work.</h1>
+            <p class="learn-reviewed">Content prepared by K-Pick Trading Corp from manufacturer specifications (Sungshim Medical). Reviewed by the K-Pick regulatory and product team &middot; last updated 28 August 2026. Educational material only &mdash; not clinical advice.</p>
             <p>Nine devices, explained by letting you operate them. Change a gauge and watch the needle redraw. Push a plunger and see the medication that gets left behind. Prime an infusion line and find out what a 5&nbsp;micron filter is for.</p>
             <div class="learn-hero__facts" aria-label="What this guide covers">
                 <div>
@@ -478,7 +493,7 @@
     <footer class="site-footer" id="contact">
         <div class="site-footer__top">
             <div class="site-footer__brand">
-                <img src="img/KpickLogo.png" alt="K-Pick Trading Corp." class="site-footer__logo" loading="lazy">
+                <img width="566" height="82" src="img/KpickLogo.png" alt="K-Pick Trading Corp." class="site-footer__logo" loading="lazy">
             </div>
             <div class="site-footer__contact">
                 <p>Dakota Building, 555 Gen Malvar St. cor</p>

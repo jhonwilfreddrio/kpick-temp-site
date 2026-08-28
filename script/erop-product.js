@@ -619,6 +619,15 @@ function renderAfterSpecPanel(product) {
             <section class="new-port-static-panel" aria-label="New Port feature overview">
                 <img src="img/newportBottom.jpg" alt="New Port feature overview" class="new-port-static-panel__image">
             </section>
+
+            <section class="erop-research-cite" aria-label="Clinical research citation">
+                <div class="erop-research-cite__body">
+                    <div class="erop-research-cite__label">Used in peer-reviewed clinical research &mdash; 2025</div>
+                    <p class="erop-research-cite__title">Minimally invasive transanal excision for rectal tumors: technical feasibility compared to conventional approach</p>
+                    <p class="erop-research-cite__detail">The EROP New Port KSILS-2PB single-port device was used by surgeons at St. Vincent&rsquo;s Hospital, Catholic University of Korea, in a study of 133 patients comparing minimally invasive and conventional transanal surgical technique. Mun JY, Geong GS, Yoo N, Kim HJ, Cho HM, Kye BH. <em>Annals of Coloproctology</em> 2025;41(2):162&ndash;168.</p>
+                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/" target="_blank" rel="noopener" class="erop-research-cite__link">Read the full study on PubMed Central &rarr;</a>
+                </div>
+            </section>
         `;
     }
 
@@ -921,15 +930,15 @@ if (root) {
             </div>
 
             <div class="navbar">
-                <a class="navlogo" href="index.html" aria-label="K-Pick Trading Corp home">
+                <a class="navlogo" href="/" aria-label="K-Pick Trading Corp home">
                     <img src="img/KpickLogoDark.png" alt="K-Pick Trading Corp" class="nav-logo">
                 </a>
                 <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
                 <div class="navigations">
                     <ul class="navigation" id="primary-navigation">
-                        <li class="nav home"><a href="index.html">Home</a></li>
-                        <li class="nav aboutus"><a href="index.html#about">About Us</a></li>
-                        <li class="nav brands"><a href="index.html#TieUps">Brands</a></li>
+                        <li class="nav home"><a href="/">Home</a></li>
+                        <li class="nav aboutus"><a href="/#about">About Us</a></li>
+                        <li class="nav brands"><a href="/#TieUps">Brands</a></li>
                         <li class="nav learn"><a href="learn.html">Learn</a></li>
                         <li class="nav generatePO"><a href="request.htm">Generate Quote / PO</a></li>
                         <li class="nav contactus"><a href="contact.htm">Contact Us</a></li>

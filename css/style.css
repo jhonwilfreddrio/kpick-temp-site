@@ -1,3 +1,21 @@
+/* Self-hosted fonts (2026-08-28): replaces the render-blocking jsDelivr Pretendard and Google Fonts Inter
+   stylesheets. Latin subsets only; the site is English. Files live in /fonts/. */
+@font-face{
+    font-family: 'Pretendard Variable';
+    font-style: normal;
+    font-weight: 45 930;
+    font-display: swap;
+    src: url('../fonts/pretendard-variable-latin.woff2') format('woff2');
+}
+@font-face{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 900;
+    font-display: swap;
+    src: url('../fonts/inter-variable-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 *   {
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
@@ -8497,4 +8515,11 @@ body[data-erop-product="new-port-pack"] .erop-spec{
         justify-content: center;
         padding-left: 0;
     }
+}
+
+/* 2026-08-28: width/height attributes were added to every <img> for CLS. They are
+   intrinsic hints only; classes that fix the width must let the height follow. */
+.product-photo,
+.iv-diagram{
+    height: auto;
 }
