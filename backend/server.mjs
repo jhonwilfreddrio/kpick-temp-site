@@ -33,6 +33,83 @@ const autoSyncInventory = process.env.KPICK_AUTO_SYNC_INVENTORY !== '0';
    values can't overwrite ERP data. The manual admin "Sync now" button keeps
    working as a fallback. */
 const erpSyncToken = (process.env.KPICK_ERP_SYNC_TOKEN || '').trim();
+/* Security hardening (2026-08-28 audit): single allowed browser origin for the API,
+   baseline security headers on every response, and in-memory rate limits. */
+const allowedOrigin = (process.env.KPICK_ALLOWED_ORIGIN || (isLocalHost ? `http://${host}:${port}` : 'https://kpicktradingcorp.com')).trim();
+const CONTENT_SECURITY_POLICY = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline'",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data:",
+    "font-src 'self'",
+    "connect-src 'self' https://api.web3forms.com",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self' https://api.web3forms.com",
+    'upgrade-insecure-requests'
+].join('; ');
+
+function securityHeaders(extra = {}) {
+    return {
+        'X-Content-Type-Options': 'nosniff',
+        'X-Frame-Options': 'DENY',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+        'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+        'Content-Security-Policy': CONTENT_SECURITY_POLICY,
+        ...(isLocalHost ? {} : { 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains' }),
+        ...extra
+    };
+}
+
+function corsHeaders() {
+    return {
+        'Access-Control-Allow-Origin': allowedOrigin,
+        'Vary': 'Origin'
+    };
+}
+
+function clientIp(request) {
+    const forwarded = String(request.headers['x-forwarded-for'] || '').split(',')[0].trim();
+    return forwarded || request.socket?.remoteAddress || 'unknown';
+}
+
+/* Fixed-window in-memory limiter. Good enough for a single-process site; resets on restart. */
+const rateBuckets = new Map();
+function rateLimitExceeded(scope, key, max, windowMs) {
+    const now = Date.now();
+    const id = `${scope}:${key}`;
+    let bucket = rateBuckets.get(id);
+    if (!bucket || bucket.resetAt <= now) {
+        bucket = { count: 0, resetAt: now + windowMs };
+        rateBuckets.set(id, bucket);
+    }
+    bucket.count += 1;
+    if (rateBuckets.size > 5000) {
+        for (const [k, b] of rateBuckets) { if (b.resetAt <= now) rateBuckets.delete(k); }
+    }
+    return bucket.count > max;
+}
+
+function rejectRateLimited(response, retryAfterSeconds = 60) {
+    sendJson(response, 429, { error: 'Too many requests. Please try again in a few minutes.' }, { 'Retry-After': String(retryAfterSeconds) });
+}
+
+const EMAIL_PATTERN = /^[^\s@<>()[\],;:"]+@[^\s@<>()[\],;:"]+\.[A-Za-z]{2,}$/;
+function isValidEmail(value) {
+    const email = String(value || '').trim();
+    return email.length <= 254 && EMAIL_PATTERN.test(email);
+}
+
+function safeEqualStrings(a, b) {
+    const bufferA = Buffer.from(String(a || ''));
+    const bufferB = Buffer.from(String(b || ''));
+    return bufferA.length === bufferB.length && timingSafeEqual(bufferA, bufferB);
+}
+
+const MAX_QUOTE_ITEMS = 200;
+const MAX_QUOTE_ITEM_QUANTITY = 1000000;
+// Hash of an unused password so a login for an unknown ID costs the same time as a wrong password.
+let dummyPasswordHash = null;
 const inventorySyncIntervalMs = getPositiveInteger(process.env.KPICK_INVENTORY_SYNC_INTERVAL_MS, 30 * 60 * 1000);
 const inventorySyncTimeoutMs = getPositiveInteger(process.env.KPICK_INVENTORY_SYNC_TIMEOUT_MS, 15 * 1000);
 
@@ -728,7 +805,13 @@ function cleanCustomer(customer = {}) {
     return {
         company: String(customer.company || '').trim(),
         contact: String(customer.contact || '').trim(),
-        email: String(customer.email || '').trim(),
+        email: (() => {
+            const email = String(customer.email || '').trim();
+            if (email && !isValidEmail(email)) {
+                throw new Error('Please enter a valid email address.');
+            }
+            return email;
+        })(),
         mobile: String(customer.mobile || '').trim(),
         address: addressAfterPayment ? '' : String(customer.address || '').trim(),
         maps_url: addressAfterPayment ? '' : String(customer.maps_url || '').trim(),
@@ -749,6 +832,9 @@ function normalizeQuoteItems(rawItems, options = {}) {
     if (!Array.isArray(rawItems) || rawItems.length === 0) {
         throw new Error('Select at least one product.');
     }
+    if (rawItems.length > MAX_QUOTE_ITEMS) {
+        throw new Error(`A quote can contain at most ${MAX_QUOTE_ITEMS} line items.`);
+    }
 
     return rawItems.map((rawItem) => {
         const sku = String(rawItem.sku || '').trim();
@@ -758,7 +844,7 @@ function normalizeQuoteItems(rawItems, options = {}) {
             throw new Error(`Unknown product SKU: ${sku}`);
         }
 
-        const quantity = Math.max(1, Number.parseInt(rawItem.quantity, 10) || 1);
+        const quantity = Math.min(MAX_QUOTE_ITEM_QUANTITY, Math.max(1, Number.parseInt(rawItem.quantity, 10) || 1));
         const priceOverride = Number(rawItem.unit_price);
 
         return {
@@ -1035,7 +1121,7 @@ function createToken(user) {
 
 function verifyToken(token) {
     const [payload, signature] = String(token || '').split('.');
-    if (!payload || !signature || sign(payload) !== signature) {
+    if (!payload || !signature || !safeEqualStrings(sign(payload), signature)) {
         return null;
     }
 
@@ -1067,7 +1153,7 @@ function createQuotePdfToken(quote) {
         purpose: 'quote-pdf',
         id: quote.id,
         request_number: quote.request_number,
-        exp: Date.now() + 1000 * 60 * 60 * 24 * 14
+        exp: Date.now() + 1000 * 60 * 60 * 24 * 7
     }));
 
     return `${payload}.${sign(payload)}`;
@@ -1075,7 +1161,7 @@ function createQuotePdfToken(quote) {
 
 function verifyQuotePdfToken(token, quote) {
     const [payload, signature] = String(token || '').split('.');
-    if (!payload || !signature || sign(payload) !== signature) {
+    if (!payload || !signature || !safeEqualStrings(sign(payload), signature)) {
         return false;
     }
 
@@ -1106,9 +1192,6 @@ function userFromRequest(request) {
         return verifyToken(bearer[1]);
     }
 
-    if (adminPassword && request.headers['x-admin-password'] === adminPassword) {
-        return { id_number: 'admin', name: 'K-Pick Admin', role: 'Admin', active: 1 };
-    }
 
     return null;
 }
@@ -1173,7 +1256,12 @@ function loginStaff(payload) {
         WHERE id_number = ? AND active = 1
     `).get(idNumber);
 
-    if (!user || !verifySecret(password, user.password_hash)) {
+    if (!dummyPasswordHash) {
+        dummyPasswordHash = hashSecret(randomBytes(24).toString('hex'));
+    }
+    // Always run the PBKDF2 check so unknown IDs take the same time as wrong passwords.
+    const passwordOk = verifySecret(password, user ? user.password_hash : dummyPasswordHash);
+    if (!user || !passwordOk) {
         throw new Error('Invalid ID number or password.');
     }
 
@@ -1793,11 +1881,12 @@ function buildQuotePdf(quote) {
 
 async function sendQuotePdf(response, quote) {
     const pdf = await buildQuotePdf(quote);
-    response.writeHead(200, {
+    response.writeHead(200, securityHeaders({
+        'Cache-Control': 'no-store',
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${quote.request_number}.pdf"`,
         'Content-Length': pdf.length
-    });
+    }));
     response.end(pdf);
 }
 
@@ -1828,7 +1917,7 @@ async function sendQuoteEmails(quote) {
             to: SALES_INBOX,
             fromName: 'K-Pick Website',
             subject: `New Quote Request ${quote.request_number} — ${customer.company}`,
-            text: `New quote request from the website.\n\nRequest No.: ${quote.request_number}\nCompany: ${customer.company}\nContact: ${customer.contact}\nMobile: ${customer.mobile}\nEmail: ${customer.email || '—'}\nAddress: ${customer.address || '—'}\nNotes: ${customer.notes || '—'}\n\nItems:\n${itemLines}\n\nGrand Total: ${money(totals.grand_total)}\n\nThe formal quotation PDF is attached (also downloadable for 14 days):\nhttps://kpicktradingcorp.com${quotePdfUrl(quote)}\n\nManage this request in request-admin.htm. Reply to the customer at: ${customer.email || customer.mobile}`,
+            text: `New quote request from the website.\n\nRequest No.: ${quote.request_number}\nCompany: ${customer.company}\nContact: ${customer.contact}\nMobile: ${customer.mobile}\nEmail: ${customer.email || '—'}\nAddress: ${customer.address || '—'}\nNotes: ${customer.notes || '—'}\n\nItems:\n${itemLines}\n\nGrand Total: ${money(totals.grand_total)}\n\nThe formal quotation PDF is attached (also downloadable for 7 days):\nhttps://kpicktradingcorp.com${quotePdfUrl(quote)}\n\nManage this request in request-admin.htm. Reply to the customer at: ${customer.email || customer.mobile}`,
             attachments
         });
     } catch (error) {
@@ -1865,21 +1954,23 @@ async function readLeadPayload(request) {
     return getJsonBody(request);
 }
 
-function sendJson(response, status, data) {
+function sendJson(response, status, data, extraHeaders = {}) {
     const body = JSON.stringify(data);
-    response.writeHead(status, {
-        'Access-Control-Allow-Origin': '*',
+    response.writeHead(status, securityHeaders({
+        ...corsHeaders(),
+        'Cache-Control': 'no-store',
         'Content-Type': 'application/json; charset=utf-8',
-        'Content-Length': Buffer.byteLength(body)
-    });
+        'Content-Length': Buffer.byteLength(body),
+        ...extraHeaders
+    }));
     response.end(body);
 }
 
 function sendText(response, status, text) {
-    response.writeHead(status, {
+    response.writeHead(status, securityHeaders({
         'Content-Type': 'text/plain; charset=utf-8',
         'Content-Length': Buffer.byteLength(text)
-    });
+    }));
     response.end(text);
 }
 
@@ -1917,7 +2008,7 @@ async function sendNotFound(response, pathname) {
     if (wantsHtml) {
         try {
             const body = await readFile(resolve(rootDir, '404.html'));
-            response.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+            response.writeHead(404, securityHeaders({ 'Content-Type': 'text/html; charset=utf-8' }));
             response.end(body);
             return;
         } catch {}
@@ -1927,7 +2018,7 @@ async function sendNotFound(response, pathname) {
 
 async function serveStatic(request, response, pathname) {
     if (pathname === '/index.html') {
-        response.writeHead(301, { Location: '/' });
+        response.writeHead(301, securityHeaders({ Location: '/' }));
         response.end();
         return;
     }
@@ -1955,9 +2046,12 @@ async function serveStatic(request, response, pathname) {
 
     try {
         const body = await readFile(filePath);
-        response.writeHead(200, {
-            'Content-Type': contentTypes[extname(filePath).toLowerCase()] || 'application/octet-stream'
-        });
+        const extension = extname(filePath).toLowerCase();
+        const isPage = extension === '.html' || extension === '.htm';
+        response.writeHead(200, securityHeaders({
+            'Content-Type': contentTypes[extension] || 'application/octet-stream',
+            'Cache-Control': isPage ? 'no-cache' : 'public, max-age=604800'
+        }));
         response.end(body);
     } catch (error) {
         await sendNotFound(response, requestedPath);
@@ -1969,17 +2063,18 @@ async function handleRequest(request, response) {
     const { pathname } = url;
 
     if (request.method === 'OPTIONS') {
-        response.writeHead(204, {
-            'Access-Control-Allow-Origin': '*',
+        response.writeHead(204, securityHeaders({
+            ...corsHeaders(),
             'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Password, Authorization'
-        });
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '600'
+        }));
         response.end();
         return;
     }
 
     if (request.method === 'GET' && pathname === '/api/health') {
-        sendJson(response, 200, { ok: true, database: dbPath });
+        sendJson(response, 200, { ok: true });
         return;
     }
 
@@ -1989,8 +2084,20 @@ async function handleRequest(request, response) {
     }
 
     if (request.method === 'POST' && pathname === '/api/login') {
+        const ip = clientIp(request);
+        if (rateLimitExceeded('login-ip', ip, 10, 15 * 60 * 1000)) {
+            await writeLog(`Login rate limit hit for ${ip}.`);
+            rejectRateLimited(response, 900);
+            return;
+        }
         try {
             const payload = await getJsonBody(request);
+            const idNumber = String(payload.id_number || '').trim().toLowerCase();
+            if (idNumber && rateLimitExceeded('login-id', idNumber, 5, 15 * 60 * 1000)) {
+                await writeLog(`Login rate limit hit for account ${idNumber} from ${ip}.`);
+                rejectRateLimited(response, 900);
+                return;
+            }
             sendJson(response, 200, loginStaff(payload));
         } catch (error) {
             sendJson(response, 401, { error: error.message || 'Unable to login.' });
@@ -2088,6 +2195,10 @@ async function handleRequest(request, response) {
     }
 
     if (request.method === 'POST' && pathname === '/api/quote-requests') {
+        if (rateLimitExceeded('form-ip', clientIp(request), 5, 10 * 60 * 1000)) {
+            rejectRateLimited(response, 600);
+            return;
+        }
         try {
             const payload = await getJsonBody(request);
             const quote = createQuote(payload);
@@ -2184,6 +2295,10 @@ async function handleRequest(request, response) {
     }
 
     if (request.method === 'POST' && pathname === '/api/exhibit-lead') {
+        if (rateLimitExceeded('form-ip', clientIp(request), 5, 10 * 60 * 1000)) {
+            rejectRateLimited(response, 600);
+            return;
+        }
         try {
             const payload = await readLeadPayload(request);
             if (payload.botcheck) {
@@ -2201,6 +2316,14 @@ async function handleRequest(request, response) {
                 return;
             }
             const email = String(payload.email || '').trim();
+            if (email && !isValidEmail(email)) {
+                sendJson(response, 400, { error: 'Please enter a valid email address.' });
+                return;
+            }
+            if (email && rateLimitExceeded('form-email', email.toLowerCase(), 3, 60 * 60 * 1000)) {
+                rejectRateLimited(response, 3600);
+                return;
+            }
             const products = Array.isArray(payload.products)
                 ? payload.products.map((item) => String(item)).join(', ')
                 : String(payload.products || '');
@@ -2235,6 +2358,10 @@ async function handleRequest(request, response) {
     }
 
     if (request.method === 'POST' && pathname === '/api/contact-message') {
+        if (rateLimitExceeded('form-ip', clientIp(request), 5, 10 * 60 * 1000)) {
+            rejectRateLimited(response, 600);
+            return;
+        }
         try {
             const payload = await readLeadPayload(request);
             if (payload.botcheck) {
@@ -2247,6 +2374,14 @@ async function handleRequest(request, response) {
             const message = String(payload.message || '').trim();
             if (!name || !email || !subject || !message) {
                 sendJson(response, 400, { error: 'Name, email, subject, and message are required.' });
+                return;
+            }
+            if (!isValidEmail(email)) {
+                sendJson(response, 400, { error: 'Please enter a valid email address.' });
+                return;
+            }
+            if (rateLimitExceeded('form-email', email.toLowerCase(), 3, 60 * 60 * 1000)) {
+                rejectRateLimited(response, 3600);
                 return;
             }
             if (!isMailerConfigured()) {
@@ -2271,7 +2406,7 @@ async function handleRequest(request, response) {
         return;
     }
 
-    if (request.method === 'GET') {
+    if (request.method === 'GET' || request.method === 'HEAD') {
         await serveStatic(request, response, pathname);
         return;
     }
