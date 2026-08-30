@@ -1,7 +1,7 @@
 ﻿import { createServer } from 'node:http';
 import { createHmac, pbkdf2Sync, randomBytes, timingSafeEqual } from 'node:crypto';
 import { readFile, mkdir, appendFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, mkdirSync, accessSync, copyFileSync, constants as fsConstants } from 'node:fs';
 import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
@@ -10,7 +10,35 @@ import { isMailerConfigured, sendLeadNotification, sendAutoResponder, sendMail }
 
 const backendDir = fileURLToPath(new URL('.', import.meta.url));
 const rootDir = resolve(backendDir, '..');
-const dataDir = process.env.KPICK_DATA_DIR ? resolve(process.env.KPICK_DATA_DIR) : join(backendDir, 'data');
+/* Hostinger builds every deploy into <domain>/hbuilds/versions/<uuid>/nodejs/ and the
+   previous folder is discarded, so a data dir inside the build is wiped on each push.
+   When no KPICK_DATA_DIR is configured and we are running inside such a build,
+   default to <domain>/kpick-data, which survives deploys. Falls back to the old
+   build-local folder if that directory cannot be created or written. */
+function resolveDataDir() {
+    if (process.env.KPICK_DATA_DIR) {
+        return { dir: resolve(process.env.KPICK_DATA_DIR), storage: 'configured' };
+    }
+    const buildLocal = join(backendDir, 'data');
+    const match = backendDir.replace(/\\/g, '/').match(/^(.*)\/(?:hbuilds|\.builds)\/versions\/[^/]+\//);
+    if (match) {
+        const persistent = join(match[1], 'kpick-data');
+        try {
+            mkdirSync(persistent, { recursive: true });
+            accessSync(persistent, fsConstants.W_OK);
+            const persistentDb = join(persistent, 'kpick_quote.sqlite3');
+            const buildDb = join(buildLocal, 'kpick_quote.sqlite3');
+            if (!existsSync(persistentDb) && existsSync(buildDb)) {
+                copyFileSync(buildDb, persistentDb);
+            }
+            return { dir: persistent, storage: 'persistent' };
+        } catch (error) {
+            console.warn(`Persistent data dir unavailable (${persistent}): ${error.message}. Using build-local storage.`);
+        }
+    }
+    return { dir: buildLocal, storage: 'build-local' };
+}
+const { dir: dataDir, storage: dataStorage } = resolveDataDir();
 const dbPath = join(dataDir, 'kpick_quote.sqlite3');
 const seedPath = join(backendDir, 'seed_products.json');
 const logPath = join(dataDir, 'server.log');
@@ -2074,7 +2102,7 @@ async function handleRequest(request, response) {
     }
 
     if (request.method === 'GET' && pathname === '/api/health') {
-        sendJson(response, 200, { ok: true });
+        sendJson(response, 200, { ok: true, storage: dataStorage });
         return;
     }
 
