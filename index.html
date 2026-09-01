@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <link rel="preload" href="fonts/pretendard-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/inter-variable-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/style.css?v=20260828">
+    <link rel="stylesheet" href="css/style.css?v=20260901-5">
     <link rel="stylesheet" href="css/refine.css?v=20260804-2">
     <link rel="canonical" href="https://kpicktradingcorp.com/">
     <meta property="og:title" content="K-Pick Trading Corp | Korean Medical Supplies Distributor Philippines">
@@ -360,7 +360,15 @@
         <div class="brand-spotlight brand-spotlight--sungshim" id="sungshim-spotlight">
             <div class="brand-spotlight__inner">
                 <div class="brand-spotlight__visual animate-in animate-in--left">
-                    <img width="960" height="1280" src="img/sungshimProductCard-r2.png" alt="Sungshim Korean injection devices — insulin syringes, LDS syringes, and pen needles" class="brand-spotlight__product-img" loading="lazy">
+                    <figure class="brand-film" data-film="sungshim">
+                        <button class="brand-film__trigger" type="button" aria-label="Play the Sungshim manufacturer film with sound, 33 seconds">
+                            <video class="brand-film__loop" width="740" height="416" poster="video/sungshim-poster.jpg" data-src="video/sungshim-loop.mp4" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
+                            <span class="brand-film__scrim"></span>
+                            <span class="brand-film__play"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+                            <span class="brand-film__chip">0:33 &middot; With sound</span>
+                        </button>
+                        <figcaption class="brand-film__caption">Manufacturer film &mdash; Sungshim Medical Co., Ltd. Insulin syringe production, from cannula to quality inspection.</figcaption>
+                    </figure>
                 </div>
                 <div class="brand-spotlight__content animate-in animate-in--right">
                     <div class="brand-spotlight__logo-wrap">
@@ -417,7 +425,15 @@
                     <a class="brand-spotlight__cta" href="erop.html" aria-label="Explore EROP brand page">Explore EROP &rarr;</a>
                 </div>
                 <div class="brand-spotlight__visual animate-in animate-in--right">
-                    <img width="960" height="1280" src="img/EropProductCard-r2.png" alt="EROP Korean surgical and laparoscopic devices" class="brand-spotlight__product-img" loading="lazy">
+                    <figure class="brand-film" data-film="erop">
+                        <button class="brand-film__trigger" type="button" aria-label="Play the EROP manufacturer film with sound, 2 minutes 45 seconds">
+                            <video class="brand-film__loop" width="740" height="416" poster="video/erop-poster.jpg" data-src="video/erop-loop.mp4" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
+                            <span class="brand-film__scrim"></span>
+                            <span class="brand-film__play"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+                            <span class="brand-film__chip">2:45 &middot; With sound</span>
+                        </button>
+                        <figcaption class="brand-film__caption">Manufacturer film &mdash; EROP Co., Ltd. Laparoscopic devices developed by surgeons, with cleanroom production and clinical validation.</figcaption>
+                    </figure>
                 </div>
             </div>
         </div>
@@ -840,9 +856,27 @@
             });
         });
     </script>
+    <div class="film-modal" id="film-modal" hidden>
+        <button class="film-modal__scrim" type="button" data-film-close tabindex="-1" aria-label="Close video"></button>
+        <div class="film-modal__panel" role="dialog" aria-modal="true" aria-labelledby="film-modal-title">
+            <div class="film-modal__bar">
+                <h3 class="film-modal__title" id="film-modal-title"></h3>
+                <button class="film-modal__close" type="button" data-film-close aria-label="Close video">
+                    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+            <video class="film-modal__video" controls playsinline preload="auto"></video>
+            <div class="film-modal__chapters">
+                <span class="film-modal__chapters-label">Jump to a section</span>
+                <div class="film-modal__chapter-list" id="film-modal-chapters"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="script/animate.js"></script>
     <script src="script/navbar.js"></script>
     <script src="script/back-to-top.js"></script>
+    <script src="script/brand-film.js?v=20260901" defer></script>
 <script src="script/expo-mode.js?v=20260808" defer></script>
 </body>
 </html>

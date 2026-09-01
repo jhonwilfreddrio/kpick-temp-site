@@ -4,3 +4,12 @@ node_modules/
 img/_unused/
 deploy/
 DEPLOYMENT.md
+
+# Video masters. The web encodes that ship live are in video/ (2.1 MB + 10.1 MB);
+# these are the untouched originals (6.5 MB + 39.9 MB). A push here deploys to
+# Hostinger, so keeping the masters out avoids 46 MB of dead weight in history
+# and on every deploy. Same for the uncropped category photo originals.
+img/SungshimVid.MP4
+img/EropVid.mp4
+img/NanoCateg.jpg
+img/SingleNeedCateg.jpg

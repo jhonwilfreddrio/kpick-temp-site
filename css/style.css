@@ -2010,36 +2010,51 @@ body{
     justify-content: center;
     gap: 14px;
     padding: 18px 18px 112px;
-    background: #eef2f8;
+    background: #ffffff;
 }
-.insufine-size-card--4mm .insufine-size-card__media{ background: #eef8ea; }
-.insufine-size-card--5mm .insufine-size-card__media{ background: #fdeef1; }
-.insufine-size-card--6mm .insufine-size-card__media{ background: #fef4e8; }
-.insufine-size-card--8mm .insufine-size-card__media{ background: #eaf5fd; }
+/* The per-size pastel tints (green 4mm / pink 5mm / orange 6mm / blue 8mm) were
+   removed and the neutral #eef2f8 behind them went flat white, so the cards are
+   plain white with only the photo and the navy label on them. The photos are
+   white-ground with no alpha, so on white they now sit flush with the card
+   instead of reading as a panel. The --4mm/--5mm/--6mm/--8mm classes are left
+   on the markup as hooks. */
+/* z-index 2 puts this above the photo (1) and below the overlay copy (3). It
+   used to sit underneath the photo and relied on the image's multiply blend to
+   darken it; with multiply gone the photo stayed pale and the white overlay
+   text lost contrast against it. A scrim dimming the thing above it is also
+   just the right way round. */
 .insufine-size-card__media::after{
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 2;
     background: rgba(7, 31, 88, 0);
     transition: background-color 0.25s ease;
 }
 .insufine-size-card:hover .insufine-size-card__media::after{
-    background: rgba(7, 31, 88, 0.62);
+    background: rgba(7, 31, 88, 0.7);
 }
+/* No mix-blend-mode here. These photos are RGB on solid white with no alpha,
+   so multiply was being used to fake transparency against the old pastel media
+   tint — and it tinted the product itself with it, so the 5mm box read pink and
+   the 4mm box read green. width:auto (rather than 100%) keeps the box on the
+   photo instead of letterboxing it. No border-radius: the card is white now, so
+   there is no visible photo edge left to round. */
 .insufine-size-card__image{
     position: relative;
     z-index: 1;
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
     max-height: 330px;
     object-fit: contain;
-    mix-blend-mode: multiply;
     transition: transform 0.3s ease, opacity 0.25s ease;
 }
+/* No opacity fade — the scrim above now does the dimming, so the product stays
+   crisp under it instead of washing out to a pale smear. */
 .insufine-size-card:hover .insufine-size-card__image{
     transform: scale(1.1);
-    opacity: 0.55;
 }
 .insufine-size-card__label{
     position: absolute;
@@ -6549,13 +6564,18 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 }
 .brand-spotlight__inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* minmax(0, 1fr), not 1fr: a bare 1fr track has an auto minimum, so one
+       oversized child (a logo, a long token, a wide table) stretches the
+       column past the viewport instead of being constrained by it. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 72px;
     align-items: center;
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 48px;
 }
+.brand-spotlight__content,
+.brand-spotlight__visual { min-width: 0; }
 .brand-spotlight__visual {
     display: flex;
     justify-content: center;
@@ -6592,8 +6612,14 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 }
 .brand-spotlight--sungshim .brand-spotlight__logo-wrap { background: #0f4ca3; }
 .brand-spotlight--erop .brand-spotlight__logo-wrap { background: #08713d; }
-.brand-spotlight__logo { height: 42px; object-fit: contain; }
-.brand-spotlight__logo--erop { height: 34px; }
+/* width:auto is load-bearing. These <img> tags carry width/height attributes
+   for CLS, and an attribute width is a presentational hint — without an
+   explicit CSS width the box stayed 477px (Sungshim) / 275px (EROP) wide with
+   the logo just letterboxed inside it by object-fit. That blew the grid
+   column out to 509px and .brand-spotlights' overflow:hidden silently clipped
+   ~175px of the Sungshim copy off the right edge on phones. */
+.brand-spotlight__logo { height: 42px; width: auto; max-width: 100%; object-fit: contain; }
+.brand-spotlight__logo--erop { height: 34px; width: auto; }
 .brand-spotlight__brand-name {
     display: inline-block;
     font-size: 21px;
@@ -6710,6 +6736,229 @@ body[data-erop-product="new-port-pack"] .erop-spec{
 .brand-spotlight--erop     .brand-spotlight__cta:hover { background: #065a30; transform: translateY(-1px); }
 .brand-spotlight--insufine .brand-spotlight__cta { background: #0e7c86; color: #fff; }
 .brand-spotlight--insufine .brand-spotlight__cta:hover { background: #0a616c; transform: translateY(-1px); }
+
+/* ===========================================
+   BRAND FILMS — ambient loop card + modal player
+   Replaces the static product card in a spotlight's visual column with a
+   silent 16:9 loop that opens the full manufacturer film on click. The card
+   keeps the neumorphic shadow of the image it replaces so the section's
+   art direction is unchanged.
+   =========================================== */
+.brand-film {
+    margin: 0;
+    width: 100%;
+    max-width: 480px;
+}
+.brand-film__trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    /* Locks the card's height before the video's metadata arrives, so the
+       spotlight never reflows on load. Matches the 740x416 encode. */
+    aspect-ratio: 740 / 416;
+    padding: 0;
+    border: 0;
+    border-radius: 26px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #e9eef6;
+    --spotlight-shadow-color: 20, 45, 90;
+    box-shadow:
+        18px 18px 36px rgba(var(--spotlight-shadow-color), 0.14),
+        -14px -14px 30px rgba(255, 255, 255, 0.85),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.brand-spotlight--erop .brand-film__trigger { --spotlight-shadow-color: 18, 70, 45; }
+.brand-film__trigger:hover { transform: translateY(-3px); }
+.brand-film__trigger:focus-visible {
+    outline: 3px solid #0f4ca3;
+    outline-offset: 3px;
+}
+.brand-spotlight--erop .brand-film__trigger:focus-visible { outline-color: #08713d; }
+.brand-film__loop {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* The loop is decoration; the button's aria-label carries the meaning. */
+    pointer-events: none;
+}
+/* Darkens just enough for the play control and duration chip to stay legible
+   over a bright frame, without dulling the footage. */
+.brand-film__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(4, 14, 35, 0) 45%, rgba(4, 14, 35, 0.42) 100%);
+    opacity: 0.85;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+.brand-film__trigger:hover .brand-film__scrim { opacity: 1; }
+.brand-film__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #0f4ca3;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 8px 22px rgba(4, 14, 35, 0.28);
+    transition: transform 0.25s ease, background 0.25s ease;
+    pointer-events: none;
+}
+.brand-spotlight--erop .brand-film__play { color: #08713d; }
+.brand-film__trigger:hover .brand-film__play {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: #fff;
+}
+.brand-film__play svg { margin-left: 3px; }
+.brand-film__chip {
+    position: absolute;
+    left: 14px;
+    bottom: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: rgba(4, 14, 35, 0.62);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+.brand-film__caption {
+    margin: 13px 4px 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #5b6577;
+}
+
+/* ---- Modal player ---- */
+body.film-modal-open { overflow: hidden; }
+.film-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+/* [hidden] alone loses to display:grid. */
+.film-modal[hidden] { display: none; }
+.film-modal__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 14, 35, 0.8);
+    backdrop-filter: blur(3px);
+    border: 0;
+    cursor: pointer;
+}
+.film-modal__panel {
+    position: relative;
+    width: min(980px, 100%);
+    max-height: calc(100vh - 40px);
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 30px 70px rgba(4, 14, 35, 0.45);
+}
+.film-modal__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e6ecf5;
+}
+.film-modal__title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 800;
+    color: #041A4F;
+}
+.film-modal__close {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #dbe4f0;
+    border-radius: 9px;
+    background: #f6f9fd;
+    color: #41506b;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.film-modal__close:hover { background: #eaf1fa; color: #041A4F; }
+.film-modal__video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+.film-modal__chapters { padding: 14px 18px 18px; }
+.film-modal__chapters-label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #7b8699;
+}
+.film-modal__chapter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+.film-chapter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 7px;
+    padding: 7px 13px;
+    border: 1px solid #dbe4f0;
+    border-radius: 999px;
+    background: #f6f9fd;
+    color: #41506b;
+    font: inherit;
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.film-chapter:hover { background: #eaf1fa; border-color: #b9cde8; color: #041A4F; }
+.film-chapter__t {
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+    font-size: 11.5px;
+    color: #8b96a9;
+}
+.film-chapter--active {
+    background: #0f4ca3;
+    border-color: #0f4ca3;
+    color: #fff;
+}
+.film-chapter--active .film-chapter__t { color: rgba(255, 255, 255, 0.72); }
+.film-chapter--active:hover { background: #0a3a7f; border-color: #0a3a7f; color: #fff; }
+
+@media (max-width: 640px) {
+    .film-modal { padding: 0; place-items: stretch; }
+    .film-modal__panel {
+        width: 100%;
+        max-height: 100dvh;
+        border-radius: 0;
+    }
+    .brand-film__play { width: 50px; height: 50px; }
+    .film-chapter { font-size: 12px; padding: 6px 11px; }
+}
 
 /* ===========================================
    FAQ ACCORDION
@@ -6996,7 +7245,7 @@ body[data-erop-product="new-port-pack"] .erop-spec{
    =========================================== */
 @media (max-width: 900px) {
     .brand-spotlight__inner {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 36px;
         padding: 0 32px;
     }
