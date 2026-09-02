@@ -1958,7 +1958,7 @@ async function sendQuoteEmails(quote) {
                 fromName: 'K-Pick Trading Corp',
                 replyTo: SALES_INBOX,
                 subject: `Your K-Pick Quotation — ${quote.request_number}`,
-                text: `Dear ${customer.contact},\n\nThank you for your quotation request. Your formal K-Pick quotation ${quote.request_number} is attached as a PDF for your procurement records.\n\nA senior accounts director will follow up within 1 business day to confirm availability, delivery terms, and any documentation your organization requires.\n\nShould your timeline require immediate attention:\nPhone / Viber: +63 917 315 8420\nDirect inquiries: sales@kpicktradingcorp.com\n\nK-PICK TRADING CORP\nDakota Building, 555 Gen. Malvar St. cor. Adriatico St.,\nBrgy. 698 Zone 076, Malate, Manila, Philippines\nExclusive Philippine Distributor — Sungshim · EROP · Insufine\nBuilding Partnerships. Delivering Quality. Improving Lives.`,
+                text: `Dear ${customer.contact},\n\nThank you for your quotation request. Your formal K-Pick quotation ${quote.request_number} is attached as a PDF for your procurement records.\n\nA senior accounts director will follow up within 1 business day to confirm availability, delivery terms, and any documentation your organization requires.\n\nShould your timeline require immediate attention:\nPhone / Viber: +63 917 315 8420\nDirect inquiries: sales@kpicktradingcorp.com\n\nK-PICK TRADING CORP\nDakota Building, 555 Gen. Malvar St. cor. Adriatico St.,\nBrgy. 698 Zone 076, Malate, Manila, Philippines\nExclusive Philippine Distributor — Sungshim · Insufine\nBuilding Partnerships. Delivering Quality. Improving Lives.`,
                 attachments
             });
         } catch (error) {

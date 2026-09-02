@@ -14,8 +14,8 @@
    2. Player layer. Clicking the card opens the full manufacturer film with
       sound and native controls, plus chapter chips so a viewer can jump
       straight back to a timestamp they care about. The heavy file (2.1 MB
-      Sungshim / 10.1 MB EROP) is only requested on that click, so the
-      homepage never pays for it. Both films are encoded +faststart, so
+      Sungshim) is only requested on that click, so the
+      homepage never pays for it. Films are encoded +faststart, so
       seeking works while the file is still downloading.
 
    prefers-reduced-motion is honoured: the ambient layer stays a poster
@@ -34,22 +34,6 @@
                 { t: 6.5,  label: 'Korean manufacturing' },
                 { t: 14.5, label: 'Sterilisation & QC' },
                 { t: 23.5, label: 'Smooth in every injection' }
-            ]
-        },
-        erop: {
-            title: 'EROP — manufacturer film',
-            src: 'video/erop-film.mp4',
-            poster: 'video/erop-poster.jpg',
-            chapters: [
-                { t: 0,   label: 'Painless, scarless, wasteless' },
-                { t: 24,  label: 'Company & history' },
-                { t: 43,  label: 'Developed by surgeons' },
-                { t: 55,  label: 'Awards & recognition' },
-                { t: 66,  label: 'Product range' },
-                { t: 79,  label: 'Clinical validation' },
-                { t: 91,  label: 'Cleanroom & certifications' },
-                { t: 119, label: 'Growth' },
-                { t: 147, label: 'We are EROP' }
             ]
         }
     };

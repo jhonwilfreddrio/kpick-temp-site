@@ -10,6 +10,5 @@ DEPLOYMENT.md
 # Hostinger, so keeping the masters out avoids 46 MB of dead weight in history
 # and on every deploy. Same for the uncropped category photo originals.
 img/SungshimVid.MP4
-img/EropVid.mp4
 img/NanoCateg.jpg
 img/SingleNeedCateg.jpg

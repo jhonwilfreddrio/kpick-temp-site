@@ -16,7 +16,7 @@ The website helps K-Pick appear more professional and searchable online. It intr
 
 2. Product Presentation
 
-The site organizes K-Pick’s products by brand and category, including Sungshim syringes, injection products, LDS syringes, pen needles, and EROP surgical devices. This makes the product catalog easier to browse compared with sending product details manually through chat, email, or files.
+The site organizes K-Pick’s products by brand and category, including Sungshim syringes, injection products, LDS syringes, pen needles, and Insufine insulin pen needles. This makes the product catalog easier to browse compared with sending product details manually through chat, email, or files.
 
 3. Customer Inquiry Support
 

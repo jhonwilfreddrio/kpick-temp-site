@@ -368,19 +368,6 @@ h1, h2, h3, .dashboardarea h1 {
 .learn-outro .brand-cta__btn--secondary:hover { background: rgba(15, 32, 73, 0.06); }
 
 /* ---------------------------------------------------------------------------
-   11c. EROP research citation → soft neumorphic bump
-        (green icon / label / link kept for brand identity)
-   ------------------------------------------------------------------------- */
-.erop-research-cite {
-    background: var(--rf-neu-surface);
-    border: 0;
-    border-radius: 14px;
-    box-shadow:
-        -6px -6px 14px var(--rf-neu-light),
-         7px  7px 16px var(--rf-neu-dark);
-}
-
-/* ---------------------------------------------------------------------------
    11d. Brand CTA — breathing room between the buttons and the trust line.
         Needs .brand-cta prefix to outrank `.brand-cta p { margin: 0 0 28px }`
         (0,1,1), which was pinning margin-top to 0 (the "sticking").
@@ -461,7 +448,6 @@ h1, h2, h3, .dashboardarea h1 {
 .quote-hero h1,
 .tieupsTitle,
 .insufine-sizes__header h2,
-.erop-spec h2,
 .brand-cta h2,
 .brand-spotlights__header h2,
 .learn-outro h2 {
@@ -482,7 +468,6 @@ h1, h2, h3, .dashboardarea h1 {
    ------------------------------------------------------------------------- */
 .brand-card,
 .product-card,
-.erop-category-card,
 .insufine-size-card {
     border: none;
     box-shadow: none;
@@ -523,7 +508,7 @@ h1, h2, h3, .dashboardarea h1 {
 
 /* ---------------------------------------------------------------------------
    6. Accent consolidation — only the brand-neutral, clicked-most CTAs.
-      Per-brand CTAs (Sungshim blue / EROP green / Insufine teal) and the
+      Per-brand CTAs (Sungshim blue / Insufine teal) and the
       dark-navy footer links are left alone on purpose: those colors are
       either deliberate brand identity or a contrast-risk on a dark surface.
    ------------------------------------------------------------------------- */

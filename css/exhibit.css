@@ -45,8 +45,8 @@ h1, h2, h3 {
 
 p { margin: 0 0 1em; }
 
-/* ---- Brand bar (K-Pick | EROP | Sungshim) — fixed navy in both themes
-   because the only EROP/Sungshim logo assets are white-on-transparent. */
+/* ---- Brand bar (K-Pick | Sungshim) — fixed navy in both themes
+   because the only Sungshim logo asset is white-on-transparent. */
 .exhibit-brandbar {
     background: #0B3D91;
     padding: 12px 20px;

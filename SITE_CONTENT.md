@@ -17,13 +17,13 @@
 **Company mailboxes (July 2026):** sales@ (quotes/orders) · support@ (product inquiries, contact form) · compliance@ (regulatory/documentation) · accounts@ (billing) — all @kpicktradingcorp.com  
 **Tagline:** Premium Korean Medical Supplies, Trusted Worldwide.
 
-**What they do:** K-Pick Trading Corp imports and distributes certified Korean medical devices to hospitals, clinics, pharmacies, resellers, and healthcare procurement teams across the Philippines. They hold exclusive Philippine distribution rights for Sungshim, EROP, and Insufine.
+**What they do:** K-Pick Trading Corp imports and distributes certified Korean medical devices to hospitals, clinics, pharmacies, resellers, and healthcare procurement teams across the Philippines. They hold exclusive Philippine distribution rights for Sungshim and Insufine.
 
 **Credentials:**
 - DTI Registered (Department of Trade and Industry, Philippines)
 - SEC Incorporated (Securities and Exchange Commission, Philippines)
 - Philippine FDA License to Operate (LTO) — medical device distributor
-- Exclusive distributor for Sungshim and EROP in the Philippines
+- Exclusive distributor for Sungshim and Insufine in the Philippines
 
 ---
 
@@ -33,7 +33,6 @@
 |---|---|---|
 | Homepage | index.html | Main landing page — all brands, about, timeline, articles, certifications, FAQ |
 | Sungshim | sungshim.html | Sungshim brand page — product categories and certifications |
-| EROP | erop.html | EROP brand page — surgical device categories and research citation |
 | Insufine | insufine.html | Insufine insulin pen needle page |
 | Contact | contact.htm | Contact form and company contact details |
 | Generate Quote/PO | request.htm | Online quote and purchase order generation tool |
@@ -49,15 +48,6 @@
 | Sungshim — Filter Syringe | sungshim-filter-syringe.html | Product detail page |
 | Sungshim — Filter Needle | sungshim-filter-needle.html | Product detail page |
 | Sungshim — Infusion Set (I.V. Set) | sungshim-infusion-set.html | Product detail page |
-| EROP — Eroptix | erop-eroptix.html | Product detail page |
-| EROP — Trocar | erop-trocar.html | Product detail page |
-| EROP — Forcep | erop-forcep.html | Product detail page |
-| EROP — Dual Guard | erop-dual-guard.html | Product detail page |
-| EROP — New Port | erop-new-port.html | Product detail page |
-| EROP — Chito Block | erop-chito-block.html | Product detail page |
-| EROP — T Closure | erop-t-closure.html | Product detail page |
-| EROP — S-Sustener | erop-s-sustener.html | Product detail page |
-| EROP — New Port Pack | erop-new-port-pack.html | Product detail page |
 
 ---
 
@@ -66,13 +56,13 @@
 ### 1. Hero Section
 - **Eyebrow:** Korean Medical Brands for Philippine Healthcare
 - **H1:** Korean medical supplies for Philippine healthcare procurement.
-- **Body:** K-Pick Trading Corp distributes Korean syringes, insulin pen needles, and surgical devices for hospitals, clinics, pharmacies, resellers, and procurement officers across the Philippines.
+- **Body:** K-Pick Trading Corp distributes Korean syringes and insulin pen needles for hospitals, clinics, pharmacies, resellers, and procurement officers across the Philippines.
 - **CTA buttons:** "View Brands" → #TieUps | "Generate Quote" → request.htm
-- **Stats:** Founded 2020 in Manila · 3 Exclusive lines · Nationwide PH coverage
+- **Stats:** Founded 2020 in Manila · 2 Exclusive lines · Nationwide PH coverage
 
 **Supply Focus panel:**
-1. Laparoscopic Devices — Laparoscopic and procedural tools for controlled clinical use
-2. Syringes and Needles — Syringes, LDS syringes, and pen needles for consistent delivery
+1. Syringes and Needles — Insulin, single-use, LDS, and filter syringes with matching needles
+2. Insulin Pen Needles — 31G and 32G pen needles from 4mm to 8mm for consistent delivery
 3. Clinical Support — Reliable products that support dependable care workflows
 - Distribution: Metro Manila with reach to Luzon, Visayas, and Mindanao
 
@@ -101,13 +91,6 @@
 - **Certifications:** ISO 13485 · CE Marked · MFDS Certified
 - **CTA:** Explore Sungshim →
 
-#### EROP (Laparoscopic Devices · Exclusive PH Distributor)
-- **Headline:** Surgeon-developed laparoscopic instruments engineered for precision and better patient outcomes.
-- **Description:** EROP designs surgical devices built around ideas from the operating room, with a mission to benefit both doctors and patients. K-Pick Trading Corp is the exclusive Philippine distributor for EROP surgical instruments supporting hospital procurement teams nationwide. In 2025, EROP's New Port trocar was cited in peer-reviewed clinical research published in the Annals of Coloproctology by surgeons at the Catholic University of Korea.
-- **Products:** Trocar · Forcep · Eroptix · Dual Guard · New Port · Chito Block · T Closure · S-Sustener
-- **Certifications:** ISO 13485 · CE Marked · MFDS Certified
-- **CTA:** Explore EROP →
-
 #### Insufine (Insulin Pen Needles · Exclusive PH Distributor)
 - **Headline:** Fine-gauge Korean insulin pen needles engineered for smoother, more comfortable injections.
 - **Description:** Insufine sterile, single-use pen needles are made by Tae-Chang Industrial, a Korean medical needle manufacturer exporting to more than 50 countries. K-Pick Trading Corp is the exclusive distributor of Insufine in the Philippines, supplying pharmacies, clinics, and diabetes care retailers nationwide.
@@ -134,7 +117,6 @@
 - **2021** — Broader medical supplies. K-Pick started distributing a wider range of medical supplies for the Philippine market.
 - **2022** — Expanded capabilities. Expanded product sourcing, logistics, distribution, and online retail capabilities.
 - **2024** — Sungshim exclusive PH distributor. K-Pick became the exclusive Philippine distributor for Sungshim syringes and needles.
-- **2025** — EROP exclusive PH distributor. K-Pick expanded into Korean laparoscopic device distribution through EROP.
 - **Today** — Continuing growth. K-Pick continues to develop its hospital, institutional, B2B, and e-commerce distribution networks while introducing new healthcare technologies to the Philippines.
 
 ---
@@ -143,16 +125,11 @@
 
 #### K-Pick Story
 **Title:** Why the Philippines Needs a Trusted Korean Medical Device Partner  
-The Philippines medical devices market is valued at USD 669 million (2024) and is 99.2% import-reliant — yet few truly national distributors exist. K-Pick Trading Corp was founded in 2020 specifically to bridge this gap: securing exclusive Philippine distribution for Sungshim and EROP, and supplying certified Korean medical devices to hospitals, clinics, pharmacies, and procurement teams nationwide.
+The Philippines medical devices market is valued at USD 669 million (2024) and is 99.2% import-reliant — yet few truly national distributors exist. K-Pick Trading Corp was founded in 2020 specifically to bridge this gap: securing exclusive Philippine distribution for Sungshim and Insufine, and supplying certified Korean medical devices to hospitals, clinics, pharmacies, and procurement teams nationwide.
 
 #### Sungshim Story
 **Title:** Sungshim: Globally Stocked by Professional Medical Suppliers Across 4 Continents  
 Established in 1995, Sungshim Medical is listed by the Korea Medical Devices Association (KMDA) and carries CE 0120, ISO 9001, ISO 13485, and Korean MFDS certification. Sungshim syringes and pen needles are actively stocked by professional medical and aesthetic suppliers in the USA, UK, Europe, Australia, and Southeast Asia — products distributed globally to hospitals, clinics, and pharmacies across more than 10 countries.
-
-#### EROP Story
-**Title:** EROP New Port Trocar Cited in 2025 Clinical Research at Catholic University of Korea  
-In April 2025, EROP's New Port single-port trocar (KSILS-2PB) was used in a peer-reviewed clinical study published in the *Annals of Coloproctology* by surgeons at St. Vincent's Hospital, Catholic University of Korea. The study evaluated minimally invasive transanal surgical techniques across 133 patients — direct evidence that EROP devices are trusted in active clinical practice.  
-**Source:** Mun JY et al. Ann Coloproctol 2025;41(2):162-168. https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/
 
 #### Insufine Story
 **Title:** Made by Korea's Leading Insulin Pen Needle Exporter, Shipping to 50+ Countries  
@@ -161,12 +138,6 @@ Insufine pen needles are manufactured by Tae-Chang Industrial Co., Ltd., a Korea
 ---
 
 ### 8. Recognition & Research
-
-#### EROP — Peer-Reviewed Clinical Citation
-- **Source:** Annals of Coloproctology, 2025
-- **Quote:** "New Port (KSILS-2PB, EROP) — single-port trocar device used for minimally invasive transanal surgical procedures at St. Vincent's Hospital, Catholic University of Korea."
-- **Full citation:** Mun JY, Geong GS, Yoo N, Kim HJ, Cho HM, Kye BH. Minimally invasive transanal excision for rectal tumors: technical feasibility compared to conventional approach. Ann Coloproctol. 2025;41(2):162-168. DOI: 10.3393/ac.2024.00864.0123
-- **PubMed link:** https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/
 
 #### Insufine — Trade Data Recognition
 - **Source:** Volza global trade data
@@ -188,7 +159,7 @@ Insufine pen needles are manufactured by Tae-Chang Industrial Co., Ltd., a Korea
 ---
 
 ### 9. Services
-1. **Medical product distribution** — Korean syringes, pen needles, surgical devices, and healthcare products for professional channels.
+1. **Medical product distribution** — Korean syringes, pen needles, and healthcare products for professional channels.
 2. **Healthcare product importation** — Supplier coordination and import-focused support for selected Korean medical brands.
 3. **Wholesale and dealer supply** — Structured supply support for resellers, clinics, pharmacies, and dealer networks.
 4. **Logistics and fulfillment** — Manila-based coordination with supply reach across Metro Manila, Luzon, Visayas, and Mindanao.
@@ -214,8 +185,8 @@ Use the Generate Quote / PO tool on this website to select products, enter your 
 **Q3: Are the products registered with the Philippine FDA?**  
 Yes. K-Pick Trading Corp holds a License to Operate (LTO) as a medical device distributor issued by the Philippine Food and Drug Administration. Products distributed through K-Pick carry the appropriate regulatory documentation. Copies of LTO and product registration certificates are available upon formal request for procurement purposes.
 
-**Q4: What certifications do Sungshim and EROP products hold?**  
-Both Sungshim and EROP are Korean-manufactured medical device brands that comply with ISO 13485 quality management standards. Their products carry CE marking indicating conformity with European medical device requirements, and hold MFDS (Ministry of Food and Drug Safety) certification in Korea. Documentation is available upon formal procurement request.
+**Q4: What certifications do Sungshim and Insufine products hold?**  
+Both Sungshim and Insufine are Korean-manufactured medical device brands that comply with ISO 13485 quality management standards. Their products carry CE marking indicating conformity with European medical device requirements, and hold MFDS (Ministry of Food and Drug Safety) certification in Korea. Documentation is available upon formal procurement request.
 
 **Q5: Is there a minimum order quantity (MOQ)?**  
 MOQs vary by product and packaging type. Most syringe products are available per box or per carton, and carton-based orders may qualify for volume pricing. Use the Generate Quote tool to select products and packaging — pricing and carton discount details are shown automatically based on your selection.
@@ -230,7 +201,7 @@ After your purchase order is confirmed and payment is processed, orders for Metr
 Yes. K-Pick regularly supports procurement inquiries from hospitals, LGU health offices, and government healthcare facilities. We can assist with formal quotation preparation, product specification documentation, and compliance paperwork required for public procurement processes such as PhilGEPS submissions.
 
 **Q9: Can I become a reseller or dealer of K-Pick products?**  
-Yes. K-Pick supports reseller and dealer inquiries for Sungshim, EROP, and Insufine products. We offer structured pricing for qualified dealer partners. Contact us through the Contact page with your business details to begin the partnership discussion.
+Yes. K-Pick supports reseller and dealer inquiries for Sungshim and Insufine products. We offer structured pricing for qualified dealer partners. Contact us through the Contact page with your business details to begin the partnership discussion.
 
 **Q10: What happens if a product is found defective or damaged on arrival?**  
 All products are inspected prior to shipment. If a defect or damage is discovered upon delivery, please contact our team within 48 hours with photographic documentation. K-Pick will coordinate an appropriate resolution, which may include replacement, credit note, or return processing, depending on the nature of the issue.
@@ -241,7 +212,7 @@ All products are inspected prior to shipment. If a defect or damage is discovere
 - **DTI Registered** — Registered with the Department of Trade and Industry of the Philippines.
 - **SEC Incorporated** — Duly incorporated with the Securities and Exchange Commission of the Philippines.
 - **Philippine FDA LTO** — License to Operate as a medical device distributor issued by the Philippine FDA.
-- **Exclusive Distributor** — Official exclusive Philippine distributor for Sungshim and EROP Korean medical brands.
+- **Exclusive Distributor** — Official exclusive Philippine distributor for Sungshim and Insufine Korean medical brands.
 - *K-Pick Trading Corp certificate placeholder — document to be uploaded*
 
 ---
@@ -281,68 +252,6 @@ Compatible pen needles for consistent and comfortable insulin pen delivery.
 ### Brand CTA
 "Generate Quote / PO" | "Contact Our Team"  
 K-Pick Trading Corp is the exclusive Philippine distributor of Sungshim Korean injection devices.
-
----
-
-## EROP Brand Page (erop.html)
-
-### Brand Hero
-EROP — Laparoscopic Devices
-
-### Brand Intro
-- **Eyebrow:** Laparoscopic Devices
-- **H1:** Designed around clinical ideas, surgical efficiency, and patient outcomes.
-- **Description:** EROP develops surgical medical devices with a mission to benefit both doctors and patients by bringing surgeon-led ideas into clinical practice. In 2025, EROP's New Port trocar was cited in peer-reviewed clinical research published in the *Annals of Coloproctology* by surgeons at the Catholic University of Korea.
-- **Citation:** K-Pick Trading Corp is the exclusive Philippine distributor of EROP Korean surgical medical devices, supporting procurement inquiries for laparoscopic trocars, forceps, wound protectors, port systems, skin closure products, and surgical support devices across the Philippines.
-- **Facts:** Established: 2018 · Focus: Surgery · Mission: Better care
-
-### Product Categories
-
-#### 1. EROPTIX → erop-eroptix.html
-Surgery-assisted cooperative robot
-
-#### 2. TROCAR → erop-trocar.html
-Disposable trocar for laparoscopy
-
-#### 3. FORCEP → erop-forcep.html
-Laparoscopic surgical aid
-
-#### 4. DUAL GUARD → erop-dual-guard.html
-Dual port type wound protector
-
-#### 5. NEW PORT → erop-new-port.html
-Disposable natural medical opening device
-
-#### 6. CHITO BLOCK → erop-chito-block.html
-Pain buster management device kit
-
-#### 7. T CLOSURE → erop-t-closure.html
-Thyroid surgical instrument
-
-#### 8. S-SUSTENER → erop-s-sustener.html
-Surgical skin closure
-
-#### 9. NEW PORT PACK → erop-new-port-pack.html
-Single port kit
-
-### Clinical Research Citation (2025)
-**Study:** Minimally invasive transanal excision for rectal tumors: technical feasibility compared to conventional approach  
-**Journal:** Annals of Coloproctology, Vol. 41(2), pp. 162–168 (April 2025)  
-**Authors:** Ji Yeon Mun, Gyu Sung Geong, Nina Yoo, Hyung Jin Kim, Hyeon-Min Cho, Bong-Hyeon Kye  
-**Institution:** Department of Surgery, St. Vincent's Hospital, College of Medicine, The Catholic University of Korea  
-**EROP device used:** New Port single-port trocar (KSILS-2PB)  
-**Summary:** Analyzed 133 patients comparing minimally invasive transanal approach (MTA) vs. conventional transanal approach (CTA). MTA group achieved 100% margin-negative rate.  
-**Link:** https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/
-
-### EROP Certifications
-- **ISO 13485** — Quality Management System certified for medical device design and manufacturing.
-- **CE Mark** — European conformity certification under EU MDR.
-- **MFDS Certified** — Korean Ministry of Food and Drug Safety certification.
-- **PH FDA Registered** — Products distributed by K-Pick registered with Philippine FDA. *(On File — Available on Request)*
-
-### Brand CTA
-"Generate Quote / PO" | "Contact Our Team"  
-K-Pick supports Philippine hospital procurement teams with EROP laparoscopic and surgical instruments.
 
 ---
 
@@ -412,7 +321,6 @@ All pages share the same navbar with the following links:
 - **Home** → index.html
 - **Brands** (dropdown) →
   - Sungshim — Syringes and Needles → sungshim.html
-  - EROP — Laparoscopic Devices → erop.html
   - Insufine — Insulin Pen Needles → insufine.html
   - View All Brands → index.html#TieUps
 - **About Us** → index.html#about
@@ -429,7 +337,6 @@ Every page footer links to the **Privacy Policy** (privacy.htm).
 | Brand | Primary Color | Hex |
 |---|---|---|
 | Sungshim | Blue | #0f4ca3 |
-| EROP | Green | #08713d |
 | Insufine | Teal | #0e7c86 |
 | K-Pick | Navy | #041A4F |
 
@@ -439,7 +346,6 @@ Every page footer links to the **Privacy Policy** (privacy.htm).
 
 | Source | URL | Used for |
 |---|---|---|
-| Annals of Coloproctology (PMC) | https://pmc.ncbi.nlm.nih.gov/articles/PMC12046413/ | EROP clinical citation |
 | Sungshim TradeKorea (KMDA) | https://sungmedi.tradekorea.com/company.do | Sungshim company data |
 | Expert Market Research | https://www.expertmarketresearch.com/reports/philippines-medical-devices-market | Philippines market stats |
 | Tae-Chang Industrial (global site) | http://global.needles.co.kr | Insufine manufacturer data |
@@ -579,15 +485,15 @@ Every page footer links to the **Privacy Policy** (privacy.htm).
 
 ## Important Business Notes
 
-- All three brands are Korean-manufactured with international certifications (ISO 13485, CE, MFDS).
-- Sungshim, EROP, and Insufine: K-Pick holds **exclusive** Philippine distribution rights (management-confirmed for Insufine, July 2026).
+- Both brands are Korean-manufactured with international certifications (ISO 13485, CE, MFDS).
+- Sungshim and Insufine: K-Pick holds **exclusive** Philippine distribution rights (management-confirmed for Insufine, July 2026).
 - Insufine competes in the same category as Sungshim pen needles; site copy presents each brand on its own strengths and never frames them against each other.
 - All B2B only — no retail/consumer sales. Minimum buyers: hospitals, clinics, pharmacies, resellers, procurement teams.
 - PhilGEPS procurement support available for government buyers.
 - Dealer/reseller partnership inquiries accepted.
 - Certificate documents (DTI, SEC, FDA LTO) available upon formal request.
 - K-Pick certificate placeholder is present on the website pending document upload.
-- **Sungshim is the flagship brand.** The homepage hero background is deliberately a Sungshim syringe photo even though the headline covers all three brands (management-confirmed 2026-07-20; do not change). In the Big-3 hero cards, Sungshim must never be visually outweighed by EROP or Insufine — logo sizes are tuned by apparent mass, not equal pixel height.
+- **Sungshim is the flagship brand.** The homepage hero background is deliberately a Sungshim syringe photo even though the headline covers both brands (management-confirmed 2026-07-20; do not change). In the hero brand cards, Sungshim must never be visually outweighed by Insufine — logo sizes are tuned by apparent mass, not equal pixel height.
 - **Insufine claim boundaries:** all specs must trace to the Tae-Chang Industrial catalogue or the July 2026 verified brief. Do NOT claim for Insufine: EO sterilization, shelf life, named pen brand compatibility, MFDS approval numbers, or Philippine FDA registration of Insufine specifically.
 - ⚠️ `img/ForRev.png` must never be published — its rendered box print shows incorrect specs.
 

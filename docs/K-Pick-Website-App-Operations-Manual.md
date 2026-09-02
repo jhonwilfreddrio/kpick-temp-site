@@ -34,8 +34,8 @@ This repository contains a public website and an internal operations backend.
 
 Public pages:
 - `index.html`: homepage and brand overview.
-- `sungshim.html`, `insufine.html`, `erop.html`: brand landing pages.
-- Product detail pages such as `sungshim-insulin-syringe.html` and `erop-trocar.html`.
+- `sungshim.html`, `insufine.html`: brand landing pages.
+- Product detail pages such as `sungshim-insulin-syringe.html` and `sungshim-lds-syringe.html`.
 - `contact.htm`: contact form using Web3Forms.
 - `request.htm`: customer quote / PO request builder.
 
