@@ -150,6 +150,7 @@ const contentTypes = {
     '.jpeg': 'image/jpeg',
     '.js': 'application/javascript; charset=utf-8',
     '.json': 'application/json; charset=utf-8',
+    '.mp4': 'video/mp4',
     '.pdf': 'application/pdf',
     '.png': 'image/png',
     '.svg': 'image/svg+xml',
@@ -2007,7 +2008,7 @@ function isPathInsideRoot(filePath) {
 }
 
 function isPublicStaticPath(pathname) {
-    const publicPrefixes = ['/css/', '/img/', '/script/', '/certs/', '/fonts/'];
+    const publicPrefixes = ['/css/', '/img/', '/script/', '/certs/', '/fonts/', '/video/'];
     const publicRootFiles = new Set([
         '/',
         '/index.html',
