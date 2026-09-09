@@ -106,7 +106,7 @@ h1, h2, h3, .dashboardarea h1 {
 }
 
 /* Generous, consistent vertical rhythm between major bands */
-.brand-spotlights { padding-top: clamp(56px, 7vw, 104px); padding-bottom: clamp(56px, 7vw, 104px); }
+.brand-spotlights { padding-top: 0; padding-bottom: clamp(56px, 7vw, 104px); }
 
 /* ---------------------------------------------------------------------------
    4. Buttons — neat radius, confident (not shouty) weight, premium lift
@@ -295,8 +295,8 @@ h1, h2, h3, .dashboardarea h1 {
 .recognition-card--journal,
 .recognition-card--review,
 .recognition-card--global { border-top: 0; }
-/* 3 cards (odd): only ever 1×3 (wide) or 3×1 (narrow), never a 2 + 1 orphan. */
-.recognition-grid { grid-template-columns: repeat(3, 1fr); }
+/* 2 cards since the EROP citation left: a 2-up row, never a 3-track grid with an empty third. */
+.recognition-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 860px) {
     .recognition-grid { grid-template-columns: 1fr; }
 }
@@ -319,13 +319,10 @@ h1, h2, h3, .dashboardarea h1 {
          11px 11px 24px var(--rf-neu-dark);
 }
 
-/* Story-card grid: only ever 1×4 (wide), 2×2 (medium) or 4×1 (narrow) —
-   the base auto-fit produced an ugly 3 + 1 orphan row. */
-.brand-stories__grid { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 1024px) {
-    .brand-stories__grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
+/* Story-card grid: three cards (K-Pick, Sungshim, Insufine) — only ever 1×3
+   (wide) or 3×1 (narrow); auto-fit left a fourth empty track on wide screens. */
+.brand-stories__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) {
     .brand-stories__grid { grid-template-columns: 1fr; }
 }
 
