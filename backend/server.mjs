@@ -2489,14 +2489,14 @@ function sendTikTokCallbackPage(response, authCode, state) {
   <div class="card">
     ${received ? `
     <h1>TikTok authorization received</h1>
-    <p>Copy this authorization code into K-PICK Core ERP under <strong>Settings → TikTok Ads</strong>. It expires within minutes and can be used once.</p>
+    <p>Copy this authorization code into K-PICK Core ERP under <strong>Accounting → TikTok Ads</strong>. It expires within minutes and can be used once.</p>
     <code id="code">${safeCode}</code>
     <button type="button" id="copy">Copy code</button>
     ${safeState ? `<p class="muted">State: ${safeState}</p>` : ''}
     <p class="muted">This page is not stored anywhere. If you did not start a TikTok connection from the ERP, close this tab.</p>
     ` : `
     <h1 class="warn">No authorization code received</h1>
-    <p>TikTok did not send an authorization code to this page. Start the connection again from K-PICK Core ERP under <strong>Settings → TikTok Ads</strong>.</p>
+    <p>TikTok did not send an authorization code to this page. Start the connection again from K-PICK Core ERP under <strong>Accounting → TikTok Ads</strong>.</p>
     `}
   </div>
 </main>
