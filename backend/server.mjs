@@ -2435,12 +2435,93 @@ async function handleRequest(request, response) {
         return;
     }
 
+    if (request.method === 'GET' && pathname === '/tiktok/ads/callback') {
+        // TikTok for Business (Marketing API) OAuth redirect. TikTok lands here with
+        // ?auth_code=...&state=... after the advertiser authorizes the app. The website
+        // deliberately holds no app secret: the code is shown once to the signed-in
+        // K-PICK staff member, who pastes it into the ERP, and the ERP (on our own server)
+        // exchanges it for the access token. Nothing is stored or logged here.
+        sendTikTokCallbackPage(response, url.searchParams.get('auth_code'), url.searchParams.get('state'));
+        return;
+    }
+
     if (request.method === 'GET' || request.method === 'HEAD') {
         await serveStatic(request, response, pathname);
         return;
     }
 
     sendJson(response, 404, { error: 'Not found.' });
+}
+
+function escapeHtmlText(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[char]));
+}
+
+function sendTikTokCallbackPage(response, authCode, state) {
+    const code = String(authCode || '').trim();
+    const safeCode = escapeHtmlText(code);
+    const safeState = escapeHtmlText(String(state || '').trim());
+    const received = code.length > 0;
+    const body = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TikTok authorization · K-PICK</title>
+<style>
+  body { margin: 0; background: #f4f5f3; color: #1c2420; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 640px; margin: 48px auto; padding: 0 20px; }
+  .card { background: #fff; border: 1px solid #d5d9d2; padding: 24px 26px; }
+  h1 { font-size: 1.35rem; margin: 0 0 8px; }
+  p { margin: 0 0 12px; }
+  code { display: block; word-break: break-all; background: #eef0ec; border: 1px solid #d5d9d2; padding: 12px 14px; font-size: 15px; margin: 12px 0; user-select: all; }
+  button { font: inherit; padding: 8px 14px; border: 1px solid #1c2420; background: #1c2420; color: #fff; cursor: pointer; }
+  button:focus-visible { outline: 2px solid #0f5e5a; outline-offset: 2px; }
+  .muted { color: #5f6b64; font-size: 0.9rem; }
+  .warn { border-left: 4px solid #b4412a; padding-left: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    ${received ? `
+    <h1>TikTok authorization received</h1>
+    <p>Copy this authorization code into K-PICK Core ERP under <strong>Settings → TikTok Ads</strong>. It expires within minutes and can be used once.</p>
+    <code id="code">${safeCode}</code>
+    <button type="button" id="copy">Copy code</button>
+    ${safeState ? `<p class="muted">State: ${safeState}</p>` : ''}
+    <p class="muted">This page is not stored anywhere. If you did not start a TikTok connection from the ERP, close this tab.</p>
+    ` : `
+    <h1 class="warn">No authorization code received</h1>
+    <p>TikTok did not send an authorization code to this page. Start the connection again from K-PICK Core ERP under <strong>Settings → TikTok Ads</strong>.</p>
+    `}
+  </div>
+</main>
+<script>
+  (function () {
+    var button = document.getElementById('copy');
+    var code = document.getElementById('code');
+    if (!button || !code) return;
+    button.addEventListener('click', function () {
+      navigator.clipboard.writeText(code.textContent).then(function () {
+        button.textContent = 'Copied';
+      }, function () {
+        button.textContent = 'Select the code and copy it manually';
+      });
+    });
+  })();
+</script>
+</body>
+</html>`;
+    response.writeHead(received ? 200 : 400, securityHeaders({
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store',
+        'Content-Length': Buffer.byteLength(body)
+    }));
+    response.end(body);
 }
 
 initDb();
