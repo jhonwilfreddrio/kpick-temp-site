@@ -56,7 +56,7 @@ body{
     display: flex;
     align-items: center;
     overflow: hidden;
-    background-image: linear-gradient(90deg, rgba(3, 17, 50, 0.94) 0%, rgba(5, 31, 79, 0.84) 43%, rgba(7, 39, 86, 0.32) 100%), url("../img/sungshimDashboard.png");
+    background-image: linear-gradient(90deg, rgba(3, 17, 50, 0.94) 0%, rgba(5, 31, 79, 0.84) 43%, rgba(7, 39, 86, 0.32) 100%), url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1381,18 +1381,18 @@ body{
     overflow: hidden;
 }
 .brand-hero--sungshim{
-    background-image: url("../img/sungshimDashboard.png");
+    background-image: url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
 }
 .brand-hero--insufine{
-    background-image: url("../img/insufine-hero.jpg");
+    background-image: url("../img/insufine-hero.webp");
     background-size: cover;
     background-position: center 62%;
 }
 @media (max-width: 700px){
     .brand-hero--insufine{
-        background-image: url("../img/insufine-hero-mobile.jpg");
+        background-image: url("../img/insufine-hero-mobile.webp");
         background-position: center 28%;
     }
 }
@@ -2075,7 +2075,7 @@ body{
     overflow: hidden;
 }
 .product-hero--insulin{
-    background-image: url("../img/sungshimDashboard.png");
+    background-image: url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
 }
@@ -2395,17 +2395,17 @@ body{
     box-shadow: 0 10px 24px rgba(15, 45, 107, 0.08);
 }
 .product-hero--single-use{
-    background-image: url("../img/sungshimDashboard.png");
+    background-image: url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
 }
 .product-hero--lds{
-    background-image: url("../img/sungshimDashboard.png");
+    background-image: url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
 }
 .product-hero--pen{
-    background-image: url("../img/sungshimDashboard.png");
+    background-image: url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
 }
@@ -2414,12 +2414,12 @@ body{
 .product-hero--filter-syringe,
 .product-hero--filter-needle,
 .product-hero--infusion{
-    background-image: url("../img/sungshimDashboard.png");
+    background-image: url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
 }
 .product-hero--contact{
-    background-image: url("../img/dbImage.png");
+    background-image: url("../img/dbImage.webp");
     background-size: cover;
     background-position: center;
 }
@@ -2582,7 +2582,7 @@ body{
     padding: 92px 0 104px;
     background-image:
         linear-gradient(90deg, rgba(3, 17, 50, 0.94) 0%, rgba(5, 31, 79, 0.84) 46%, rgba(7, 39, 86, 0.36) 100%),
-        url("../img/sungshimDashboard.png");
+        url("../img/sungshimDashboard.webp");
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -6816,4 +6816,31 @@ body.film-modal-open { overflow: hidden; }
 .product-photo,
 .iv-diagram{
     height: auto;
+}
+
+/* 2026-09-20: mobile hero clipping. .hero-brands is a nowrap flex row holding
+   two brand chips whose labels are white-space: nowrap under 640px. Its
+   min-content width is ~399px, and because .dashboardarea__content is a grid
+   item (min-width: auto = min-content), that 399px became the hero column's
+   minimum. .dashboardsection is overflow: hidden, so on a 390px phone the
+   right ~40px of the H1, lede, CTA buttons and stat row was silently cut off
+   instead of scrolling. Stack the lockup and let the grid item shrink. */
+@media (max-width: 480px){
+    .dashboardarea__content{
+        min-width: 0;
+    }
+    .hero-brands{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .hero-brands::before{
+        width: auto;
+        height: 1px;
+        align-self: stretch;
+        margin: 0 14px;
+    }
+    .hero-brand__type{
+        white-space: normal;
+    }
 }

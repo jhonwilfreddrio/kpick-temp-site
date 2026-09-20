@@ -64,6 +64,12 @@ const erpSyncToken = (process.env.KPICK_ERP_SYNC_TOKEN || '').trim();
 /* Security hardening (2026-08-28 audit): single allowed browser origin for the API,
    baseline security headers on every response, and in-memory rate limits. */
 const allowedOrigin = (process.env.KPICK_ALLOWED_ORIGIN || (isLocalHost ? `http://${host}:${port}` : 'https://kpicktradingcorp.com')).trim();
+/* Canonical hostname without the leading www. Empty disables the www -> apex
+   redirect (local development, or a deployment on a different domain). */
+const CANONICAL_HOST = (process.env.KPICK_CANONICAL_HOST ?? (isLocalHost ? '' : 'kpicktradingcorp.com'))
+    .trim()
+    .toLowerCase()
+    .replace(/^www\./, '');
 const CONTENT_SECURITY_POLICY = [
     "default-src 'self'",
     "script-src 'self' 'unsafe-inline'",
@@ -2016,7 +2022,12 @@ function isPublicStaticPath(pathname) {
         '/request.htm',
         '/request-admin.htm',
         '/robots.txt',
-        '/sitemap.xml'
+        '/sitemap.xml',
+        // Crawler and AI-agent discovery files. Without these entries the
+        // allowlist below never matches a root .txt file and they 404 live.
+        '/llms.txt',
+        '/agents.txt',
+        '/.well-known/ai-agent.json'
     ]);
 
     if (publicRootFiles.has(pathname)) {
@@ -2090,6 +2101,22 @@ async function serveStatic(request, response, pathname) {
 async function handleRequest(request, response) {
     const url = new URL(request.url, `http://${request.headers.host}`);
     const { pathname } = url;
+
+    // Canonical host: www.<domain> answers 200 on its own otherwise, which
+    // splits crawl budget and link equity across two hosts. Redirect to the
+    // apex the canonical tags already point at. The Location is forced to
+    // https because TLS terminates at the CDN and this process only ever
+    // sees plain http -- building it from url.protocol would send visitors
+    // through an extra http->https hop at the edge.
+    if (CANONICAL_HOST && url.hostname.toLowerCase() === `www.${CANONICAL_HOST}`) {
+        const target = new URL(url);
+        target.protocol = 'https:';
+        target.hostname = CANONICAL_HOST;
+        target.port = '';
+        response.writeHead(301, securityHeaders({ Location: target.toString() }));
+        response.end();
+        return;
+    }
 
     if (request.method === 'OPTIONS') {
         response.writeHead(204, securityHeaders({

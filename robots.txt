@@ -1,3 +1,6 @@
+# https://kpicktradingcorp.com/robots.txt
+# Structured content for AI assistants: /llms.txt and /agents.txt
+
 User-agent: *
 Allow: /
 Disallow: /request-admin.htm
@@ -9,43 +12,32 @@ Disallow: /docs/
 
 # AI answer engines and assistants are allowed, so K-Pick can be cited as a
 # source for Korean medical device supply questions in the Philippines.
+# A named group replaces the "*" group outright for that crawler, so the
+# Disallow lines above have to be repeated here or these bots would be free
+# to crawl the admin and backend paths.
 User-agent: GPTBot
-Allow: /
-
 User-agent: OAI-SearchBot
-Allow: /
-
 User-agent: ChatGPT-User
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: Claude-User
-Allow: /
-
+User-agent: Claude-SearchBot
 User-agent: PerplexityBot
-Allow: /
-
 User-agent: Perplexity-User
-Allow: /
-
 User-agent: Google-Extended
-Allow: /
-
 User-agent: Applebot
-Allow: /
-
 User-agent: Applebot-Extended
-Allow: /
-
 User-agent: meta-externalagent
-Allow: /
-
 User-agent: Amazonbot
-Allow: /
-
+User-agent: Bytespider
 User-agent: cohere-ai
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
 Allow: /
+Disallow: /request-admin.htm
+Disallow: /sungshim-navigation-draft.htm
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /landing-page-backups/
+Disallow: /docs/
 
 Sitemap: https://kpicktradingcorp.com/sitemap.xml

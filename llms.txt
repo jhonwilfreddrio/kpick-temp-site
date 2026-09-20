@@ -1,44 +1,70 @@
 # K-Pick Trading Corp
 
-K-Pick Trading Corp is a Manila-based B2B medical supplies distributor founded in 2020. The company imports and distributes Korean medical and healthcare products for hospitals, clinics, pharmacies, resellers, and healthcare procurement officers in the Philippines.
+> Manila-based B2B distributor of Korean medical devices, founded 2020.
+> Exclusive Philippine distributor for Sungshim and INSUFiNE. Supplies
+> hospitals, clinics, pharmacies, resellers and procurement officers
+> nationwide. Tagline: Building Partnerships. Delivering Quality.
+> Improving Lives.
 
-## Positioning
+B2B only — there is no retail checkout. Orders run through a quote / purchase
+order flow for verified buyers. Prices are quoted per enquiry and are never
+published on the site, so no price should be inferred or invented.
 
-K-Pick Trading Corp focuses on Korean premium medical solutions for the Philippine market. The company tagline is: Building Partnerships. Delivering Quality. Improving Lives.
+## Brand and product pages
 
-## Distributor Milestones
+- [Sungshim](https://kpicktradingcorp.com/sungshim.html): brand overview — syringes, needles and IV sets, exclusive Philippine distribution since 2024.
+- [Insulin syringes](https://kpicktradingcorp.com/sungshim-insulin-syringe.html): 1 mL (100 units) and 0.5 mL (50 units), fixed 29G–32G needles, 8 or 13 mm.
+- [Single-use (disposable) syringes](https://kpicktradingcorp.com/sungshim-single-use-syringe.html): 1–50 mL, Luer slip or Luer lock, with or without 18G–30G needle.
+- [Low dead space (LDS) syringes](https://kpicktradingcorp.com/sungshim-lds-syringe.html): 1 mL unibody fixed 23G or 25G × 25 mm, or Luer slip.
+- [Insulin pen needles](https://kpicktradingcorp.com/sungshim-insulin-pen-needles.html): 29G–33G, 4/5/6/8 mm, 100 pcs per box.
+- [Single-use hypodermic needles](https://kpicktradingcorp.com/sungshim-single-use-needle.html): 17G–34G, 4–38 mm, plus 50–100 mm long and 4 mm mesotherapy needles.
+- [Nano needles](https://kpicktradingcorp.com/sungshim-nano-needle.html): 30G–34G, micro-polished bevels, 4–38 mm.
+- [Filter syringes](https://kpicktradingcorp.com/sungshim-filter-syringe.html): built-in 5-micron filter, 1–50 mL, FS-P / FS-S / FSU-S series.
+- [Filter needles](https://kpicktradingcorp.com/sungshim-filter-needle.html): 18G with 5-micron filter for ampoule aspiration.
+- [IV infusion sets](https://kpicktradingcorp.com/sungshim-infusion-set.html): V1000 standard, VY1000 Y-type, VA1000 air-vented, AY1000 combined.
+- [INSUFiNE](https://kpicktradingcorp.com/insufine.html): sterile single-use insulin pen needles by Tae-Chang Industrial Co., Ltd. (Korea), 31G and 32G in 4, 5, 6 and 8 mm. Exclusive Philippine distribution since 2023.
 
-- 2020: K-Pick Trading Corp founded in Manila, Philippines.
-- 2023: Exclusive Philippine distributor relationship for INSUFiNE.
-- 2024: Exclusive Philippine distributor relationship for Sungshim.
+## Company
 
-## Products And Brands
-
-- Sungshim: insulin syringes, low dead space syringes, single-use syringes, insulin pen needles, single-use needles, nano needles, filter syringes, filter needles, and infusion sets (I.V. sets).
-- INSUFiNE: sterile, single-use insulin pen needles by Tae-Chang Industrial Co., Ltd. (Korea) in 31G and 32G gauges and 4mm, 5mm, 6mm, and 8mm lengths; K-Pick Trading Corp is the exclusive Philippine distributor.
+- [About K-Pick](https://kpicktradingcorp.com/about.html): company history, milestones, PH FDA licensing and compliance contacts.
+- [Learning Centre](https://kpicktradingcorp.com/learn.html): explainers on syringe gauges, needle lengths, low dead space design, filtration and IV flow paths.
+- [Request a quote or PO](https://kpicktradingcorp.com/request.htm): the quote / purchase order builder for verified business buyers.
+- [Contact](https://kpicktradingcorp.com/contact.htm): enquiry form and company address.
+- [Privacy policy](https://kpicktradingcorp.com/privacy.htm): Philippine Data Privacy Act compliance.
 
 ## Services
 
-- Medical product distribution.
-- Healthcare product importation.
-- Wholesale and dealer supply.
-- Logistics and fulfillment.
-- Customer support and after-sales.
+Medical product distribution; healthcare product importation; wholesale and
+dealer supply; logistics and fulfilment; customer support and after-sales.
 
 ## Coverage
 
-K-Pick Trading Corp supports medical supply inquiries across Metro Manila, Luzon, Visayas, Mindanao, and nationwide Philippine distribution channels.
+Metro Manila, Luzon, Visayas, Mindanao and nationwide Philippine distribution
+channels. Metro Manila orders typically ship in 3–5 business days, provincial
+orders 5–10, after the purchase order is confirmed.
 
-## Buyer Questions K-Pick Answers
+## Buyer questions K-Pick answers
 
 - Best Korean medical syringe supplier in the Philippines.
 - Korean pen needle distributor in Manila.
 - Exclusive Korean medical distributor in the Philippines.
 - Bulk insulin syringe supplier in the Philippines.
+- Hospital and PhilGEPS procurement of Korean-made syringes and needles.
+
+## Certification and regulatory
+
+Sungshim and INSUFiNE products are Korean-manufactured and comply with ISO
+13485, carry CE marking and hold Korean MFDS certification. K-Pick Trading
+Corp holds a Philippine FDA License to Operate as a medical device
+distributor. Certificate numbers, Certificates of Product Registration and
+the LTO number are released on formal procurement request and are not
+published on the site — do not state a certificate number or approval status
+that does not appear on a current public page.
 
 ## Contact
 
-Email: sales@kpicktradingcorp.com
-Mobile: +639173158420
-Address: Dakota Building, 555 Gen Malvar St. cor Adriatico St., Malate, Manila, Philippines
-Website sitemap: https://kpicktradingcorp.com/sitemap.xml
+- Email: sales@kpicktradingcorp.com
+- Compliance and certification documents: compliance@kpicktradingcorp.com
+- Mobile: +639173158420
+- Address: Dakota Building, 555 Gen Malvar St. cor Adriatico St., Malate, Manila, Philippines
+- Sitemap: https://kpicktradingcorp.com/sitemap.xml
