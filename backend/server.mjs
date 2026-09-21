@@ -70,29 +70,74 @@ const CANONICAL_HOST = (process.env.KPICK_CANONICAL_HOST ?? (isLocalHost ? '' : 
     .trim()
     .toLowerCase()
     .replace(/^www\./, '');
-const CONTENT_SECURITY_POLICY = [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data:",
-    "font-src 'self'",
-    "connect-src 'self' https://api.web3forms.com",
-    "frame-ancestors 'none'",
-    "base-uri 'self'",
-    "form-action 'self' https://api.web3forms.com",
-    'upgrade-insecure-requests'
-].join('; ');
+const DEFAULT_FRAME_ANCESTOR = 'https://jhonwilfreddrio.netlify.app';
+const publicFramingEnabled = process.env.KPICK_PUBLIC_FRAMING_ENABLED === '1';
+
+function parseFrameAncestorOrigins(value) {
+    const configured = String(value || '').trim() || DEFAULT_FRAME_ANCESTOR;
+    const origins = configured.split(/\s+/).map((candidate) => {
+        let parsed;
+        try {
+            parsed = new URL(candidate);
+        } catch {
+            throw new Error(`KPICK_FRAME_ANCESTORS contains an invalid origin: ${candidate}`);
+        }
+
+        if (parsed.protocol !== 'https:'
+            || parsed.username
+            || parsed.password
+            || parsed.pathname !== '/'
+            || parsed.search
+            || parsed.hash) {
+            throw new Error(`KPICK_FRAME_ANCESTORS must contain only HTTPS origins: ${candidate}`);
+        }
+
+        return parsed.origin;
+    });
+
+    return [...new Set(origins)];
+}
+
+const publicFrameAncestorOrigins = parseFrameAncestorOrigins(process.env.KPICK_FRAME_ANCESTORS);
+
+function buildContentSecurityPolicy(frameAncestorSources) {
+    return [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline'",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self' https://api.web3forms.com",
+        `frame-ancestors ${frameAncestorSources.join(' ')}`,
+        "base-uri 'self'",
+        "form-action 'self' https://api.web3forms.com",
+        'upgrade-insecure-requests'
+    ].join('; ');
+}
+
+// Public pages get this policy, but X-Frame-Options remains DENY until the
+// rollout gate is enabled after the full CSP is confirmed on the live CDN.
+const CONTENT_SECURITY_POLICY = buildContentSecurityPolicy(["'self'", ...publicFrameAncestorOrigins]);
+const PROTECTED_CONTENT_SECURITY_POLICY = buildContentSecurityPolicy(["'none'"]);
 
 function securityHeaders(extra = {}) {
-    return {
+    const headers = {
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
         'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
-        'Content-Security-Policy': CONTENT_SECURITY_POLICY,
+        'Content-Security-Policy': PROTECTED_CONTENT_SECURITY_POLICY,
         ...(isLocalHost ? {} : { 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains' }),
         ...extra
     };
+
+    for (const [name, value] of Object.entries(headers)) {
+        if (value === null || value === undefined) {
+            delete headers[name];
+        }
+    }
+
+    return headers;
 }
 
 function corsHeaders() {
@@ -2043,6 +2088,38 @@ function isPublicStaticPath(pathname) {
         && !pathname.toLowerCase().startsWith('/node_modules/');
 }
 
+const FRAMEABLE_PUBLIC_PAGES = new Set([
+    '/',
+    '/index.html',
+    '/catalog.htm',
+    '/exhibit.htm',
+    '/learn.html',
+    '/insufine.html',
+    '/contact.htm',
+    '/privacy.htm',
+    '/sungshim.html',
+    '/sungshim-filter-needle.html',
+    '/sungshim-filter-syringe.html',
+    '/sungshim-infusion-set.html',
+    '/sungshim-insulin-pen-needles.html',
+    '/sungshim-insulin-syringe.html',
+    '/sungshim-lds-syringe.html',
+    '/sungshim-nano-needle.html',
+    '/sungshim-single-use-needle.html',
+    '/sungshim-single-use-syringe.html'
+]);
+
+function frameablePageSecurityOverrides(pathname) {
+    if (!FRAMEABLE_PUBLIC_PAGES.has(pathname)) {
+        return {};
+    }
+
+    return {
+        'Content-Security-Policy': CONTENT_SECURITY_POLICY,
+        ...(publicFramingEnabled ? { 'X-Frame-Options': null } : {})
+    };
+}
+
 async function sendNotFound(response, pathname) {
     const wantsHtml = pathname === '/' || /\.html?$/i.test(pathname) || !/\.[a-z0-9]+$/i.test(pathname);
     if (wantsHtml) {
@@ -2089,6 +2166,7 @@ async function serveStatic(request, response, pathname) {
         const extension = extname(filePath).toLowerCase();
         const isPage = extension === '.html' || extension === '.htm';
         response.writeHead(200, securityHeaders({
+            ...(isPage ? frameablePageSecurityOverrides(requestedPath) : {}),
             'Content-Type': contentTypes[extension] || 'application/octet-stream',
             'Cache-Control': isPage ? 'no-cache' : 'public, max-age=604800'
         }));
