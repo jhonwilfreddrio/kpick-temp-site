@@ -6844,3 +6844,82 @@ body.film-modal-open { overflow: hidden; }
         white-space: normal;
     }
 }
+
+/* 2026-09-21: the three learn-hero fact cards get the same pointer-tracking
+   glare as the .hero-brand lockup on the homepage, driven by the same
+   script/hero-glare.js (--gx/--gy).
+
+   The gradient is written out again rather than shared with .hero-brand: a
+   gradient hoisted into a custom property on :root would resolve var(--gx)
+   against :root instead of the hovered card, so the glare would never move.
+
+   Two differences from .hero-brand, both deliberate. The fact cards already
+   read as glass at rest, so the ::after carries a second uniform wash instead
+   of the hero's background-color fade -- one animatable opacity drives both
+   the moving highlight and the brighten, and background-image is not reliably
+   interpolable. And the hover block is inside (hover: hover) because these are
+   plain <div>s, not links: on a touch screen a sticky :hover would leave a
+   card lifted with no way to dismiss it. */
+.learn-hero__facts > div{
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+        border-color 0.32s ease,
+        box-shadow 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+        -webkit-backdrop-filter 0.32s ease,
+        backdrop-filter 0.32s ease;
+}
+.learn-hero__facts > div::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    /* A negative z-index pseudo paints above the card's own background and
+       below its text, so the glare washes the glass without dimming the copy. */
+    background:
+        radial-gradient(
+            var(--glare-r, 170px) circle at var(--gx, 50%) var(--gy, 50%),
+            rgba(255, 255, 255, 0.30) 0%,
+            rgba(255, 255, 255, 0.10) 32%,
+            rgba(255, 255, 255, 0) 62%
+        ),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.04) 100%);
+    opacity: 0;
+    transition: opacity 0.32s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+.learn-hero__facts span{
+    transition: color 0.18s ease;
+}
+@media (hover: hover) and (pointer: fine){
+    .learn-hero__facts > div:hover{
+        transform: translateY(-3px);
+        border-color: rgba(255, 255, 255, 0.30);
+        -webkit-backdrop-filter: blur(14px) saturate(1.3);
+        backdrop-filter: blur(14px) saturate(1.3);
+        /* Raised neumorphic edges, same light direction as .hero-brand. */
+        box-shadow:
+            -8px -8px 22px rgba(255, 255, 255, 0.07),
+            10px 12px 28px rgba(0, 0, 0, 0.38),
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+    }
+    .learn-hero__facts > div:hover::after{
+        opacity: 1;
+    }
+    .learn-hero__facts > div:hover span{
+        color: #ffffff;
+    }
+}
+@media (prefers-reduced-motion: reduce){
+    .learn-hero__facts > div,
+    .learn-hero__facts > div::after{
+        transition: none;
+    }
+    .learn-hero__facts > div:hover{
+        transform: none;
+    }
+}

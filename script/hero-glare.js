@@ -1,9 +1,15 @@
-/* Hero brand lockup: a glare that follows the pointer inside each card.
-   Sets --gx/--gy (px, card-relative) for the ::after radial highlight.
-   Pointer-only; touch and keyboard users get the plain hover/focus state. */
+/* Pointer-tracking glare for glass cards.
+   Sets --gx/--gy (px, card-relative) for the card's ::after radial highlight.
+   Pointer-only; touch and keyboard users get the plain hover/focus state.
+
+   Add a selector here AND the matching ::after / :hover rules in style.css —
+   the gradient cannot be hoisted into a shared custom property because
+   var(--gx) would then resolve against :root rather than the card. */
 (function () {
+    var GLARE_SELECTOR = '.hero-brand, .learn-hero__facts > div';
+
     if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var cards = document.querySelectorAll('.hero-brand');
+    var cards = document.querySelectorAll(GLARE_SELECTOR);
     for (var i = 0; i < cards.length; i++) {
         (function (card) {
             var raf = 0, x = 0, y = 0;
