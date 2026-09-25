@@ -2140,6 +2140,13 @@ async function serveStatic(request, response, pathname) {
         return;
     }
 
+    // Company-profile mode: the quote / PO builder is retired; 302 so it can return later.
+    if (pathname === '/request.htm' || pathname === '/request-admin.htm') {
+        response.writeHead(302, securityHeaders({ Location: '/contact.htm' }));
+        response.end();
+        return;
+    }
+
     let requestedPath;
     try {
         requestedPath = pathname === '/' ? '/index.html' : decodeURIComponent(pathname);
@@ -2212,8 +2219,10 @@ async function handleRequest(request, response) {
         return;
     }
 
-    if (request.method === 'GET' && pathname === '/api/products') {
-        sendJson(response, 200, { categories: getProductCategories() });
+    // Company-profile mode: prices, stock and self-serve quotes are not published.
+    if ((request.method === 'GET' && pathname === '/api/products')
+        || (request.method === 'POST' && pathname === '/api/quote-requests')) {
+        sendJson(response, 404, { error: 'Not available.' });
         return;
     }
 
@@ -2645,7 +2654,7 @@ const server = createServer((request, response) => {
 });
 
 server.listen(port, host, async () => {
-    await writeLog(`K-Pick Node backend running at http://${host}:${port}/request.htm`);
+    await writeLog(`K-Pick Node backend running at http://${host}:${port}/`);
     await writeLog(`SQLite DB: ${dbPath}`);
     if (erpSyncToken) {
         await writeLog('ERP push sync enabled; Google Sheet auto-sync is off (manual sync still available).');
@@ -2655,6 +2664,6 @@ server.listen(port, host, async () => {
         }, inventorySyncIntervalMs).unref();
         await writeLog(`Inventory auto-sync enabled every ${inventorySyncIntervalMs}ms.`);
     }
-    console.log(`K-Pick backend running at http://${host}:${port}/request.htm`);
+    console.log(`K-Pick backend running at http://${host}:${port}/`);
 });
 

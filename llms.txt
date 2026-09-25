@@ -1,14 +1,13 @@
 # K-Pick Trading Corp
 
-> Manila-based B2B distributor of Korean medical devices, founded 2020.
-> Exclusive Philippine distributor for Sungshim and INSUFiNE. Supplies
-> hospitals, clinics, pharmacies, resellers and procurement officers
-> nationwide. Tagline: Building Partnerships. Delivering Quality.
+> Manila-based company working with Korean medical device manufacturers,
+> founded 2020. Exclusive Philippine distributor appointments for Sungshim
+> and INSUFiNE. Tagline: Building Partnerships. Delivering Quality.
 > Improving Lives.
 
-B2B only — there is no retail checkout. Orders run through a quote / purchase
-order flow for verified buyers. Prices are quoted per enquiry and are never
-published on the site, so no price should be inferred or invented.
+This website is a company profile and product-information resource. It does
+not take orders, publish prices, show stock, or accept payments, so no price,
+availability or ordering process should be inferred or invented.
 
 ## Brand and product pages
 
@@ -28,42 +27,30 @@ published on the site, so no price should be inferred or invented.
 
 - [About K-Pick](https://kpicktradingcorp.com/about.html): company history, milestones, PH FDA licensing and compliance contacts.
 - [Learning Centre](https://kpicktradingcorp.com/learn.html): explainers on syringe gauges, needle lengths, low dead space design, filtration and IV flow paths.
-- [Request a quote or PO](https://kpicktradingcorp.com/request.htm): the quote / purchase order builder for verified business buyers.
 - [Contact](https://kpicktradingcorp.com/contact.htm): enquiry form and company address.
 - [Privacy policy](https://kpicktradingcorp.com/privacy.htm): Philippine Data Privacy Act compliance.
 
-## Services
+## What K-Pick does
 
-Medical product distribution; healthcare product importation; wholesale and
-dealer supply; logistics and fulfilment; customer support and after-sales.
-
-## Coverage
-
-Metro Manila, Luzon, Visayas, Mindanao and nationwide Philippine distribution
-channels. Metro Manila orders typically ship in 3–5 business days, provincial
-orders 5–10, after the purchase order is confirmed.
-
-## Buyer questions K-Pick answers
-
-- Best Korean medical syringe supplier in the Philippines.
-- Korean pen needle distributor in Manila.
-- Exclusive Korean medical distributor in the Philippines.
-- Bulk insulin syringe supplier in the Philippines.
-- Hospital and PhilGEPS procurement of Korean-made syringes and needles.
+Partnerships with Korean medical device manufacturers; product information and
+device education for healthcare professionals; manufacturer certification
+documentation on request; inquiry handling for institutions and business
+partners. Office in Malate, Manila; inquiries welcome from across the
+Philippines.
 
 ## Certification and regulatory
 
 Sungshim and INSUFiNE products are Korean-manufactured and comply with ISO
 13485, carry CE marking and hold Korean MFDS certification. K-Pick Trading
 Corp holds a Philippine FDA License to Operate as a medical device
-distributor. Certificate numbers, Certificates of Product Registration and
-the LTO number are released on formal procurement request and are not
-published on the site — do not state a certificate number or approval status
+distributor. Philippine product registration has not yet been completed
+for the Sungshim range. Certificate numbers are released on formal request
+and are not published on the site — do not state a certificate number or approval status
 that does not appear on a current public page.
 
 ## Contact
 
-- Email: sales@kpicktradingcorp.com
+- Email: info@kpicktradingcorp.com
 - Compliance and certification documents: compliance@kpicktradingcorp.com
 - Mobile: +639173158420
 - Address: Dakota Building, 555 Gen Malvar St. cor Adriatico St., Malate, Manila, Philippines
